@@ -26,6 +26,12 @@ class ViewController: UIViewController, UITextFieldDelegate{
   override func viewDidLoad() {
     super.viewDidLoad()
     
+    let formatter = NumberFormatter()
+    formatter.numberStyle = NumberFormatter.Style.decimal
+    formatter.groupingSeparator = ","
+    formatter.groupingSize = 3
+
+    
     // Do any additional setup after loading the view, typically from a nib.
     
     MonyField.delegate = self
@@ -50,7 +56,7 @@ class ViewController: UIViewController, UITextFieldDelegate{
     
     if ud.integer(forKey: "mony") != nil{
       TodayMonyNum = ud.integer(forKey: "mony")
-      TodayMony.text = "\(ud.integer(forKey: "mony"))円"
+      TodayMony.text = "\(formatter.string(from: ud.integer(forKey: "mony") as NSNumber )! )円"
     }
     
     
@@ -89,6 +95,8 @@ class ViewController: UIViewController, UITextFieldDelegate{
   
   
   
+  
+  
   @objc func commit(){
     MonyField.endEditing(true)
     UsedMony.endEditing(true)
@@ -107,8 +115,14 @@ class ViewController: UIViewController, UITextFieldDelegate{
       UIView.animate(withDuration: 1.3){
         self.resultmony.value = 100
       }
+      
+      let formatter = NumberFormatter()
+      formatter.numberStyle = NumberFormatter.Style.decimal
+      formatter.groupingSeparator = ","
+      formatter.groupingSize = 3
+      
       ud3.set(resultmony.value, forKey: "resultmonyyy")
-      TodayMony.text = "\(MonyField.text!)円"
+      TodayMony.text = "\(formatter.string(from: Int(MonyField.text!) as! NSNumber)!)円"
       TodayMonyNum = Int(MonyField.text!)!
       ud.set(TodayMonyNum, forKey: "mony")
       ud4.set(TodayMonyNum, forKey: "mony2")
@@ -157,8 +171,13 @@ class ViewController: UIViewController, UITextFieldDelegate{
           
         }
         
+        let formatter = NumberFormatter()
+        formatter.numberStyle = NumberFormatter.Style.decimal
+        formatter.groupingSeparator = ","
+        formatter.groupingSize = 3
+        
         zyunresult = ud.integer(forKey: "mony") - Todayusedmony
-        TodayMony.text = "\(String(zyunresult))円"
+        TodayMony.text = "\(formatter.string(from: zyunresult as NSNumber)! )円"
         
         ud.set(zyunresult, forKey: "mony")
         ud.synchronize()
