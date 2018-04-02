@@ -23,6 +23,7 @@ class ViewController: UIViewController, UITextFieldDelegate{
   @IBOutlet weak var resultmony: MBCircularProgressBarView!
   
   
+  
   override func viewDidLoad() {
     super.viewDidLoad()
     
@@ -33,6 +34,28 @@ class ViewController: UIViewController, UITextFieldDelegate{
 
     
     // Do any additional setup after loading the view, typically from a nib.
+    
+//    UIToolbar.appearance().setBackgroundImage(UIImage(),
+//                                              forToolbarPosition: UIBarPosition.any,
+//                                              barMetrics: UIBarMetrics.default)
+//    UIToolbar.appearance().setShadowImage(UIImage(),
+//                                          forToolbarPosition: UIBarPosition.any)
+    
+    UpsideToolBar.setBackgroundImage(UIImage(), forToolbarPosition: .any, barMetrics: .default)
+    UpsideToolBar.shadowImage(forToolbarPosition: .any)
+    UpsideToolBar.isTranslucent = true
+    
+    self.navigationController?.setToolbarHidden(false, animated: false)
+    
+    let button = UIBarButtonItem(barButtonHiddenItem: .Down, target: nil, action: #selector(ViewController.buttonEvent(sender:)))
+    
+    button.tintColor = UIColor.yellow
+    
+//    self.toolbar.setItems([button], animated: true)
+    
+    self.UpsideToolBar.setItems([button], animated: true)
+    
+    
     
     MonyField.delegate = self
     UsedMony.delegate = self
@@ -91,6 +114,10 @@ class ViewController: UIViewController, UITextFieldDelegate{
   override func didReceiveMemoryWarning() {
     super.didReceiveMemoryWarning()
     // Dispose of any resources that can be recreated.
+  }
+  
+  @objc func buttonEvent(sender: Any) {
+    print("ボタンのアクション設置成功!!!")
   }
   
   
@@ -298,6 +325,27 @@ class ViewController: UIViewController, UITextFieldDelegate{
       
       
     })
+  }
+  
+  @IBOutlet weak var UpsideToolBar: UIToolbar!
+  
+  
+  
+  
+}
+
+extension UIBarButtonItem {
+  enum HiddenItem: Int {
+    case Arrow = 100
+    case Back = 101
+    case Forward = 102
+    case Up = 103
+    case Down = 104
+  }
+  
+  convenience init(barButtonHiddenItem: HiddenItem, target: AnyObject?, action: Selector?) {
+    let systemItem = UIBarButtonSystemItem(rawValue: barButtonHiddenItem.rawValue)
+    self.init(barButtonSystemItem: systemItem!, target: target, action: action)
   }
   
   

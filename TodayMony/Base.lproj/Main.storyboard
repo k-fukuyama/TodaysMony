@@ -179,6 +179,11 @@
                                     <action selector="OneMonthMony:" destination="BYZ-38-t0r" eventType="touchUpInside" id="bwh-ND-CCE"/>
                                 </connections>
                             </button>
+                            <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="RAl-n7-yKk">
+                                <rect key="frame" x="318" y="0.0" width="57" height="44"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
+                                <items/>
+                            </toolbar>
                         </subviews>
                         <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
@@ -188,9 +193,12 @@
                             </userDefinedRuntimeAttribute>
                         </userDefinedRuntimeAttributes>
                     </view>
+                    <toolbarItems/>
+                    <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
                         <outlet property="MonyField" destination="DWN-Aa-brQ" id="lLe-Vx-ncz"/>
                         <outlet property="TodayMony" destination="Dn2-PJ-j9R" id="dnb-Z4-97s"/>
+                        <outlet property="UpsideToolBar" destination="RAl-n7-yKk" id="KJ9-ID-QjP"/>
                         <outlet property="UsedMony" destination="0aV-Fo-Vgl" id="D6m-QJ-99j"/>
                         <outlet property="resultmony" destination="oNr-cH-6FT" id="8Eb-sN-OCF"/>
                         <segue destination="Z1W-iY-s1d" kind="show" identifier="resultmony" id="RBN-Dq-qgS"/>
@@ -254,6 +262,8 @@
                         <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                         <viewLayoutGuide key="safeArea" id="xhI-mg-tX3"/>
                     </view>
+                    <toolbarItems/>
+                    <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
                         <outlet property="monylabel" destination="6QT-3j-jSn" id="DAT-Lj-n4T"/>
                         <segue destination="BYZ-38-t0r" kind="show" identifier="todaysmony" id="KW3-Pr-7Kd"/>
@@ -313,6 +323,6 @@
     </scenes>
     <inferredMetricsTieBreakers>
         <segue reference="7Yo-zw-KDm"/>
-        <segue reference="FbY-C4-JJM"/>
+        <segue reference="KW3-Pr-7Kd"/>
     </inferredMetricsTieBreakers>
 </document>
