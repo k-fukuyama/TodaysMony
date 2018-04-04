@@ -31,15 +31,6 @@ class ViewController: UIViewController, UITextFieldDelegate{
     formatter.numberStyle = NumberFormatter.Style.decimal
     formatter.groupingSeparator = ","
     formatter.groupingSize = 3
-
-    
-    // Do any additional setup after loading the view, typically from a nib.
-    
-//    UIToolbar.appearance().setBackgroundImage(UIImage(),
-//                                              forToolbarPosition: UIBarPosition.any,
-//                                              barMetrics: UIBarMetrics.default)
-//    UIToolbar.appearance().setShadowImage(UIImage(),
-//                                          forToolbarPosition: UIBarPosition.any)
     
     UpsideToolBar.setBackgroundImage(UIImage(), forToolbarPosition: .any, barMetrics: .default)
     UpsideToolBar.shadowImage(forToolbarPosition: .any)
@@ -117,6 +108,37 @@ class ViewController: UIViewController, UITextFieldDelegate{
   }
   
   @objc func buttonEvent(sender: Any) {
+    
+    let SubButtonAlert = UIAlertController(title: "選択してください",
+                                           message: "",
+                                           preferredStyle: .actionSheet)
+    
+    SubButtonAlert.addAction(UIAlertAction(title: "1ヶ月、自由に使える金額計算", style: .default, handler: { action in
+      let OneMonthMony = UIAlertController(title: "今月自由に使える金額を入力してください",
+                                           message: "[入力した金額]÷31日で1日あたりに使える金額を計算します",
+                                           preferredStyle: .alert)
+      OneMonthMony.addTextField(configurationHandler: {(textField: UITextField!) -> Void in
+        textField.placeholder = "お給料を入力してください"
+        textField.delegate = self
+        textField.keyboardType  = UIKeyboardType.numberPad
+        
+        OneMonthMony.addAction(UIAlertAction(title: "OK", style: .default, handler: { action in
+          if textField.text != "" {
+            var OndDayMony = Int(textField.text!)! / 31
+            let OndDayMonyAlert = UIAlertController(title: "\(OndDayMony)円",
+              message: "が1日あたりの使用可能金額です",
+              preferredStyle: .alert)
+            
+            OndDayMonyAlert.addAction(UIAlertAction(title: "OK", style: .cancel))
+            self.present(OndDayMonyAlert, animated:true, completion:nil)
+          }
+          
+        }))
+        self.present(OneMonthMony, animated: true, completion: nil)
+      })
+    }))
+    
+    self.present(SubButtonAlert, animated: true, completion: nil)
     print("ボタンのアクション設置成功!!!")
   }
   
@@ -297,35 +319,6 @@ class ViewController: UIViewController, UITextFieldDelegate{
     }
   }
   
-  @IBAction func OneMonthMony(_ sender: Any) {
-    let alert = UIAlertController(title: "1日あたりに使っていい金額を計算します",
-                                  message: "手取り額を入力しましょう",
-                                  preferredStyle: .alert)
-    
-    alert.addTextField(configurationHandler: {(textField: UITextField! ) -> Void in
-      textField.placeholder = "お給料を入力してください"
-      textField.delegate = self
-      textField.keyboardType  = UIKeyboardType.numberPad
-      
-      alert.addAction(UIAlertAction(title:"OK", style: .destructive, handler: { action in
-        if textField.text != ""{
-          
-          var ans = Int(textField.text!)! / 31
-          let alert = UIAlertController(title: "\(ans)円",
-                                        message: "が1日あたりの使用可能金額です",
-                                        preferredStyle: .alert)
-          
-          alert.addAction(UIAlertAction(title:"OK", style: .cancel))
-          self.present(alert, animated: true, completion: nil)
-        }
-      }))
-    
-    self.present(alert, animated: true, completion:  nil)
-    
-      
-      
-    })
-  }
   
   @IBOutlet weak var UpsideToolBar: UIToolbar!
   
