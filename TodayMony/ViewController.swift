@@ -138,8 +138,19 @@ class ViewController: UIViewController, UITextFieldDelegate{
       })
     }))
     
+    SubButtonAlert.addAction(UIAlertAction(title: "決算", style: .destructive, handler: { action in
+      let finishtoday = UIAlertController(title: "決算しますか？",
+                                          message: "今日の残額を決定します",
+                                          preferredStyle: .alert)
+      finishtoday.addAction(UIAlertAction(title: "OK", style: .destructive, handler :{ action in
+         self.performSegue(withIdentifier: "resultmony", sender: nil)
+        
+      }))
+      self.present(finishtoday, animated: true, completion:  nil)
+    }))
+    
+    
     self.present(SubButtonAlert, animated: true, completion: nil)
-    print("ボタンのアクション設置成功!!!")
   }
   
   
@@ -286,23 +297,6 @@ class ViewController: UIViewController, UITextFieldDelegate{
   }
   
   var alert:UIAlertController!
-  
-  @IBAction func kessan(_ sender: Any) {
-    alert = UIAlertController(
-      title: "決算しますか?",
-      message:"本日の決算に移ります",
-      preferredStyle: .actionSheet
-    )
-    
-    alert.addAction(UIAlertAction(title:"決算", style: .destructive, handler: { action in
-      self.performSegue(withIdentifier: "resultmony", sender: nil)
-    }))
-    
-    alert.addAction(UIAlertAction(title:"決算をやめる", style:.cancel))
-    
-    self.present(alert, animated: true, completion: nil)
-    
-  }
   
   @IBAction func move(_ sender: Any) {
     performSegue(withIdentifier: "pool", sender: nil)
