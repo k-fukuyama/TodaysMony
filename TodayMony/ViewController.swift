@@ -60,12 +60,22 @@ class ViewController: UIViewController, UITextFieldDelegate{
     
     let spacer = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.flexibleSpace, target: self, action: nil)
     
-    let commitbutton = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.done, target: self, action: #selector(self.commit))
+    let commitbutton = UIBarButtonItem(title:"決定", style: UIBarButtonItemStyle.done, target: self, action: #selector(self.commit))
     
     toolbar.items = [spacer, commitbutton]
     
+    let UsedCostToolbar = UIToolbar()
+    UsedCostToolbar.barStyle = UIBarStyle.default
+    UsedCostToolbar.sizeToFit()
+    
+//    (title: "決定", style: UIBarButtonItemStyle.done, target: self, action: #selector(self.commit))
+    
+    let DecideButton = UIBarButtonItem(title: "決定", style: UIBarButtonItemStyle.done, target: self, action: #selector(self.UsedMonyButton))
+    
+    UsedCostToolbar.items = [spacer, DecideButton]
+    
     MonyField.inputAccessoryView = toolbar
-    UsedMony.inputAccessoryView = toolbar
+    UsedMony.inputAccessoryView = UsedCostToolbar
     
     
     if ud.integer(forKey: "mony") != nil{
@@ -109,7 +119,7 @@ class ViewController: UIViewController, UITextFieldDelegate{
   
   @objc func buttonEvent(sender: Any) {
     
-    let SubButtonAlert = UIAlertController(title: "選択してください",
+    let SubButtonAlert = UIAlertController(title: nil,
                                            message: "",
                                            preferredStyle: .actionSheet)
     
@@ -140,77 +150,79 @@ class ViewController: UIViewController, UITextFieldDelegate{
       })
     }))
     
-    SubButtonAlert.addAction(UIAlertAction(title: "決算", style: .destructive, handler: { action in
-      let finishtoday = UIAlertController(title: "決算しますか？",
-                                          message: "今日の残額を決定します",
-                                          preferredStyle: .alert)
-      finishtoday.addAction(UIAlertAction(title: "OK", style: .destructive, handler :{ action in
-        self.performSegue(withIdentifier: "resultmony", sender: nil)
-        
-      }))
-      self.present(finishtoday, animated: true, completion:  nil)
+    SubButtonAlert.addAction(UIAlertAction(title: "細かく計算する", style: .default, handler :{ action in
+      self.performSegue(withIdentifier: "detail", sender: nil)
     }))
     
     self.present(SubButtonAlert, animated: true, completion: nil)
+    
+//    SubButtonAlert.addAction(UIAlertAction(title: "決算", style: .destructive, handler: { action in
+//      let finishtoday = UIAlertController(title: "決算しますか？",
+//                                          message: "今日の残額を決定します",
+//                                          preferredStyle: .alert)
+//      
+//      finishtoday.addAction(UIAlertAction(title: "OK", style: .destructive, handler :{ action in
+//        self.performSegue(withIdentifier: "resultmony", sender: nil)
+//        
+//      }))
+//      finishtoday.addAction(UIAlertAction(title: "キャンセル", style: .cancel))
+//      self.present(finishtoday, animated: true, completion:  nil)
+//    }))
+    
+   
   }
   
   
-  
-  
-  
-  @objc func commit(){
-    MonyField.endEditing(true)
-    UsedMony.endEditing(true)
-  }
-  
-  @IBOutlet weak var TodayMony: UILabel!
-  @IBOutlet weak var MonyField: UITextField!
   
   var TodayMonyNum = 0
   
-  @IBAction func DoneCost(_ sender: Any) {
-    
-   
-    
+  @objc func commit(){
     if MonyField.text != ""{
-      UIView.animate(withDuration: 1.3){
-        self.resultmony.value = 100
+      TodayMonyNum = Int(MonyField.text!)!
+      switch TodayMonyNum{
+      case 0:
+        var zeroalert = UIAlertController(
+          title: "0円は設定できません",
+          message: "金額を設定しないとアプリが使用できません",
+          preferredStyle: .alert)
+         MonyField.endEditing(true)
+        
+        zeroalert.addAction(UIAlertAction(title: "OK", style: .cancel))
+        
+        self.present(zeroalert, animated: true, completion: nil)
+      default:
+        UIView.animate(withDuration: 1.3) {
+          self.resultmony.value = 100
+        }
+        
+        let formatter = NumberFormatter()
+        formatter.numberStyle = NumberFormatter.Style.decimal
+        formatter.groupingSeparator = ","
+        formatter.groupingSize = 3
+        
+        ud3.set(resultmony.value, forKey: "resultmonyyy")
+        TodayMony.text = "\(formatter.string(from: Int(MonyField.text!) as! NSNumber)!)円"
+        TodayMonyNum = Int(MonyField.text!)!
+        ud.set(TodayMonyNum, forKey: "mony")
+        ud4.set(TodayMonyNum, forKey: "mony2")
+        MonyField.endEditing(true)
       }
       
-      let formatter = NumberFormatter()
-      formatter.numberStyle = NumberFormatter.Style.decimal
-      formatter.groupingSeparator = ","
-      formatter.groupingSize = 3
-      
-      ud3.set(resultmony.value, forKey: "resultmonyyy")
-      TodayMony.text = "\(formatter.string(from: Int(MonyField.text!) as! NSNumber)!)円"
-      TodayMonyNum = Int(MonyField.text!)!
-      ud.set(TodayMonyNum, forKey: "mony")
-      ud4.set(TodayMonyNum, forKey: "mony2")
     }else{
       var emptyalert = UIAlertController(
-        title: "今日の金額を入力してください",
+        title: "金額を入力してください",
         message: "金額を設定しないとアプリが使用できません",
         preferredStyle: .alert)
       
       emptyalert.addAction(UIAlertAction(title: "OK", style: .cancel))
       
+      MonyField.endEditing(true)
       self.present(emptyalert, animated: true, completion: nil)
+      
     }
-    
-    
-    
   }
   
-  @IBOutlet weak var UsedMony: UITextField!
-  
-  var Todayusedmony:Int = 0
-  var BeNum = ""
-  var zyunresult = 0
-  var bbb:Float!
-  
-  @IBAction func ResultMony(_ sender: Any) {
-    
+  @objc func UsedMonyButton(){
     if UsedMony.text != ""{
       
       if ud.integer(forKey: "mony") != nil{
@@ -242,7 +254,7 @@ class ViewController: UIViewController, UITextFieldDelegate{
         
         ud.set(zyunresult, forKey: "mony")
         ud.synchronize()
-        
+        UsedMony.endEditing(true)
         
       }else{
         BeNum = UsedMony.text!
@@ -260,7 +272,7 @@ class ViewController: UIViewController, UITextFieldDelegate{
         
         ud.set(zyunresult, forKey: "mony")
         ud.synchronize()
-        
+        UsedMony.endEditing(true)
       }
       
       if ud3.float(forKey: "resulymonyyy") != nil{
@@ -274,6 +286,7 @@ class ViewController: UIViewController, UITextFieldDelegate{
         
         ud3.set(resultmony.value, forKey: "resultmonyyy")
         ud3.synchronize()
+        UsedMony.endEditing(true)
       }
       
       
@@ -287,15 +300,36 @@ class ViewController: UIViewController, UITextFieldDelegate{
       
       emptyalert.addAction(UIAlertAction(title: "OK", style: .cancel))
       
+      UsedMony.endEditing(true)
       self.present(emptyalert, animated: true, completion:  nil)
       
     }
-    
-   
-    
-   
-   
   }
+  
+  @IBOutlet weak var TodayMony: UILabel!
+  @IBOutlet weak var MonyField: UITextField!
+  
+  
+  @IBOutlet weak var UsedMony: UITextField!
+  
+  
+  @IBAction func EndTodaysMony(_ sender: Any) {
+    let EndTodaysMonyAlert = UIAlertController(title: "決算しますか?",
+                                               message: "今日の残額を決定します",
+                                               preferredStyle: .alert)
+    
+    EndTodaysMonyAlert.addAction(UIAlertAction(title: "OK", style: .destructive, handler: { action in
+      self.performSegue(withIdentifier: "resultmony", sender: nil)
+    }))
+    EndTodaysMonyAlert.addAction(UIAlertAction(title: "キャンセル", style: .cancel))
+    
+    self.present(EndTodaysMonyAlert, animated: true, completion: nil)
+  }
+  
+  var Todayusedmony:Int = 0
+  var BeNum = ""
+  var zyunresult = 0
+  var bbb:Float!
   
   var alert:UIAlertController!
   
@@ -311,6 +345,8 @@ class ViewController: UIViewController, UITextFieldDelegate{
     }else if (segue.identifier == "pool"){
       let pvc:poolViewController = segue.destination as! poolViewController
       pvc.poolmony = poolmonytwo
+    }else if (segue.identifier == "detail"){
+      
     }
   }
   
