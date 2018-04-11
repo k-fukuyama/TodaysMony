@@ -12,6 +12,7 @@ import Foundation
 
 class ViewController: UIViewController, UITextFieldDelegate{
   
+  
   let ud = UserDefaults.standard
   let udtwo = UserDefaults()
   let ud3 = UserDefaults.standard
@@ -22,10 +23,12 @@ class ViewController: UIViewController, UITextFieldDelegate{
 
   @IBOutlet weak var resultmony: MBCircularProgressBarView!
   
-  
+  let Screen_Size = UIScreen.main.bounds.size
   
   override func viewDidLoad() {
     super.viewDidLoad()
+    
+   
     
     let formatter = NumberFormatter()
     formatter.numberStyle = NumberFormatter.Style.decimal
@@ -42,11 +45,7 @@ class ViewController: UIViewController, UITextFieldDelegate{
     
     button.tintColor = UIColor.yellow
     
-//    self.toolbar.setItems([button], animated: true)
-    
     self.UpsideToolBar.setItems([button], animated: true)
-    
-    
     
     MonyField.delegate = self
     UsedMony.delegate = self
@@ -67,8 +66,6 @@ class ViewController: UIViewController, UITextFieldDelegate{
     let UsedCostToolbar = UIToolbar()
     UsedCostToolbar.barStyle = UIBarStyle.default
     UsedCostToolbar.sizeToFit()
-    
-//    (title: "決定", style: UIBarButtonItemStyle.done, target: self, action: #selector(self.commit))
     
     let DecideButton = UIBarButtonItem(title: "決定", style: UIBarButtonItemStyle.done, target: self, action: #selector(self.UsedMonyButton))
     
@@ -110,6 +107,10 @@ class ViewController: UIViewController, UITextFieldDelegate{
     
     print("\(udtwo.integer(forKey: "poolmonytwo"))です")
     print(ud.integer(forKey: "mony"))
+    
+    NotificationCenter.default.addObserver(self, selector: #selector(ViewController.keyboardWillShow(_:)), name: NSNotification.Name.UIKeyboardWillShow, object: nil)
+    NotificationCenter.default.addObserver(self, selector: #selector(ViewController.keyboardWillHide(_:)), name: NSNotification.Name.UIKeyboardDidHide, object: nil)
+    
   }
 
   override func didReceiveMemoryWarning() {
@@ -156,23 +157,24 @@ class ViewController: UIViewController, UITextFieldDelegate{
     
     self.present(SubButtonAlert, animated: true, completion: nil)
     
-//    SubButtonAlert.addAction(UIAlertAction(title: "決算", style: .destructive, handler: { action in
-//      let finishtoday = UIAlertController(title: "決算しますか？",
-//                                          message: "今日の残額を決定します",
-//                                          preferredStyle: .alert)
-//      
-//      finishtoday.addAction(UIAlertAction(title: "OK", style: .destructive, handler :{ action in
-//        self.performSegue(withIdentifier: "resultmony", sender: nil)
-//        
-//      }))
-//      finishtoday.addAction(UIAlertAction(title: "キャンセル", style: .cancel))
-//      self.present(finishtoday, animated: true, completion:  nil)
-//    }))
-    
    
   }
   
+  @objc func keyboardWillShow(_ notification: NSNotification){
+    UITextField.animate(withDuration:0.10, delay:0.0, options: .curveLinear, animations:{
+      self.UsedMony.center.y -= 20
+    })
+  }
   
+  @objc func keyboardWillHide(_ notification: NSNotification){
+    UITextField.animate(withDuration:0.10, delay:0.0, options: .curveLinear, animations:{
+      self.UsedMony.center.y += 20
+    })
+  }
+  
+  override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+    self.view.endEditing(true)
+  }
   
   var TodayMonyNum = 0
   
@@ -209,15 +211,8 @@ class ViewController: UIViewController, UITextFieldDelegate{
       }
       
     }else{
-      var emptyalert = UIAlertController(
-        title: "金額を入力してください",
-        message: "金額を設定しないとアプリが使用できません",
-        preferredStyle: .alert)
-      
-      emptyalert.addAction(UIAlertAction(title: "OK", style: .cancel))
       
       MonyField.endEditing(true)
-      self.present(emptyalert, animated: true, completion: nil)
       
     }
   }
@@ -292,18 +287,9 @@ class ViewController: UIViewController, UITextFieldDelegate{
       
       
     }else{
-      
-      var emptyalert = UIAlertController(
-        title: "使用金額を入力してください",
-        message: "使用した金額を入力しないとアプリが使用できません",
-        preferredStyle: .alert)
-      
-      emptyalert.addAction(UIAlertAction(title: "OK", style: .cancel))
-      
       UsedMony.endEditing(true)
-      self.present(emptyalert, animated: true, completion:  nil)
-      
     }
+    
   }
   
   @IBOutlet weak var TodayMony: UILabel!
