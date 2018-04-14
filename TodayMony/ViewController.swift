@@ -23,12 +23,15 @@ class ViewController: UIViewController, UITextFieldDelegate{
 
   @IBOutlet weak var resultmony: MBCircularProgressBarView!
   
-  let Screen_Size = UIScreen.main.bounds.size
+//  let Screen_Size = UIScreen.main.bounds.size
   
   override func viewDidLoad() {
     super.viewDidLoad()
     
-   
+    print("高さはね!!!!\(Float(UsedMony.bounds.size.height))")
+    
+   UsedMony.tag = 1
+   MonyField.tag = 2
     
     let formatter = NumberFormatter()
     formatter.numberStyle = NumberFormatter.Style.decimal
@@ -46,6 +49,8 @@ class ViewController: UIViewController, UITextFieldDelegate{
     button.tintColor = UIColor.yellow
     
     self.UpsideToolBar.setItems([button], animated: true)
+    
+    var used = Used()
     
     MonyField.delegate = self
     UsedMony.delegate = self
@@ -77,7 +82,7 @@ class ViewController: UIViewController, UITextFieldDelegate{
     
     if ud.integer(forKey: "mony") != nil{
       TodayMonyNum = ud.integer(forKey: "mony")
-      TodayMony.text = "\(formatter.string(from: ud.integer(forKey: "mony") as NSNumber )! )円"
+      TodayMony.text = "¥\(formatter.string(from: ud.integer(forKey: "mony") as NSNumber )! )"
     }
     
     
@@ -108,8 +113,8 @@ class ViewController: UIViewController, UITextFieldDelegate{
     print("\(udtwo.integer(forKey: "poolmonytwo"))です")
     print(ud.integer(forKey: "mony"))
     
-    NotificationCenter.default.addObserver(self, selector: #selector(ViewController.keyboardWillShow(_:)), name: NSNotification.Name.UIKeyboardWillShow, object: nil)
-    NotificationCenter.default.addObserver(self, selector: #selector(ViewController.keyboardWillHide(_:)), name: NSNotification.Name.UIKeyboardDidHide, object: nil)
+//    NotificationCenter.default.addObserver(self, selector: #selector(ViewController.keyboardWillShow(_:)), name: NSNotification.Name.UIKeyboardWillShow, object: nil)
+//    NotificationCenter.default.addObserver(self, selector: #selector(ViewController.keyboardWillHide(_:)), name: NSNotification.Name.UIKeyboardDidHide, object: nil)
     
   }
 
@@ -138,7 +143,7 @@ class ViewController: UIViewController, UITextFieldDelegate{
         OneMonthMony.addAction(UIAlertAction(title: "OK", style: .default, handler: { action in
           if textField.text != "" {
             var OndDayMony = Int(textField.text!)! / 31
-            let OndDayMonyAlert = UIAlertController(title: "\(OndDayMony)円",
+            let OndDayMonyAlert = UIAlertController(title: "¥\(OndDayMony)",
               message: "が1日あたりの使用可能金額です",
               preferredStyle: .alert)
             
@@ -160,21 +165,68 @@ class ViewController: UIViewController, UITextFieldDelegate{
    
   }
   
-  @objc func keyboardWillShow(_ notification: NSNotification){
-    UITextField.animate(withDuration:0.10, delay:0.0, options: .curveLinear, animations:{
-      self.UsedMony.center.y -= 20
-    })
-  }
-  
-  @objc func keyboardWillHide(_ notification: NSNotification){
-    UITextField.animate(withDuration:0.10, delay:0.0, options: .curveLinear, animations:{
-      self.UsedMony.center.y += 20
-    })
-  }
+//  @objc func keyboardWillShow(_ notification: NSNotification){
+//
+//      UITextField.animate(withDuration:0.10, delay:0.0, options: .curveLinear, animations:{
+//        self.UsedMony.center.y -= 20
+//      })
+//  }
+//
+//  @objc func keyboardWillHide(_ notification: NSNotification){
+//    UITextField.animate(withDuration:0.10, delay:0.0, options: .curveLinear, animations:{
+//      self.UsedMony.center.y += 20
+//    })
+//  }
   
   override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
     self.view.endEditing(true)
+    
+    if suzi == 1{
+      UITextField.animate(withDuration:0.10, delay:0.0, options: .curveLinear, animations:{
+        self.UsedMony.center.y += 20
+      })
+    }
+    suzi = 0
   }
+//
+//  override func viewDidDisappear(_ animated: Bool) {
+//    super.viewDidDisappear(animated)
+//    
+//  }
+  
+  func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
+    let maxLength = 7
+    var str = textField.text! + string
+    
+    if str.characters.count < maxLength{
+      return true
+    }
+    
+    return false
+    
+  }
+  
+  var suzi = 0
+  
+  func textFieldDidBeginEditing(_ textField: UITextField) {
+    if textField.tag == 1{
+      UITextField.animate(withDuration:0.10, delay:0.0, options: .curveLinear, animations:{
+                self.UsedMony.center.y -= 20
+      })
+      
+      suzi = 1
+      
+    }else if textField.tag == 2{
+      if suzi == 1{
+        UITextField.animate(withDuration:0.10, delay:0.0, options: .curveLinear, animations:{
+                self.UsedMony.center.y += 20
+              })
+      }
+      suzi = 0
+    }
+  }
+  
+  
   
   var TodayMonyNum = 0
   
@@ -189,9 +241,11 @@ class ViewController: UIViewController, UITextFieldDelegate{
           preferredStyle: .alert)
          MonyField.endEditing(true)
         
+        
         zeroalert.addAction(UIAlertAction(title: "OK", style: .cancel))
         
         self.present(zeroalert, animated: true, completion: nil)
+    
       default:
         UIView.animate(withDuration: 1.3) {
           self.resultmony.value = 100
@@ -203,16 +257,18 @@ class ViewController: UIViewController, UITextFieldDelegate{
         formatter.groupingSize = 3
         
         ud3.set(resultmony.value, forKey: "resultmonyyy")
-        TodayMony.text = "\(formatter.string(from: Int(MonyField.text!) as! NSNumber)!)円"
+        TodayMony.text = "¥\(formatter.string(from: Int(MonyField.text!) as! NSNumber)!)"
         TodayMonyNum = Int(MonyField.text!)!
         ud.set(TodayMonyNum, forKey: "mony")
         ud4.set(TodayMonyNum, forKey: "mony2")
         MonyField.endEditing(true)
+        
       }
       
     }else{
       
       MonyField.endEditing(true)
+    
       
     }
   }
@@ -237,6 +293,7 @@ class ViewController: UIViewController, UITextFieldDelegate{
             self.resultmony.value = 0
           }
           
+          
         }
         
         let formatter = NumberFormatter()
@@ -245,12 +302,17 @@ class ViewController: UIViewController, UITextFieldDelegate{
         formatter.groupingSize = 3
         
         zyunresult = ud.integer(forKey: "mony") - Todayusedmony
-        TodayMony.text = "\(formatter.string(from: zyunresult as NSNumber)! )円"
+        TodayMony.text = "¥\(formatter.string(from: zyunresult as NSNumber)! )"
         
         ud.set(zyunresult, forKey: "mony")
         ud.synchronize()
         UsedMony.endEditing(true)
+        suzi = 0
         
+        UITextField.animate(withDuration:0.10, delay:0.0, options: .curveLinear, animations:{
+                self.UsedMony.center.y += 20
+              })
+        suzi = 0
       }else{
         BeNum = UsedMony.text!
         Todayusedmony = Int(BeNum)!
@@ -268,6 +330,9 @@ class ViewController: UIViewController, UITextFieldDelegate{
         ud.set(zyunresult, forKey: "mony")
         ud.synchronize()
         UsedMony.endEditing(true)
+        
+        suzi = 0
+        
       }
       
       if ud3.float(forKey: "resulymonyyy") != nil{
@@ -282,14 +347,19 @@ class ViewController: UIViewController, UITextFieldDelegate{
         ud3.set(resultmony.value, forKey: "resultmonyyy")
         ud3.synchronize()
         UsedMony.endEditing(true)
+        suzi = 0
       }
       
       
       
     }else{
       UsedMony.endEditing(true)
+      UITextField.animate(withDuration:0.10, delay:0.0, options: .curveLinear, animations:{
+              self.UsedMony.center.y += 20
+            })
+      suzi = 0
     }
-    
+    suzi = 0
   }
   
   @IBOutlet weak var TodayMony: UILabel!
@@ -300,8 +370,8 @@ class ViewController: UIViewController, UITextFieldDelegate{
   
   
   @IBAction func EndTodaysMony(_ sender: Any) {
-    let EndTodaysMonyAlert = UIAlertController(title: "決算しますか?",
-                                               message: "今日の残額を決定します",
+    let EndTodaysMonyAlert = UIAlertController(title: "¥\(ud.integer(forKey: "mony"))",
+                                               message: "が今日の残額でよろしいですか?",
                                                preferredStyle: .alert)
     
     EndTodaysMonyAlert.addAction(UIAlertAction(title: "OK", style: .destructive, handler: { action in
