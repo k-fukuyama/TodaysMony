@@ -116,6 +116,11 @@ class ViewController: UIViewController, UITextFieldDelegate{
 //    NotificationCenter.default.addObserver(self, selector: #selector(ViewController.keyboardWillShow(_:)), name: NSNotification.Name.UIKeyboardWillShow, object: nil)
 //    NotificationCenter.default.addObserver(self, selector: #selector(ViewController.keyboardWillHide(_:)), name: NSNotification.Name.UIKeyboardDidHide, object: nil)
     
+    if zyunresult < ud4.integer(forKey: "mony2") / 2{
+      self.resultmony.progressColor = UIColor.red
+      self.resultmony.progressStrokeColor = UIColor.red
+    }
+    
   }
 
   override func didReceiveMemoryWarning() {
@@ -249,6 +254,7 @@ class ViewController: UIViewController, UITextFieldDelegate{
       default:
         UIView.animate(withDuration: 1.3) {
           self.resultmony.value = 100
+          self.resultmony.progressColor = UIColor.yellow
         }
         
         let formatter = NumberFormatter()
@@ -289,12 +295,15 @@ class ViewController: UIViewController, UITextFieldDelegate{
         UIView.animate(withDuration: 1.3){
           if self.resultmony.value != 0{
             self.resultmony.value = CGFloat(float_t(self.Todayusedmony) / float_t(self.ud4.integer(forKey: "mony2")))
+            
+            
           }else{
             self.resultmony.value = 0
           }
           
           
         }
+        
         
         let formatter = NumberFormatter()
         formatter.numberStyle = NumberFormatter.Style.decimal
@@ -308,6 +317,11 @@ class ViewController: UIViewController, UITextFieldDelegate{
         ud.synchronize()
         UsedMony.endEditing(true)
         suzi = 0
+        
+        if zyunresult < ud4.integer(forKey: "mony2") / 2{
+          self.resultmony.progressColor = UIColor.red
+          self.resultmony.progressStrokeColor = UIColor.red
+        }
         
         UITextField.animate(withDuration:0.10, delay:0.0, options: .curveLinear, animations:{
                 self.UsedMony.center.y += 20
