@@ -113,8 +113,12 @@ class detailmonyViewController: UIViewController, UITextFieldDelegate{
   var otherint = 0
   
   var costarray:[String] = []
+  var textarray:[String] = []
   
   @IBAction func total(_ sender: Any) {
+    
+    textarray = [housemony.text!, lifelinemony.text!, phonemony.text!, cardmony.text!, transportmony.text!, entertainmentmony.text!, othermony.text!]
+    
     
     if salary.text == ""{
       let emptyalert = UIAlertController(title: "手取り額を入力してください",
@@ -124,10 +128,19 @@ class detailmonyViewController: UIViewController, UITextFieldDelegate{
       emptyalert.addAction(UIAlertAction(title: "OK", style: .default))
     }else{
       let benumsarary = Int(salary.text!)
-      costarray = [housemony.text!, lifelinemony.text!, phonemony.text!, cardmony.text!, transportmony.text!, entertainmentmony.text!, othermony.text!]
+      costarray = [housemony.text!, lifelinemony.text!, phonemony.text!, cardmony.text!, transportmony.text!, entertainmentmony.text!, othermony.text!, netmony.text!]
+      
+      for var (index, text) in  costarray.enumerated(){
+        if text == ""{
+          costarray[index] = "0"
+          print("AAA\(costarray[index])")
+        }
+        }
+      
+      
       let total = costarray.map{Int($0)!}
+      
       let result = total.reduce(0){$0 + $1}
-      print("resultは\(result)円")
       let result2 = benumsarary! - result
       print(result2)
       
@@ -139,6 +152,7 @@ class detailmonyViewController: UIViewController, UITextFieldDelegate{
       
       present(OneMonthMony, animated: true, completion: nil)
       
+      print("\(total)")
     }
   }
   

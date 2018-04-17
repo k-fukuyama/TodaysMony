@@ -57,6 +57,7 @@ class ViewController: UIViewController, UITextFieldDelegate{
     UsedMony.returnKeyType = .done
     self.MonyField.keyboardType = UIKeyboardType.numberPad
     self.UsedMony.keyboardType = UIKeyboardType.numberPad
+    MonyField.placeholder = "今日使っていい金額"
     
     let toolbar = UIToolbar()
     toolbar.barStyle = UIBarStyle.default
@@ -115,7 +116,19 @@ class ViewController: UIViewController, UITextFieldDelegate{
     
 //    NotificationCenter.default.addObserver(self, selector: #selector(ViewController.keyboardWillShow(_:)), name: NSNotification.Name.UIKeyboardWillShow, object: nil)
 //    NotificationCenter.default.addObserver(self, selector: #selector(ViewController.keyboardWillHide(_:)), name: NSNotification.Name.UIKeyboardDidHide, object: nil)
+    if zyunresult == 0{
+      zyunresult = ud.integer(forKey: "mony")
+    }
+    if zyunresult < ud4.integer(forKey: "mony2") / 2{
+      self.resultmony.progressColor = UIColor.red
+      self.resultmony.progressStrokeColor = UIColor.red
+    }else if zyunresult > ud4.integer(forKey: "mony2") / 2{
+      self.resultmony.progressColor = UIColor.yellow
+      self.resultmony.progressStrokeColor = UIColor.yellow
+    }
     
+    print("マニー2は\(ud4.integer(forKey: "mony2"))")
+    print("順れざるとは\(zyunresult)")
   }
 
   override func didReceiveMemoryWarning() {
@@ -249,6 +262,8 @@ class ViewController: UIViewController, UITextFieldDelegate{
       default:
         UIView.animate(withDuration: 1.3) {
           self.resultmony.value = 100
+          self.resultmony.progressColor = UIColor.yellow
+          self.resultmony.progressStrokeColor = UIColor.yellow
         }
         
         let formatter = NumberFormatter()
@@ -262,13 +277,13 @@ class ViewController: UIViewController, UITextFieldDelegate{
         ud.set(TodayMonyNum, forKey: "mony")
         ud4.set(TodayMonyNum, forKey: "mony2")
         MonyField.endEditing(true)
-        
+        MonyField.text = ""
       }
       
     }else{
       
       MonyField.endEditing(true)
-    
+      MonyField.text = ""
       
     }
   }
@@ -289,12 +304,14 @@ class ViewController: UIViewController, UITextFieldDelegate{
         UIView.animate(withDuration: 1.3){
           if self.resultmony.value != 0{
             self.resultmony.value = CGFloat(float_t(self.Todayusedmony) / float_t(self.ud4.integer(forKey: "mony2")))
+            
           }else{
             self.resultmony.value = 0
           }
           
           
         }
+        
         
         let formatter = NumberFormatter()
         formatter.numberStyle = NumberFormatter.Style.decimal
@@ -309,10 +326,18 @@ class ViewController: UIViewController, UITextFieldDelegate{
         UsedMony.endEditing(true)
         suzi = 0
         
+        if zyunresult < ud4.integer(forKey: "mony2") / 2{
+          self.resultmony.progressColor = UIColor.red
+          self.resultmony.progressStrokeColor = UIColor.red
+        }
+        
         UITextField.animate(withDuration:0.10, delay:0.0, options: .curveLinear, animations:{
                 self.UsedMony.center.y += 20
               })
         suzi = 0
+        
+        UsedMony.text = ""
+        
       }else{
         BeNum = UsedMony.text!
         Todayusedmony = Int(BeNum)!
@@ -332,7 +357,7 @@ class ViewController: UIViewController, UITextFieldDelegate{
         UsedMony.endEditing(true)
         
         suzi = 0
-        
+        UsedMony.text = ""
       }
       
       if ud3.float(forKey: "resulymonyyy") != nil{
