@@ -14,6 +14,11 @@ class resultViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+      
+      let formatter = NumberFormatter()
+      formatter.numberStyle = NumberFormatter.Style.decimal
+      formatter.groupingSeparator = ","
+      formatter.groupingSize = 3
 
         // Do any additional setup after loading the view.
       
@@ -26,10 +31,11 @@ class resultViewController: UIViewController {
         poolmony = trueresult
         
         ud.set(trueresult, forKey: "aaa")
+        
       }
       
       
-      monylabel.text = String("\(ud.integer(forKey: "aaa"))円")
+      monylabel.text = "¥\(formatter.string(from: ud.integer(forKey: "aaa") as! NSNumber)!)"
     }
 
     override func didReceiveMemoryWarning() {
@@ -51,7 +57,7 @@ class resultViewController: UIViewController {
     
     alert.addAction(UIAlertAction(title:"貯金額をリセットする", style:.destructive, handler:{ action in
       self.ud.removeObject(forKey: "aaa")
-      self.performSegue(withIdentifier: "pool", sender: nil)
+      self.performSegue(withIdentifier: "todaysmony", sender: nil)
     }))
     
     alert.addAction(UIAlertAction(title:"リセットしない", style: .cancel))
@@ -68,11 +74,7 @@ class resultViewController: UIViewController {
     if (segue.identifier == "todaysmony"){
       let viewcontroller:ViewController = segue.destination as! ViewController
       viewcontroller.poolmonytwo = poolmony
-    }else if (segue.identifier == "pool"){
-      let pvc:poolViewController = segue.destination as! poolViewController
-      pvc.poolmony = 0
     }
-    
   }
   
   /*
@@ -86,3 +88,6 @@ class resultViewController: UIViewController {
     */
 
 }
+
+
+

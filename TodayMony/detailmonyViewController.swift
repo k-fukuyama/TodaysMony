@@ -53,15 +53,15 @@ class detailmonyViewController: UIViewController, UITextFieldDelegate{
       self.othermony.keyboardType = UIKeyboardType.numberPad
       netmony.keyboardType = UIKeyboardType.numberPad
       
-      salary.text = "0"
-      housemony.text = "0"
-      lifelinemony.text = "0"
-      phonemony.text = "0"
-      cardmony.text = "0"
-      transportmony.text = "0"
-      entertainmentmony.text = "0"
-      othermony.text = "0"
-      netmony.text = "0"
+      salary.text = ""
+      housemony.text = ""
+      lifelinemony.text = ""
+      phonemony.text = ""
+      cardmony.text = ""
+      transportmony.text = ""
+      entertainmentmony.text = ""
+      othermony.text = ""
+      netmony.text = ""
       
     }
 
@@ -159,6 +159,18 @@ class detailmonyViewController: UIViewController, UITextFieldDelegate{
   
   @IBAction func movebefore(_ sender: Any) {
     self.performSegue(withIdentifier: "back", sender: nil)
+  }
+  
+  func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
+    let maxLength = 7
+    var str = textField.text! + string
+    
+    if str.characters.count < maxLength{
+      return true
+    }
+    
+    return false
+    
   }
   
   /*
