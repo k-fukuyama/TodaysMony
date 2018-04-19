@@ -19,7 +19,7 @@ class ViewController: UIViewController, UITextFieldDelegate{
   let ud4 = UserDefaults()
   var poolmony = 0
   var returnnum = 0
-  var poolmonytwo = 1
+  var poolmonytwo = 0
 
   @IBOutlet weak var resultmony: MBCircularProgressBarView!
   
@@ -27,6 +27,7 @@ class ViewController: UIViewController, UITextFieldDelegate{
   
   override func viewDidLoad() {
     super.viewDidLoad()
+    
     
     print("高さはね!!!!\(Float(UsedMony.bounds.size.height))")
     
@@ -58,6 +59,7 @@ class ViewController: UIViewController, UITextFieldDelegate{
     self.MonyField.keyboardType = UIKeyboardType.numberPad
     self.UsedMony.keyboardType = UIKeyboardType.numberPad
     MonyField.placeholder = "今日使っていい金額"
+    UsedMony.placeholder = "使った金額"
     
     let toolbar = UIToolbar()
     toolbar.barStyle = UIBarStyle.default
@@ -87,7 +89,7 @@ class ViewController: UIViewController, UITextFieldDelegate{
     }
     
     
-    if poolmonytwo == 1{
+    if poolmonytwo == 0{
       
       poolmonytwo = udtwo.integer(forKey: "poolmonytwo")
       udtwo.set(poolmonytwo, forKey: "poolmonytwo")
@@ -393,6 +395,7 @@ class ViewController: UIViewController, UITextFieldDelegate{
   
   @IBOutlet weak var UsedMony: UITextField!
   
+  var EndMonyJudegeNum = 0
   
   @IBAction func EndTodaysMony(_ sender: Any) {
     let EndTodaysMonyAlert = UIAlertController(title: "¥\(ud.integer(forKey: "mony"))",
@@ -400,6 +403,7 @@ class ViewController: UIViewController, UITextFieldDelegate{
                                                preferredStyle: .alert)
     
     EndTodaysMonyAlert.addAction(UIAlertAction(title: "OK", style: .destructive, handler: { action in
+      self.EndMonyJudegeNum = 1
       self.performSegue(withIdentifier: "resultmony", sender: nil)
     }))
     EndTodaysMonyAlert.addAction(UIAlertAction(title: "キャンセル", style: .cancel))
@@ -415,18 +419,14 @@ class ViewController: UIViewController, UITextFieldDelegate{
   var alert:UIAlertController!
   
   @IBAction func move(_ sender: Any) {
-    performSegue(withIdentifier: "pool", sender: nil)
+    performSegue(withIdentifier: "testmony", sender: nil)
   }
   
   override func prepare(for segue:UIStoryboardSegue, sender:Any?){
     if (segue.identifier == "resultmony"){
-      let resultViewController:resultViewController = segue.destination as! resultViewController
-      var result = ud.integer(forKey: "mony")
-      resultViewController.result = result
-    }else if (segue.identifier == "pool"){
-      let pvc:poolViewController = segue.destination as! poolViewController
-      pvc.poolmony = poolmonytwo
-    }else if (segue.identifier == "detail"){
+        let resultViewController:resultViewController = segue.destination as! resultViewController
+        var result = ud.integer(forKey: "mony")
+        resultViewController.result = result
       
     }
   }
