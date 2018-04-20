@@ -137,6 +137,8 @@ class ViewController: UIViewController, UITextFieldDelegate{
       })
       suzi = 0
     }
+    UsedMony.endEditing(true)
+    
     
     let SubButtonAlert = UIAlertController(title: nil,
                                            message: "",
@@ -173,13 +175,7 @@ class ViewController: UIViewController, UITextFieldDelegate{
             
             
             
-            OndDayMonyAlert.addAction(UIAlertAction(title: "OK", style: .cancel, handler :{ action in
-    
-                UITextField.animate(withDuration:0.10, delay:0.0, options: .curveLinear, animations:{
-                  self.UsedMony.center.y += 20
-                })
-              
-            }))
+            OndDayMonyAlert.addAction(UIAlertAction(title: "OK", style: .cancel))
             self.present(OndDayMonyAlert, animated:true, completion:nil)
             
            
