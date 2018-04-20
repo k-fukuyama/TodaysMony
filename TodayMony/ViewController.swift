@@ -12,7 +12,6 @@ import Foundation
 
 class ViewController: UIViewController, UITextFieldDelegate{
   
-  
   let ud = UserDefaults.standard
   let udtwo = UserDefaults()
   let ud3 = UserDefaults.standard
@@ -23,13 +22,8 @@ class ViewController: UIViewController, UITextFieldDelegate{
 
   @IBOutlet weak var resultmony: MBCircularProgressBarView!
   
-//  let Screen_Size = UIScreen.main.bounds.size
-  
   override func viewDidLoad() {
     super.viewDidLoad()
-    
-    
-    print("高さはね!!!!\(Float(UsedMony.bounds.size.height))")
     
    UsedMony.tag = 1
    MonyField.tag = 2
@@ -52,7 +46,7 @@ class ViewController: UIViewController, UITextFieldDelegate{
     self.UpsideToolBar.setItems([button], animated: true)
     
     var used = Used()
-    
+
     MonyField.delegate = self
     UsedMony.delegate = self
     UsedMony.returnKeyType = .done
@@ -115,9 +109,7 @@ class ViewController: UIViewController, UITextFieldDelegate{
     
     print("\(udtwo.integer(forKey: "poolmonytwo"))です")
     print(ud.integer(forKey: "mony"))
-    
-//    NotificationCenter.default.addObserver(self, selector: #selector(ViewController.keyboardWillShow(_:)), name: NSNotification.Name.UIKeyboardWillShow, object: nil)
-//    NotificationCenter.default.addObserver(self, selector: #selector(ViewController.keyboardWillHide(_:)), name: NSNotification.Name.UIKeyboardDidHide, object: nil)
+  
     if zyunresult == 0{
       zyunresult = ud.integer(forKey: "mony")
     }
@@ -139,6 +131,12 @@ class ViewController: UIViewController, UITextFieldDelegate{
   }
   
   @objc func buttonEvent(sender: Any) {
+    if self.suzi == 1{
+      UITextField.animate(withDuration:0.10, delay:0.0, options: .curveLinear, animations:{
+        self.UsedMony.center.y += 20
+      })
+      suzi = 0
+    }
     
     let SubButtonAlert = UIAlertController(title: nil,
                                            message: "",
@@ -149,26 +147,50 @@ class ViewController: UIViewController, UITextFieldDelegate{
     SubButtonAlert.addAction(UIAlertAction(title: "1ヶ月、自由に使える金額計算", style: .default, handler: { action in
       let OneMonthMony = UIAlertController(title: "今月自由に使える金額を入力してください",
                                            message: "[入力した金額]÷31日で1日あたりに使える金額を計算します",
-                                           preferredStyle: .alert)
-      OneMonthMony.addTextField(configurationHandler: {(textField: UITextField!) -> Void in
+                                           preferredStyle: .alert
+                                           )
+      
+      
+      OneMonthMony.addTextField(configurationHandler: {(textField: UITextField) -> Void in
+        
+        
+        
+       
         textField.placeholder = "お給料を入力してください"
         textField.delegate = self
         textField.keyboardType  = UIKeyboardType.numberPad
+       
         
         OneMonthMony.addAction(UIAlertAction(title: "OK", style: .default, handler: { action in
+          
           if textField.text != "" {
-            var OndDayMony = Int(textField.text!)! / 31
+           
+
+            let OndDayMony = Int(textField.text!)! / 31
             let OndDayMonyAlert = UIAlertController(title: "¥\(OndDayMony)",
               message: "が1日あたりの使用可能金額です",
               preferredStyle: .alert)
             
-            OndDayMonyAlert.addAction(UIAlertAction(title: "OK", style: .cancel))
+            
+            
+            OndDayMonyAlert.addAction(UIAlertAction(title: "OK", style: .cancel, handler :{ action in
+    
+                UITextField.animate(withDuration:0.10, delay:0.0, options: .curveLinear, animations:{
+                  self.UsedMony.center.y += 20
+                })
+              
+            }))
             self.present(OndDayMonyAlert, animated:true, completion:nil)
+            
+           
+            
+            
           }
-          
         }))
-        self.present(OneMonthMony, animated: true, completion: nil)
-      })
+        
+    self.present(OneMonthMony, animated: true, completion: nil)
+      } )
+      
     }))
     
     SubButtonAlert.addAction(UIAlertAction(title: "細かく計算する", style: .default, handler :{ action in
@@ -177,21 +199,10 @@ class ViewController: UIViewController, UITextFieldDelegate{
     
     self.present(SubButtonAlert, animated: true, completion: nil)
     
-   
+    
   }
   
-//  @objc func keyboardWillShow(_ notification: NSNotification){
-//
-//      UITextField.animate(withDuration:0.10, delay:0.0, options: .curveLinear, animations:{
-//        self.UsedMony.center.y -= 20
-//      })
-//  }
-//
-//  @objc func keyboardWillHide(_ notification: NSNotification){
-//    UITextField.animate(withDuration:0.10, delay:0.0, options: .curveLinear, animations:{
-//      self.UsedMony.center.y += 20
-//    })
-//  }
+  
   
   override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
     self.view.endEditing(true)
@@ -203,11 +214,7 @@ class ViewController: UIViewController, UITextFieldDelegate{
     }
     suzi = 0
   }
-//
-//  override func viewDidDisappear(_ animated: Bool) {
-//    super.viewDidDisappear(animated)
-//    
-//  }
+  
   
   func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
     let maxLength = 7
@@ -454,4 +461,10 @@ extension UIBarButtonItem {
   }
   
   
+}
+
+extension UITextField{
+  override open func canPerformAction(_ action: Selector, withSender sender: Any?) -> Bool {
+    return false
+  }
 }
