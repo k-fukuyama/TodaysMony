@@ -146,7 +146,7 @@ class ViewController: UIViewController, UITextFieldDelegate{
     
     SubButtonAlert.addAction(UIAlertAction(title: "キャンセル", style: .cancel))
     
-    SubButtonAlert.addAction(UIAlertAction(title: "1日あたり自由に使える金額計算", style: .default, handler: { action in
+    SubButtonAlert.addAction(UIAlertAction(title: "1日あたりに使える金額計算", style: .default, handler: { action in
       let OneMonthMony = UIAlertController(title: "今月自由に使える金額を入力してください",
                                            message: "[入力した金額]÷31日で1日あたりに使える金額を計算します",
                                            preferredStyle: .alert
@@ -464,3 +464,4 @@ extension UITextField{
     return false
   }
 }
+

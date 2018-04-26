@@ -12,6 +12,7 @@ import Foundation
 class detailmonyViewController: UIViewController, UITextFieldDelegate{
   
   let formatter = NumberFormatter()
+  let introalertjudge = UserDefaults()
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -81,14 +82,25 @@ class detailmonyViewController: UIViewController, UITextFieldDelegate{
       
     }
   
+  
   override func viewDidAppear(_ animated: Bool) {
-    let introAlert = UIAlertController(title: "1ヶ月に使える金額計算",
-                                       message: "1ヶ月に使える金額を計算します費用を入力してください",
-                                       preferredStyle: .alert)
+    if introalertjudge.integer(forKey: "introalertnum") != 1{
+      let introAlert = UIAlertController(title: "1ヶ月に使える金額計算",
+                                         message: "1ヶ月に使える金額を計算します費用を入力してください",
+                                         preferredStyle: .alert)
+      
+      introAlert.addAction(UIAlertAction(title: "OK", style: .default))
+      introAlert.addAction(UIAlertAction(title: "今後表示しない", style: .default, handler: { action in
+        var judgenum = 1
+        self.introalertjudge.set(judgenum, forKey: "introalertnum")
+        self.introalertjudge.synchronize()
+      }))
+      
+      
+      
+      self.present(introAlert, animated: true, completion:  nil)
+    }
     
-    introAlert.addAction(UIAlertAction(title: "OK", style: .cancel))
-    
-    self.present(introAlert, animated: true, completion:  nil)
   }
   
   @objc func commit(){
@@ -216,3 +228,4 @@ class detailmonyViewController: UIViewController, UITextFieldDelegate{
     */
 
 }
+
