@@ -7,13 +7,24 @@
 //
 
 import UIKit
+import Foundation
 
 class detailmonyViewController: UIViewController, UITextFieldDelegate{
+  
+  let formatter = NumberFormatter()
+  let introalertjudge = UserDefaults()
 
     override func viewDidLoad() {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
+      
+      
+      formatter.numberStyle = NumberFormatter.Style.decimal
+      formatter.groupingSeparator = ","
+      formatter.groupingSize = 3
+      
+      
       
       salary.delegate = self
       housemony.delegate = self
@@ -71,14 +82,25 @@ class detailmonyViewController: UIViewController, UITextFieldDelegate{
       
     }
   
+  
   override func viewDidAppear(_ animated: Bool) {
-    let introAlert = UIAlertController(title: "1ヶ月に使える金額計算",
-                                       message: "1ヶ月に使える金額を計算します費用を入力してください",
-                                       preferredStyle: .alert)
+    if introalertjudge.integer(forKey: "introalertnum") != 1{
+      let introAlert = UIAlertController(title: "1ヶ月に使える金額計算",
+                                         message: "1ヶ月に使える金額を計算します費用を入力してください",
+                                         preferredStyle: .alert)
+      
+      introAlert.addAction(UIAlertAction(title: "OK", style: .default))
+      introAlert.addAction(UIAlertAction(title: "今後表示しない", style: .default, handler: { action in
+        var judgenum = 1
+        self.introalertjudge.set(judgenum, forKey: "introalertnum")
+        self.introalertjudge.synchronize()
+      }))
+      
+      
+      
+      self.present(introAlert, animated: true, completion:  nil)
+    }
     
-    introAlert.addAction(UIAlertAction(title: "OK", style: .cancel))
-    
-    self.present(introAlert, animated: true, completion:  nil)
   }
   
   @objc func commit(){
@@ -117,6 +139,7 @@ class detailmonyViewController: UIViewController, UITextFieldDelegate{
   
   @IBAction func total(_ sender: Any) {
     
+    
     textarray = [housemony.text!, lifelinemony.text!, phonemony.text!, cardmony.text!, transportmony.text!, entertainmentmony.text!, othermony.text!]
     
     
@@ -127,7 +150,7 @@ class detailmonyViewController: UIViewController, UITextFieldDelegate{
       
       emptyalert.addAction(UIAlertAction(title: "OK", style: .default))
     }else{
-      let benumsarary = Int(salary.text!)
+      let benumsarary = Int(removeComa(str: salary.text!) )
       costarray = [housemony.text!, lifelinemony.text!, phonemony.text!, cardmony.text!, transportmony.text!, entertainmentmony.text!, othermony.text!, netmony.text!]
       
       for var (index, text) in  costarray.enumerated(){
@@ -137,8 +160,10 @@ class detailmonyViewController: UIViewController, UITextFieldDelegate{
         }
         }
       
+      let deletecomma = costarray.map{removeComa(str: $0)}
       
-      let total = costarray.map{Int($0)!}
+      let total = deletecomma.map{Int($0)!}
+      
       
       let result = total.reduce(0){$0 + $1}
       let result2 = benumsarary! - result
@@ -173,6 +198,25 @@ class detailmonyViewController: UIViewController, UITextFieldDelegate{
     
   }
   
+  func addComma(str:String) -> String{
+    if (str != ""){
+      return formatter.string(from: Int(str) as! NSNumber)!
+//      formatter.string(from: Int(MonyField.text!) as! NSNumber)!
+    }else{
+      return ""
+    }
+  }
+  
+  func removeComa(str:String) -> String{
+    let tmp = str.replacingOccurrences(of: ",", with: "")
+    return tmp
+  }
+  
+  func textFieldDidEndEditing(_ textField: UITextField) {
+    textField.text = addComma(str: removeComa(str: textField.text!))
+  }
+  
+  
   /*
     // MARK: - Navigation
 
@@ -184,3 +228,4 @@ class detailmonyViewController: UIViewController, UITextFieldDelegate{
     */
 
 }
+
