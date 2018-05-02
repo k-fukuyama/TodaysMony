@@ -191,7 +191,7 @@ class ViewController: UIViewController, UITextFieldDelegate{
     }))
     
     SubButtonAlert.addAction(UIAlertAction(title: "1Push入力金額設定", style: .default, handler :{ action in
-      let onepush = UIAlertController(title: "1Pushで設定した金額を入力してください",
+      let onepush = UIAlertController(title: "1Pushで設定したい金額を入力してください",
                                       message: "ボタン一つで金額を設定できるようになります",
                                       preferredStyle: .alert)
       
