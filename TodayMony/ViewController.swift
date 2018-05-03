@@ -16,6 +16,7 @@ class ViewController: UIViewController, UITextFieldDelegate{
   let udtwo = UserDefaults()
   let ud3 = UserDefaults.standard
   let ud4 = UserDefaults()
+  let onepushud = UserDefaults()
   var poolmony = 0
   var returnnum = 0
   var poolmonytwo = 0
@@ -24,6 +25,8 @@ class ViewController: UIViewController, UITextFieldDelegate{
   
   override func viewDidLoad() {
     super.viewDidLoad()
+    
+    print(onepushud.integer(forKey: "onepushmony"))
     
    UsedMony.tag = 1
    MonyField.tag = 2
@@ -155,9 +158,6 @@ class ViewController: UIViewController, UITextFieldDelegate{
       
       OneMonthMony.addTextField(configurationHandler: {(textField: UITextField) -> Void in
         
-        
-        
-       
         textField.placeholder = "お給料を入力してください"
         textField.delegate = self
         textField.keyboardType  = UIKeyboardType.numberPad
@@ -178,9 +178,6 @@ class ViewController: UIViewController, UITextFieldDelegate{
             OndDayMonyAlert.addAction(UIAlertAction(title: "OK", style: .cancel))
             self.present(OndDayMonyAlert, animated:true, completion:nil)
             
-           
-            
-            
           }
         }))
         
@@ -193,8 +190,37 @@ class ViewController: UIViewController, UITextFieldDelegate{
       self.performSegue(withIdentifier: "detail", sender: nil)
     }))
     
-    self.present(SubButtonAlert, animated: true, completion: nil)
+    SubButtonAlert.addAction(UIAlertAction(title: "1Push入力金額設定", style: .default, handler :{ action in
+      let onepush = UIAlertController(title: "1Pushで設定したい金額を入力してください",
+                                      message: "ボタン一つで金額を設定できるようになります",
+                                      preferredStyle: .alert)
+      
+      onepush.addTextField(configurationHandler:{(textField:UITextField) -> Void in
+        textField.placeholder = "1pushで入力する金額を設定してください"
+        textField.delegate = self
+        textField.keyboardType  = UIKeyboardType.numberPad
+        
+        onepush.addAction(UIAlertAction(title: "決定", style: .default, handler:{ action in
+          if textField.text != "" {
+            let benum = Int(textField.text!)
+            self.onepushud.set(benum, forKey: "onepushmony")
+            self.onepushud.synchronize()
+            
+            let onepushalert = UIAlertController(title: "設定完了",
+                                                 message: "金額を設定できました",
+                                                 preferredStyle: .alert)
+            
+            onepushalert.addAction(UIAlertAction(title: "OK", style: .default))
+            
+            self.present(onepushalert, animated: true, completion: nil)
+          }
+        }))
+      })
+      self.present(onepush, animated: true, completion: nil)
+    }))
     
+    
+    self.present(SubButtonAlert, animated: true, completion: nil)
     
   }
   
@@ -292,6 +318,29 @@ class ViewController: UIViewController, UITextFieldDelegate{
       
     }
   }
+  
+  @IBAction func OnePushButton(_ sender: Any) {
+    
+    UIView.animate(withDuration: 1.3) {
+      self.resultmony.value = 100
+      self.resultmony.progressColor = UIColor.yellow
+      self.resultmony.progressStrokeColor = UIColor.yellow
+    }
+    
+    let formatter = NumberFormatter()
+    formatter.numberStyle = NumberFormatter.Style.decimal
+    formatter.groupingSeparator = ","
+    formatter.groupingSize = 3
+    
+    var onepush = onepushud.integer(forKey: "onepushmony")
+    ud3.set(resultmony.value, forKey: "resultmonyyy")
+    
+    TodayMony.text = "¥\(formatter.string(from: onepush as! NSNumber)!)"
+    ud.set(onepush, forKey: "mony")
+    ud4.set(onepush, forKey: "mony2")
+    
+  }
+  
   
   @objc func UsedMonyButton(){
     if UsedMony.text != ""{
