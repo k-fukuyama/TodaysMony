@@ -328,17 +328,11 @@ class ViewController: UIViewController, UITextFieldDelegate{
       self.resultmony.progressStrokeColor = UIColor.yellow
     }
     
-    let formatter = NumberFormatter()
-    formatter.numberStyle = NumberFormatter.Style.decimal
-    formatter.groupingSeparator = ","
-    formatter.groupingSize = 3
-    
     var onepush = onepushud.integer(forKey: "onepushmony")
     ud3.set(resultmony.value, forKey: "resultmonyyy")
     
     TodayMony.text = CommaAdd(comma: onepush)
     
-//    TodayMony.text = "¥\(formatter.string(from: onepush as! NSNumber)!)"
     ud.set(onepush, forKey: "mony")
     ud4.set(onepush, forKey: "mony2")
     
@@ -455,7 +449,14 @@ class ViewController: UIViewController, UITextFieldDelegate{
       self.EndMonyJudegeNum = 1
       self.performSegue(withIdentifier: "resultmony", sender: nil)
     }))
-    EndTodaysMonyAlert.addAction(UIAlertAction(title: "キャンセル", style: .cancel))
+    
+    EndTodaysMonyAlert.addAction(UIAlertAction(title: "キャンセル", style: .cancel, handler :{ action in
+      if self.suzi == 1{
+        UITextField.animate(withDuration:0.10, delay:0.0, options: .curveLinear, animations:{
+          self.UsedMony.center.y += 20
+        })
+      }
+    }))
     
     self.present(EndTodaysMonyAlert, animated: true, completion: nil)
   }
