@@ -26,15 +26,9 @@ class ViewController: UIViewController, UITextFieldDelegate{
   override func viewDidLoad() {
     super.viewDidLoad()
     
-    print(onepushud.integer(forKey: "onepushmony"))
-    
    UsedMony.tag = 1
    MonyField.tag = 2
     
-    let formatter = NumberFormatter()
-    formatter.numberStyle = NumberFormatter.Style.decimal
-    formatter.groupingSeparator = ","
-    formatter.groupingSize = 3
     
     UpsideToolBar.setBackgroundImage(UIImage(), forToolbarPosition: .any, barMetrics: .default)
     UpsideToolBar.shadowImage(forToolbarPosition: .any)
@@ -48,7 +42,6 @@ class ViewController: UIViewController, UITextFieldDelegate{
     
     self.UpsideToolBar.setItems([button], animated: true)
     
-    var used = Used()
 
     MonyField.delegate = self
     UsedMony.delegate = self
@@ -82,7 +75,7 @@ class ViewController: UIViewController, UITextFieldDelegate{
     
     if ud.integer(forKey: "mony") != nil{
       TodayMonyNum = ud.integer(forKey: "mony")
-      TodayMony.text = "¥\(formatter.string(from: ud.integer(forKey: "mony") as NSNumber )! )"
+      TodayMony.text = CommaAdd(comma: ud.integer(forKey: "mony"))
     }
     
     
@@ -297,13 +290,9 @@ class ViewController: UIViewController, UITextFieldDelegate{
           self.resultmony.progressStrokeColor = UIColor.yellow
         }
         
-        let formatter = NumberFormatter()
-        formatter.numberStyle = NumberFormatter.Style.decimal
-        formatter.groupingSeparator = ","
-        formatter.groupingSize = 3
         
         ud3.set(resultmony.value, forKey: "resultmonyyy")
-        TodayMony.text = "¥\(formatter.string(from: Int(MonyField.text!) as! NSNumber)!)"
+        TodayMony.text = CommaAdd(comma: Int(MonyField.text!)!)
         TodayMonyNum = Int(MonyField.text!)!
         ud.set(TodayMonyNum, forKey: "mony")
         ud4.set(TodayMonyNum, forKey: "mony2")
@@ -317,6 +306,18 @@ class ViewController: UIViewController, UITextFieldDelegate{
       MonyField.text = ""
       
     }
+  }
+  
+  func CommaAdd(comma:Int) -> String{
+    let formatter = NumberFormatter()
+    formatter.numberStyle = NumberFormatter.Style.decimal
+    formatter.groupingSeparator = ","
+    formatter.groupingSize = 3
+
+    let becomma = "¥\(formatter.string(from: Int(comma) as! NSNumber)!)"
+
+    return becomma
+
   }
   
   @IBAction func OnePushButton(_ sender: Any) {
@@ -335,7 +336,9 @@ class ViewController: UIViewController, UITextFieldDelegate{
     var onepush = onepushud.integer(forKey: "onepushmony")
     ud3.set(resultmony.value, forKey: "resultmonyyy")
     
-    TodayMony.text = "¥\(formatter.string(from: onepush as! NSNumber)!)"
+    TodayMony.text = CommaAdd(comma: onepush)
+    
+//    TodayMony.text = "¥\(formatter.string(from: onepush as! NSNumber)!)"
     ud.set(onepush, forKey: "mony")
     ud4.set(onepush, forKey: "mony2")
     
@@ -366,15 +369,9 @@ class ViewController: UIViewController, UITextFieldDelegate{
           
         }
         
-        
-        let formatter = NumberFormatter()
-        formatter.numberStyle = NumberFormatter.Style.decimal
-        formatter.groupingSeparator = ","
-        formatter.groupingSize = 3
-        
         zyunresult = ud.integer(forKey: "mony") - Todayusedmony
-        TodayMony.text = "¥\(formatter.string(from: zyunresult as NSNumber)! )"
-        
+        TodayMony.text = CommaAdd(comma: zyunresult)
+
         ud.set(zyunresult, forKey: "mony")
         ud.synchronize()
         UsedMony.endEditing(true)
