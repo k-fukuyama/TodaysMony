@@ -13,6 +13,7 @@ class detailmonyViewController: UIViewController, UITextFieldDelegate{
   
   let formatter = NumberFormatter()
   let introalertjudge = UserDefaults()
+  var SendOneDayMoney = 0
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -156,9 +157,8 @@ class detailmonyViewController: UIViewController, UITextFieldDelegate{
       for var (index, text) in  costarray.enumerated(){
         if text == ""{
           costarray[index] = "0"
-          print("AAA\(costarray[index])")
         }
-        }
+      }
       
       let deletecomma = costarray.map{removeComa(str: $0)}
       
@@ -166,19 +166,49 @@ class detailmonyViewController: UIViewController, UITextFieldDelegate{
       
       
       let result = total.reduce(0){$0 + $1}
-      let result2 = benumsarary! - result
-      print(result2)
+      let OneMonthMonyResult = benumsarary! - result
+      let OneDayMoneyResult = OneMonthMonyResult / 31
+      SendOneDayMoney = OneMonthMonyResult / 31
       
-      let OneMonthMony = UIAlertController(title: "\(result2)",
-        message: "あなたが1ヶ月に使える自由な金額の総合です",
+      let OneMonthMonyAlert = UIAlertController(title: String("\(OneMonthMonyResult)円"),
+        message: "が1ヶ月あたりに使用できる金額です",
         preferredStyle: .alert)
       
-      OneMonthMony.addAction(UIAlertAction(title: "OK", style: .default))
       
-      present(OneMonthMony, animated: true, completion: nil)
       
-      print("\(total)")
+      let OneDayMoneyAlert = UIAlertController(title: String("\(OneDayMoneyResult)円"),
+                                               message: "が1日あたりに使用できる金額です",
+                                               preferredStyle: .alert)
+      
+      OneDayMoneyAlert.addAction(UIAlertAction(title: "OK", style: .default))
+      OneDayMoneyAlert.addAction(UIAlertAction(title: "1pushに設定", style: .default){ action in
+        let SendOneDayMoneySegue = UIAlertController(title: "設定が完了しました",
+                                                     message: "",
+                                                     preferredStyle: .alert)
+        
+        SendOneDayMoneySegue.addAction(UIAlertAction(title: "OK", style: .default){ action in
+                  self.performSegue(withIdentifier: "SendOneDayMney", sender: nil)
+        })
+        
+        self.present(SendOneDayMoneySegue, animated: true, completion: nil)
+
+        
+      })
+      
+
+      OneMonthMonyAlert.addAction(UIAlertAction(title: "OK", style: .default){ action in
+        
+        
+        self.present(OneDayMoneyAlert, animated: true, completion: nil)
+      })
+      
+
+      present(OneMonthMonyAlert, animated: true, completion: nil)
+      
+      
     }
+    
+    
   }
   
   
@@ -214,6 +244,13 @@ class detailmonyViewController: UIViewController, UITextFieldDelegate{
   
   func textFieldDidEndEditing(_ textField: UITextField) {
     textField.text = addComma(str: removeComa(str: textField.text!))
+  }
+  
+  override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+    if (segue.identifier == "SendOneDayMney"){
+      let vc:ViewController = segue.destination as! ViewController
+      vc.SentOneDayMoney = SendOneDayMoney
+    }
   }
   
   

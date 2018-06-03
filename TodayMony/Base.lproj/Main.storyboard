@@ -187,6 +187,7 @@
                         <outlet property="salary" destination="Lah-Zr-1s0" id="COI-X4-PK1"/>
                         <outlet property="transportmony" destination="QIH-0e-YNs" id="60g-zl-fpD"/>
                         <segue destination="BYZ-38-t0r" kind="show" identifier="back" id="y3i-dL-bK4"/>
+                        <segue destination="BYZ-38-t0r" kind="show" identifier="SendOneDayMney" id="5lB-xW-J0F"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="bXN-Q1-C8E" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -362,7 +363,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-162.40000000000001" y="133.5832083958021"/>
+            <point key="canvasLocation" x="-7" y="157"/>
         </scene>
         <!--result-->
         <scene sceneID="Kcd-8S-AdK">
@@ -432,6 +433,6 @@
     </scenes>
     <inferredMetricsTieBreakers>
         <segue reference="hcu-fK-sK3"/>
-        <segue reference="y3i-dL-bK4"/>
+        <segue reference="5lB-xW-J0F"/>
     </inferredMetricsTieBreakers>
 </document>
