@@ -20,6 +20,7 @@ class ViewController: UIViewController, UITextFieldDelegate{
   var poolmony = 0
   var returnnum = 0
   var poolmonytwo = 0
+  var SentOneDayMoney = 0
 
   @IBOutlet weak var resultmony: MBCircularProgressBarView!
   
@@ -119,6 +120,11 @@ class ViewController: UIViewController, UITextFieldDelegate{
     
     print("マニー2は\(ud4.integer(forKey: "mony2"))")
     print("順れざるとは\(zyunresult)")
+    
+    if SentOneDayMoney != 0{
+      onepushud.set(SentOneDayMoney, forKey: "onepushmony")
+      onepushud.synchronize()
+    }
   }
 
   override func didReceiveMemoryWarning() {
