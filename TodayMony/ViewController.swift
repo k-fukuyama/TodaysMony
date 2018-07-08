@@ -49,7 +49,7 @@ class ViewController: UIViewController, UITextFieldDelegate{
     UsedMony.returnKeyType = .done
     self.MonyField.keyboardType = UIKeyboardType.numberPad
     self.UsedMony.keyboardType = UIKeyboardType.numberPad
-    MonyField.placeholder = "今日使っていい金額"
+    MonyField.placeholder = "今日使える金額"
     UsedMony.placeholder = "使った金額"
     
     let toolbar = UIToolbar()

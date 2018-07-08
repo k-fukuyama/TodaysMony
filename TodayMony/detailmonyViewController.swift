@@ -243,7 +243,8 @@ class detailmonyViewController: UIViewController, UITextFieldDelegate{
   }
   
   func textFieldDidEndEditing(_ textField: UITextField) {
-    textField.text = addComma(str: removeComa(str: textField.text!))
+//    textField.text = addComma(str: removeComa(str: textField.text!))
+    textField.text = addComma(str: textField.text!)
   }
   
   override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -251,6 +252,10 @@ class detailmonyViewController: UIViewController, UITextFieldDelegate{
       let vc:ViewController = segue.destination as! ViewController
       vc.SentOneDayMoney = SendOneDayMoney
     }
+  }
+  
+  func textFieldDidBeginEditing(_ textField: UITextField) {
+    textField.text = removeComa(str: removeComa(str: textField.text!))
   }
   
   
