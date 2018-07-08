@@ -18,13 +18,20 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="IMG_0441" translatesAutoresizingMaskIntoConstraints="NO" id="WDw-xA-Z0U">
-                                <rect key="frame" x="48" y="157" width="278" height="329"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="IMG_0441" translatesAutoresizingMaskIntoConstraints="NO" id="WDw-xA-Z0U">
+                                <rect key="frame" x="67.5" y="183.5" width="240" height="300"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" relation="lessThanOrEqual" constant="240" id="fWR-6Q-0Ql"/>
+                                    <constraint firstAttribute="height" constant="300" id="mvZ-dM-S7g"/>
+                                </constraints>
                             </imageView>
                         </subviews>
                         <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                         <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="WDw-xA-Z0U" firstAttribute="centerY" secondItem="Ze5-6b-2t3" secondAttribute="centerY" id="1UR-mM-1Mz"/>
+                            <constraint firstItem="WDw-xA-Z0U" firstAttribute="centerX" secondItem="Ze5-6b-2t3" secondAttribute="centerX" id="p39-2F-rOe"/>
+                        </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
                 </viewController>
