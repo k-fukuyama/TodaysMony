@@ -425,23 +425,24 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="mony!" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6QT-3j-jSn">
-                                <rect key="frame" x="59" y="265" width="268" height="77"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="mony!" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6QT-3j-jSn">
+                                <rect key="frame" x="87.666666666666686" y="331" width="200" height="50"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="200" id="RoE-YR-bdL"/>
+                                    <constraint firstAttribute="height" constant="50" id="fLp-yB-1eH"/>
+                                </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="50"/>
                                 <color key="textColor" red="1" green="1" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="貯められた金額" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qbQ-bK-GYb">
-                                <rect key="frame" x="38" y="153" width="298" height="72"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="貯められた金額" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qbQ-bK-GYb">
+                                <rect key="frame" x="57" y="214" width="261" height="44"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="37"/>
                                 <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8I0-Se-eLW">
-                                <rect key="frame" x="0.0" y="605" width="375" height="62"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8I0-Se-eLW">
+                                <rect key="frame" x="0.0" y="693" width="375" height="36"/>
                                 <color key="backgroundColor" red="1" green="1" blue="0.0" alpha="0.74595298423423428" colorSpace="calibratedRGB"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="20"/>
                                 <state key="normal" title="前のページに戻る">
@@ -451,16 +452,19 @@
                                     <action selector="TodaysMonyPage:" destination="Z1W-iY-s1d" eventType="touchUpInside" id="Yt2-ND-oC7"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="JpX-7N-igA" customClass="SimpleButton" customModule="TodayMony" customModuleProvider="target">
-                                <rect key="frame" x="72" y="462" width="231" height="62"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="JpX-7N-igA" customClass="SimpleButton" customModule="TodayMony" customModuleProvider="target">
+                                <rect key="frame" x="87.666666666666686" y="501" width="200" height="50"/>
                                 <color key="backgroundColor" red="0.50196081400000003" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="200" id="8ff-Qs-MXR"/>
+                                    <constraint firstAttribute="height" constant="50" id="Pdj-bg-zBe"/>
+                                </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="20"/>
                                 <color key="tintColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                 <state key="normal" title="リセット"/>
                                 <userDefinedRuntimeAttributes>
                                     <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
-                                        <integer key="value" value="30"/>
+                                        <integer key="value" value="25"/>
                                     </userDefinedRuntimeAttribute>
                                 </userDefinedRuntimeAttributes>
                                 <connections>
@@ -469,6 +473,18 @@
                             </button>
                         </subviews>
                         <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                        <constraints>
+                            <constraint firstItem="6QT-3j-jSn" firstAttribute="centerY" secondItem="jIc-sj-CZG" secondAttribute="centerY" constant="-50" id="3Rm-3J-hUR"/>
+                            <constraint firstItem="8I0-Se-eLW" firstAttribute="trailing" secondItem="mLf-M8-grq" secondAttribute="trailing" id="Ajl-V5-PkF"/>
+                            <constraint firstItem="6QT-3j-jSn" firstAttribute="centerX" secondItem="jIc-sj-CZG" secondAttribute="centerX" id="BC3-1D-4yo"/>
+                            <constraint firstItem="mLf-M8-grq" firstAttribute="bottom" secondItem="8I0-Se-eLW" secondAttribute="bottom" id="D0V-xE-28d"/>
+                            <constraint firstItem="JpX-7N-igA" firstAttribute="centerX" secondItem="jIc-sj-CZG" secondAttribute="centerX" id="JcM-aC-Je5"/>
+                            <constraint firstItem="qbQ-bK-GYb" firstAttribute="centerY" secondItem="jIc-sj-CZG" secondAttribute="centerY" constant="-170" id="SOF-Gh-cZS"/>
+                            <constraint firstItem="qbQ-bK-GYb" firstAttribute="centerX" secondItem="jIc-sj-CZG" secondAttribute="centerX" id="czc-AM-d6D"/>
+                            <constraint firstItem="JpX-7N-igA" firstAttribute="centerY" secondItem="jIc-sj-CZG" secondAttribute="centerY" constant="120" id="sK6-Uh-e6a"/>
+                            <constraint firstItem="8I0-Se-eLW" firstAttribute="bottom" secondItem="mLf-M8-grq" secondAttribute="bottom" id="vtA-2v-yzy"/>
+                            <constraint firstItem="8I0-Se-eLW" firstAttribute="leading" secondItem="mLf-M8-grq" secondAttribute="leading" id="xjp-zy-j1j"/>
+                        </constraints>
                         <viewLayoutGuide key="safeArea" id="mLf-M8-grq"/>
                     </view>
                     <toolbarItems/>
@@ -484,7 +500,7 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="hcu-fK-sK3"/>
+        <segue reference="RBN-Dq-qgS"/>
         <segue reference="KW3-Pr-7Kd"/>
     </inferredMetricsTieBreakers>
 </document>
