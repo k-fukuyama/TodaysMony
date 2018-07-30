@@ -17,6 +17,8 @@ class ViewController: UIViewController, UITextFieldDelegate{
   let ud3 = UserDefaults.standard
   let ud4 = UserDefaults()
   let onepushud = UserDefaults()
+  var JudgeOnepush = UserDefaults()
+  let TodaysTotalUsedMoney = UserDefaults()
   var poolmony = 0
   var returnnum = 0
   var poolmonytwo = 0
@@ -26,6 +28,8 @@ class ViewController: UIViewController, UITextFieldDelegate{
   
   override func viewDidLoad() {
     super.viewDidLoad()
+    
+    print("今日使った金額は\(TodaysTotalUsedMoney.integer(forKey: "TodaysTotalUd"))")
     
    UsedMony.tag = 1
    MonyField.tag = 2
@@ -86,13 +90,10 @@ class ViewController: UIViewController, UITextFieldDelegate{
       udtwo.set(poolmonytwo, forKey: "poolmonytwo")
       udtwo.synchronize()
       
-      print("\(poolmonytwo)現状")
-      
     }else{
       udtwo.set(poolmonytwo, forKey: "poolmonytwo")
       poolmonytwo = ud.integer(forKey: "poolmonytwo")
       udtwo.synchronize()
-      print("お金ありません")
     }
     
     if ud3.float(forKey: "resultmonyyy") != nil{
@@ -117,9 +118,6 @@ class ViewController: UIViewController, UITextFieldDelegate{
       self.resultmony.progressColor = UIColor.yellow
       self.resultmony.progressStrokeColor = UIColor.yellow
     }
-    
-    print("マニー2は\(ud4.integer(forKey: "mony2"))")
-    print("順れざるとは\(zyunresult)")
     
     if SentOneDayMoney != 0{
       onepushud.set(SentOneDayMoney, forKey: "onepushmony")
@@ -328,19 +326,52 @@ class ViewController: UIViewController, UITextFieldDelegate{
   
   @IBAction func OnePushButton(_ sender: Any) {
     
-    UIView.animate(withDuration: 1.3) {
-      self.resultmony.value = 100
-      self.resultmony.progressColor = UIColor.yellow
-      self.resultmony.progressStrokeColor = UIColor.yellow
+    if JudgeOnepush.integer(forKey: "judgenum") == 0{
+      
+      
+      UIView.animate(withDuration: 1.3) {
+        self.resultmony.value = 100
+        self.resultmony.progressColor = UIColor.yellow
+        self.resultmony.progressStrokeColor = UIColor.yellow
+        
+      }
+      
+      var onepush = onepushud.integer(forKey: "onepushmony")
+      ud3.set(resultmony.value, forKey: "resultmonyyy")
+      
+      TodayMony.text = CommaAdd(comma: onepush)
+      
+      ud.set(onepush, forKey: "mony")
+      ud4.set(onepush, forKey: "mony2")
+      
+    }else{
+      let OnepushDoneAlert = UIAlertController(
+      title: "既に1pushを押しています",
+      message: "もう一度設定しますか？",
+      preferredStyle: .alert)
+      
+      OnepushDoneAlert.addAction(UIAlertAction(title: "OK", style: .default, handler: { action in
+        
+        UIView.animate(withDuration: 1.3) {
+          self.resultmony.value = 100
+          self.resultmony.progressColor = UIColor.yellow
+          self.resultmony.progressStrokeColor = UIColor.yellow
+          
+        }
+        
+        var onepush = self.onepushud.integer(forKey: "onepushmony")
+        self.ud3.set(self.resultmony.value, forKey: "resultmonyyy")
+        
+        self.TodayMony.text = self.CommaAdd(comma: onepush)
+        
+        self.ud.set(onepush, forKey: "mony")
+        self.ud4.set(onepush, forKey: "mony2")
+        
+      }))
+      OnepushDoneAlert.addAction(UIAlertAction(title: "キャンセル", style: .default))
+      present(OnepushDoneAlert, animated: true, completion: nil)
     }
-    
-    var onepush = onepushud.integer(forKey: "onepushmony")
-    ud3.set(resultmony.value, forKey: "resultmonyyy")
-    
-    TodayMony.text = CommaAdd(comma: onepush)
-    
-    ud.set(onepush, forKey: "mony")
-    ud4.set(onepush, forKey: "mony2")
+    JudgeOnepush.set(1, forKey: "judgenum")
     
   }
   
@@ -356,6 +387,10 @@ class ViewController: UIViewController, UITextFieldDelegate{
         Todayusedmony = Int(BeNum)!
         
         bbb = float_t(Todayusedmony) / float_t(ud4.integer(forKey: "mony2"))
+        
+        var total = Todayusedmony + TodaysTotalUsedMoney.integer(forKey: "TodaysTotalUd")
+        
+        TodaysTotalUsedMoney.set(total, forKey: "TodaysTotalUd")
         
         
         UIView.animate(withDuration: 1.3){
@@ -454,6 +489,7 @@ class ViewController: UIViewController, UITextFieldDelegate{
     EndTodaysMonyAlert.addAction(UIAlertAction(title: "OK", style: .destructive, handler: { action in
       self.EndMonyJudegeNum = 1
       self.performSegue(withIdentifier: "resultmony", sender: nil)
+      self.JudgeOnepush.set(0, forKey: "judgenum")
     }))
     
     EndTodaysMonyAlert.addAction(UIAlertAction(title: "キャンセル", style: .cancel, handler :{ action in
@@ -465,6 +501,7 @@ class ViewController: UIViewController, UITextFieldDelegate{
     }))
     
     self.present(EndTodaysMonyAlert, animated: true, completion: nil)
+    
   }
   
   var Todayusedmony:Int = 0
@@ -483,6 +520,8 @@ class ViewController: UIViewController, UITextFieldDelegate{
         let resultViewController:resultViewController = segue.destination as! resultViewController
         var result = ud.integer(forKey: "mony")
         resultViewController.result = result
+        resultViewController.SegueUsedMoney = TodaysTotalUsedMoney.integer(forKey: "TodaysTotalUd")
+        TodaysTotalUsedMoney.removeObject(forKey: "TodaysTotalUd")
       
     }
   }
