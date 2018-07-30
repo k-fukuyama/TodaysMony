@@ -14,9 +14,11 @@ class detailmonyViewController: UIViewController, UITextFieldDelegate{
   let formatter = NumberFormatter()
   let introalertjudge = UserDefaults()
   var SendOneDayMoney = 0
+  let SaveOneMonthMoneyResult = UserDefaults()
 
     override func viewDidLoad() {
         super.viewDidLoad()
+      print(SaveOneMonthMoneyResult.integer(forKey: "SaveMoney"))
 
         // Do any additional setup after loading the view.
       
@@ -169,6 +171,7 @@ class detailmonyViewController: UIViewController, UITextFieldDelegate{
       let OneMonthMonyResult = benumsarary! - result
       let OneDayMoneyResult = OneMonthMonyResult / 31
       SendOneDayMoney = OneMonthMonyResult / 31
+      SaveOneMonthMoneyResult.set(OneMonthMonyResult, forKey: "SaveMoney")
       
       let OneMonthMonyAlert = UIAlertController(title: String("\(OneMonthMonyResult)円"),
         message: "が1ヶ月あたりに使用できる金額です",

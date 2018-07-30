@@ -12,9 +12,22 @@ class resultViewController: UIViewController {
   
   let ud = UserDefaults.standard
 
-    override func viewDidLoad() {
+  @IBOutlet weak var OneMonthMoneyRemain: UILabel!
+  
+  var SegueUsedMoney = 0
+  
+  override func viewDidLoad() {
         super.viewDidLoad()
-      
+    
+    print("渡せたかな\(SegueUsedMoney)")
+    
+    var detailVC = detailmonyViewController()
+    var detailVCOnemonthMoney = detailVC.SaveOneMonthMoneyResult.integer(forKey: "SaveMoney")
+    var remain = detailVCOnemonthMoney - SegueUsedMoney
+    detailVC.SaveOneMonthMoneyResult.set(remain, forKey: "SaveMoney")
+    
+    OneMonthMoneyRemain.text! = String(remain)
+    
       let formatter = NumberFormatter()
       formatter.numberStyle = NumberFormatter.Style.decimal
       formatter.groupingSeparator = ","
