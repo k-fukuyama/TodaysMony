@@ -11,6 +11,7 @@ import MBCircularProgressBar
 import Foundation
 
 class ViewController: UIViewController, UITextFieldDelegate{
+  @IBOutlet weak var ResultMoneyButtom: NSLayoutConstraint!
   
   let ud = UserDefaults.standard
   let udtwo = UserDefaults()
@@ -28,6 +29,23 @@ class ViewController: UIViewController, UITextFieldDelegate{
   
   override func viewDidLoad() {
     super.viewDidLoad()
+    
+    print( UIScreen.main.nativeBounds.size)
+    
+    
+    if UIScreen.main.nativeBounds.size.width >= 750.0{
+      ResultMoneyButtom.constant = 20
+    }else{
+      ResultMoneyButtom.constant = 5
+    }
+    
+    print(ResultMoneyButtom.constant)
+    
+    
+    
+    let notificationcenter = NotificationCenter.default
+    
+    notificationcenter.addObserver(self, selector: #selector(showkeyboard(notification:)), name: NSNotification.Name.UIKeyboardDidShow, object: nil)
     
     print("今日使った金額は\(TodaysTotalUsedMoney.integer(forKey: "TodaysTotalUd"))")
     
@@ -249,23 +267,43 @@ class ViewController: UIViewController, UITextFieldDelegate{
   
   var suzi = 0
   
-  func textFieldDidBeginEditing(_ textField: UITextField) {
-    if textField.tag == 1{
-      UITextField.animate(withDuration:0.10, delay:0.0, options: .curveLinear, animations:{
-                self.UsedMony.center.y -= 20
-      })
-      
-      suzi = 1
-      
-    }else if textField.tag == 2{
-      if suzi == 1{
-        UITextField.animate(withDuration:0.10, delay:0.0, options: .curveLinear, animations:{
-                self.UsedMony.center.y += 20
-              })
+  var KeyboardHighResult = 0
+  
+  @objc func showkeyboard(notification:Notification){
+    if let userinfo = notification.userInfo{
+      if let keyboard = userinfo[UIKeyboardFrameEndUserInfoKey] as? NSValue{
+        let keyhigh = keyboard.cgRectValue
+        NSLog("\(keyhigh.size.height)")
+        print("\(Int(keyhigh.size.height))だおおおお")
+        KeyboardHighResult = Int(keyhigh.size.height)
+        if KeyboardHighResult > 260{
+          UITextField.animate(withDuration:0.10, delay:0.0, options: .curveLinear, animations:{
+            self.UsedMony.center.y -= 20
+          })
+        }
       }
-      suzi = 0
     }
   }
+  
+  
+//  func textFieldDidBeginEditing(_ textField: UITextField) {
+//    print("\(KeyboardHighResult)わああわあわあ")
+//    if textField.tag == 1{
+//      UITextField.animate(withDuration:0.10, delay:0.0, options: .curveLinear, animations:{
+//                self.UsedMony.center.y -= 20
+//      })
+//
+//      suzi = 1
+//
+//    }else if textField.tag == 2{
+//      if suzi == 1{
+//        UITextField.animate(withDuration:0.10, delay:0.0, options: .curveLinear, animations:{
+//                self.UsedMony.center.y += 20
+//              })
+//      }
+//      suzi = 0
+//    }
+//  }
   
   
   

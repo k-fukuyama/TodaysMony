@@ -417,6 +417,7 @@
                     <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
                         <outlet property="MonyField" destination="DWN-Aa-brQ" id="lLe-Vx-ncz"/>
+                        <outlet property="ResultMoneyButtom" destination="pdx-Of-l37" id="8Y6-aR-Ddy"/>
                         <outlet property="TodayMony" destination="Dn2-PJ-j9R" id="dnb-Z4-97s"/>
                         <outlet property="UpsideToolBar" destination="RAl-n7-yKk" id="KJ9-ID-QjP"/>
                         <outlet property="UsedMony" destination="CcB-im-XIb" id="RJT-Ve-QJ0"/>
