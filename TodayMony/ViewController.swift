@@ -13,6 +13,8 @@ import Foundation
 class ViewController: UIViewController, UITextFieldDelegate{
   @IBOutlet weak var ResultMoneyButtom: NSLayoutConstraint!
   
+  @IBOutlet weak var tabBar: UITabBar!
+  
   let ud = UserDefaults.standard
   let udtwo = UserDefaults()
   let ud3 = UserDefaults.standard
@@ -31,6 +33,8 @@ class ViewController: UIViewController, UITextFieldDelegate{
     super.viewDidLoad()
     
     print( UIScreen.main.nativeBounds.size)
+    
+    
     
     
     if UIScreen.main.nativeBounds.size.width >= 750.0{
