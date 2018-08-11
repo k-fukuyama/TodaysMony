@@ -34,7 +34,8 @@ class ViewController: UIViewController, UITextFieldDelegate{
     
     
     if UIScreen.main.nativeBounds.size.width >= 750.0{
-      ResultMoneyButtom.constant = 20
+      ResultMoneyButtom.constant = 1
+      TodayMony.font = UIFont.systemFont(ofSize: 45)
     }else{
       ResultMoneyButtom.constant = 5
     }
@@ -99,6 +100,9 @@ class ViewController: UIViewController, UITextFieldDelegate{
     if ud.integer(forKey: "mony") != nil{
       TodayMonyNum = ud.integer(forKey: "mony")
       TodayMony.text = CommaAdd(comma: ud.integer(forKey: "mony"))
+    }else{
+      TodayMonyNum = ud.integer(forKey: "mony")
+      TodayMony.text = CommaAdd(comma: ud.integer(forKey: "mony"))
     }
     
     
@@ -134,7 +138,7 @@ class ViewController: UIViewController, UITextFieldDelegate{
       self.resultmony.progressStrokeColor = UIColor.red
     }else if zyunresult > ud4.integer(forKey: "mony2") / 2{
       self.resultmony.progressColor = UIColor.yellow
-      self.resultmony.progressStrokeColor = UIColor.yellow
+      self.resultmony.progressStrokeColor = UIColor.yellow;#colorLiteral(red: 0.9994240403, green: 0.9855536819, blue: 0, alpha: 1)
     }
     
     if SentOneDayMoney != 0{
@@ -248,8 +252,9 @@ class ViewController: UIViewController, UITextFieldDelegate{
       UITextField.animate(withDuration:0.10, delay:0.0, options: .curveLinear, animations:{
         self.UsedMony.center.y += 20
       })
+      suzi = 0
     }
-    suzi = 0
+    
   }
   
   
@@ -273,13 +278,16 @@ class ViewController: UIViewController, UITextFieldDelegate{
     if let userinfo = notification.userInfo{
       if let keyboard = userinfo[UIKeyboardFrameEndUserInfoKey] as? NSValue{
         let keyhigh = keyboard.cgRectValue
-        NSLog("\(keyhigh.size.height)")
-        print("\(Int(keyhigh.size.height))だおおおお")
         KeyboardHighResult = Int(keyhigh.size.height)
-        if KeyboardHighResult > 260{
+        if KeyboardHighResult > 260 && suzi == 0{
+          print("栗山千明")
           UITextField.animate(withDuration:0.10, delay:0.0, options: .curveLinear, animations:{
             self.UsedMony.center.y -= 20
+            self.suzi = 1
+            print(self.suzi)
           })
+        }else{
+          print("kuriyama")
         }
       }
     }
@@ -318,7 +326,15 @@ class ViewController: UIViewController, UITextFieldDelegate{
           title: "0円は設定できません",
           message: "金額を設定しないとアプリが使用できません",
           preferredStyle: .alert)
+        if suzi == 1{
+          UITextField.animate(withDuration:0.10, delay:0.0, options: .curveLinear, animations:{
+            self.UsedMony.center.y += 20
+          })
+          suzi = 0
+          print("これがああああああ\(suzi)")
+        }
          MonyField.endEditing(true)
+        
         
         
         zeroalert.addAction(UIAlertAction(title: "OK", style: .cancel))
@@ -332,8 +348,18 @@ class ViewController: UIViewController, UITextFieldDelegate{
           self.resultmony.progressStrokeColor = UIColor.yellow
         }
         
+        suzi = 1
+        
+        if suzi == 1{
+          UITextField.animate(withDuration:0.10, delay:0.0, options: .curveLinear, animations:{
+            self.UsedMony.center.y += 20
+          })
+          suzi = 0
+          print("これがああああああ\(suzi)")
+        }
         
         ud3.set(resultmony.value, forKey: "resultmonyyy")
+        
         TodayMony.text = CommaAdd(comma: Int(MonyField.text!)!)
         TodayMonyNum = Int(MonyField.text!)!
         ud.set(TodayMonyNum, forKey: "mony")
@@ -344,8 +370,18 @@ class ViewController: UIViewController, UITextFieldDelegate{
       
     }else{
       
-      MonyField.endEditing(true)
-      MonyField.text = ""
+      if suzi == 1{
+        UITextField.animate(withDuration:0.10, delay:0.0, options: .curveLinear, animations:{
+          self.UsedMony.center.y += 20
+        })
+        MonyField.endEditing(true)
+        MonyField.text = ""
+        suzi = 0
+      }else{
+        MonyField.endEditing(true)
+        MonyField.text = ""
+      }
+      
       
     }
   }
@@ -448,17 +484,19 @@ class ViewController: UIViewController, UITextFieldDelegate{
         ud.set(zyunresult, forKey: "mony")
         ud.synchronize()
         UsedMony.endEditing(true)
-        suzi = 0
+        suzi = 1
         
         if zyunresult < ud4.integer(forKey: "mony2") / 2{
           self.resultmony.progressColor = UIColor.red
           self.resultmony.progressStrokeColor = UIColor.red
         }
         
-        UITextField.animate(withDuration:0.10, delay:0.0, options: .curveLinear, animations:{
-                self.UsedMony.center.y += 20
-              })
-        suzi = 0
+        if suzi == 1{
+          UITextField.animate(withDuration:0.10, delay:0.0, options: .curveLinear, animations:{
+            self.UsedMony.center.y += 20
+          })
+          suzi = 0
+        }
         
         UsedMony.text = ""
         
@@ -503,10 +541,13 @@ class ViewController: UIViewController, UITextFieldDelegate{
       
     }else{
       UsedMony.endEditing(true)
-      UITextField.animate(withDuration:0.10, delay:0.0, options: .curveLinear, animations:{
-              self.UsedMony.center.y += 20
-            })
-      suzi = 0
+      if suzi == 1{
+        UITextField.animate(withDuration:0.10, delay:0.0, options: .curveLinear, animations:{
+          self.UsedMony.center.y += 20
+        })
+        suzi = 0
+      }
+      
     }
     suzi = 0
   }
