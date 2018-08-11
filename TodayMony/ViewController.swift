@@ -284,7 +284,6 @@ class ViewController: UIViewController, UITextFieldDelegate{
         let keyhigh = keyboard.cgRectValue
         KeyboardHighResult = Int(keyhigh.size.height)
         if KeyboardHighResult > 260 && suzi == 0{
-          print("栗山千明")
           UITextField.animate(withDuration:0.10, delay:0.0, options: .curveLinear, animations:{
             self.UsedMony.center.y -= 20
             self.suzi = 1
@@ -352,7 +351,6 @@ class ViewController: UIViewController, UITextFieldDelegate{
           self.resultmony.progressStrokeColor = UIColor.yellow
         }
         
-        suzi = 1
         
         if suzi == 1{
           UITextField.animate(withDuration:0.10, delay:0.0, options: .curveLinear, animations:{
@@ -488,7 +486,7 @@ class ViewController: UIViewController, UITextFieldDelegate{
         ud.set(zyunresult, forKey: "mony")
         ud.synchronize()
         UsedMony.endEditing(true)
-        suzi = 1
+        
         
         if zyunresult < ud4.integer(forKey: "mony2") / 2{
           self.resultmony.progressColor = UIColor.red
@@ -501,6 +499,8 @@ class ViewController: UIViewController, UITextFieldDelegate{
           })
           suzi = 0
         }
+        
+        suzi = 1
         
         UsedMony.text = ""
         
