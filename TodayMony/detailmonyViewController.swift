@@ -189,11 +189,14 @@ class detailmonyViewController: UIViewController, UITextFieldDelegate{
                                                      message: "",
                                                      preferredStyle: .alert)
         
-        SendOneDayMoneySegue.addAction(UIAlertAction(title: "OK", style: .default){ action in
-                  self.performSegue(withIdentifier: "SendOneDayMney", sender: nil)
-        })
+        let vc = ViewController()
+        vc.onepushud.set(self.SendOneDayMoney, forKey: "onepushmony")
         
-        self.present(SendOneDayMoneySegue, animated: true, completion: nil)
+//        SendOneDayMoneySegue.addAction(UIAlertAction(title: "OK", style: .default){ action in
+//                  self.performSegue(withIdentifier: "SendOnedayMoney", sender: nil)
+//        })
+//
+//        self.present(SendOneDayMoneySegue, animated: true, completion: nil)
 
         
       })
@@ -251,7 +254,7 @@ class detailmonyViewController: UIViewController, UITextFieldDelegate{
   }
   
   override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-    if (segue.identifier == "SendOneDayMney"){
+    if (segue.identifier == "SendOnedayMoney"){
       let vc:ViewController = segue.destination as! ViewController
       vc.SentOneDayMoney = SendOneDayMoney
     }
