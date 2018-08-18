@@ -19,6 +19,8 @@ class detailmonyViewController: UIViewController, UITextFieldDelegate{
     override func viewDidLoad() {
         super.viewDidLoad()
       print(SaveOneMonthMoneyResult.integer(forKey: "SaveMoney"))
+      print("どせいさん")
+      
 
         // Do any additional setup after loading the view.
       
@@ -173,15 +175,20 @@ class detailmonyViewController: UIViewController, UITextFieldDelegate{
       SendOneDayMoney = OneMonthMonyResult / 31
       SaveOneMonthMoneyResult.set(OneMonthMonyResult, forKey: "SaveMoney")
       
+      
+      
+      
       let OneMonthMonyAlert = UIAlertController(title: String("\(OneMonthMonyResult)円"),
         message: "が1ヶ月あたりに使用できる金額です",
         preferredStyle: .alert)
       
-      
+     
       
       let OneDayMoneyAlert = UIAlertController(title: String("\(OneDayMoneyResult)円"),
                                                message: "が1日あたりに使用できる金額です",
                                                preferredStyle: .alert)
+     
+      
       
       OneDayMoneyAlert.addAction(UIAlertAction(title: "OK", style: .default))
       OneDayMoneyAlert.addAction(UIAlertAction(title: "1pushに設定", style: .default){ action in
@@ -213,8 +220,7 @@ class detailmonyViewController: UIViewController, UITextFieldDelegate{
       
       
     }
-    
-    
+  
   }
   
   
