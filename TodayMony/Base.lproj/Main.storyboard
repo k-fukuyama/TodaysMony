@@ -10,7 +10,7 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--詳細計算-->
+        <!--使えるお金計算-->
         <scene sceneID="SrT-5R-bwF">
             <objects>
                 <viewController id="Vvg-gj-v6r" customClass="detailmonyViewController" customModule="TodayMony" customModuleProvider="target" sceneMemberID="viewController">
@@ -95,13 +95,6 @@
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
-                            <textField opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Lah-Zr-1s0">
-                                <rect key="frame" x="138" y="30" width="100" height="30"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <nil key="textColor"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits"/>
-                            </textField>
                             <textField opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="DgW-le-HYZ">
                                 <rect key="frame" x="218" y="277" width="100" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -153,20 +146,6 @@
                                 <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="NwO-yg-y2Y">
-                                <rect key="frame" x="0.0" y="669" width="375" height="60"/>
-                                <color key="backgroundColor" red="0.50196081400000003" green="0.50196081400000003" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="60" id="BkL-d7-PKY"/>
-                                </constraints>
-                                <fontDescription key="fontDescription" type="system" pointSize="20"/>
-                                <state key="normal" title="戻る">
-                                    <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                                </state>
-                                <connections>
-                                    <action selector="movebefore:" destination="Vvg-gj-v6r" eventType="touchUpInside" id="3vB-y4-BZN"/>
-                                </connections>
-                            </button>
                             <textField opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="dGj-JD-vht">
                                 <rect key="frame" x="58" y="277" width="100.00000000000001" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -174,17 +153,19 @@
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
+                            <textField opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Lah-Zr-1s0">
+                                <rect key="frame" x="137" y="391" width="100" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <nil key="textColor"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
                         </subviews>
                         <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
-                        <constraints>
-                            <constraint firstItem="NwO-yg-y2Y" firstAttribute="centerX" secondItem="kev-Gg-Psm" secondAttribute="centerX" id="JUK-f3-e6a"/>
-                            <constraint firstItem="NwO-yg-y2Y" firstAttribute="leading" secondItem="0XS-E9-qjg" secondAttribute="leading" id="b62-ok-Y3K"/>
-                            <constraint firstItem="0XS-E9-qjg" firstAttribute="trailing" secondItem="NwO-yg-y2Y" secondAttribute="trailing" id="b80-lU-GKy"/>
-                            <constraint firstItem="NwO-yg-y2Y" firstAttribute="bottom" secondItem="0XS-E9-qjg" secondAttribute="bottom" id="xdh-sz-QMZ"/>
-                        </constraints>
                         <viewLayoutGuide key="safeArea" id="0XS-E9-qjg"/>
                     </view>
-                    <tabBarItem key="tabBarItem" title="詳細計算" image="moneydetail" selectedImage="moneydetail" id="9pi-fG-ULM" userLabel="詳細計算"/>
+                    <tabBarItem key="tabBarItem" title="使えるお金計算" image="moneydetail" selectedImage="moneydetail" id="1vu-Kk-AXt"/>
+                    <navigationItem key="navigationItem" id="Psm-Dh-xR9"/>
                     <connections>
                         <outlet property="cardmony" destination="c15-dw-yKH" id="sgL-Nk-oVR"/>
                         <outlet property="entertainmentmony" destination="ZVX-HQ-ngv" id="Qjf-cR-LCG"/>
@@ -196,12 +177,12 @@
                         <outlet property="salary" destination="Lah-Zr-1s0" id="COI-X4-PK1"/>
                         <outlet property="transportmony" destination="QIH-0e-YNs" id="60g-zl-fpD"/>
                         <segue destination="wCp-iv-rNX" kind="modal" identifier="back" id="y3i-dL-bK4"/>
-                        <segue destination="wCp-iv-rNX" kind="modal" identifier="SendOneDayMney" id="5lB-xW-J0F"/>
+                        <segue destination="BYZ-38-t0r" kind="modal" identifier="SendOnedayMoney" id="6gN-BK-QLC"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="bXN-Q1-C8E" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="417.5" y="-1101.1304347826087"/>
+            <point key="canvasLocation" x="875.5" y="-1135"/>
         </scene>
         <!--今日の金額-->
         <scene sceneID="tne-QT-ifu">
@@ -387,10 +368,11 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="moG-2J-g5m"/>
                     </view>
-                    <tabBarItem key="tabBarItem" title="今日の金額" image="mainmoney" selectedImage="mainmoney" id="xw8-Sk-3Eg" userLabel="メイン画面">
+                    <tabBarItem key="tabBarItem" title="今日の金額" image="yenn" selectedImage="yenn" id="xw8-Sk-3Eg" userLabel="メイン画面">
                         <inset key="largeContentSizeImageInsets" minX="0.0" minY="1" maxX="0.0" maxY="0.0"/>
                     </tabBarItem>
                     <toolbarItems/>
+                    <navigationItem key="navigationItem" id="VNR-u6-pZU"/>
                     <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
                         <outlet property="MonyField" destination="DWN-Aa-brQ" id="lLe-Vx-ncz"/>
@@ -399,13 +381,12 @@
                         <outlet property="UpsideToolBar" destination="RAl-n7-yKk" id="KJ9-ID-QjP"/>
                         <outlet property="UsedMony" destination="CcB-im-XIb" id="RJT-Ve-QJ0"/>
                         <outlet property="resultmony" destination="oNr-cH-6FT" id="8Eb-sN-OCF"/>
-                        <segue destination="Z1W-iY-s1d" kind="modal" identifier="resultmony" id="RBN-Dq-qgS"/>
-                        <segue destination="Vvg-gj-v6r" kind="modal" identifier="detail" id="m9P-OR-QQv"/>
+                        <segue destination="Z1W-iY-s1d" kind="push" identifier="resultmoney" id="fBF-5G-2mn"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="208.5" y="211"/>
+            <point key="canvasLocation" x="-771" y="-1324"/>
         </scene>
         <!--result-->
         <scene sceneID="Kcd-8S-AdK">
@@ -487,22 +468,24 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="mLf-M8-grq"/>
                     </view>
+                    <tabBarItem key="tabBarItem" title="残りの金額" image="poolmoney" selectedImage="poolmoney" id="Qj8-ls-2xX"/>
                     <toolbarItems/>
+                    <navigationItem key="navigationItem" id="rgD-WZ-MH6"/>
                     <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
-                        <outlet property="OneMonthMoneyRemain" destination="gj2-rS-crQ" id="xzf-Yf-xda"/>
                         <outlet property="monylabel" destination="6QT-3j-jSn" id="DAT-Lj-n4T"/>
+                        <outlet property="oneMonthMoneyRemain" destination="gj2-rS-crQ" id="TRD-R3-v7o"/>
                         <segue destination="wCp-iv-rNX" kind="modal" identifier="todaysmony" id="KW3-Pr-7Kd"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Mtu-eS-Aei" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="823.5" y="180"/>
+            <point key="canvasLocation" x="45.5" y="-1165"/>
         </scene>
-        <!--Tab Bar Controller-->
+        <!--Custoumbar-->
         <scene sceneID="Fr6-Ol-fFg">
             <objects>
-                <tabBarController automaticallyAdjustsScrollViewInsets="NO" id="wCp-iv-rNX" sceneMemberID="viewController">
+                <tabBarController automaticallyAdjustsScrollViewInsets="NO" id="wCp-iv-rNX" customClass="custoumbar" customModule="TodayMony" customModuleProvider="target" sceneMemberID="viewController">
                     <toolbarItems/>
                     <tabBar key="tabBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="zLS-Z1-ISY">
                         <rect key="frame" x="0.0" y="0.0" width="1000" height="1000"/>
@@ -512,20 +495,23 @@
                     </tabBar>
                     <connections>
                         <segue destination="BYZ-38-t0r" kind="relationship" relationship="viewControllers" id="ozK-Yh-tbw"/>
-                        <segue destination="Vvg-gj-v6r" kind="relationship" relationship="viewControllers" id="W38-wf-5l3"/>
+                        <segue destination="Vvg-gj-v6r" kind="relationship" relationship="viewControllers" id="jAe-GD-7Dn"/>
+                        <segue destination="Z1W-iY-s1d" kind="relationship" relationship="viewControllers" id="Ysh-rm-FaU"/>
                     </connections>
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="cn4-0I-OkZ" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-450" y="-252"/>
+            <point key="canvasLocation" x="-315" y="-182"/>
         </scene>
     </scenes>
     <resources>
-        <image name="mainmoney" width="32" height="32"/>
         <image name="moneydetail" width="32" height="32"/>
+        <image name="poolmoney" width="32" height="32"/>
+        <image name="yenn" width="30" height="30"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="5lB-xW-J0F"/>
-        <segue reference="m9P-OR-QQv"/>
+        <segue reference="y3i-dL-bK4"/>
+        <segue reference="fBF-5G-2mn"/>
+        <segue reference="6gN-BK-QLC"/>
     </inferredMetricsTieBreakers>
 </document>

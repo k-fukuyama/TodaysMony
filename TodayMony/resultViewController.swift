@@ -8,25 +8,28 @@
 
 import UIKit
 
-class resultViewController: UIViewController {
+class resultViewController: UIViewController{
   
   let ud = UserDefaults.standard
 
-  @IBOutlet weak var OneMonthMoneyRemain: UILabel!
+  
+  @IBOutlet weak var oneMonthMoneyRemain: UILabel!
   
   var SegueUsedMoney = 0
+  let testman = UserDefaults()
   
   override func viewDidLoad() {
         super.viewDidLoad()
+   let dvc = detailmonyViewController()
+//    testman.integer(forKey: "testmoney")
+//    oneMonthMoneyRemain.text! = String(describing: testman)
     
-    print("渡せたかな\(SegueUsedMoney)")
-    
-    var detailVC = detailmonyViewController()
-    var detailVCOnemonthMoney = detailVC.SaveOneMonthMoneyResult.integer(forKey: "SaveMoney")
-    var remain = detailVCOnemonthMoney - SegueUsedMoney
-    detailVC.SaveOneMonthMoneyResult.set(remain, forKey: "SaveMoney")
-    
-    OneMonthMoneyRemain.text! = String(remain)
+//    var detailVC = detailmonyViewController()
+//    var detailVCOnemonthMoney = detailVC.SaveOneMonthMoneyResult.integer(forKey: "SaveMoney")
+//    var remain = detailVCOnemonthMoney - SegueUsedMoney
+//    detailVC.SaveOneMonthMoneyResult.set(remain, forKey: "SaveMoney")
+    let vc = ViewController()
+    let aaa = dvc.SaveOneMonthMoneyResult.integer(forKey: "SaveMoney")
     
       let formatter = NumberFormatter()
       formatter.numberStyle = NumberFormatter.Style.decimal
@@ -44,11 +47,10 @@ class resultViewController: UIViewController {
         poolmony = trueresult
         
         ud.set(trueresult, forKey: "aaa")
-        
       }
+    
       
-      
-      monylabel.text = "¥\(formatter.string(from: ud.integer(forKey: "aaa") as! NSNumber)!)"
+//      monylabel.text = "¥\(formatter.string(from: ud.integer(forKey: "aaa") as! NSNumber)!)"
     }
 
     override func didReceiveMemoryWarning() {
@@ -90,6 +92,23 @@ class resultViewController: UIViewController {
     }
   }
   
+  
+  func ontap(){
+    let dvc = detailmonyViewController()
+    oneMonthMoneyRemain.text! = String(dvc.SaveOneMonthMoneyResult.integer(forKey: "SaveMoney"))
+  }
+  
+  func hoge(){
+  
+    let dvc = detailmonyViewController()
+//    let vc = ViewController()
+//    let atai = dvc.SaveOneMonthMoneyResult.integer(forKey: "SaveMoney") - vc.TodaysTotalUsedMoney.integer(forKey: "TodaysTotalUd")
+//    print(atai)
+//    OneMonthMoneyRemain.text! = String(atai)
+    
+   
+  }
+  
   /*
     // MARK: - Navigation
 
@@ -102,5 +121,11 @@ class resultViewController: UIViewController {
 
 }
 
+extension resultViewController: MyTabBarDelegate {
+
+  func didSelectTab(tabBarController: UITabBarController) {
+    ontap()
+  }
+}
 
 

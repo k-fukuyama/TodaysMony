@@ -284,7 +284,6 @@ class ViewController: UIViewController, UITextFieldDelegate{
         let keyhigh = keyboard.cgRectValue
         KeyboardHighResult = Int(keyhigh.size.height)
         if KeyboardHighResult > 260 && suzi == 0{
-          print("栗山千明")
           UITextField.animate(withDuration:0.10, delay:0.0, options: .curveLinear, animations:{
             self.UsedMony.center.y -= 20
             self.suzi = 1
@@ -352,7 +351,6 @@ class ViewController: UIViewController, UITextFieldDelegate{
           self.resultmony.progressStrokeColor = UIColor.yellow
         }
         
-        suzi = 1
         
         if suzi == 1{
           UITextField.animate(withDuration:0.10, delay:0.0, options: .curveLinear, animations:{
@@ -361,7 +359,7 @@ class ViewController: UIViewController, UITextFieldDelegate{
           suzi = 0
           print("これがああああああ\(suzi)")
         }
-        
+        TodaysTotalUsedMoney.removeObject(forKey: "TodaysTotalUd")
         ud3.set(resultmony.value, forKey: "resultmonyyy")
         
         TodayMony.text = CommaAdd(comma: Int(MonyField.text!)!)
@@ -421,6 +419,7 @@ class ViewController: UIViewController, UITextFieldDelegate{
       
       ud.set(onepush, forKey: "mony")
       ud4.set(onepush, forKey: "mony2")
+      TodaysTotalUsedMoney.removeObject(forKey: "TodaysTotalUd")
       
     }else{
       let OnepushDoneAlert = UIAlertController(
@@ -450,7 +449,7 @@ class ViewController: UIViewController, UITextFieldDelegate{
       present(OnepushDoneAlert, animated: true, completion: nil)
     }
     JudgeOnepush.set(1, forKey: "judgenum")
-    
+    TodaysTotalUsedMoney.removeObject(forKey: "TodaysTotalUd")
   }
   
   
@@ -488,7 +487,7 @@ class ViewController: UIViewController, UITextFieldDelegate{
         ud.set(zyunresult, forKey: "mony")
         ud.synchronize()
         UsedMony.endEditing(true)
-        suzi = 1
+        
         
         if zyunresult < ud4.integer(forKey: "mony2") / 2{
           self.resultmony.progressColor = UIColor.red
@@ -501,6 +500,8 @@ class ViewController: UIViewController, UITextFieldDelegate{
           })
           suzi = 0
         }
+        
+        suzi = 1
         
         UsedMony.text = ""
         
@@ -564,16 +565,36 @@ class ViewController: UIViewController, UITextFieldDelegate{
   
   var EndMonyJudegeNum = 0
   
+  var todaysOneMonethMoneyRemain = 0
+  
   @IBAction func EndTodaysMony(_ sender: Any) {
     let EndTodaysMonyAlert = UIAlertController(title: "¥\(ud.integer(forKey: "mony"))",
                                                message: "が今日の残額でよろしいですか?",
                                                preferredStyle: .alert)
+   
     
     EndTodaysMonyAlert.addAction(UIAlertAction(title: "OK", style: .destructive, handler: { action in
-      self.EndMonyJudegeNum = 1
-      self.performSegue(withIdentifier: "resultmony", sender: nil)
+//      self.EndMonyJudegeNum = 1
       self.JudgeOnepush.set(0, forKey: "judgenum")
+//      let dvc = detailmonyViewController()
+//      let totalResult = dvc.SaveOneMonthMoneyResult.integer(forKey: "SaveMoney") - self.TodaysTotalUsedMoney.integer(forKey: "TodaysTotalUd")
+//      dvc.SaveOneMonthMoneyResult.set(totalResult, forKey: "SaveMoney")
+//
+      let rvc = resultViewController()
+      let dvc = detailmonyViewController()
+      self.todaysOneMonethMoneyRemain = dvc.SaveOneMonthMoneyResult.integer(forKey: "SaveMoney") - self.TodaysTotalUsedMoney.integer(forKey: "TodaysTotalUd")
+      dvc.SaveOneMonthMoneyResult.set(self.todaysOneMonethMoneyRemain, forKey: "SaveMoney")
+      
+      let todaysResult = UIAlertController(title: "今月残り使える金額は\(self.todaysOneMonethMoneyRemain)円です",
+        message: "",
+        preferredStyle: .alert)
+      todaysResult.addAction(UIAlertAction(title: "OK", style: .destructive))
+      self.present(todaysResult, animated: true, completion: nil)
+      self.TodaysTotalUsedMoney.removeObject(forKey: "TodaysTotalUd")
+      
     }))
+    
+    
     
     EndTodaysMonyAlert.addAction(UIAlertAction(title: "キャンセル", style: .cancel, handler :{ action in
       if self.suzi == 1{
@@ -584,6 +605,8 @@ class ViewController: UIViewController, UITextFieldDelegate{
     }))
     
     self.present(EndTodaysMonyAlert, animated: true, completion: nil)
+
+    
     
   }
   
@@ -598,16 +621,17 @@ class ViewController: UIViewController, UITextFieldDelegate{
     performSegue(withIdentifier: "testmony", sender: nil)
   }
   
-  override func prepare(for segue:UIStoryboardSegue, sender:Any?){
-    if (segue.identifier == "resultmony"){
-        let resultViewController:resultViewController = segue.destination as! resultViewController
-        var result = ud.integer(forKey: "mony")
-        resultViewController.result = result
-        resultViewController.SegueUsedMoney = TodaysTotalUsedMoney.integer(forKey: "TodaysTotalUd")
-        TodaysTotalUsedMoney.removeObject(forKey: "TodaysTotalUd")
-      
-    }
-  }
+//  override func prepare(for segue:UIStoryboardSegue, sender:Any?){
+//    if (segue.identifier == "resultmoney"){
+////        let resultViewController:resultViewController = segue.destination as! resultViewController
+////        var result = ud.integer(forKey: "mony")
+////        resultViewController.result = result
+////        resultViewController.SegueUsedMoney = TodaysTotalUsedMoney.integer(forKey: "TodaysTotalUd")
+////        TodaysTotalUsedMoney.removeObject(forKey: "TodaysTotalUd")
+//      self.tabBarController?.selectedIndex = 2
+//
+//    }
+//  }
   
   
   @IBOutlet weak var UpsideToolBar: UIToolbar!
@@ -633,10 +657,3 @@ extension UIBarButtonItem {
   
   
 }
-
-extension UITextField{
-  override open func canPerformAction(_ action: Selector, withSender sender: Any?) -> Bool {
-    return false
-  }
-}
-
