@@ -209,7 +209,7 @@
                                         <rect key="frame" x="0.0" y="5" width="375" height="339.66666666666669"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Dn2-PJ-j9R">
-                                                <rect key="frame" x="88" y="144.33333333333334" width="200" height="51"/>
+                                                <rect key="frame" x="88" y="144.66666666666666" width="200" height="51"/>
                                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <constraints>
                                                     <constraint firstAttribute="width" constant="200" id="JIz-ku-rSc"/>
@@ -220,7 +220,7 @@
                                                 <color key="highlightedColor" red="1" green="1" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                             </label>
                                             <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="RAl-n7-yKk">
-                                                <rect key="frame" x="310.66666666666669" y="8" width="55" height="259.33333333333331"/>
+                                                <rect key="frame" x="310.66666666666669" y="8" width="55" height="259.66666666666669"/>
                                                 <color key="backgroundColor" red="0.098039217289999994" green="0.098039217289999994" blue="0.098039217289999994" alpha="1" colorSpace="calibratedRGB"/>
                                                 <constraints>
                                                     <constraint firstAttribute="width" constant="60" id="dpt-oN-Wkp"/>

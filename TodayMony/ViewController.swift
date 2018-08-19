@@ -33,13 +33,13 @@ class ViewController: UIViewController, UITextFieldDelegate{
   override func viewDidLoad() {
     super.viewDidLoad()
     
-    print( UIScreen.main.nativeBounds.size)
+    print( UIScreen.main.nativeBounds.size.width)
     
     
     if UIScreen.main.nativeBounds.size.width < 750.0{
       ResultMoneyButtom.constant = 1
       onePushBottom.constant = 35
-    }else{
+    }else if UIScreen.main.nativeBounds.size.width >= 1125{
       onePushBottom.constant = 70
       TodayMony.font = UIFont.systemFont(ofSize: 50)
     }
