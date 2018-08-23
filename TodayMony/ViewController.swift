@@ -223,10 +223,6 @@ class ViewController: UIViewController, UITextFieldDelegate{
       
     }))
     
-    SubButtonAlert.addAction(UIAlertAction(title: "1ヶ月あたりに使える金額計算", style: .default, handler :{ action in
-      self.performSegue(withIdentifier: "detail", sender: nil)
-    }))
-    
     SubButtonAlert.addAction(UIAlertAction(title: "1Push入力金額設定", style: .default, handler :{ action in
       let onepush = UIAlertController(title: "1Pushで設定したい金額を入力してください",
                                       message: "ボタン一つで金額を設定できるようになります",
@@ -312,25 +308,6 @@ class ViewController: UIViewController, UITextFieldDelegate{
   }
   
   
-//  func textFieldDidBeginEditing(_ textField: UITextField) {
-//    print("\(KeyboardHighResult)わああわあわあ")
-//    if textField.tag == 1{
-//      UITextField.animate(withDuration:0.10, delay:0.0, options: .curveLinear, animations:{
-//                self.UsedMony.center.y -= 20
-//      })
-//
-//      suzi = 1
-//
-//    }else if textField.tag == 2{
-//      if suzi == 1{
-//        UITextField.animate(withDuration:0.10, delay:0.0, options: .curveLinear, animations:{
-//                self.UsedMony.center.y += 20
-//              })
-//      }
-//      suzi = 0
-//    }
-//  }
-  
   
   
   var TodayMonyNum = 0
@@ -349,7 +326,6 @@ class ViewController: UIViewController, UITextFieldDelegate{
             self.UsedMony.center.y += 20
           })
           suzi = 0
-          print("これがああああああ\(suzi)")
         }
          MonyField.endEditing(true)
         

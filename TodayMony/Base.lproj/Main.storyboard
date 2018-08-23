@@ -519,8 +519,9 @@
                                     <action selector="reset:" destination="Z1W-iY-s1d" eventType="touchUpInside" id="yHi-nU-LLf"/>
                                 </connections>
                             </button>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gj2-rS-crQ">
-                                <rect key="frame" x="97.5" y="303.5" width="180" height="60"/>
+                            <label opaque="NO" userInteractionEnabled="NO" alpha="0.90000000000000002" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gj2-rS-crQ">
+                                <rect key="frame" x="97.5" y="283.5" width="180" height="60"/>
+                                <color key="backgroundColor" red="0.19722986341396098" green="0.094349546791249489" blue="0.097413732096437666" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="180" id="6hL-XQ-5zd"/>
                                     <constraint firstAttribute="height" constant="60" id="gpS-hl-fE6"/>
@@ -535,7 +536,7 @@
                             <constraint firstItem="gj2-rS-crQ" firstAttribute="centerX" secondItem="jIc-sj-CZG" secondAttribute="centerX" id="3Lg-F9-cuw"/>
                             <constraint firstItem="JpX-7N-igA" firstAttribute="centerX" secondItem="jIc-sj-CZG" secondAttribute="centerX" id="JcM-aC-Je5"/>
                             <constraint firstItem="qbQ-bK-GYb" firstAttribute="centerY" secondItem="jIc-sj-CZG" secondAttribute="centerY" constant="-170" id="SOF-Gh-cZS"/>
-                            <constraint firstItem="gj2-rS-crQ" firstAttribute="centerY" secondItem="jIc-sj-CZG" secondAttribute="centerY" id="XhW-HW-aE6"/>
+                            <constraint firstItem="gj2-rS-crQ" firstAttribute="centerY" secondItem="jIc-sj-CZG" secondAttribute="centerY" constant="-20" id="XhW-HW-aE6"/>
                             <constraint firstItem="qbQ-bK-GYb" firstAttribute="centerX" secondItem="jIc-sj-CZG" secondAttribute="centerX" id="czc-AM-d6D"/>
                             <constraint firstItem="JpX-7N-igA" firstAttribute="centerY" secondItem="jIc-sj-CZG" secondAttribute="centerY" constant="120" id="sK6-Uh-e6a"/>
                         </constraints>
@@ -582,7 +583,7 @@
         <image name="yenn" width="30" height="30"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="y3i-dL-bK4"/>
+        <segue reference="KW3-Pr-7Kd"/>
         <segue reference="fBF-5G-2mn"/>
         <segue reference="6gN-BK-QLC"/>
     </inferredMetricsTieBreakers>
