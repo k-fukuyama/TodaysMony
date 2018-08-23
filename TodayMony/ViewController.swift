@@ -683,6 +683,9 @@ class ViewController: UIViewController, UITextFieldDelegate{
   
   @IBOutlet weak var UpsideToolBar: UIToolbar!
   
+  func ontap(){
+    onePushTitle.setTitle(String(self.onepushud.integer(forKey: "onepushmony")), for: .normal)
+  }
   
   
   
@@ -703,4 +706,11 @@ extension UIBarButtonItem {
   }
   
   
+}
+
+extension ViewController: MyTabBarDelegate{
+  func didSelectTab(tabBarController: UITabBarController) {
+    ontap()
+  }
+
 }
