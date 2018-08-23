@@ -150,12 +150,25 @@ class ViewController: UIViewController, UITextFieldDelegate{
       onepushud.set(SentOneDayMoney, forKey: "onepushmony")
       onepushud.synchronize()
     }
+    
+    let onePushData = onepushud.integer(forKey: "onepushmony")
+    
+    if onePushData != 0{
+      onePushTitle.setTitle(String(self.onepushud.integer(forKey: "onepushmony")), for: .normal)
+    }else{
+      onePushTitle.setTitle("1push", for: .normal)
+    }
+    
+    
+    
   }
 
   override func didReceiveMemoryWarning() {
     super.didReceiveMemoryWarning()
     // Dispose of any resources that can be recreated.
   }
+  
+  @IBOutlet weak var onePushTitle: UIButton!
   
   @objc func buttonEvent(sender: Any) {
     if self.suzi == 1{
@@ -229,6 +242,7 @@ class ViewController: UIViewController, UITextFieldDelegate{
             let benum = Int(textField.text!)
             self.onepushud.set(benum, forKey: "onepushmony")
             self.onepushud.synchronize()
+            self.onePushTitle.setTitle(String(self.onepushud.integer(forKey: "onepushmony")), for: .normal)
             
             let onepushalert = UIAlertController(title: "設定完了",
                                                  message: "金額を設定できました",
@@ -402,6 +416,38 @@ class ViewController: UIViewController, UITextFieldDelegate{
   }
   
   @IBAction func OnePushButton(_ sender: Any) {
+    var onepush = onepushud.integer(forKey: "onepushmony")
+    
+    if onepush == 0{
+        let onepush = UIAlertController(title: "1Pushで設定したい金額を入力してください",
+                                        message: "ボタン一つで金額を設定できるようになります",
+                                        preferredStyle: .alert)
+        
+        onepush.addTextField(configurationHandler:{(textField:UITextField) -> Void in
+          textField.placeholder = "1pushで入力する金額を設定してください"
+          textField.delegate = self
+          textField.keyboardType  = UIKeyboardType.numberPad
+          
+          onepush.addAction(UIAlertAction(title: "決定", style: .default, handler:{ action in
+            if textField.text != "" {
+              let benum = Int(textField.text!)
+              self.onepushud.set(benum, forKey: "onepushmony")
+              self.onepushud.synchronize()
+              self.onePushTitle.setTitle(String(self.onepushud.integer(forKey: "onepushmony")), for: .normal)
+              
+              let onepushalert = UIAlertController(title: "設定完了",
+                                                   message: "金額を設定できました",
+                                                   preferredStyle: .alert)
+              
+              onepushalert.addAction(UIAlertAction(title: "OK", style: .default))
+              
+              self.present(onepushalert, animated: true, completion: nil)
+            }
+          }))
+        })
+        self.present(onepush, animated: true, completion: nil)
+      
+    }
     
     if JudgeOnepush.integer(forKey: "judgenum") == 0{
       
@@ -413,7 +459,7 @@ class ViewController: UIViewController, UITextFieldDelegate{
         
       }
       
-      var onepush = onepushud.integer(forKey: "onepushmony")
+      
       ud3.set(resultmony.value, forKey: "resultmonyyy")
       
       TodayMony.text = CommaAdd(comma: onepush)

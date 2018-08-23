@@ -477,6 +477,7 @@
                         <outlet property="UpsideToolBar" destination="RAl-n7-yKk" id="KJ9-ID-QjP"/>
                         <outlet property="UsedMony" destination="CcB-im-XIb" id="RJT-Ve-QJ0"/>
                         <outlet property="onePushBottom" destination="BDN-xt-P0K" id="3cR-gC-ENI"/>
+                        <outlet property="onePushTitle" destination="HjV-Y4-RPl" id="enb-9y-b9g"/>
                         <outlet property="resultmony" destination="oNr-cH-6FT" id="8Eb-sN-OCF"/>
                         <segue destination="Z1W-iY-s1d" kind="push" identifier="resultmoney" id="fBF-5G-2mn"/>
                     </connections>
