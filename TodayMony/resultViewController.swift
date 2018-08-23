@@ -70,8 +70,10 @@ class resultViewController: UIViewController{
                                   message:"残りの金額をリセットします",
                                   preferredStyle: .alert)
     
+    let dvc = detailmonyViewController()
+    
     alert.addAction(UIAlertAction(title:"リセットする", style:.destructive, handler:{ action in
-      self.ud.removeObject(forKey: "aaa")
+      dvc.SaveOneMonthMoneyResult.removeObject(forKey: "SaveMoney")
       self.oneMonthMoneyRemain.text! = String(self.ud.integer(forKey: "aaa"))
     }))
     
