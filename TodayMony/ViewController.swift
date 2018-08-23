@@ -13,6 +13,7 @@ import Foundation
 class ViewController: UIViewController, UITextFieldDelegate{
   @IBOutlet weak var ResultMoneyButtom: NSLayoutConstraint!
   
+  @IBOutlet weak var onePushBottom: NSLayoutConstraint!
   @IBOutlet weak var tabBar: UITabBar!
   
   let ud = UserDefaults.standard
@@ -32,17 +33,17 @@ class ViewController: UIViewController, UITextFieldDelegate{
   override func viewDidLoad() {
     super.viewDidLoad()
     
-    print( UIScreen.main.nativeBounds.size)
+    print( UIScreen.main.nativeBounds.size.width)
     
     
-    
-    
-    if UIScreen.main.nativeBounds.size.width >= 750.0{
+    if UIScreen.main.nativeBounds.size.width < 750.0{
       ResultMoneyButtom.constant = 1
-      TodayMony.font = UIFont.systemFont(ofSize: 45)
-    }else{
-      ResultMoneyButtom.constant = 5
+      onePushBottom.constant = 35
+    }else if UIScreen.main.nativeBounds.size.width >= 1125{
+      onePushBottom.constant = 70
+      TodayMony.font = UIFont.systemFont(ofSize: 50)
     }
+    
     
     print(ResultMoneyButtom.constant)
     

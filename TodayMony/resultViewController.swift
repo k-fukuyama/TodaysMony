@@ -66,13 +66,13 @@ class resultViewController: UIViewController{
   
   
   @IBAction func reset(_ sender: Any) {
-    var alert = UIAlertController(title:"貯金額をリセット",
-                                  message:"貯金額をリセットします",
+    var alert = UIAlertController(title:"残りの金額をリセット",
+                                  message:"残りの金額をリセットします",
                                   preferredStyle: .alert)
     
-    alert.addAction(UIAlertAction(title:"貯金額をリセットする", style:.destructive, handler:{ action in
+    alert.addAction(UIAlertAction(title:"リセットする", style:.destructive, handler:{ action in
       self.ud.removeObject(forKey: "aaa")
-      self.performSegue(withIdentifier: "todaysmony", sender: nil)
+      self.oneMonthMoneyRemain.text! = String(self.ud.integer(forKey: "aaa"))
     }))
     
     alert.addAction(UIAlertAction(title:"リセットしない", style: .cancel))
@@ -81,16 +81,6 @@ class resultViewController: UIViewController{
   }
   
   
-  @IBAction func TodaysMonyPage(_ sender: Any) {
-    performSegue(withIdentifier: "todaysmony", sender: nil)
-  }
-  
-  override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-    if (segue.identifier == "todaysmony"){
-      let viewcontroller:ViewController = segue.destination as! ViewController
-      viewcontroller.poolmonytwo = poolmony
-    }
-  }
   
   
   func ontap(){
