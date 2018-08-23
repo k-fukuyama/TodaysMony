@@ -16,10 +16,21 @@ class detailmonyViewController: UIViewController, UITextFieldDelegate{
   var SendOneDayMoney = 0
   let SaveOneMonthMoneyResult = UserDefaults()
 
-    override func viewDidLoad() {
+  @IBOutlet weak var numBottom: NSLayoutConstraint!
+  
+  let uiScreenSize = UIScreen.main.nativeBounds.size.width
+  
+  override func viewDidLoad() {
         super.viewDidLoad()
       print(SaveOneMonthMoneyResult.integer(forKey: "SaveMoney"))
-      print("どせいさん")
+    
+    
+    
+    if uiScreenSize < 750.0{
+      numBottom.constant = 40
+    }else if uiScreenSize >= 1125{
+      numBottom.constant = 160
+    }
       
 
         // Do any additional setup after loading the view.
@@ -78,6 +89,15 @@ class detailmonyViewController: UIViewController, UITextFieldDelegate{
       entertainmentmony.text = ""
       othermony.text = ""
       netmony.text = ""
+      
+      netmony.tag = 1
+      othermony.tag = 2
+      transportmony.tag = 3
+      entertainmentmony.tag = 4
+      
+      let notificationCenter = NotificationCenter.default
+      notificationCenter.addObserver(self, selector: #selector(self.handleKeyboardWillShowNotification(_:)) , name: .UIKeyboardWillShow, object: nil)
+      notificationCenter.addObserver(self, selector: #selector(self.handleKeyboardWillHideNotification(_:)), name: .UIKeyboardWillHide, object: nil)
       
     }
 
@@ -173,7 +193,7 @@ class detailmonyViewController: UIViewController, UITextFieldDelegate{
       let OneMonthMonyResult = benumsarary! - result
       let OneDayMoneyResult = OneMonthMonyResult / 31
       SendOneDayMoney = OneMonthMonyResult / 31
-      SaveOneMonthMoneyResult.set(OneMonthMonyResult, forKey: "SaveMoney")
+     
       
       
       
@@ -181,6 +201,8 @@ class detailmonyViewController: UIViewController, UITextFieldDelegate{
       let OneMonthMonyAlert = UIAlertController(title: String("\(OneMonthMonyResult)円"),
         message: "が1ヶ月あたりに使用できる金額です",
         preferredStyle: .alert)
+      
+      
       
      
       
@@ -211,8 +233,15 @@ class detailmonyViewController: UIViewController, UITextFieldDelegate{
 
       OneMonthMonyAlert.addAction(UIAlertAction(title: "OK", style: .default){ action in
         
-        
         self.present(OneDayMoneyAlert, animated: true, completion: nil)
+       
+      })
+      
+      OneMonthMonyAlert.addAction(UIAlertAction(title: "残りの金額に設定する", style: .destructive){ action in
+        
+        self.SaveOneMonthMoneyResult.set(OneMonthMonyResult, forKey: "SaveMoney")
+        self.present(OneDayMoneyAlert, animated: true, completion: nil)
+        
       })
       
 
@@ -223,6 +252,37 @@ class detailmonyViewController: UIViewController, UITextFieldDelegate{
   
   }
   
+  var num = 0
+  
+  func textFieldDidBeginEditing(_ textField: UITextField) {
+    textField.text = removeComa(str: removeComa(str: textField.text!))
+    num = textField.tag
+  }
+  
+  @objc func handleKeyboardWillShowNotification(_ notification: Notification){
+      let userInfo = notification.userInfo
+      let keyBoardSize = (userInfo![UIKeyboardFrameEndUserInfoKey] as! NSValue).cgRectValue
+      let keyBoardY = self.view.frame.size.height - keyBoardSize.height
+      let edithingTextField: CGFloat = (self.netmony.frame.origin.y)
+      if edithingTextField > keyBoardY - 60 && num >= 1 && uiScreenSize < 750{
+        UIView.animate(withDuration: 0.15, delay: 0.0, options: .curveEaseIn, animations: {
+          self.view.frame = CGRect(x: 0, y: self.view.frame.origin.y - (edithingTextField - (keyBoardY - 60)), width: self.view.bounds.width, height: self.view.bounds.height)
+        }, completion: nil)
+      }
+
+
+
+  }
+
+  @objc private func handleKeyboardWillHideNotification(_ notification: Notification) {
+    UIView.animate(withDuration: 0.25, delay: 0.0, options: .curveEaseIn, animations: {
+      self.view.frame = CGRect(x: 0, y: 0, width: self.view.bounds.width, height: self.view.bounds.height)
+    }, completion: nil)
+
+  }
+
+  
+//
   
   @IBAction func movebefore(_ sender: Any) {
     self.performSegue(withIdentifier: "back", sender: nil)
@@ -257,6 +317,8 @@ class detailmonyViewController: UIViewController, UITextFieldDelegate{
   func textFieldDidEndEditing(_ textField: UITextField) {
 //    textField.text = addComma(str: removeComa(str: textField.text!))
     textField.text = addComma(str: textField.text!)
+    
+   
   }
   
   override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -266,9 +328,10 @@ class detailmonyViewController: UIViewController, UITextFieldDelegate{
     }
   }
   
-  func textFieldDidBeginEditing(_ textField: UITextField) {
-    textField.text = removeComa(str: removeComa(str: textField.text!))
-  }
+//  func textFieldDidBeginEditing(_ textField: UITextField) {
+//    textField.text = removeComa(str: removeComa(str: textField.text!))
+//    print(textField.tag)
+//  }
   
   
   /*
