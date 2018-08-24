@@ -8,7 +8,7 @@
 
 import UIKit
 
-class resultViewController: UIViewController{
+class resultViewController: UIViewController, UITextFieldDelegate{
   
   let ud = UserDefaults.standard
 
@@ -16,19 +16,23 @@ class resultViewController: UIViewController{
   @IBOutlet weak var oneMonthMoneyRemain: UILabel!
   
   var SegueUsedMoney = 0
-  let testman = UserDefaults()
+  
+  @IBOutlet weak var remainMoneySetButtom: NSLayoutConstraint!
   
   override func viewDidLoad() {
         super.viewDidLoad()
-   let dvc = detailmonyViewController()
-//    testman.integer(forKey: "testmoney")
-//    oneMonthMoneyRemain.text! = String(describing: testman)
     
-//    var detailVC = detailmonyViewController()
-//    var detailVCOnemonthMoney = detailVC.SaveOneMonthMoneyResult.integer(forKey: "SaveMoney")
-//    var remain = detailVCOnemonthMoney - SegueUsedMoney
-//    detailVC.SaveOneMonthMoneyResult.set(remain, forKey: "SaveMoney")
-    let vc = ViewController()
+    let uiScreenSize = UIScreen.main.nativeBounds.size.width
+    
+    if uiScreenSize < 750{
+      remainMoneySetButtom.constant = 20
+    }else if uiScreenSize >= 1125{
+      remainMoneySetButtom.constant = 115
+    }
+    
+   let dvc = detailmonyViewController()
+    
+    
     let aaa = dvc.SaveOneMonthMoneyResult.integer(forKey: "SaveMoney")
     
       let formatter = NumberFormatter()
@@ -48,9 +52,6 @@ class resultViewController: UIViewController{
         
         ud.set(trueresult, forKey: "aaa")
       }
-    
-      
-//      monylabel.text = "¥\(formatter.string(from: ud.integer(forKey: "aaa") as! NSNumber)!)"
     }
 
     override func didReceiveMemoryWarning() {
@@ -64,16 +65,18 @@ class resultViewController: UIViewController{
   @IBOutlet weak var monylabel: UILabel!
   
   
+  let dvc = detailmonyViewController()
+  let vc = ViewController()
   
   @IBAction func reset(_ sender: Any) {
     var alert = UIAlertController(title:"残りの金額をリセット",
                                   message:"残りの金額をリセットします",
                                   preferredStyle: .alert)
     
-    let dvc = detailmonyViewController()
+    
     
     alert.addAction(UIAlertAction(title:"リセットする", style:.destructive, handler:{ action in
-      dvc.SaveOneMonthMoneyResult.removeObject(forKey: "SaveMoney")
+      self.dvc.SaveOneMonthMoneyResult.removeObject(forKey: "SaveMoney")
       self.oneMonthMoneyRemain.text! = String(self.ud.integer(forKey: "aaa"))
     }))
     
@@ -86,20 +89,45 @@ class resultViewController: UIViewController{
   
   
   func ontap(){
-    let dvc = detailmonyViewController()
-    oneMonthMoneyRemain.text! = String(dvc.SaveOneMonthMoneyResult.integer(forKey: "SaveMoney"))
+//    let dvc = detailmonyViewController()
+    oneMonthMoneyRemain.text! = vc.CommaAdd(comma: dvc.SaveOneMonthMoneyResult.integer(forKey: "SaveMoney"))
+//    oneMonthMoneyRemain.text! = String(dvc.SaveOneMonthMoneyResult.integer(forKey: "SaveMoney"))
   }
   
-  func hoge(){
-  
-    let dvc = detailmonyViewController()
-//    let vc = ViewController()
-//    let atai = dvc.SaveOneMonthMoneyResult.integer(forKey: "SaveMoney") - vc.TodaysTotalUsedMoney.integer(forKey: "TodaysTotalUd")
-//    print(atai)
-//    OneMonthMoneyRemain.text! = String(atai)
+  func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
+    let maxLength = 7
+    var str = textField.text! + string
     
-   
+    if str.characters.count < maxLength{
+      return true
+    }
+    
+    return false
+    
   }
+  
+  
+  
+  @IBAction func remainMoneySetButton(_ sender: Any) {
+    var remainMoneySetAlert = UIAlertController(title: "残りの金額を設定します",
+                                                message: "金額を入力してください",
+                                                preferredStyle: .alert)
+    remainMoneySetAlert.addTextField(configurationHandler:{(textField: UITextField) -> Void in
+      textField.placeholder = "金額を入力してください"
+      textField.delegate = self
+      textField.keyboardType = UIKeyboardType.numberPad
+      
+      remainMoneySetAlert.addAction(UIAlertAction(title: "決定", style: .default, handler:{ action in
+        if textField.text != ""{
+         self.dvc.SaveOneMonthMoneyResult.set(Int(textField.text!), forKey: "SaveMoney")
+          let viewRemain = self.vc.CommaAdd(comma: self.dvc.SaveOneMonthMoneyResult.integer(forKey: "SaveMoney"))
+          self.oneMonthMoneyRemain.text =  viewRemain
+        }
+      } ))
+    } )
+    self.present(remainMoneySetAlert, animated: true, completion: nil)
+  }
+  
   
   /*
     // MARK: - Navigation

@@ -416,6 +416,7 @@ class ViewController: UIViewController, UITextFieldDelegate{
                                                    preferredStyle: .alert)
               
               onepushalert.addAction(UIAlertAction(title: "OK", style: .default))
+              self.JudgeOnepush.set(0, forKey: "judgenum")
               
               self.present(onepushalert, animated: true, completion: nil)
             }
@@ -427,15 +428,6 @@ class ViewController: UIViewController, UITextFieldDelegate{
     
     if JudgeOnepush.integer(forKey: "judgenum") == 0{
       
-      
-      UIView.animate(withDuration: 1.3) {
-        self.resultmony.value = 100
-        self.resultmony.progressColor = UIColor.yellow
-        self.resultmony.progressStrokeColor = UIColor.yellow
-        
-      }
-      
-      
       ud3.set(resultmony.value, forKey: "resultmonyyy")
       
       TodayMony.text = CommaAdd(comma: onepush)
@@ -443,6 +435,15 @@ class ViewController: UIViewController, UITextFieldDelegate{
       ud.set(onepush, forKey: "mony")
       ud4.set(onepush, forKey: "mony2")
       TodaysTotalUsedMoney.removeObject(forKey: "TodaysTotalUd")
+      UIView.animate(withDuration: 1.3) {
+        self.resultmony.value = 100
+        self.resultmony.progressColor = UIColor.yellow
+        self.resultmony.progressStrokeColor = UIColor.yellow
+        
+      }
+      self.ud3.set(self.resultmony.value, forKey: "resultmonyyy")
+      self.ud.set(onepush, forKey: "mony")
+      self.ud4.set(onepush, forKey: "mony2")
       
     }else{
       let OnepushDoneAlert = UIAlertController(
@@ -450,7 +451,9 @@ class ViewController: UIViewController, UITextFieldDelegate{
       message: "もう一度設定しますか？",
       preferredStyle: .alert)
       
-      OnepushDoneAlert.addAction(UIAlertAction(title: "OK", style: .default, handler: { action in
+      OnepushDoneAlert.addAction(UIAlertAction(title: "キャンセル", style: .default))
+      
+      OnepushDoneAlert.addAction(UIAlertAction(title: "OK", style: .destructive, handler: { action in
         
         UIView.animate(withDuration: 1.3) {
           self.resultmony.value = 100
@@ -466,13 +469,13 @@ class ViewController: UIViewController, UITextFieldDelegate{
         
         self.ud.set(onepush, forKey: "mony")
         self.ud4.set(onepush, forKey: "mony2")
+        self.TodaysTotalUsedMoney.removeObject(forKey: "TodaysTotalUd")
         
       }))
-      OnepushDoneAlert.addAction(UIAlertAction(title: "キャンセル", style: .default))
       present(OnepushDoneAlert, animated: true, completion: nil)
     }
     JudgeOnepush.set(1, forKey: "judgenum")
-    TodaysTotalUsedMoney.removeObject(forKey: "TodaysTotalUd")
+   
   }
   
   
@@ -597,12 +600,9 @@ class ViewController: UIViewController, UITextFieldDelegate{
    
     
     EndTodaysMonyAlert.addAction(UIAlertAction(title: "OK", style: .destructive, handler: { action in
-//      self.EndMonyJudegeNum = 1
+      
       self.JudgeOnepush.set(0, forKey: "judgenum")
-//      let dvc = detailmonyViewController()
-//      let totalResult = dvc.SaveOneMonthMoneyResult.integer(forKey: "SaveMoney") - self.TodaysTotalUsedMoney.integer(forKey: "TodaysTotalUd")
-//      dvc.SaveOneMonthMoneyResult.set(totalResult, forKey: "SaveMoney")
-//
+
       let rvc = resultViewController()
       let dvc = detailmonyViewController()
       self.todaysOneMonethMoneyRemain = dvc.SaveOneMonthMoneyResult.integer(forKey: "SaveMoney") - self.TodaysTotalUsedMoney.integer(forKey: "TodaysTotalUd")
@@ -660,7 +660,13 @@ class ViewController: UIViewController, UITextFieldDelegate{
   @IBOutlet weak var UpsideToolBar: UIToolbar!
   
   func ontap(){
-    onePushTitle.setTitle(String(self.onepushud.integer(forKey: "onepushmony")), for: .normal)
+    let onePushSetData = self.onepushud.integer(forKey: "onepushmony")
+    
+    if onePushSetData == 0{
+      onePushTitle.setTitle("1psuh設定", for: .normal)
+    }else{
+      onePushTitle.setTitle(String(self.onepushud.integer(forKey: "onepushmony")), for: .normal)
+    }
   }
   
   
