@@ -33,6 +33,8 @@ class ViewController: UIViewController, UITextFieldDelegate{
   override func viewDidLoad() {
     super.viewDidLoad()
     
+    print(UsedMony.frame.origin.y)
+    
     print( UIScreen.main.nativeBounds.size.width)
     
     
@@ -51,8 +53,8 @@ class ViewController: UIViewController, UITextFieldDelegate{
     
     let notificationcenter = NotificationCenter.default
     
-    notificationcenter.addObserver(self, selector: #selector(showkeyboard(notification:)), name: NSNotification.Name.UIKeyboardDidShow, object: nil)
-    
+    notificationcenter.addObserver(self, selector: #selector(showkeyboard(notification:)), name: .UIKeyboardWillShow, object: nil)
+  
     print("今日使った金額は\(TodaysTotalUsedMoney.integer(forKey: "TodaysTotalUd"))")
     
    UsedMony.tag = 1
@@ -271,6 +273,7 @@ class ViewController: UIViewController, UITextFieldDelegate{
       })
       suzi = 0
     }
+    NotificationCenter.default.removeObserver(self)
     
   }
   
@@ -291,24 +294,33 @@ class ViewController: UIViewController, UITextFieldDelegate{
   
   var KeyboardHighResult = 0
   
+  var keyboardNumber = 0
+  
+  func textFieldDidBeginEditing(_ textField: UITextField) {
+    if textField.tag == 1{
+      NotificationCenter.default.addObserver(self, selector: #selector(showkeyboard(notification:)), name: .UIKeyboardWillShow, object: nil)
+    }
+    
+    keyboardNumber = textField.tag
+  }
+  
   @objc func showkeyboard(notification:Notification){
     if let userinfo = notification.userInfo{
       if let keyboard = userinfo[UIKeyboardFrameEndUserInfoKey] as? NSValue{
         let keyhigh = keyboard.cgRectValue
         KeyboardHighResult = Int(keyhigh.size.height)
-        if KeyboardHighResult > 260 && suzi == 0{
+        if KeyboardHighResult > 260 && suzi == 0 && keyboardNumber == 1{
           UITextField.animate(withDuration:0.10, delay:0.0, options: .curveLinear, animations:{
             self.UsedMony.center.y -= 20
             self.suzi = 1
             print(self.suzi)
           })
         }else{
-          print("kuriyama")
+          print("action is done")
         }
       }
     }
   }
-  
   
   
   
@@ -485,7 +497,7 @@ class ViewController: UIViewController, UITextFieldDelegate{
   
   @objc func UsedMonyButton(){
     if UsedMony.text != ""{
-      
+      NotificationCenter.default.removeObserver(self)
       if ud.integer(forKey: "mony") != nil{
         
         print(ud.integer(forKey: "mony"))
@@ -535,6 +547,7 @@ class ViewController: UIViewController, UITextFieldDelegate{
         
         UsedMony.text = ""
         
+        
       }else{
         BeNum = UsedMony.text!
         Todayusedmony = Int(BeNum)!
@@ -555,6 +568,7 @@ class ViewController: UIViewController, UITextFieldDelegate{
         
         suzi = 0
         UsedMony.text = ""
+        
       }
       
       if ud3.float(forKey: "resulymonyyy") != nil{
@@ -582,7 +596,7 @@ class ViewController: UIViewController, UITextFieldDelegate{
         })
         suzi = 0
       }
-      
+      NotificationCenter.default.removeObserver(self)
     }
     suzi = 0
   }
@@ -665,6 +679,7 @@ class ViewController: UIViewController, UITextFieldDelegate{
   
   func ontap(){
     let onePushSetData = self.onepushud.integer(forKey: "onepushmony")
+    
     
     if onePushSetData == 0{
       onePushTitle.setTitle("1psuh設定", for: .normal)

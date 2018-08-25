@@ -90,6 +90,7 @@ class resultViewController: UIViewController, UITextFieldDelegate{
   
   func ontap(){
     oneMonthMoneyRemain.text! = vc.CommaAdd(comma: dvc.SaveOneMonthMoneyResult.integer(forKey: "SaveMoney"))
+    
   }
   
   func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
