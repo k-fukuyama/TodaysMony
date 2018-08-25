@@ -228,6 +228,8 @@ class ViewController: UIViewController, UITextFieldDelegate{
                                       message: "ボタン一つで金額を設定できるようになります",
                                       preferredStyle: .alert)
       
+      onepush.addAction(UIAlertAction(title: "キャンセル", style: .cancel))
+      
       onepush.addTextField(configurationHandler:{(textField:UITextField) -> Void in
         textField.placeholder = "1pushで入力する金額を設定してください"
         textField.delegate = self
@@ -398,6 +400,7 @@ class ViewController: UIViewController, UITextFieldDelegate{
         let onepush = UIAlertController(title: "1Pushで設定したい金額を入力してください",
                                         message: "ボタン一つで金額を設定できるようになります",
                                         preferredStyle: .alert)
+      onepush.addAction(UIAlertAction(title: "キャンセル", style: .cancel))
         
         onepush.addTextField(configurationHandler:{(textField:UITextField) -> Void in
           textField.placeholder = "1pushで入力する金額を設定してください"
@@ -410,6 +413,7 @@ class ViewController: UIViewController, UITextFieldDelegate{
               self.onepushud.set(benum, forKey: "onepushmony")
               self.onepushud.synchronize()
               self.onePushTitle.setTitle(String(self.onepushud.integer(forKey: "onepushmony")), for: .normal)
+              
               
               let onepushalert = UIAlertController(title: "設定完了",
                                                    message: "金額を設定できました",
@@ -426,7 +430,7 @@ class ViewController: UIViewController, UITextFieldDelegate{
       
     }
     
-    if JudgeOnepush.integer(forKey: "judgenum") == 0{
+    if JudgeOnepush.integer(forKey: "judgenum") == 0 && onepushud.integer(forKey: "onepushmony") != 0{
       
       ud3.set(resultmony.value, forKey: "resultmonyyy")
       
