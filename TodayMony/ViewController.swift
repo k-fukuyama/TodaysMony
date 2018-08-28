@@ -374,7 +374,7 @@ class ViewController: UIViewController, UITextFieldDelegate{
         MonyField.endEditing(true)
         MonyField.text = ""
       }
-      
+      JudgeOnepush.set(1, forKey: "judgenum")
     }else{
       
       if suzi == 1{
@@ -442,30 +442,12 @@ class ViewController: UIViewController, UITextFieldDelegate{
       
     }
     
-    if JudgeOnepush.integer(forKey: "judgenum") == 0 && onepushud.integer(forKey: "onepushmony") != 0{
+    func onePushedNotice(){
       
-      ud3.set(resultmony.value, forKey: "resultmonyyy")
-      
-      TodayMony.text = CommaAdd(comma: onepush)
-      
-      ud.set(onepush, forKey: "mony")
-      ud4.set(onepush, forKey: "mony2")
-      TodaysTotalUsedMoney.removeObject(forKey: "TodaysTotalUd")
-      UIView.animate(withDuration: 1.3) {
-        self.resultmony.value = 100
-        self.resultmony.progressColor = UIColor.yellow
-        self.resultmony.progressStrokeColor = UIColor.yellow
-        
-      }
-      self.ud3.set(self.resultmony.value, forKey: "resultmonyyy")
-      self.ud.set(onepush, forKey: "mony")
-      self.ud4.set(onepush, forKey: "mony2")
-      
-    }else{
       let OnepushDoneAlert = UIAlertController(
-      title: "既に1pushを押しています",
-      message: "もう一度設定しますか？",
-      preferredStyle: .alert)
+        title: "既に金額を設定しています",
+        message: "もう一度設定しますか？",
+        preferredStyle: .alert)
       
       OnepushDoneAlert.addAction(UIAlertAction(title: "キャンセル", style: .default))
       
@@ -489,6 +471,32 @@ class ViewController: UIViewController, UITextFieldDelegate{
         
       }))
       present(OnepushDoneAlert, animated: true, completion: nil)
+      
+    }
+    
+    if JudgeOnepush.integer(forKey: "judgenum") == 0 && onepushud.integer(forKey: "onepushmony") != 0{
+      
+      ud3.set(resultmony.value, forKey: "resultmonyyy")
+      
+      TodayMony.text = CommaAdd(comma: onepush)
+      
+      ud.set(onepush, forKey: "mony")
+      ud4.set(onepush, forKey: "mony2")
+      TodaysTotalUsedMoney.removeObject(forKey: "TodaysTotalUd")
+      UIView.animate(withDuration: 1.3) {
+        self.resultmony.value = 100
+        self.resultmony.progressColor = UIColor.yellow
+        self.resultmony.progressStrokeColor = UIColor.yellow
+        
+      }
+      self.ud3.set(self.resultmony.value, forKey: "resultmonyyy")
+      self.ud.set(onepush, forKey: "mony")
+      self.ud4.set(onepush, forKey: "mony2")
+      
+    }else{
+      
+      onePushedNotice()
+     
     }
     JudgeOnepush.set(1, forKey: "judgenum")
    
@@ -626,8 +634,8 @@ class ViewController: UIViewController, UITextFieldDelegate{
       self.todaysOneMonethMoneyRemain = dvc.SaveOneMonthMoneyResult.integer(forKey: "SaveMoney") - self.TodaysTotalUsedMoney.integer(forKey: "TodaysTotalUd")
       dvc.SaveOneMonthMoneyResult.set(self.todaysOneMonethMoneyRemain, forKey: "SaveMoney")
       
-      let todaysResult = UIAlertController(title: "今月残り使える金額は\(self.todaysOneMonethMoneyRemain)円です",
-        message: "",
+      let todaysResult = UIAlertController(title: "\(self.todaysOneMonethMoneyRemain)円",
+        message: "が残りの使える金額です",
         preferredStyle: .alert)
       todaysResult.addAction(UIAlertAction(title: "OK", style: .destructive))
       self.present(todaysResult, animated: true, completion: nil)
