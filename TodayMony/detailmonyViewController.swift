@@ -23,7 +23,9 @@ class detailmonyViewController: UIViewController, UITextFieldDelegate{
   override func viewDidLoad() {
         super.viewDidLoad()
       print(SaveOneMonthMoneyResult.integer(forKey: "SaveMoney"))
+    print(fixedCostUd.array(forKey: "fixedCost"))
     
+    let fixedCostSet = fixedCostUd.array(forKey: "fixedCost")
     
     
     if uiScreenSize < 750.0{
@@ -79,17 +81,40 @@ class detailmonyViewController: UIViewController, UITextFieldDelegate{
       self.entertainmentmony.keyboardType = UIKeyboardType.numberPad
       self.othermony.keyboardType = UIKeyboardType.numberPad
       netmony.keyboardType = UIKeyboardType.numberPad
-      
-      salary.text = ""
-      housemony.text = ""
-      lifelinemony.text = ""
-      phonemony.text = ""
-      cardmony.text = ""
-      transportmony.text = ""
-      entertainmentmony.text = ""
-      othermony.text = ""
-      netmony.text = ""
-      
+    
+    
+//z      if let fixedCost = fix as Optional{
+//        let beComma = fix.map{addComma(str: $0 as! String)}
+//
+//        commaArray.append(contentsOf: beComma)
+//      }else{
+//        commaArray.append(String(111))
+//      }
+//
+////      for i in beComma{
+////        commaArray.append(i)
+////      }
+//
+//    }
+    
+//    hoge(fix: (fixedCostSet as? Array<String?>))
+    print("できたかな\(fixedCostSet)")
+    
+    func beString(int: Int) -> String{
+      return String(int)
+    }
+   
+    if let fixedCostNet = fixedCostSet{
+      let fixedCost = fixedCostNet.map{String(describing: $0)}
+      let addCommaFixedCost = fixedCost.map{(addComma(str: $0))}
+      housemony.text = addCommaFixedCost[0]
+      transportmony.text = addCommaFixedCost[1]
+      netmony.text = addCommaFixedCost[2]
+      salary.text = addCommaFixedCost[3]
+    }else{
+      print("There are Optionals")
+    }
+    
       netmony.tag = 1
       othermony.tag = 2
       transportmony.tag = 3
@@ -128,6 +153,8 @@ class detailmonyViewController: UIViewController, UITextFieldDelegate{
     
   }
   
+  
+  
   @objc func commit(){
     salary.endEditing(true)
     housemony.endEditing(true)
@@ -161,6 +188,7 @@ class detailmonyViewController: UIViewController, UITextFieldDelegate{
   
   var costarray:[String] = []
   var textarray:[String] = []
+  let fixedCostUd = UserDefaults()
   
   @IBAction func total(_ sender: Any) {
     
@@ -174,6 +202,7 @@ class detailmonyViewController: UIViewController, UITextFieldDelegate{
                                          preferredStyle: .alert)
       
       emptyalert.addAction(UIAlertAction(title: "OK", style: .default))
+      self.present(emptyalert, animated: true, completion: nil)
     }else{
       let benumsarary = Int(removeComa(str: salary.text!) )
       costarray = [housemony.text!, lifelinemony.text!, phonemony.text!, cardmony.text!, transportmony.text!, entertainmentmony.text!, othermony.text!, netmony.text!]
@@ -185,6 +214,10 @@ class detailmonyViewController: UIViewController, UITextFieldDelegate{
       }
       
       let deletecomma = costarray.map{removeComa(str: $0)}
+      let fixedCost = ["housemoney": costarray[0], "transportmoney": costarray[4], "netmoney": costarray[7],"salary": salary.text!]
+      let removeCommaFixedCost = fixedCost.values.map{removeComa(str: $0)}
+      print("これがああああ\(removeCommaFixedCost)")
+      fixedCostUd.set(removeCommaFixedCost, forKey: "fixedCost")
       
       let total = deletecomma.map{Int($0)!}
       

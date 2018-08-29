@@ -89,9 +89,8 @@ class resultViewController: UIViewController, UITextFieldDelegate{
   
   
   func ontap(){
-//    let dvc = detailmonyViewController()
     oneMonthMoneyRemain.text! = vc.CommaAdd(comma: dvc.SaveOneMonthMoneyResult.integer(forKey: "SaveMoney"))
-//    oneMonthMoneyRemain.text! = String(dvc.SaveOneMonthMoneyResult.integer(forKey: "SaveMoney"))
+    
   }
   
   func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
@@ -109,9 +108,12 @@ class resultViewController: UIViewController, UITextFieldDelegate{
   
   
   @IBAction func remainMoneySetButton(_ sender: Any) {
-    var remainMoneySetAlert = UIAlertController(title: "残りの金額を設定します",
+    let remainMoneySetAlert = UIAlertController(title: "残りの金額を設定します",
                                                 message: "金額を入力してください",
                                                 preferredStyle: .alert)
+    
+    remainMoneySetAlert.addAction(UIAlertAction(title: "キャンセル", style: .cancel))
+    
     remainMoneySetAlert.addTextField(configurationHandler:{(textField: UITextField) -> Void in
       textField.placeholder = "金額を入力してください"
       textField.delegate = self

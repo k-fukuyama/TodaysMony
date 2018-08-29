@@ -33,6 +33,8 @@ class ViewController: UIViewController, UITextFieldDelegate{
   override func viewDidLoad() {
     super.viewDidLoad()
     
+    print(UsedMony.frame.origin.y)
+    
     print( UIScreen.main.nativeBounds.size.width)
     
     
@@ -51,8 +53,8 @@ class ViewController: UIViewController, UITextFieldDelegate{
     
     let notificationcenter = NotificationCenter.default
     
-    notificationcenter.addObserver(self, selector: #selector(showkeyboard(notification:)), name: NSNotification.Name.UIKeyboardDidShow, object: nil)
-    
+    notificationcenter.addObserver(self, selector: #selector(showkeyboard(notification:)), name: .UIKeyboardWillShow, object: nil)
+  
     print("今日使った金額は\(TodaysTotalUsedMoney.integer(forKey: "TodaysTotalUd"))")
     
    UsedMony.tag = 1
@@ -228,6 +230,8 @@ class ViewController: UIViewController, UITextFieldDelegate{
                                       message: "ボタン一つで金額を設定できるようになります",
                                       preferredStyle: .alert)
       
+      onepush.addAction(UIAlertAction(title: "キャンセル", style: .cancel))
+      
       onepush.addTextField(configurationHandler:{(textField:UITextField) -> Void in
         textField.placeholder = "1pushで入力する金額を設定してください"
         textField.delegate = self
@@ -269,6 +273,7 @@ class ViewController: UIViewController, UITextFieldDelegate{
       })
       suzi = 0
     }
+    NotificationCenter.default.removeObserver(self)
     
   }
   
@@ -289,24 +294,33 @@ class ViewController: UIViewController, UITextFieldDelegate{
   
   var KeyboardHighResult = 0
   
+  var keyboardNumber = 0
+  
+  func textFieldDidBeginEditing(_ textField: UITextField) {
+    if textField.tag == 1{
+      NotificationCenter.default.addObserver(self, selector: #selector(showkeyboard(notification:)), name: .UIKeyboardWillShow, object: nil)
+    }
+    
+    keyboardNumber = textField.tag
+  }
+  
   @objc func showkeyboard(notification:Notification){
     if let userinfo = notification.userInfo{
       if let keyboard = userinfo[UIKeyboardFrameEndUserInfoKey] as? NSValue{
         let keyhigh = keyboard.cgRectValue
         KeyboardHighResult = Int(keyhigh.size.height)
-        if KeyboardHighResult > 260 && suzi == 0{
+        if KeyboardHighResult > 260 && suzi == 0 && keyboardNumber == 1{
           UITextField.animate(withDuration:0.10, delay:0.0, options: .curveLinear, animations:{
             self.UsedMony.center.y -= 20
             self.suzi = 1
             print(self.suzi)
           })
         }else{
-          print("kuriyama")
+          print("action is done")
         }
       }
     }
   }
-  
   
   
   
@@ -360,7 +374,7 @@ class ViewController: UIViewController, UITextFieldDelegate{
         MonyField.endEditing(true)
         MonyField.text = ""
       }
-      
+      JudgeOnepush.set(1, forKey: "judgenum")
     }else{
       
       if suzi == 1{
@@ -398,6 +412,7 @@ class ViewController: UIViewController, UITextFieldDelegate{
         let onepush = UIAlertController(title: "1Pushで設定したい金額を入力してください",
                                         message: "ボタン一つで金額を設定できるようになります",
                                         preferredStyle: .alert)
+      onepush.addAction(UIAlertAction(title: "キャンセル", style: .cancel))
         
         onepush.addTextField(configurationHandler:{(textField:UITextField) -> Void in
           textField.placeholder = "1pushで入力する金額を設定してください"
@@ -410,6 +425,7 @@ class ViewController: UIViewController, UITextFieldDelegate{
               self.onepushud.set(benum, forKey: "onepushmony")
               self.onepushud.synchronize()
               self.onePushTitle.setTitle(String(self.onepushud.integer(forKey: "onepushmony")), for: .normal)
+              
               
               let onepushalert = UIAlertController(title: "設定完了",
                                                    message: "金額を設定できました",
@@ -426,30 +442,12 @@ class ViewController: UIViewController, UITextFieldDelegate{
       
     }
     
-    if JudgeOnepush.integer(forKey: "judgenum") == 0{
+    func onePushedNotice(){
       
-      ud3.set(resultmony.value, forKey: "resultmonyyy")
-      
-      TodayMony.text = CommaAdd(comma: onepush)
-      
-      ud.set(onepush, forKey: "mony")
-      ud4.set(onepush, forKey: "mony2")
-      TodaysTotalUsedMoney.removeObject(forKey: "TodaysTotalUd")
-      UIView.animate(withDuration: 1.3) {
-        self.resultmony.value = 100
-        self.resultmony.progressColor = UIColor.yellow
-        self.resultmony.progressStrokeColor = UIColor.yellow
-        
-      }
-      self.ud3.set(self.resultmony.value, forKey: "resultmonyyy")
-      self.ud.set(onepush, forKey: "mony")
-      self.ud4.set(onepush, forKey: "mony2")
-      
-    }else{
       let OnepushDoneAlert = UIAlertController(
-      title: "既に1pushを押しています",
-      message: "もう一度設定しますか？",
-      preferredStyle: .alert)
+        title: "既に金額を設定しています",
+        message: "もう一度設定しますか？",
+        preferredStyle: .alert)
       
       OnepushDoneAlert.addAction(UIAlertAction(title: "キャンセル", style: .default))
       
@@ -473,6 +471,32 @@ class ViewController: UIViewController, UITextFieldDelegate{
         
       }))
       present(OnepushDoneAlert, animated: true, completion: nil)
+      
+    }
+    
+    if JudgeOnepush.integer(forKey: "judgenum") == 0 && onepushud.integer(forKey: "onepushmony") != 0{
+      
+      ud3.set(resultmony.value, forKey: "resultmonyyy")
+      
+      TodayMony.text = CommaAdd(comma: onepush)
+      
+      ud.set(onepush, forKey: "mony")
+      ud4.set(onepush, forKey: "mony2")
+      TodaysTotalUsedMoney.removeObject(forKey: "TodaysTotalUd")
+      UIView.animate(withDuration: 1.3) {
+        self.resultmony.value = 100
+        self.resultmony.progressColor = UIColor.yellow
+        self.resultmony.progressStrokeColor = UIColor.yellow
+        
+      }
+      self.ud3.set(self.resultmony.value, forKey: "resultmonyyy")
+      self.ud.set(onepush, forKey: "mony")
+      self.ud4.set(onepush, forKey: "mony2")
+      
+    }else{
+      
+      onePushedNotice()
+     
     }
     JudgeOnepush.set(1, forKey: "judgenum")
    
@@ -481,7 +505,7 @@ class ViewController: UIViewController, UITextFieldDelegate{
   
   @objc func UsedMonyButton(){
     if UsedMony.text != ""{
-      
+      NotificationCenter.default.removeObserver(self)
       if ud.integer(forKey: "mony") != nil{
         
         print(ud.integer(forKey: "mony"))
@@ -531,6 +555,7 @@ class ViewController: UIViewController, UITextFieldDelegate{
         
         UsedMony.text = ""
         
+        
       }else{
         BeNum = UsedMony.text!
         Todayusedmony = Int(BeNum)!
@@ -551,6 +576,7 @@ class ViewController: UIViewController, UITextFieldDelegate{
         
         suzi = 0
         UsedMony.text = ""
+        
       }
       
       if ud3.float(forKey: "resulymonyyy") != nil{
@@ -578,7 +604,7 @@ class ViewController: UIViewController, UITextFieldDelegate{
         })
         suzi = 0
       }
-      
+      NotificationCenter.default.removeObserver(self)
     }
     suzi = 0
   }
@@ -608,8 +634,8 @@ class ViewController: UIViewController, UITextFieldDelegate{
       self.todaysOneMonethMoneyRemain = dvc.SaveOneMonthMoneyResult.integer(forKey: "SaveMoney") - self.TodaysTotalUsedMoney.integer(forKey: "TodaysTotalUd")
       dvc.SaveOneMonthMoneyResult.set(self.todaysOneMonethMoneyRemain, forKey: "SaveMoney")
       
-      let todaysResult = UIAlertController(title: "今月残り使える金額は\(self.todaysOneMonethMoneyRemain)円です",
-        message: "",
+      let todaysResult = UIAlertController(title: "\(self.todaysOneMonethMoneyRemain)円",
+        message: "が残りの使える金額です",
         preferredStyle: .alert)
       todaysResult.addAction(UIAlertAction(title: "OK", style: .destructive))
       self.present(todaysResult, animated: true, completion: nil)
@@ -661,6 +687,7 @@ class ViewController: UIViewController, UITextFieldDelegate{
   
   func ontap(){
     let onePushSetData = self.onepushud.integer(forKey: "onepushmony")
+    
     
     if onePushSetData == 0{
       onePushTitle.setTitle("1psuh設定", for: .normal)
