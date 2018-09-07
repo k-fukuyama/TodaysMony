@@ -156,7 +156,7 @@ class ViewController: UIViewController, UITextFieldDelegate{
     let onePushData = onepushud.integer(forKey: "onepushmony")
     
     if onePushData != 0{
-      onePushTitle.setTitle(String(self.onepushud.integer(forKey: "onepushmony")), for: .normal)
+      onePushTitle.setTitle(CommaAdd(comma: onePushData), for: .normal)
     }else{
       onePushTitle.setTitle("1push", for: .normal)
     }
@@ -183,7 +183,7 @@ class ViewController: UIViewController, UITextFieldDelegate{
     
     
     let SubButtonAlert = UIAlertController(title: nil,
-                                           message: "",
+                                           message: nil,
                                            preferredStyle: .actionSheet)
     
     SubButtonAlert.addAction(UIAlertAction(title: "キャンセル", style: .cancel))
@@ -242,7 +242,8 @@ class ViewController: UIViewController, UITextFieldDelegate{
             let benum = Int(textField.text!)
             self.onepushud.set(benum, forKey: "onepushmony")
             self.onepushud.synchronize()
-            self.onePushTitle.setTitle(String(self.onepushud.integer(forKey: "onepushmony")), for: .normal)
+            let onePushedCost = self.onepushud.integer(forKey: "onepushmony")
+            self.onePushTitle.setTitle(self.CommaAdd(comma: onePushedCost), for: .normal)
             
             let onepushalert = UIAlertController(title: "設定完了",
                                                  message: "金額を設定できました",
@@ -405,6 +406,8 @@ class ViewController: UIViewController, UITextFieldDelegate{
 
   }
   
+  
+  
   @IBAction func OnePushButton(_ sender: Any) {
     var onepush = onepushud.integer(forKey: "onepushmony")
     
@@ -424,7 +427,8 @@ class ViewController: UIViewController, UITextFieldDelegate{
               let benum = Int(textField.text!)
               self.onepushud.set(benum, forKey: "onepushmony")
               self.onepushud.synchronize()
-              self.onePushTitle.setTitle(String(self.onepushud.integer(forKey: "onepushmony")), for: .normal)
+              let onePushedCost = self.onepushud.integer(forKey: "onepushmony")
+              self.onePushTitle.setTitle(self.CommaAdd(comma: onePushedCost), for: .normal)
               
               
               let onepushalert = UIAlertController(title: "設定完了",
@@ -692,7 +696,7 @@ class ViewController: UIViewController, UITextFieldDelegate{
     if onePushSetData == 0{
       onePushTitle.setTitle("1psuh設定", for: .normal)
     }else{
-      onePushTitle.setTitle(String(self.onepushud.integer(forKey: "onepushmony")), for: .normal)
+      onePushTitle.setTitle(CommaAdd(comma: onePushSetData), for: .normal)
     }
   }
   
