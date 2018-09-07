@@ -261,7 +261,7 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="0XS-E9-qjg"/>
                     </view>
-                    <tabBarItem key="tabBarItem" title="使えるお金計算" image="moneydetail" selectedImage="moneydetail" id="1vu-Kk-AXt"/>
+                    <tabBarItem key="tabBarItem" title="使えるお金計算" image="detailmoney" selectedImage="detailmoney" id="1vu-Kk-AXt"/>
                     <navigationItem key="navigationItem" id="Psm-Dh-xR9"/>
                     <connections>
                         <outlet property="cardmony" destination="c15-dw-yKH" id="sgL-Nk-oVR"/>
@@ -464,7 +464,7 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="moG-2J-g5m"/>
                     </view>
-                    <tabBarItem key="tabBarItem" title="今日の金額" image="yenn" selectedImage="yenn" id="xw8-Sk-3Eg" userLabel="メイン画面">
+                    <tabBarItem key="tabBarItem" title="今日の金額" image="yenIcon" selectedImage="yenIcon" id="xw8-Sk-3Eg" userLabel="メイン画面">
                         <inset key="largeContentSizeImageInsets" minX="0.0" minY="1" maxX="0.0" maxY="0.0"/>
                     </tabBarItem>
                     <toolbarItems/>
@@ -495,7 +495,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="JpX-7N-igA" customClass="SimpleButton" customModule="TodayMony" customModuleProvider="target">
-                                <rect key="frame" x="87.5" y="453" width="200" height="50"/>
+                                <rect key="frame" x="87.5" y="404" width="200" height="50"/>
                                 <color key="backgroundColor" red="0.50196081400000003" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="200" id="DBT-85-1t5"/>
@@ -514,7 +514,7 @@
                                 </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" alpha="0.90000000000000002" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gj2-rS-crQ">
-                                <rect key="frame" x="87.5" y="308" width="200" height="50"/>
+                                <rect key="frame" x="87.5" y="259" width="200" height="50"/>
                                 <color key="backgroundColor" red="0.19722986341396098" green="0.094349546791249489" blue="0.097413732096437666" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="50" id="JcP-ug-hhy"/>
@@ -525,7 +525,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="BD0-eD-yuT">
-                                <rect key="frame" x="87" y="543" width="200" height="50"/>
+                                <rect key="frame" x="87" y="494" width="200" height="50"/>
                                 <color key="backgroundColor" red="0.99942404029999998" green="0.98555368190000003" blue="0.0" alpha="0.78130278716216217" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="50" id="ugi-sy-heH"/>
@@ -545,7 +545,7 @@
                                 </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="残りの使える金額" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qbQ-bK-GYb">
-                                <rect key="frame" x="38" y="184" width="298" height="44"/>
+                                <rect key="frame" x="38" y="135" width="298" height="44"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="37"/>
                                 <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
@@ -586,7 +586,7 @@
                     <tabBar key="tabBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="zLS-Z1-ISY">
                         <rect key="frame" x="0.0" y="0.0" width="1000" height="1000"/>
                         <autoresizingMask key="autoresizingMask"/>
-                        <color key="barTintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <color key="barTintColor" red="0.12984204290000001" green="0.12984612579999999" blue="0.12984395030000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <color key="selectedImageTintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     </tabBar>
                     <connections>
@@ -601,13 +601,13 @@
         </scene>
     </scenes>
     <resources>
-        <image name="moneydetail" width="32" height="32"/>
-        <image name="poolmoney" width="32" height="32"/>
-        <image name="yenn" width="30" height="30"/>
+        <image name="detailmoney" width="595" height="842"/>
+        <image name="poolmoney" width="595" height="842"/>
+        <image name="yenIcon" width="595" height="842"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="KW3-Pr-7Kd"/>
-        <segue reference="fBF-5G-2mn"/>
-        <segue reference="6gN-BK-QLC"/>
+        <segue reference="y3i-dL-bK4"/>
+        <segue reference="Ysh-rm-FaU"/>
+        <segue reference="ozK-Yh-tbw"/>
     </inferredMetricsTieBreakers>
 </document>
