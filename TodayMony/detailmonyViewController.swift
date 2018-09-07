@@ -221,11 +221,15 @@ class detailmonyViewController: UIViewController, UITextFieldDelegate{
       
       let total = deletecomma.map{Int($0)!}
       
+      let cal = Calendar.current
+      let date = Date()
+      let thisMonthDays = cal.range(of: .day, in: .month, for: date as Date)?.count
+      
       
       let result = total.reduce(0){$0 + $1}
       let OneMonthMonyResult = benumsarary! - result
-      let OneDayMoneyResult = OneMonthMonyResult / 31
-      SendOneDayMoney = OneMonthMonyResult / 31
+      let OneDayMoneyResult = OneMonthMonyResult / thisMonthDays!
+      SendOneDayMoney = OneMonthMonyResult / thisMonthDays!
      
       
       
