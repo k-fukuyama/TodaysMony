@@ -195,18 +195,18 @@ class ViewController: UIViewController, UITextFieldDelegate{
                                            )
       
       
-      OneMonthMony.addTextField(configurationHandler: {(textField: UITextField) -> Void in
+      OneMonthMony.addTextField(configurationHandler: ({(textField: UITextField) -> Void in
         
         textField.placeholder = "お給料を入力してください"
         textField.delegate = self
         textField.keyboardType  = UIKeyboardType.numberPad
-       
+        
         
         OneMonthMony.addAction(UIAlertAction(title: "OK", style: .default, handler: { action in
           
           if textField.text != "" {
-           
-
+            
+            
             let OndDayMony = Int(textField.text!)! / 31
             let OndDayMonyAlert = UIAlertController(title: "¥\(OndDayMony)",
               message: "が1日あたりの使用可能金額です",
@@ -220,8 +220,8 @@ class ViewController: UIViewController, UITextFieldDelegate{
           }
         }))
         
-    self.present(OneMonthMony, animated: true, completion: nil)
-      } )
+        self.present(OneMonthMony, animated: true, completion: nil)
+        } as! (UITextField) -> Void) )
       
     }))
     
@@ -699,9 +699,7 @@ class ViewController: UIViewController, UITextFieldDelegate{
       onePushTitle.setTitle(CommaAdd(comma: onePushSetData), for: .normal)
     }
   }
-  
-  
-  
+
 }
 
 extension UIBarButtonItem {
@@ -727,3 +725,11 @@ extension ViewController: MyTabBarDelegate{
   }
 
 }
+
+extension UITextField{
+  override open func canPerformAction(_ action: Selector, withSender sender: Any?) -> Bool {
+    
+    return false
+  }
+}
+

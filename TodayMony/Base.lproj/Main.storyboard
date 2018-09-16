@@ -28,7 +28,7 @@
                                 <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="jMg-3W-Otr">
+                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="jMg-3W-Otr" customClass="CustomTextField" customModule="TodayMony" customModuleProvider="target">
                                 <rect key="frame" x="67.5" y="198" width="100" height="30"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="100" id="08g-DA-MpG"/>
@@ -78,7 +78,7 @@
                                 <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="7wC-NR-7Hd">
+                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="7wC-NR-7Hd" customClass="CustomTextField" customModule="TodayMony" customModuleProvider="target">
                                 <rect key="frame" x="67.5" y="258" width="100" height="30"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="100" id="9dZ-ZM-Xoq"/>
@@ -88,7 +88,7 @@
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
-                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="kSh-b8-d96">
+                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="kSh-b8-d96" customClass="CustomTextField" customModule="TodayMony" customModuleProvider="target">
                                 <rect key="frame" x="207.5" y="198" width="100" height="30"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="30" id="Oe9-NC-G15"/>
@@ -98,7 +98,7 @@
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
-                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="c15-dw-yKH">
+                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="c15-dw-yKH" customClass="CustomTextField" customModule="TodayMony" customModuleProvider="target">
                                 <rect key="frame" x="207.5" y="258" width="100" height="30"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="100" id="MK6-QP-luF"/>
@@ -108,7 +108,7 @@
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
-                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="QIH-0e-YNs">
+                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="QIH-0e-YNs" customClass="CustomTextField" customModule="TodayMony" customModuleProvider="target">
                                 <rect key="frame" x="67.5" y="318" width="100" height="30"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="100" id="B7r-EA-2ot"/>
@@ -118,7 +118,7 @@
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
-                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="ZVX-HQ-ngv">
+                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="ZVX-HQ-ngv" customClass="CustomTextField" customModule="TodayMony" customModuleProvider="target">
                                 <rect key="frame" x="207.5" y="318" width="100" height="30"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="100" id="2LL-qk-q2b"/>
@@ -128,7 +128,7 @@
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
-                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="DgW-le-HYZ">
+                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="DgW-le-HYZ" customClass="CustomTextField" customModule="TodayMony" customModuleProvider="target">
                                 <rect key="frame" x="207.5" y="378" width="100" height="30"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="100" id="TPX-6f-SJS"/>
@@ -187,7 +187,7 @@
                                 <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <textField opaque="NO" tag="1" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="dGj-JD-vht">
+                            <textField opaque="NO" tag="1" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="dGj-JD-vht" customClass="CustomTextField" customModule="TodayMony" customModuleProvider="target">
                                 <rect key="frame" x="67.5" y="378" width="100" height="30"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="100" id="Isa-PM-gnD"/>
@@ -197,7 +197,7 @@
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
-                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Lah-Zr-1s0">
+                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Lah-Zr-1s0" customClass="CustomTextField" customModule="TodayMony" customModuleProvider="target">
                                 <rect key="frame" x="137.5" y="133" width="100" height="30"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="100" id="S2k-5X-Ol1"/>
@@ -294,7 +294,7 @@
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="vYx-bM-gSQ">
                                 <rect key="frame" x="0.0" y="30" width="375" height="588"/>
                                 <subviews>
-                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="DWN-Aa-brQ">
+                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="DWN-Aa-brQ" customClass="CustomTextField" customModule="TodayMony" customModuleProvider="target">
                                         <rect key="frame" x="123" y="277.5" width="130" height="30"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="30" id="95a-yo-2Bg"/>
@@ -378,7 +378,7 @@
                                         <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <textField opaque="NO" contentMode="scaleToFill" verticalCompressionResistancePriority="751" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="CcB-im-XIb">
+                                    <textField opaque="NO" contentMode="scaleToFill" verticalCompressionResistancePriority="751" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="CcB-im-XIb" customClass="CustomTextField" customModule="TodayMony" customModuleProvider="target">
                                         <rect key="frame" x="123" y="337.5" width="130" height="30"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="130" id="PyP-ZE-z0g"/>
@@ -496,7 +496,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="JpX-7N-igA" customClass="SimpleButton" customModule="TodayMony" customModuleProvider="target">
-                                <rect key="frame" x="87.5" y="404" width="200" height="50"/>
+                                <rect key="frame" x="87.5" y="453" width="200" height="50"/>
                                 <color key="backgroundColor" red="0.50196081400000003" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="200" id="DBT-85-1t5"/>
@@ -515,7 +515,7 @@
                                 </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" alpha="0.90000000000000002" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gj2-rS-crQ">
-                                <rect key="frame" x="87.5" y="259" width="200" height="50"/>
+                                <rect key="frame" x="87.5" y="308" width="200" height="50"/>
                                 <color key="backgroundColor" red="0.19722986341396098" green="0.094349546791249489" blue="0.097413732096437666" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="50" id="JcP-ug-hhy"/>
@@ -526,7 +526,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="BD0-eD-yuT">
-                                <rect key="frame" x="87" y="494" width="200" height="50"/>
+                                <rect key="frame" x="87" y="543" width="200" height="50"/>
                                 <color key="backgroundColor" red="0.99942404029999998" green="0.98555368190000003" blue="0.0" alpha="0.78130278716216217" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="50" id="ugi-sy-heH"/>
@@ -546,7 +546,7 @@
                                 </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="残りの使える金額" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qbQ-bK-GYb">
-                                <rect key="frame" x="38" y="135" width="298" height="44"/>
+                                <rect key="frame" x="38" y="184" width="298" height="44"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="37"/>
                                 <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
@@ -608,7 +608,7 @@
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="y3i-dL-bK4"/>
-        <segue reference="Ysh-rm-FaU"/>
+        <segue reference="fBF-5G-2mn"/>
         <segue reference="6gN-BK-QLC"/>
     </inferredMetricsTieBreakers>
 </document>
