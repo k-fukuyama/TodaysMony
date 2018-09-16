@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		6D05B8EE214E9C0B003B1D56 /* usedMoneyLogController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D05B8ED214E9C0B003B1D56 /* usedMoneyLogController.swift */; };
 		6D3B05B32056AF3400A9671F /* resultViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D3B05B22056AF3400A9671F /* resultViewController.swift */; };
 		6D4F7800207E3F2C005C35D2 /* SimpleButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D4F77FF207E3F2C005C35D2 /* SimpleButton.swift */; };
 		6D4F7802207E64CA005C35D2 /* Used.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D4F7801207E64CA005C35D2 /* Used.swift */; };
@@ -24,6 +25,7 @@
 
 /* Begin PBXFileReference section */
 		3ADE97311C1760DF6220C436 /* Pods_TodayMony.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_TodayMony.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		6D05B8ED214E9C0B003B1D56 /* usedMoneyLogController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = usedMoneyLogController.swift; sourceTree = "<group>"; };
 		6D3B05B22056AF3400A9671F /* resultViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = resultViewController.swift; sourceTree = "<group>"; };
 		6D4F77FF207E3F2C005C35D2 /* SimpleButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SimpleButton.swift; sourceTree = "<group>"; };
 		6D4F7801207E64CA005C35D2 /* Used.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Used.swift; sourceTree = "<group>"; };
@@ -85,6 +87,7 @@
 			children = (
 				6DF5AB792054D9BC00015475 /* AppDelegate.swift */,
 				6DF5AB7B2054D9BC00015475 /* ViewController.swift */,
+				6D05B8ED214E9C0B003B1D56 /* usedMoneyLogController.swift */,
 				6D4F77FF207E3F2C005C35D2 /* SimpleButton.swift */,
 				6DE5AA432122FE8400BFE0B6 /* MyTabBarDelegate.swift */,
 				6DFAD2572088DB4D00965A26 /* CustomTextField.swift */,
@@ -246,6 +249,7 @@
 				6DCE8CFB2077A286006E324E /* detailmonyViewController.swift in Sources */,
 				6DF5AB7A2054D9BC00015475 /* AppDelegate.swift in Sources */,
 				6D4F7800207E3F2C005C35D2 /* SimpleButton.swift in Sources */,
+				6D05B8EE214E9C0B003B1D56 /* usedMoneyLogController.swift in Sources */,
 				6D4F7802207E64CA005C35D2 /* Used.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

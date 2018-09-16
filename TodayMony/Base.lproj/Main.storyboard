@@ -496,7 +496,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="JpX-7N-igA" customClass="SimpleButton" customModule="TodayMony" customModuleProvider="target">
-                                <rect key="frame" x="87.5" y="453" width="200" height="50"/>
+                                <rect key="frame" x="87.5" y="404" width="200" height="50"/>
                                 <color key="backgroundColor" red="0.50196081400000003" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="200" id="DBT-85-1t5"/>
@@ -515,7 +515,7 @@
                                 </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" alpha="0.90000000000000002" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gj2-rS-crQ">
-                                <rect key="frame" x="87.5" y="308" width="200" height="50"/>
+                                <rect key="frame" x="87.5" y="259" width="200" height="50"/>
                                 <color key="backgroundColor" red="0.19722986341396098" green="0.094349546791249489" blue="0.097413732096437666" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="50" id="JcP-ug-hhy"/>
@@ -526,7 +526,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="BD0-eD-yuT">
-                                <rect key="frame" x="87" y="543" width="200" height="50"/>
+                                <rect key="frame" x="87" y="494" width="200" height="50"/>
                                 <color key="backgroundColor" red="0.99942404029999998" green="0.98555368190000003" blue="0.0" alpha="0.78130278716216217" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="50" id="ugi-sy-heH"/>
@@ -546,7 +546,7 @@
                                 </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="残りの使える金額" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qbQ-bK-GYb">
-                                <rect key="frame" x="38" y="184" width="298" height="44"/>
+                                <rect key="frame" x="38" y="135" width="298" height="44"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="37"/>
                                 <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
@@ -594,11 +594,59 @@
                         <segue destination="BYZ-38-t0r" kind="relationship" relationship="viewControllers" id="ozK-Yh-tbw"/>
                         <segue destination="Vvg-gj-v6r" kind="relationship" relationship="viewControllers" id="jAe-GD-7Dn"/>
                         <segue destination="Z1W-iY-s1d" kind="relationship" relationship="viewControllers" id="Ysh-rm-FaU"/>
+                        <segue destination="eZv-AU-5Lw" kind="relationship" relationship="viewControllers" id="NCz-h5-hUF"/>
                     </connections>
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="cn4-0I-OkZ" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-315" y="-182"/>
+        </scene>
+        <!--Item-->
+        <scene sceneID="5KD-qU-2hA">
+            <objects>
+                <viewController id="eZv-AU-5Lw" customClass="usedMoneyLogController" customModule="TodayMony" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="fWP-5f-cbp">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="dmN-yM-OQZ">
+                                <rect key="frame" x="50" y="102" width="274" height="463"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="274" id="j73-eb-gvq"/>
+                                    <constraint firstAttribute="height" constant="463" id="pgY-11-RMf"/>
+                                </constraints>
+                                <prototypes>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="cell" id="bT4-3r-khJ">
+                                        <rect key="frame" x="0.0" y="28" width="274" height="44"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="bT4-3r-khJ" id="b4U-lk-kbL">
+                                            <rect key="frame" x="0.0" y="0.0" width="274" height="43.5"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
+                                </prototypes>
+                                <connections>
+                                    <outlet property="dataSource" destination="eZv-AU-5Lw" id="5IU-gb-TkD"/>
+                                    <outlet property="delegate" destination="eZv-AU-5Lw" id="43z-b6-4kB"/>
+                                </connections>
+                            </tableView>
+                        </subviews>
+                        <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="dmN-yM-OQZ" firstAttribute="centerX" secondItem="fWP-5f-cbp" secondAttribute="centerX" id="01n-ml-5cR"/>
+                            <constraint firstItem="dmN-yM-OQZ" firstAttribute="centerY" secondItem="fWP-5f-cbp" secondAttribute="centerY" id="3nd-dO-nbh"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="wSN-Nn-lmg"/>
+                    </view>
+                    <tabBarItem key="tabBarItem" title="Item" id="G2i-Pp-7ZM"/>
+                    <connections>
+                        <outlet property="table" destination="dmN-yM-OQZ" id="4az-IX-KfV"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="WeN-Be-4Fj" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="150.5" y="-160.5"/>
         </scene>
     </scenes>
     <resources>
@@ -608,7 +656,7 @@
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="y3i-dL-bK4"/>
-        <segue reference="fBF-5G-2mn"/>
-        <segue reference="6gN-BK-QLC"/>
+        <segue reference="Ysh-rm-FaU"/>
+        <segue reference="ozK-Yh-tbw"/>
     </inferredMetricsTieBreakers>
 </document>

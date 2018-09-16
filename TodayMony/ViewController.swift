@@ -23,6 +23,7 @@ class ViewController: UIViewController, UITextFieldDelegate{
   let onepushud = UserDefaults()
   var JudgeOnepush = UserDefaults()
   let TodaysTotalUsedMoney = UserDefaults()
+  let todaysUsedLog = UserDefaults()
   var poolmony = 0
   var returnnum = 0
   var poolmonytwo = 0
@@ -32,6 +33,7 @@ class ViewController: UIViewController, UITextFieldDelegate{
   
   override func viewDidLoad() {
     super.viewDidLoad()
+    print(todaysUsedLog.array(forKey: "TodaysMoneyLog"))
     
     print(UsedMony.frame.origin.y)
     
@@ -509,7 +511,21 @@ class ViewController: UIViewController, UITextFieldDelegate{
   
   @objc func UsedMonyButton(){
     if UsedMony.text != ""{
+      
+      var box:[Int] = []
+      box.append(Int(UsedMony.text!)!)
+      if todaysUsedLog.array(forKey: "TodaysMoneyLog") != nil{
+        
+        for logs in todaysUsedLog.array(forKey: "TodaysMoneyLog")!{
+          box.append(logs as! Int)
+        }
+        todaysUsedLog.set(box, forKey: "TodaysMoneyLog")
+        
+      }else{
+        todaysUsedLog.set(box, forKey: "TodaysMoneyLog")
+      }
       NotificationCenter.default.removeObserver(self)
+      
       if ud.integer(forKey: "mony") != nil{
         
         print(ud.integer(forKey: "mony"))
@@ -534,6 +550,8 @@ class ViewController: UIViewController, UITextFieldDelegate{
           
           
         }
+        
+        
         
         zyunresult = ud.integer(forKey: "mony") - Todayusedmony
         TodayMony.text = CommaAdd(comma: zyunresult)
@@ -658,6 +676,7 @@ class ViewController: UIViewController, UITextFieldDelegate{
     }))
     
     self.present(EndTodaysMonyAlert, animated: true, completion: nil)
+    todaysUsedLog.removeObject(forKey: "TodaysMoneyLog")
 
     
     
