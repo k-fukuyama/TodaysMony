@@ -17,6 +17,7 @@ class detailmonyViewController: UIViewController, UITextFieldDelegate{
   let SaveOneMonthMoneyResult = UserDefaults()
 
   @IBOutlet weak var numBottom: NSLayoutConstraint!
+  @IBOutlet weak var salaryText: UILabel!
   
   let uiScreenSize = UIScreen.main.nativeBounds.size.width
   
@@ -43,7 +44,7 @@ class detailmonyViewController: UIViewController, UITextFieldDelegate{
       formatter.groupingSize = 3
       
       
-      
+      UITextField().delegate = self
       salary.delegate = self
       housemony.delegate = self
       lifelinemony.delegate = self
@@ -60,7 +61,8 @@ class detailmonyViewController: UIViewController, UITextFieldDelegate{
       
       let spacer = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.flexibleSpace, target: self, action: nil)
       let commitbutton = UIBarButtonItem(title: "決定", style: UIBarButtonItemStyle.done, target: self, action: #selector(self.commit))
-      toolbar.items = [spacer, commitbutton]
+      let cancelButton = UIBarButtonItem(title: "閉じる", style: UIBarButtonItemStyle.done, target: self, action: #selector(self.cancelButton))
+      toolbar.items = [cancelButton,spacer, commitbutton]
       
       salary.inputAccessoryView = toolbar
       housemony.inputAccessoryView = toolbar
@@ -115,10 +117,15 @@ class detailmonyViewController: UIViewController, UITextFieldDelegate{
       print("There are Optionals")
     }
     
-      netmony.tag = 1
-      othermony.tag = 2
-      transportmony.tag = 3
-      entertainmentmony.tag = 4
+      salary.tag = 1
+      housemony.tag = 2
+      lifelinemony.tag = 3
+      phonemony.tag = 4
+      cardmony.tag = 5
+      transportmony.tag = 6
+      entertainmentmony.tag = 7
+      netmony.tag = 8
+      othermony.tag = 9
       
       let notificationCenter = NotificationCenter.default
       notificationCenter.addObserver(self, selector: #selector(self.handleKeyboardWillShowNotification(_:)) , name: .UIKeyboardWillShow, object: nil)
@@ -155,16 +162,53 @@ class detailmonyViewController: UIViewController, UITextFieldDelegate{
   
   
   
+  var num = 0
+  
+  func textFieldDidBeginEditing(_ textField: UITextField) {
+    textField.text = removeComa(str: removeComa(str: textField.text!))
+    num = textField.tag
+  }
+  
   @objc func commit(){
-    salary.endEditing(true)
-    housemony.endEditing(true)
-    lifelinemony.endEditing(true)
-    phonemony.endEditing(true)
-    cardmony.endEditing(true)
-    transportmony.endEditing(true)
-    entertainmentmony.endEditing(true)
-    othermony.endEditing(true)
-    netmony.endEditing(true)
+    
+    let textField = UITextField()
+    textField.tag = num
+    var nextTag = textField.tag + 1
+    
+    if let nextTextField = self.view.viewWithTag(nextTag){
+      nextTextField.becomeFirstResponder()
+    }
+    
+    if nextTag == 10{
+      othermony.endEditing(true)
+    }
+  }
+  
+  @objc func cancelButton(){
+    switch num {
+    case 1:
+      salary.endEditing(true)
+    case 2:
+      housemony.endEditing(true)
+    case 3:
+      lifelinemony.endEditing(true)
+    case 4:
+      phonemony.endEditing(true)
+    case 5:
+      cardmony.endEditing(true)
+    case 6:
+      transportmony.endEditing(true)
+    case 7:
+      entertainmentmony.endEditing(true)
+    case 8:
+      netmony.endEditing(true)
+    case 9:
+      othermony.endEditing(true)
+    
+    default:
+      print("none")
+    }
+    
   }
     
   @IBOutlet weak var salary: UITextField!
@@ -289,12 +333,7 @@ class detailmonyViewController: UIViewController, UITextFieldDelegate{
   
   }
   
-  var num = 0
-  
-  func textFieldDidBeginEditing(_ textField: UITextField) {
-    textField.text = removeComa(str: removeComa(str: textField.text!))
-    num = textField.tag
-  }
+ 
   
   @objc func handleKeyboardWillShowNotification(_ notification: Notification){
       let userInfo = notification.userInfo
@@ -303,9 +342,11 @@ class detailmonyViewController: UIViewController, UITextFieldDelegate{
       let edithingTextField: CGFloat = (self.netmony.frame.origin.y)
       if edithingTextField > keyBoardY - 60 && num >= 1 && uiScreenSize < 750{
         UIView.animate(withDuration: 0.15, delay: 0.0, options: .curveEaseIn, animations: {
-          self.view.frame = CGRect(x: 0, y: self.view.frame.origin.y - (edithingTextField - (keyBoardY - 60)), width: self.view.bounds.width, height: self.view.bounds.height)
+          self.view.frame = CGRect(x: 0, y: self.view.frame.origin.y - (edithingTextField - (keyBoardY - 30)), width: self.view.bounds.width, height: self.view.bounds.height)
         }, completion: nil)
+        salaryText.textColor = UIColor.black
       }
+    
 
 
 
@@ -315,6 +356,7 @@ class detailmonyViewController: UIViewController, UITextFieldDelegate{
     UIView.animate(withDuration: 0.25, delay: 0.0, options: .curveEaseIn, animations: {
       self.view.frame = CGRect(x: 0, y: 0, width: self.view.bounds.width, height: self.view.bounds.height)
     }, completion: nil)
+    salaryText.textColor = UIColor.white
 
   }
 
@@ -363,6 +405,10 @@ class detailmonyViewController: UIViewController, UITextFieldDelegate{
       let vc:ViewController = segue.destination as! ViewController
       vc.SentOneDayMoney = SendOneDayMoney
     }
+  }
+  
+  override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+    self.view.endEditing(true)
   }
   
 //  func textFieldDidBeginEditing(_ textField: UITextField) {
