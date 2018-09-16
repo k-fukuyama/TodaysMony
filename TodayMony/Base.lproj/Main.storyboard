@@ -208,10 +208,10 @@
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="手取り額" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pUJ-FG-k4m">
-                                <rect key="frame" x="137.5" y="108" width="100" height="20"/>
+                                <rect key="frame" x="153" y="108" width="69.5" height="20"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" constant="100" id="Lg3-OT-2BR"/>
-                                    <constraint firstAttribute="height" constant="20" id="azi-nT-lc4"/>
+                                    <constraint firstAttribute="height" constant="20" id="Pjz-BZ-PV7"/>
+                                    <constraint firstAttribute="width" constant="70" id="Wfb-PA-kFH"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
@@ -220,7 +220,6 @@
                         </subviews>
                         <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="pUJ-FG-k4m" firstAttribute="centerX" secondItem="kev-Gg-Psm" secondAttribute="centerX" id="0fx-Ac-fhi"/>
                             <constraint firstItem="S3v-jZ-tco" firstAttribute="centerX" secondItem="kev-Gg-Psm" secondAttribute="centerX" constant="70" id="1CS-lC-95T"/>
                             <constraint firstItem="jWo-iQ-Zwc" firstAttribute="centerX" secondItem="kev-Gg-Psm" secondAttribute="centerX" id="1Xy-SR-AHn"/>
                             <constraint firstItem="DgW-le-HYZ" firstAttribute="top" secondItem="jXc-QU-e8g" secondAttribute="bottom" constant="5" id="1or-xP-ssY"/>
@@ -234,14 +233,15 @@
                             <constraint firstItem="c15-dw-yKH" firstAttribute="centerX" secondItem="kev-Gg-Psm" secondAttribute="centerX" constant="70" id="AjD-9o-ilZ"/>
                             <constraint firstItem="jWo-iQ-Zwc" firstAttribute="top" secondItem="DgW-le-HYZ" secondAttribute="bottom" constant="50" id="B0O-bg-Ln0"/>
                             <constraint firstItem="kSh-b8-d96" firstAttribute="top" secondItem="GBy-j8-Box" secondAttribute="bottom" constant="5" id="Bxp-ub-bYh"/>
+                            <constraint firstItem="Lah-Zr-1s0" firstAttribute="top" secondItem="pUJ-FG-k4m" secondAttribute="bottom" constant="5" id="CGE-hb-WO1"/>
                             <constraint firstItem="ZVX-HQ-ngv" firstAttribute="top" secondItem="S3v-jZ-tco" secondAttribute="bottom" constant="5" id="DD2-HG-eEe"/>
                             <constraint firstItem="QIH-0e-YNs" firstAttribute="top" secondItem="PQt-zl-koV" secondAttribute="bottom" constant="5" id="EMW-JT-JFP"/>
                             <constraint firstItem="S3v-jZ-tco" firstAttribute="top" secondItem="c15-dw-yKH" secondAttribute="bottom" constant="5" id="Emj-Qw-BZe"/>
                             <constraint firstItem="ZVX-HQ-ngv" firstAttribute="centerX" secondItem="kev-Gg-Psm" secondAttribute="centerX" constant="70" id="HYh-Xb-gyN"/>
-                            <constraint firstItem="Lah-Zr-1s0" firstAttribute="top" secondItem="pUJ-FG-k4m" secondAttribute="bottom" constant="5" id="OA9-Rz-u01"/>
                             <constraint firstItem="PQt-zl-koV" firstAttribute="centerX" secondItem="kev-Gg-Psm" secondAttribute="centerX" constant="-70" id="OEm-7h-EkD"/>
                             <constraint firstItem="jMg-3W-Otr" firstAttribute="top" secondItem="YZf-zK-Cqf" secondAttribute="bottom" constant="5" id="OTy-q1-uFe"/>
                             <constraint firstItem="GBy-j8-Box" firstAttribute="centerX" secondItem="kev-Gg-Psm" secondAttribute="centerX" constant="70" id="PNd-xs-gVo"/>
+                            <constraint firstItem="pUJ-FG-k4m" firstAttribute="centerX" secondItem="kev-Gg-Psm" secondAttribute="centerX" id="QGv-lB-DWF"/>
                             <constraint firstItem="jMg-3W-Otr" firstAttribute="centerX" secondItem="kev-Gg-Psm" secondAttribute="centerX" constant="-70" id="Qel-Rd-jOZ"/>
                             <constraint firstItem="Rex-qB-ekz" firstAttribute="centerX" secondItem="kev-Gg-Psm" secondAttribute="centerX" constant="70" id="Txu-VR-d0v"/>
                             <constraint firstItem="dGj-JD-vht" firstAttribute="top" secondItem="TKH-f6-ald" secondAttribute="bottom" constant="5" id="WVv-QF-SUy"/>
@@ -273,6 +273,7 @@
                         <outlet property="othermony" destination="DgW-le-HYZ" id="52Q-We-zOa"/>
                         <outlet property="phonemony" destination="7wC-NR-7Hd" id="uM7-Q9-E7E"/>
                         <outlet property="salary" destination="Lah-Zr-1s0" id="COI-X4-PK1"/>
+                        <outlet property="salaryText" destination="pUJ-FG-k4m" id="YSf-ei-6Fm"/>
                         <outlet property="transportmony" destination="QIH-0e-YNs" id="60g-zl-fpD"/>
                         <segue destination="wCp-iv-rNX" kind="modal" identifier="back" id="y3i-dL-bK4"/>
                         <segue destination="BYZ-38-t0r" kind="modal" identifier="SendOnedayMoney" id="6gN-BK-QLC"/>
@@ -608,6 +609,6 @@
     <inferredMetricsTieBreakers>
         <segue reference="y3i-dL-bK4"/>
         <segue reference="Ysh-rm-FaU"/>
-        <segue reference="ozK-Yh-tbw"/>
+        <segue reference="6gN-BK-QLC"/>
     </inferredMetricsTieBreakers>
 </document>
