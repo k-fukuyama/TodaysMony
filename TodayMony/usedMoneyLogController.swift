@@ -13,17 +13,19 @@ class usedMoneyLogController: UIViewController, UITableViewDelegate, UITableView
   
   func ontap(){
     vcLogs = ViewController().todaysUsedLog.array(forKey: "TodaysMoneyLog")
+    vcTimeLogs = ViewController().todaysUsedLog.array(forKey: "Time")
     table.reloadData()
-    print("こんにちは")
   }
   
   
   var vcLogs = ViewController().todaysUsedLog.array(forKey: "TodaysMoneyLog")
-  
+  var vcTimeLogs = ViewController().todaysUsedLog.array(forKey: "Time")
   
   func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    
     if let vcLogs = vcLogs{
       return vcLogs.count
+//      return test.count
     }else{
       return 0
     }
@@ -34,6 +36,12 @@ class usedMoneyLogController: UIViewController, UITableViewDelegate, UITableView
     let cell:UITableViewCell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
     cell.textLabel!.text = String("\(describing: vcLogs![indexPath.row])円")
     
+    if let timeLogs = vcTimeLogs{
+      cell.detailTextLabel!.text = String(describing: timeLogs[indexPath.row])
+    }else{
+      return cell
+    }
+    
     return cell
     
   }
@@ -41,6 +49,7 @@ class usedMoneyLogController: UIViewController, UITableViewDelegate, UITableView
 
     override func viewDidLoad() {
         super.viewDidLoad()
+      
       
 
         // Do any additional setup after loading the view.

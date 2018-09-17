@@ -24,6 +24,7 @@ class ViewController: UIViewController, UITextFieldDelegate{
   var JudgeOnepush = UserDefaults()
   let TodaysTotalUsedMoney = UserDefaults()
   let todaysUsedLog = UserDefaults()
+  let todaysUsedTime = UserDefaults()
   var poolmony = 0
   var returnnum = 0
   var poolmonytwo = 0
@@ -33,7 +34,7 @@ class ViewController: UIViewController, UITextFieldDelegate{
   
   override func viewDidLoad() {
     super.viewDidLoad()
-    print(todaysUsedLog.array(forKey: "TodaysMoneyLog"))
+    print(todaysUsedTime.array(forKey: "Time"))
     
     print(UsedMony.frame.origin.y)
     
@@ -512,6 +513,23 @@ class ViewController: UIViewController, UITextFieldDelegate{
   @objc func UsedMonyButton(){
     if UsedMony.text != ""{
       
+      let f = DateFormatter()
+      let now = Date()
+      var timeBox: [String] = []
+      f.timeStyle = .short
+      f.locale = Locale(identifier: "ja_JP")
+      timeBox.append(f.string(from: now))
+      var ttl = todaysUsedTime.array(forKey: "Time")
+      
+      if ttl != nil{
+        for timeLog in ttl!{
+          timeBox.append(timeLog as! String)
+        }
+        todaysUsedTime.set(timeBox, forKey: "Time")
+      }else{
+        todaysUsedLog.set(timeBox, forKey: "Time")
+      }
+      
       var box:[Int] = []
       box.append(Int(UsedMony.text!)!)
       if todaysUsedLog.array(forKey: "TodaysMoneyLog") != nil{
@@ -677,6 +695,7 @@ class ViewController: UIViewController, UITextFieldDelegate{
     
     self.present(EndTodaysMonyAlert, animated: true, completion: nil)
     todaysUsedLog.removeObject(forKey: "TodaysMoneyLog")
+    todaysUsedTime.removeObject(forKey: "Time")
 
     
     
