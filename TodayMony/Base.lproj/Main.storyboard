@@ -601,7 +601,7 @@
             </objects>
             <point key="canvasLocation" x="-315" y="-182"/>
         </scene>
-        <!--Item-->
+        <!--今日の履歴-->
         <scene sceneID="5KD-qU-2hA">
             <objects>
                 <viewController id="eZv-AU-5Lw" customClass="usedMoneyLogController" customModule="TodayMony" customModuleProvider="target" sceneMemberID="viewController">
@@ -610,11 +610,11 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="dmN-yM-OQZ">
-                                <rect key="frame" x="50" y="102" width="274" height="463"/>
+                                <rect key="frame" x="50" y="158.5" width="274" height="350"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="274" id="j73-eb-gvq"/>
-                                    <constraint firstAttribute="height" constant="463" id="pgY-11-RMf"/>
+                                    <constraint firstAttribute="height" constant="350" id="pgY-11-RMf"/>
                                 </constraints>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="cell" textLabel="pjY-th-A6Y" detailTextLabel="4lJ-RS-jUQ" style="IBUITableViewCellStyleValue1" id="bT4-3r-khJ">
@@ -647,15 +647,28 @@
                                     <outlet property="delegate" destination="eZv-AU-5Lw" id="43z-b6-4kB"/>
                                 </connections>
                             </tableView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="今日使った金額" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mXg-6U-MC5">
+                                <rect key="frame" x="62.5" y="112.5" width="250" height="21"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="250" id="5s6-s9-Ieu"/>
+                                    <constraint firstAttribute="height" constant="21" id="MCV-GO-mDm"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="24"/>
+                                <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstItem="dmN-yM-OQZ" firstAttribute="centerX" secondItem="fWP-5f-cbp" secondAttribute="centerX" id="01n-ml-5cR"/>
                             <constraint firstItem="dmN-yM-OQZ" firstAttribute="centerY" secondItem="fWP-5f-cbp" secondAttribute="centerY" id="3nd-dO-nbh"/>
+                            <constraint firstItem="mXg-6U-MC5" firstAttribute="top" secondItem="wSN-Nn-lmg" secondAttribute="top" constant="92.5" id="Dfg-TN-0DI"/>
+                            <constraint firstItem="dmN-yM-OQZ" firstAttribute="top" secondItem="mXg-6U-MC5" secondAttribute="bottom" constant="25" id="QNK-CZ-dKa"/>
+                            <constraint firstItem="mXg-6U-MC5" firstAttribute="centerX" secondItem="fWP-5f-cbp" secondAttribute="centerX" id="b71-uY-Mdd"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="wSN-Nn-lmg"/>
                     </view>
-                    <tabBarItem key="tabBarItem" title="Item" id="G2i-Pp-7ZM"/>
+                    <tabBarItem key="tabBarItem" title="今日の履歴" image="log" selectedImage="log" id="G2i-Pp-7ZM"/>
                     <connections>
                         <outlet property="table" destination="dmN-yM-OQZ" id="4az-IX-KfV"/>
                     </connections>
@@ -667,6 +680,7 @@
     </scenes>
     <resources>
         <image name="detailmoney" width="595" height="842"/>
+        <image name="log" width="595" height="842"/>
         <image name="poolmoney" width="595" height="842"/>
         <image name="yenIcon" width="595" height="842"/>
     </resources>
