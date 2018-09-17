@@ -681,6 +681,9 @@ class ViewController: UIViewController, UITextFieldDelegate{
       self.present(todaysResult, animated: true, completion: nil)
       self.TodaysTotalUsedMoney.removeObject(forKey: "TodaysTotalUd")
       
+      self.todaysUsedLog.removeObject(forKey: "TodaysMoneyLog")
+      self.todaysUsedTime.removeObject(forKey: "Time")
+      
     }))
     
     
@@ -694,8 +697,7 @@ class ViewController: UIViewController, UITextFieldDelegate{
     }))
     
     self.present(EndTodaysMonyAlert, animated: true, completion: nil)
-    todaysUsedLog.removeObject(forKey: "TodaysMoneyLog")
-    todaysUsedTime.removeObject(forKey: "Time")
+    
 
     
     

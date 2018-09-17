@@ -20,6 +20,7 @@ class usedMoneyLogController: UIViewController, UITableViewDelegate, UITableView
   
   var vcLogs = ViewController().todaysUsedLog.array(forKey: "TodaysMoneyLog")
   var vcTimeLogs = ViewController().todaysUsedLog.array(forKey: "Time")
+  let vc = ViewController()
   
   func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
     
@@ -34,7 +35,14 @@ class usedMoneyLogController: UIViewController, UITableViewDelegate, UITableView
   
   func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
     let cell:UITableViewCell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
-    cell.textLabel!.text = String("\(describing: vcLogs![indexPath.row])円")
+//    cell.textLabel!.text = String("\(describing: vcLogs![indexPath.row])円")
+    
+    if let vclogs = vcLogs{
+      let log = vclogs.map{vc.CommaAdd(comma: $0 as! Int)}
+      cell.textLabel!.text = String(log[indexPath.row])
+    }else{
+      return cell
+    }
     
     if let timeLogs = vcTimeLogs{
       cell.detailTextLabel!.text = String(describing: timeLogs[indexPath.row])
@@ -49,7 +57,10 @@ class usedMoneyLogController: UIViewController, UITableViewDelegate, UITableView
 
     override func viewDidLoad() {
         super.viewDidLoad()
-      
+      if let vclogs = vcLogs{
+        print(vclogs.map{vc.CommaAdd(comma: $0 as! Int)})
+        print(vclogs)
+      }
       
 
         // Do any additional setup after loading the view.
