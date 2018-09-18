@@ -25,6 +25,7 @@ class ViewController: UIViewController, UITextFieldDelegate{
   let TodaysTotalUsedMoney = UserDefaults()
   let todaysUsedLog = UserDefaults()
   let todaysUsedTime = UserDefaults()
+  var total = UserDefaults()
   var poolmony = 0
   var returnnum = 0
   var poolmonytwo = 0
@@ -538,9 +539,10 @@ class ViewController: UIViewController, UITextFieldDelegate{
           box.append(logs as! Int)
         }
         todaysUsedLog.set(box, forKey: "TodaysMoneyLog")
-        
+       total.set(box.reduce(0){$0 + $1}, forKey: "total") 
       }else{
         todaysUsedLog.set(box, forKey: "TodaysMoneyLog")
+        total.set(box.reduce(0){$0 + $1}, forKey: "total") 
       }
       NotificationCenter.default.removeObserver(self)
       
@@ -683,6 +685,7 @@ class ViewController: UIViewController, UITextFieldDelegate{
       
       self.todaysUsedLog.removeObject(forKey: "TodaysMoneyLog")
       self.todaysUsedTime.removeObject(forKey: "Time")
+      self.total.removeObject(forKey: "total")
       
     }))
     

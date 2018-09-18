@@ -14,13 +14,16 @@ class usedMoneyLogController: UIViewController, UITableViewDelegate, UITableView
   func ontap(){
     vcLogs = ViewController().todaysUsedLog.array(forKey: "TodaysMoneyLog")
     vcTimeLogs = ViewController().todaysUsedLog.array(forKey: "Time")
+    vcTotal = ViewController().total.integer(forKey: "total")
     table.reloadData()
   }
   
   
   var vcLogs = ViewController().todaysUsedLog.array(forKey: "TodaysMoneyLog")
   var vcTimeLogs = ViewController().todaysUsedLog.array(forKey: "Time")
+  var vcTotal = ViewController().total.integer(forKey: "total")
   let vc = ViewController()
+  var total = 0
   
   func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
     
@@ -40,6 +43,7 @@ class usedMoneyLogController: UIViewController, UITableViewDelegate, UITableView
     if let vclogs = vcLogs{
       let log = vclogs.map{vc.CommaAdd(comma: $0 as! Int)}
       cell.textLabel!.text = String(log[indexPath.row])
+      
     }else{
       return cell
     }
@@ -54,15 +58,34 @@ class usedMoneyLogController: UIViewController, UITableViewDelegate, UITableView
     
   }
   
+  func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+    return 70
+  }
+  
+  func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView?{
+    
+    
+    let view = UIView()
+    view.frame = CGRect(x: 0, y: 0, width: self.table.frame.size.width, height: 100)
+    
+    let screenWidth:CGFloat = view.frame.size.width
+    let screenHeight:CGFloat = view.frame.size.height
+    
+    let headerLabel = UILabel()
+    headerLabel.frame =  CGRect(x: 0, y: 0, width: self.view.frame.size.width, height: 50)
+    headerLabel.center = CGPoint(x: screenWidth/2, y: screenHeight/2)
+    headerLabel.text = String("合計金額：\(vc.CommaAdd(comma: vcTotal))")
+    headerLabel.textColor = UIColor.black
+    headerLabel.textAlignment = .center
+    view.addSubview(headerLabel)
+    
+    return view
+  }
+  
 
     override func viewDidLoad() {
         super.viewDidLoad()
-      if let vclogs = vcLogs{
-        print(vclogs.map{vc.CommaAdd(comma: $0 as! Int)})
-        print(vclogs)
-      }
-      
-
+     
         // Do any additional setup after loading the view.
     }
   
