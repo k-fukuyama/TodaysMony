@@ -25,6 +25,7 @@ class ViewController: UIViewController, UITextFieldDelegate{
   let TodaysTotalUsedMoney = UserDefaults()
   let todaysUsedLog = UserDefaults()
   let todaysUsedTime = UserDefaults()
+  let hashLog = UserDefaults()
   var total = UserDefaults()
   var poolmony = 0
   var returnnum = 0
@@ -35,7 +36,89 @@ class ViewController: UIViewController, UITextFieldDelegate{
   
   override func viewDidLoad() {
     super.viewDidLoad()
-    print(todaysUsedTime.array(forKey: "Time"))
+    
+    
+    let hash = hashLog.dictionary(forKey: "hash")
+    todaysUsedTime.removeObject(forKey: "Time")
+    let dateFormater = DateFormatter()
+    dateFormater.dateFormat = "yyyy/MM/dd HH:mm:ss"
+    dateFormater.locale = Locale(identifier: "ja_JP")
+    
+    let datee = Date()
+    let cal = Calendar.current
+    let aa = cal.date(byAdding: .day, value: 2, to: cal.startOfDay(for: datee))
+
+    
+    func betime(str:String) -> Date{
+      
+      let now = Date()
+      let dateFormater = DateFormatter()
+      dateFormater.dateFormat = "yyyy/MM/dd HH:mm:ss"
+      dateFormater.locale = Locale(identifier: "ja_JP")
+
+      dateFormater.timeZone = TimeZone(identifier: "Asia/Tokyo")
+      let tbox = dateFormater.date(from: str)
+//      let cal = Calendar.current
+      
+      
+      
+      return tbox!
+     
+      //
+      //    let tbox = dateFormater.date(from: "2018/09/18 22:29:17")
+      //    let asita = cal.date(byAdding: .day, value: 2, to: cal.startOfDay(for: tbox!))
+      //    let aa = cal.date(byAdding: .day, value: 3, to: cal.startOfDay(for: date))
+    }
+    
+    func jptime(date:Date) -> String{
+      let now = Date().toStringWithCurrentLocale()
+      let dateFormater = DateFormatter()
+      dateFormater.dateFormat = "yyyy/MM/dd HH:mm:ss"
+      dateFormater.locale = Locale(identifier: "ja_JP")
+      
+      return dateFormater.string(from: date)
+    }
+    
+    
+    print(hash)
+    
+    if let hashkey = hashLog.dictionary(forKey: "hash"){
+      var hash = hashLog.dictionary(forKey: "hash")
+      for daykey in (hashkey.keys){
+        let times = betime(str: daykey)
+        if times <= aa!{
+          var box:[Date] = []
+          box.append(times)
+          let result = box.map{jptime(date: $0)}
+//          for i in result{
+//            hash![i] = nil
+//          }
+//          hashLog.set(hash, forKey: "hash")
+          print("waaaaa\(result)")
+        }else{
+          print("NoNONo")
+        }
+      }
+    }else{
+      print("nillが検出されました")
+    }
+    
+    
+//    let cal = Calendar.current
+//    let date = Date()
+//
+//    let tbox = dateFormater.date(from: "2018/09/18 22:29:17")
+//    let asita = cal.date(byAdding: .day, value: 2, to: cal.startOfDay(for: tbox!))
+//    let aa = cal.date(byAdding: .day, value: 3, to: cal.startOfDay(for: date))
+//
+//    if aa == asita{
+//      print("同じ日付です")
+//    }else{
+//      print("違う日付です")
+//    }
+    
+    
+//    print(String(describing: asita!))
     
     print(UsedMony.frame.origin.y)
     
@@ -510,6 +593,7 @@ class ViewController: UIViewController, UITextFieldDelegate{
    
   }
   
+  var hashBox:[String:Int] = [:]
   
   @objc func UsedMonyButton(){
     if UsedMony.text != ""{
@@ -517,8 +601,20 @@ class ViewController: UIViewController, UITextFieldDelegate{
       let f = DateFormatter()
       let now = Date()
       var timeBox: [String] = []
-      f.timeStyle = .short
+      f.timeStyle = .medium
+      f.dateStyle = .short
       f.locale = Locale(identifier: "ja_JP")
+      
+      if var hashset = hashLog.dictionary(forKey: "hash"){
+        hashset[f.string(from: now)] = Int(UsedMony.text!)!
+        hashLog.set(hashset, forKey: "hash")
+      }else{
+        hashBox[f.string(from: now)] = Int(UsedMony.text!)!
+        hashLog.set(hashBox, forKey: "hash")
+      }
+      
+      
+      
       timeBox.append(f.string(from: now))
       var ttl = todaysUsedTime.array(forKey: "Time")
       
@@ -665,7 +761,7 @@ class ViewController: UIViewController, UITextFieldDelegate{
     let EndTodaysMonyAlert = UIAlertController(title: "¥\(ud.integer(forKey: "mony"))",
                                                message: "が今日の残額でよろしいですか?",
                                                preferredStyle: .alert)
-   
+   hashLog.removeObject(forKey: "hash")
     
     EndTodaysMonyAlert.addAction(UIAlertAction(title: "OK", style: .destructive, handler: { action in
       
@@ -776,3 +872,16 @@ extension UITextField{
   }
 }
 
+extension Date {
+  
+  func toStringWithCurrentLocale() -> String {
+    
+    let formatter = DateFormatter()
+    formatter.timeZone = TimeZone.current
+    formatter.locale = Locale.current
+    formatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
+    
+    return formatter.string(from: self)
+  }
+  
+}

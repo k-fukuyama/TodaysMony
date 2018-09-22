@@ -12,14 +12,16 @@ class usedMoneyLogController: UIViewController, UITableViewDelegate, UITableView
   @IBOutlet weak var table: UITableView!
   
   func ontap(){
-    vcLogs = ViewController().todaysUsedLog.array(forKey: "TodaysMoneyLog")
+//    vcLogs = ViewController().todaysUsedLog.array(forKey: "TodaysMoneyLog")
+    vcLogs = ViewController().hashLog.dictionary(forKey: "hash")
     vcTimeLogs = ViewController().todaysUsedLog.array(forKey: "Time")
     vcTotal = ViewController().total.integer(forKey: "total")
     table.reloadData()
   }
   
   
-  var vcLogs = ViewController().todaysUsedLog.array(forKey: "TodaysMoneyLog")
+//  var vcLogs = ViewController().todaysUsedLog.array(forKey: "TodaysMoneyLog")
+   var vcLogs = ViewController().hashLog.dictionary(forKey: "hash")
   var vcTimeLogs = ViewController().todaysUsedLog.array(forKey: "Time")
   var vcTotal = ViewController().total.integer(forKey: "total")
   let vc = ViewController()
@@ -73,7 +75,7 @@ class usedMoneyLogController: UIViewController, UITableViewDelegate, UITableView
     
     let headerLabel = UILabel()
     headerLabel.frame =  CGRect(x: 0, y: 0, width: self.view.frame.size.width, height: 50)
-    headerLabel.center = CGPoint(x: screenWidth/2, y: screenHeight/2)
+    headerLabel.center = CGPoint(x: screenWidth/2, y: screenHeight/4)
     headerLabel.text = String("合計金額：\(vc.CommaAdd(comma: vcTotal))")
     headerLabel.textColor = UIColor.black
     headerLabel.textAlignment = .center
