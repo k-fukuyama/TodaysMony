@@ -12,17 +12,22 @@ class usedMoneyLogController: UIViewController, UITableViewDelegate, UITableView
   @IBOutlet weak var table: UITableView!
   
   func ontap(){
+    
 //    vcLogs = ViewController().todaysUsedLog.array(forKey: "TodaysMoneyLog")
     vcLogs = ViewController().hashLog.dictionary(forKey: "hash")
-    vcTimeLogs = ViewController().todaysUsedLog.array(forKey: "Time")
+//    vcTimeLogs = ViewController().todaysUsedLog.array(forKey: "Time")
     vcTotal = ViewController().total.integer(forKey: "total")
+    deleteLog()
     table.reloadData()
+
+    
+    
   }
   
   
 //  var vcLogs = ViewController().todaysUsedLog.array(forKey: "TodaysMoneyLog")
    var vcLogs = ViewController().hashLog.dictionary(forKey: "hash")
-  var vcTimeLogs = ViewController().todaysUsedLog.array(forKey: "Time")
+//  var vcTimeLogs = ViewController().todaysUsedLog.array(forKey: "Time")
   var vcTotal = ViewController().total.integer(forKey: "total")
   let vc = ViewController()
   var total = 0
@@ -41,20 +46,31 @@ class usedMoneyLogController: UIViewController, UITableViewDelegate, UITableView
   func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
     let cell:UITableViewCell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
 //    cell.textLabel!.text = String("\(describing: vcLogs![indexPath.row])円")
-    
     if let vclogs = vcLogs{
-      let log = vclogs.map{vc.CommaAdd(comma: $0 as! Int)}
+      let log = vclogs.values.map{vc.CommaAdd(comma: $0 as! Int)}
       cell.textLabel!.text = String(log[indexPath.row])
       
+      var timebox:[String] = []
+      
+      for time in vclogs.keys{
+        timebox.append(time)
+      }
+      
+      let shortTime = timebox.map{beShortTime(str: $0)}
+      shortTime.map{String(describing: $0)}
+      
+      cell.detailTextLabel!.text = String(describing: shortTime[indexPath.row])
     }else{
       return cell
     }
     
-    if let timeLogs = vcTimeLogs{
-      cell.detailTextLabel!.text = String(describing: timeLogs[indexPath.row])
-    }else{
-      return cell
-    }
+//    if let timeLogs = vcTimeLogs{
+//      cell.detailTextLabel!.text = String(describing: timeLogs[indexPath.row])
+//    }else{
+//      return cell
+//    }
+    
+    
     
     return cell
     
@@ -98,7 +114,58 @@ class usedMoneyLogController: UIViewController, UITableViewDelegate, UITableView
         // Dispose of any resources that can be recreated.
     }
   
+  func beShortTime(str:String) -> String{
+    let inFormatter = DateFormatter()
+    inFormatter.dateFormat = "yyyy/MM/dd HH:mm:ss"
+    let date = inFormatter.date(from: str)
+    
+    let outFormatter = DateFormatter()
+    outFormatter.dateFormat = "HH:mm"
+    
+    return outFormatter.string(from: date!)
+  }
   
+  
+  func deleteLog(){
+    let cal = Calendar.current
+    let f = DateFormatter()
+    f.dateFormat = "yyyy/MM/dd HH:mm:ss"
+    let date = Date().toStringWithCurrentLocale()
+    
+    let now = f.date(from: date)?.addingTimeInterval((60*60*9*1)
+)
+    print("デイトの値\(now)")
+//    let tommorow = cal.date(byAdding: .day, value: 1, to: cal.startOfDay(for: date))
+    
+    if let hashKey = vcLogs?.keys{
+      for logKey in hashKey{
+        let logkeys = ViewController().beTime(str:logKey)
+        
+        if logkeys < now!{
+          var timeBox:[Date] = []
+          timeBox.append(logkeys)
+          let result = timeBox.map{vc.jptime(date: $0)}
+          
+          for destroy in result{
+            print("結果\(result)")
+            vcLogs![destroy] = nil
+            vc.total.removeObject(forKey: "total")
+
+          }
+        
+          print("これ\(vcLogs)")
+        vc.hashLog.set(vcLogs, forKey: "hash")
+          
+        }else{
+          print(vcLogs)
+          print("何もありません")
+        }
+      }
+    }else{
+      print("何もありません")
+    }
+    
+  }
 
     /*
     // MARK: - Navigation

@@ -49,35 +49,9 @@ class ViewController: UIViewController, UITextFieldDelegate{
     let aa = cal.date(byAdding: .day, value: 2, to: cal.startOfDay(for: datee))
 
     
-    func betime(str:String) -> Date{
-      
-      let now = Date()
-      let dateFormater = DateFormatter()
-      dateFormater.dateFormat = "yyyy/MM/dd HH:mm:ss"
-      dateFormater.locale = Locale(identifier: "ja_JP")
-
-      dateFormater.timeZone = TimeZone(identifier: "Asia/Tokyo")
-      let tbox = dateFormater.date(from: str)
-//      let cal = Calendar.current
-      
-      
-      
-      return tbox!
-     
-      //
-      //    let tbox = dateFormater.date(from: "2018/09/18 22:29:17")
-      //    let asita = cal.date(byAdding: .day, value: 2, to: cal.startOfDay(for: tbox!))
-      //    let aa = cal.date(byAdding: .day, value: 3, to: cal.startOfDay(for: date))
-    }
+  
     
-    func jptime(date:Date) -> String{
-      let now = Date().toStringWithCurrentLocale()
-      let dateFormater = DateFormatter()
-      dateFormater.dateFormat = "yyyy/MM/dd HH:mm:ss"
-      dateFormater.locale = Locale(identifier: "ja_JP")
-      
-      return dateFormater.string(from: date)
-    }
+    
     
     
     print(hash)
@@ -85,7 +59,7 @@ class ViewController: UIViewController, UITextFieldDelegate{
     if let hashkey = hashLog.dictionary(forKey: "hash"){
       var hash = hashLog.dictionary(forKey: "hash")
       for daykey in (hashkey.keys){
-        let times = betime(str: daykey)
+        let times = beTime(str: daykey)
         if times <= aa!{
           var box:[Date] = []
           box.append(times)
@@ -604,13 +578,18 @@ class ViewController: UIViewController, UITextFieldDelegate{
       f.timeStyle = .medium
       f.dateStyle = .short
       f.locale = Locale(identifier: "ja_JP")
+      let beDate = addTime(str: f.string(from: now))
+      let backString = jptime(date: beDate)
       
       if var hashset = hashLog.dictionary(forKey: "hash"){
-        hashset[f.string(from: now)] = Int(UsedMony.text!)!
+        hashset[backString] = Int(UsedMony.text!)!
         hashLog.set(hashset, forKey: "hash")
       }else{
-        hashBox[f.string(from: now)] = Int(UsedMony.text!)!
+        hashBox[backString] = Int(UsedMony.text!)!
         hashLog.set(hashBox, forKey: "hash")
+        print("こっちだよ")
+        print("\(hashLog.dictionary(forKey: "hash"))")
+        print(hashBox)
       }
       
       
@@ -761,7 +740,7 @@ class ViewController: UIViewController, UITextFieldDelegate{
     let EndTodaysMonyAlert = UIAlertController(title: "¥\(ud.integer(forKey: "mony"))",
                                                message: "が今日の残額でよろしいですか?",
                                                preferredStyle: .alert)
-   hashLog.removeObject(forKey: "hash")
+ 
     
     EndTodaysMonyAlert.addAction(UIAlertAction(title: "OK", style: .destructive, handler: { action in
       
@@ -782,7 +761,8 @@ class ViewController: UIViewController, UITextFieldDelegate{
       self.todaysUsedLog.removeObject(forKey: "TodaysMoneyLog")
       self.todaysUsedTime.removeObject(forKey: "Time")
       self.total.removeObject(forKey: "total")
-      
+      self.hashLog.removeObject(forKey: "hash")
+      self.hashBox.removeAll()
     }))
     
     
@@ -837,6 +817,41 @@ class ViewController: UIViewController, UITextFieldDelegate{
     }else{
       onePushTitle.setTitle(CommaAdd(comma: onePushSetData), for: .normal)
     }
+  }
+  
+  func addTime(str:String) -> Date{
+    
+    let now = Date()
+    let dateFormater = DateFormatter()
+    dateFormater.dateFormat = "yyyy/MM/dd HH:mm:ss"
+    dateFormater.locale = Locale(identifier: "ja_JP")
+    
+    dateFormater.timeZone = TimeZone(identifier: "Asia/Tokyo")
+    var tbox = dateFormater.date(from: str)
+    tbox?.addTimeInterval(60*60*24*1)
+ 
+    return tbox!
+  }
+  
+  func beTime(str:String) -> Date{
+    let now = Date()
+    let dateFormater = DateFormatter()
+    dateFormater.dateFormat = "yyyy/MM/dd HH:mm:ss"
+    dateFormater.locale = Locale(identifier: "ja_JP")
+    
+    dateFormater.timeZone = TimeZone(identifier: "Asia/Tokyo")
+    var tbox = dateFormater.date(from: str)
+    
+     return tbox!
+  }
+  
+  func jptime(date:Date) -> String{
+    let now = Date().toStringWithCurrentLocale()
+    let dateFormater = DateFormatter()
+    dateFormater.dateFormat = "yyyy/MM/dd H:mm:ss"
+    dateFormater.locale = Locale(identifier: "ja_JP")
+    
+    return dateFormater.string(from: date)
   }
 
 }
