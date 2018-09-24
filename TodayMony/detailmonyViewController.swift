@@ -26,7 +26,7 @@ class detailmonyViewController: UIViewController, UITextFieldDelegate{
       print(SaveOneMonthMoneyResult.integer(forKey: "SaveMoney"))
     print(fixedCostUd.array(forKey: "fixedCost"))
     
-    let fixedCostSet = fixedCostUd.array(forKey: "fixedCost")
+    let fixedCostSet = fixedCostUd.dictionary(forKey: "fixedCost")
     
     
     if uiScreenSize < 750.0{
@@ -106,13 +106,13 @@ class detailmonyViewController: UIViewController, UITextFieldDelegate{
       return String(int)
     }
    
-    if let fixedCostNet = fixedCostSet{
-      let fixedCost = fixedCostNet.map{String(describing: $0)}
-      let addCommaFixedCost = fixedCost.map{(addComma(str: $0))}
-      housemony.text = addCommaFixedCost[0]
-      transportmony.text = addCommaFixedCost[1]
-      netmony.text = addCommaFixedCost[2]
-      salary.text = addCommaFixedCost[3]
+    if let fixedCostSet = fixedCostSet{
+//      let fixedCost = fixedCostNet.map{String(describing: $0)}
+//      let addCommaFixedCost = fixedCost.map{(addComma(str: $0))}
+      housemony.text = fixedCostSet["housemoney"] as! String
+      transportmony.text = fixedCostSet["transportmoney"] as! String
+      netmony.text = fixedCostSet["netmoney"] as! String
+      salary.text = fixedCostSet["salary"] as! String
     }else{
       print("There are Optionals")
     }
@@ -237,7 +237,7 @@ class detailmonyViewController: UIViewController, UITextFieldDelegate{
   @IBAction func total(_ sender: Any) {
     
     
-    textarray = [housemony.text!, lifelinemony.text!, phonemony.text!, cardmony.text!, transportmony.text!, entertainmentmony.text!, othermony.text!]
+    textarray = [lifelinemony.text!, phonemony.text!, cardmony.text!, entertainmentmony.text!, othermony.text!]
     
     
     if salary.text == ""{
@@ -249,19 +249,21 @@ class detailmonyViewController: UIViewController, UITextFieldDelegate{
       self.present(emptyalert, animated: true, completion: nil)
     }else{
       let benumsarary = Int(removeComa(str: salary.text!) )
-      costarray = [housemony.text!, lifelinemony.text!, phonemony.text!, cardmony.text!, transportmony.text!, entertainmentmony.text!, othermony.text!, netmony.text!]
+      costarray = [housemony.text!, transportmony.text!, lifelinemony.text!, phonemony.text!, cardmony.text!, entertainmentmony.text!, othermony.text!, netmony.text!]
       
       for var (index, text) in  costarray.enumerated(){
         if text == ""{
           costarray[index] = "0"
         }
       }
+
       
       let deletecomma = costarray.map{removeComa(str: $0)}
-      let fixedCost = ["housemoney": costarray[0], "transportmoney": costarray[4], "netmoney": costarray[7],"salary": salary.text!]
+      var fixedCost = ["housemoney": housemony.text!, "transportmoney": transportmony.text!, "netmoney": netmony.text!,"salary": salary.text!]
+      
       let removeCommaFixedCost = fixedCost.values.map{removeComa(str: $0)}
       print("これがああああ\(removeCommaFixedCost)")
-      fixedCostUd.set(removeCommaFixedCost, forKey: "fixedCost")
+      fixedCostUd.set(fixedCost, forKey: "fixedCost")
       
       let total = deletecomma.map{Int($0)!}
       
