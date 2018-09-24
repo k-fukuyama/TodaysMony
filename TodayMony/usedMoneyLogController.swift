@@ -11,10 +11,15 @@ import UIKit
 class usedMoneyLogController: UIViewController, UITableViewDelegate, UITableViewDataSource {
   @IBOutlet weak var table: UITableView!
   
+  var headerView: UIView!
+  var displayWidth: CGFloat!
+  var displayHeight: CGFloat!
+  var headerLabel = UILabel()
+  
   func ontap(){
     vcLogs = ViewController().hashLog.dictionary(forKey: "hash")
     deleteLog()
-    print(totalSum())
+    totalSum()
     table.reloadData()
     
   }
@@ -61,35 +66,23 @@ class usedMoneyLogController: UIViewController, UITableViewDelegate, UITableView
     
   }
   
-  func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-    return 70
-  }
-  
-  func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView?{
-    
-    
-    let view = UIView()
-    view.frame = CGRect(x: 0, y: 0, width: self.table.frame.size.width, height: 100)
-    
-    let screenWidth:CGFloat = view.frame.size.width
-    let screenHeight:CGFloat = view.frame.size.height
-    
-    let headerLabel = UILabel()
-    headerLabel.frame =  CGRect(x: 0, y: 0, width: self.view.frame.size.width, height: 50)
-    headerLabel.center = CGPoint(x: screenWidth/2, y: screenHeight/4)
-    headerLabel.text = String("合計金額：\(vc.CommaAdd(comma: totalSum()))")
-    headerLabel.textColor = UIColor.black
-    headerLabel.textAlignment = .center
-    view.addSubview(headerLabel)
-    
-    return view
-  }
-  
 
     override func viewDidLoad() {
         super.viewDidLoad()
      
         // Do any additional setup after loading the view.
+      
+      displayWidth = self.view.frame.width
+      displayHeight = self.view.frame.height
+      table.contentInset.top = 100
+      
+      headerView = UIView(frame: CGRect(x:0, y: 0, width: self.table.frame.size.width, height: 300))
+      table.addSubview(headerView)
+      headerLabel = UILabel(frame: CGRect(x: 0, y: 0, width: self.table.frame.size.width, height: -100))
+      headerLabel.text = String("合計金額：\(vc.CommaAdd(comma: totalSum()))")
+      headerLabel.font = UIFont.systemFont(ofSize: 25)
+      headerLabel.textAlignment = .center
+      table.addSubview(headerLabel)
     }
   
 
@@ -158,11 +151,19 @@ class usedMoneyLogController: UIViewController, UITableViewDelegate, UITableView
      let totalResult = values.map{$0 as! Int}
 
     result =  totalResult.reduce(0){$0 + $1}
+    headerLabel.text = String("合計金額：\(result)円")
     }else{
       result = 0
+      headerLabel.text = String("合計金額：\(result)円")
     }
     return result
     
+  }
+  
+  func scrollViewDidScroll(_ scrollView: UIScrollView) {
+    if scrollView.contentOffset.y < -100{
+      self.headerView.frame = CGRect(x: 0, y: scrollView.contentOffset.y, width: self.displayWidth, height: 100)
+    }
   }
 
     /*
