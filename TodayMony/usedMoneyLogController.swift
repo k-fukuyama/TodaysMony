@@ -18,8 +18,10 @@ class usedMoneyLogController: UIViewController, UITableViewDelegate, UITableView
 //    vcTimeLogs = ViewController().todaysUsedLog.array(forKey: "Time")
     vcTotal = ViewController().total.integer(forKey: "total")
     deleteLog()
+    print(totalSum())
     table.reloadData()
 
+    print("合計額\(vcTotal)")
     
     
   }
@@ -92,7 +94,7 @@ class usedMoneyLogController: UIViewController, UITableViewDelegate, UITableView
     let headerLabel = UILabel()
     headerLabel.frame =  CGRect(x: 0, y: 0, width: self.view.frame.size.width, height: 50)
     headerLabel.center = CGPoint(x: screenWidth/2, y: screenHeight/4)
-    headerLabel.text = String("合計金額：\(vc.CommaAdd(comma: vcTotal))")
+    headerLabel.text = String("合計金額：\(vc.CommaAdd(comma: totalSum()))")
     headerLabel.textColor = UIColor.black
     headerLabel.textAlignment = .center
     view.addSubview(headerLabel)
@@ -149,7 +151,8 @@ class usedMoneyLogController: UIViewController, UITableViewDelegate, UITableView
           for destroy in result{
             print("結果\(result)")
             vcLogs![destroy] = nil
-            vc.total.removeObject(forKey: "total")
+//            vc.total.removeObject(forKey: "total")
+            vcTotal = 0
 
           }
         
@@ -164,6 +167,21 @@ class usedMoneyLogController: UIViewController, UITableViewDelegate, UITableView
     }else{
       print("何もありません")
     }
+    
+  }
+  
+  func totalSum() -> Int{
+    
+    var result = 0
+
+    if let values = vcLogs?.values{
+     let totalResult = values.map{$0 as! Int}
+
+    result =  totalResult.reduce(0){$0 + $1}
+    }else{
+      result = 0
+    }
+    return result
     
   }
 
