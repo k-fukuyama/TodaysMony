@@ -27,7 +27,6 @@ class ViewController: UIViewController, UITextFieldDelegate{
   let todaysUsedLog = UserDefaults()
   let todaysUsedTime = UserDefaults()
   let hashLog = UserDefaults()
-  var total = UserDefaults()
   var poolmony = 0
   var returnnum = 0
   var poolmonytwo = 0
@@ -37,63 +36,6 @@ class ViewController: UIViewController, UITextFieldDelegate{
   
   override func viewDidLoad() {
     super.viewDidLoad()
-    
-    
-    let hash = hashLog.dictionary(forKey: "hash")
-    todaysUsedTime.removeObject(forKey: "Time")
-    let dateFormater = DateFormatter()
-    dateFormater.dateFormat = "yyyy/MM/dd HH:mm:ss"
-    dateFormater.locale = Locale(identifier: "ja_JP")
-    
-    let datee = Date()
-    let cal = Calendar.current
-    let aa = cal.date(byAdding: .day, value: 2, to: cal.startOfDay(for: datee))
-
-    
-  
-    
-    
-    
-    
-    print(hash)
-    
-    if let hashkey = hashLog.dictionary(forKey: "hash"){
-      var hash = hashLog.dictionary(forKey: "hash")
-      for daykey in (hashkey.keys){
-        let times = beTime(str: daykey)
-        if times <= aa!{
-          var box:[Date] = []
-          box.append(times)
-          let result = box.map{jptime(date: $0)}
-//          for i in result{
-//            hash![i] = nil
-//          }
-//          hashLog.set(hash, forKey: "hash")
-          print("waaaaa\(result)")
-        }else{
-          print("NoNONo")
-        }
-      }
-    }else{
-      print("nillが検出されました")
-    }
-    
-    
-//    let cal = Calendar.current
-//    let date = Date()
-//
-//    let tbox = dateFormater.date(from: "2018/09/18 22:29:17")
-//    let asita = cal.date(byAdding: .day, value: 2, to: cal.startOfDay(for: tbox!))
-//    let aa = cal.date(byAdding: .day, value: 3, to: cal.startOfDay(for: date))
-//
-//    if aa == asita{
-//      print("同じ日付です")
-//    }else{
-//      print("違う日付です")
-//    }
-    
-    
-//    print(String(describing: asita!))
     
     print(UsedMony.frame.origin.y)
     
@@ -110,15 +52,9 @@ class ViewController: UIViewController, UITextFieldDelegate{
     }
     
     
-    print(ResultMoneyButtom.constant)
-    
-    
-    
     let notificationcenter = NotificationCenter.default
     
     notificationcenter.addObserver(self, selector: #selector(showkeyboard(notification:)), name: .UIKeyboardWillShow, object: nil)
-  
-    print("今日使った金額は\(TodaysTotalUsedMoney.integer(forKey: "TodaysTotalUd"))")
     
    UsedMony.tag = 1
    MonyField.tag = 2
@@ -509,6 +445,7 @@ class ViewController: UIViewController, UITextFieldDelegate{
       
     }
     
+    
     func onePushedNotice(){
       
       let OnepushDoneAlert = UIAlertController(
@@ -594,33 +531,6 @@ class ViewController: UIViewController, UITextFieldDelegate{
         print(hashBox)
       }
       
-      
-      
-      timeBox.append(f.string(from: now))
-      var ttl = todaysUsedTime.array(forKey: "Time")
-      
-      if ttl != nil{
-        for timeLog in ttl!{
-          timeBox.append(timeLog as! String)
-        }
-        todaysUsedTime.set(timeBox, forKey: "Time")
-      }else{
-        todaysUsedLog.set(timeBox, forKey: "Time")
-      }
-      
-      var box:[Int] = []
-      box.append(Int(UsedMony.text!)!)
-      if todaysUsedLog.array(forKey: "TodaysMoneyLog") != nil{
-        
-        for logs in todaysUsedLog.array(forKey: "TodaysMoneyLog")!{
-          box.append(logs as! Int)
-        }
-        todaysUsedLog.set(box, forKey: "TodaysMoneyLog")
-       total.set(box.reduce(0){$0 + $1}, forKey: "total") 
-      }else{
-        todaysUsedLog.set(box, forKey: "TodaysMoneyLog")
-        total.set(box.reduce(0){$0 + $1}, forKey: "total") 
-      }
       NotificationCenter.default.removeObserver(self)
       
       if ud.integer(forKey: "mony") != nil{
@@ -762,7 +672,6 @@ class ViewController: UIViewController, UITextFieldDelegate{
       
       self.todaysUsedLog.removeObject(forKey: "TodaysMoneyLog")
       self.todaysUsedTime.removeObject(forKey: "Time")
-      self.total.removeObject(forKey: "total")
       self.hashLog.removeObject(forKey: "hash")
       self.hashBox.removeAll()
     }))
@@ -790,22 +699,6 @@ class ViewController: UIViewController, UITextFieldDelegate{
   var bbb:Float!
   
   var alert:UIAlertController!
-  
-  @IBAction func move(_ sender: Any) {
-    performSegue(withIdentifier: "testmony", sender: nil)
-  }
-  
-//  override func prepare(for segue:UIStoryboardSegue, sender:Any?){
-//    if (segue.identifier == "resultmoney"){
-////        let resultViewController:resultViewController = segue.destination as! resultViewController
-////        var result = ud.integer(forKey: "mony")
-////        resultViewController.result = result
-////        resultViewController.SegueUsedMoney = TodaysTotalUsedMoney.integer(forKey: "TodaysTotalUd")
-////        TodaysTotalUsedMoney.removeObject(forKey: "TodaysTotalUd")
-//      self.tabBarController?.selectedIndex = 2
-//
-//    }
-//  }
   
   
   @IBOutlet weak var UpsideToolBar: UIToolbar!

@@ -12,33 +12,24 @@ class usedMoneyLogController: UIViewController, UITableViewDelegate, UITableView
   @IBOutlet weak var table: UITableView!
   
   func ontap(){
-    
-//    vcLogs = ViewController().todaysUsedLog.array(forKey: "TodaysMoneyLog")
     vcLogs = ViewController().hashLog.dictionary(forKey: "hash")
-//    vcTimeLogs = ViewController().todaysUsedLog.array(forKey: "Time")
-    vcTotal = ViewController().total.integer(forKey: "total")
     deleteLog()
     print(totalSum())
     table.reloadData()
-
-    print("合計額\(vcTotal)")
-    
     
   }
   
   
-//  var vcLogs = ViewController().todaysUsedLog.array(forKey: "TodaysMoneyLog")
    var vcLogs = ViewController().hashLog.dictionary(forKey: "hash")
-//  var vcTimeLogs = ViewController().todaysUsedLog.array(forKey: "Time")
-  var vcTotal = ViewController().total.integer(forKey: "total")
-  let vc = ViewController()
-  var total = 0
+   let vc = ViewController()
+   var total = 0
   
   func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
     
     if let vcLogs = vcLogs{
+      
       return vcLogs.count
-//      return test.count
+      
     }else{
       return 0
     }
@@ -47,7 +38,7 @@ class usedMoneyLogController: UIViewController, UITableViewDelegate, UITableView
   
   func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
     let cell:UITableViewCell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
-//    cell.textLabel!.text = String("\(describing: vcLogs![indexPath.row])円")
+
     if let vclogs = vcLogs{
       let log = vclogs.values.map{vc.CommaAdd(comma: $0 as! Int)}
       cell.textLabel!.text = String(log[indexPath.row])
@@ -65,14 +56,6 @@ class usedMoneyLogController: UIViewController, UITableViewDelegate, UITableView
     }else{
       return cell
     }
-    
-//    if let timeLogs = vcTimeLogs{
-//      cell.detailTextLabel!.text = String(describing: timeLogs[indexPath.row])
-//    }else{
-//      return cell
-//    }
-    
-    
     
     return cell
     
@@ -137,7 +120,6 @@ class usedMoneyLogController: UIViewController, UITableViewDelegate, UITableView
     let now = f.date(from: date)?.addingTimeInterval((60*60*9*1)
 )
     print("デイトの値\(now)")
-//    let tommorow = cal.date(byAdding: .day, value: 1, to: cal.startOfDay(for: date))
     
     if let hashKey = vcLogs?.keys{
       for logKey in hashKey{
@@ -151,8 +133,6 @@ class usedMoneyLogController: UIViewController, UITableViewDelegate, UITableView
           for destroy in result{
             print("結果\(result)")
             vcLogs![destroy] = nil
-//            vc.total.removeObject(forKey: "total")
-            vcTotal = 0
 
           }
         
