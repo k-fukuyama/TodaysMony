@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13771" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="wCp-iv-rNX">
-    <device id="retina4_7" orientation="portrait">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14313.18" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="wCp-iv-rNX">
+    <device id="retina6_5" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13772"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14283.14"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -15,11 +15,11 @@
             <objects>
                 <viewController id="Vvg-gj-v6r" customClass="detailmonyViewController" customModule="TodayMony" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="kev-Gg-Psm">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="家賃" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="YZf-zK-Cqf">
-                                <rect key="frame" x="67.5" y="173" width="100" height="20"/>
+                                <rect key="frame" x="87" y="368" width="100" height="20"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="100" id="6dL-Jj-T8L"/>
                                     <constraint firstAttribute="height" constant="20" id="tLI-Qj-pb5"/>
@@ -29,7 +29,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="jMg-3W-Otr" customClass="CustomTextField" customModule="TodayMony" customModuleProvider="target">
-                                <rect key="frame" x="67.5" y="198" width="100" height="30"/>
+                                <rect key="frame" x="87" y="393" width="100" height="30"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="100" id="08g-DA-MpG"/>
                                     <constraint firstAttribute="height" constant="30" id="pzw-6M-D8k"/>
@@ -39,7 +39,7 @@
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="光熱費" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="GBy-j8-Box">
-                                <rect key="frame" x="207.5" y="173" width="100" height="20"/>
+                                <rect key="frame" x="227" y="368" width="100" height="20"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="20" id="23M-iv-hYm"/>
                                     <constraint firstAttribute="width" constant="100" id="uqC-o0-A8e"/>
@@ -49,7 +49,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="携帯代" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="a0y-Nm-jsk">
-                                <rect key="frame" x="67.5" y="233" width="100" height="20"/>
+                                <rect key="frame" x="87" y="428" width="100" height="20"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="100" id="NaU-HN-WW4"/>
                                     <constraint firstAttribute="height" constant="20" id="qDW-Jv-HGt"/>
@@ -59,7 +59,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="交際費" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="S3v-jZ-tco">
-                                <rect key="frame" x="207.5" y="293" width="100" height="20"/>
+                                <rect key="frame" x="227" y="488" width="100" height="20"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="100" id="2Ld-yK-0Bu"/>
                                     <constraint firstAttribute="height" constant="20" id="QRh-zT-pmc"/>
@@ -69,7 +69,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="その他" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jXc-QU-e8g">
-                                <rect key="frame" x="207.5" y="353" width="100" height="20"/>
+                                <rect key="frame" x="227" y="548" width="100" height="20"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="100" id="4uo-Qw-ZpI"/>
                                     <constraint firstAttribute="height" constant="20" id="UmC-3V-uqd"/>
@@ -79,7 +79,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="7wC-NR-7Hd" customClass="CustomTextField" customModule="TodayMony" customModuleProvider="target">
-                                <rect key="frame" x="67.5" y="258" width="100" height="30"/>
+                                <rect key="frame" x="87" y="453" width="100" height="30"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="100" id="9dZ-ZM-Xoq"/>
                                     <constraint firstAttribute="height" constant="30" id="pNN-Nx-QU9"/>
@@ -89,7 +89,7 @@
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="kSh-b8-d96" customClass="CustomTextField" customModule="TodayMony" customModuleProvider="target">
-                                <rect key="frame" x="207.5" y="198" width="100" height="30"/>
+                                <rect key="frame" x="227" y="393" width="100" height="30"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="30" id="Oe9-NC-G15"/>
                                     <constraint firstAttribute="width" constant="100" id="hFc-Xv-MMH"/>
@@ -99,7 +99,7 @@
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="c15-dw-yKH" customClass="CustomTextField" customModule="TodayMony" customModuleProvider="target">
-                                <rect key="frame" x="207.5" y="258" width="100" height="30"/>
+                                <rect key="frame" x="227" y="453" width="100" height="30"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="100" id="MK6-QP-luF"/>
                                     <constraint firstAttribute="height" constant="30" id="lcb-tU-pBU"/>
@@ -109,7 +109,7 @@
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="QIH-0e-YNs" customClass="CustomTextField" customModule="TodayMony" customModuleProvider="target">
-                                <rect key="frame" x="67.5" y="318" width="100" height="30"/>
+                                <rect key="frame" x="87" y="513" width="100" height="30"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="100" id="B7r-EA-2ot"/>
                                     <constraint firstAttribute="height" constant="30" id="Dek-0r-QIw"/>
@@ -119,7 +119,7 @@
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="ZVX-HQ-ngv" customClass="CustomTextField" customModule="TodayMony" customModuleProvider="target">
-                                <rect key="frame" x="207.5" y="318" width="100" height="30"/>
+                                <rect key="frame" x="227" y="513" width="100" height="30"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="100" id="2LL-qk-q2b"/>
                                     <constraint firstAttribute="height" constant="30" id="pkU-sq-Kir"/>
@@ -129,7 +129,7 @@
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="DgW-le-HYZ" customClass="CustomTextField" customModule="TodayMony" customModuleProvider="target">
-                                <rect key="frame" x="207.5" y="378" width="100" height="30"/>
+                                <rect key="frame" x="227" y="573" width="100" height="30"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="100" id="TPX-6f-SJS"/>
                                     <constraint firstAttribute="height" constant="30" id="VkP-h2-WaA"/>
@@ -139,7 +139,7 @@
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="jWo-iQ-Zwc">
-                                <rect key="frame" x="87.5" y="458" width="200" height="50"/>
+                                <rect key="frame" x="107" y="653" width="200" height="50"/>
                                 <color key="backgroundColor" red="0.50196081400000003" green="0.50196081400000003" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="200" id="NHd-hY-1hw"/>
@@ -158,7 +158,7 @@
                                 </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="カード代" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Rex-qB-ekz">
-                                <rect key="frame" x="207.5" y="233" width="100" height="20"/>
+                                <rect key="frame" x="227" y="428" width="100" height="20"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="100" id="QiM-Kj-GM5"/>
                                     <constraint firstAttribute="height" constant="20" id="Rli-ni-ot8"/>
@@ -168,7 +168,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="ネット代" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="TKH-f6-ald">
-                                <rect key="frame" x="67.5" y="353" width="100" height="20"/>
+                                <rect key="frame" x="87" y="548" width="100" height="20"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="100" id="IMP-76-bH4"/>
                                     <constraint firstAttribute="height" constant="20" id="pJe-5t-y5k"/>
@@ -178,7 +178,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="交通費" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="PQt-zl-koV">
-                                <rect key="frame" x="67.5" y="293" width="100" height="20"/>
+                                <rect key="frame" x="87" y="488" width="100" height="20"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="20" id="MgZ-Up-c4b"/>
                                     <constraint firstAttribute="width" constant="100" id="wwZ-Gh-P8L"/>
@@ -188,7 +188,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <textField opaque="NO" tag="1" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="dGj-JD-vht" customClass="CustomTextField" customModule="TodayMony" customModuleProvider="target">
-                                <rect key="frame" x="67.5" y="378" width="100" height="30"/>
+                                <rect key="frame" x="87" y="573" width="100" height="30"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="100" id="Isa-PM-gnD"/>
                                     <constraint firstAttribute="height" constant="30" id="wcz-tP-XGS"/>
@@ -198,7 +198,7 @@
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Lah-Zr-1s0" customClass="CustomTextField" customModule="TodayMony" customModuleProvider="target">
-                                <rect key="frame" x="137.5" y="133" width="100" height="30"/>
+                                <rect key="frame" x="157" y="328" width="100" height="30"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="100" id="S2k-5X-Ol1"/>
                                     <constraint firstAttribute="height" constant="30" id="d7V-Ck-Iez"/>
@@ -208,7 +208,7 @@
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="手取り額" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pUJ-FG-k4m">
-                                <rect key="frame" x="153" y="108" width="69.5" height="20"/>
+                                <rect key="frame" x="172" y="303" width="70" height="20"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="20" id="Pjz-BZ-PV7"/>
                                     <constraint firstAttribute="width" constant="70" id="Wfb-PA-kFH"/>
@@ -281,21 +281,21 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="bXN-Q1-C8E" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="875.5" y="-1135"/>
+            <point key="canvasLocation" x="1400.8" y="-1020.9895052473764"/>
         </scene>
         <!--今日の金額-->
         <scene sceneID="tne-QT-ifu">
             <objects>
                 <viewController id="BYZ-38-t0r" customClass="ViewController" customModule="TodayMony" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleAspectFit" id="8bC-Xf-vdC">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="vYx-bM-gSQ">
-                                <rect key="frame" x="0.0" y="30" width="375" height="588"/>
+                                <rect key="frame" x="0.0" y="54" width="414" height="759"/>
                                 <subviews>
                                     <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="DWN-Aa-brQ" customClass="CustomTextField" customModule="TodayMony" customModuleProvider="target">
-                                        <rect key="frame" x="123" y="277.5" width="130" height="30"/>
+                                        <rect key="frame" x="142" y="449" width="130" height="30"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="30" id="95a-yo-2Bg"/>
                                             <constraint firstAttribute="width" constant="130" id="IGE-jO-ySF"/>
@@ -305,10 +305,10 @@
                                         <textInputTraits key="textInputTraits"/>
                                     </textField>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="oNr-cH-6FT" customClass="MBCircularProgressBarView">
-                                        <rect key="frame" x="0.0" y="5" width="375" height="252.5"/>
+                                        <rect key="frame" x="0.0" y="5" width="414" height="424"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Dn2-PJ-j9R">
-                                                <rect key="frame" x="88" y="101" width="200" height="51"/>
+                                                <rect key="frame" x="107" y="186.66666666666666" width="200" height="51"/>
                                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <constraints>
                                                     <constraint firstAttribute="width" constant="200" id="JIz-ku-rSc"/>
@@ -319,7 +319,7 @@
                                                 <color key="highlightedColor" red="1" green="1" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                             </label>
                                             <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="RAl-n7-yKk">
-                                                <rect key="frame" x="320" y="5" width="50" height="50"/>
+                                                <rect key="frame" x="359" y="5" width="50" height="50"/>
                                                 <color key="backgroundColor" red="0.098039217289999994" green="0.098039217289999994" blue="0.098039217289999994" alpha="1" colorSpace="calibratedRGB"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="50" id="FSv-Kk-PH6"/>
@@ -373,13 +373,13 @@
                                         </userDefinedRuntimeAttributes>
                                     </view>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="252" verticalCompressionResistancePriority="746" text="今日の金額" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Oqs-ce-a9i">
-                                        <rect key="frame" x="24" y="282.5" width="87" height="20"/>
+                                        <rect key="frame" x="43.666666666666657" y="453.66666666666669" width="87" height="20"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <textField opaque="NO" contentMode="scaleToFill" verticalCompressionResistancePriority="751" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="CcB-im-XIb" customClass="CustomTextField" customModule="TodayMony" customModuleProvider="target">
-                                        <rect key="frame" x="123" y="337.5" width="130" height="30"/>
+                                        <rect key="frame" x="142" y="509" width="130" height="30"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="130" id="PyP-ZE-z0g"/>
                                             <constraint firstAttribute="height" constant="30" id="aSW-U8-20e"/>
@@ -389,7 +389,7 @@
                                         <textInputTraits key="textInputTraits"/>
                                     </textField>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="HjV-Y4-RPl">
-                                        <rect key="frame" x="87" y="488" width="200" height="50"/>
+                                        <rect key="frame" x="107" y="659" width="200" height="50"/>
                                         <color key="backgroundColor" red="1" green="1" blue="0.0" alpha="0.82216005067567566" colorSpace="calibratedRGB"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="200" id="FOd-jT-5ZD"/>
@@ -409,7 +409,7 @@
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="249" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="uIj-KF-bxk" customClass="SimpleButton" customModule="TodayMony" customModuleProvider="target">
-                                        <rect key="frame" x="87.5" y="403" width="200" height="50"/>
+                                        <rect key="frame" x="107" y="574" width="200" height="50"/>
                                         <color key="backgroundColor" red="0.50196081400000003" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="50" id="435-1l-CVx"/>
@@ -429,7 +429,7 @@
                                         </connections>
                                     </button>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="745" text="使った金額" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="UhH-3Y-dl3">
-                                        <rect key="frame" x="24.5" y="342.5" width="87" height="20.5"/>
+                                        <rect key="frame" x="43.666666666666657" y="513.66666666666663" width="87" height="20.333333333333371"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
@@ -479,24 +479,25 @@
                         <outlet property="UsedMony" destination="CcB-im-XIb" id="RJT-Ve-QJ0"/>
                         <outlet property="onePushBottom" destination="BDN-xt-P0K" id="3cR-gC-ENI"/>
                         <outlet property="onePushTitle" destination="HjV-Y4-RPl" id="enb-9y-b9g"/>
+                        <outlet property="resultViewTop" destination="Rfo-qe-7r3" id="CeF-LL-0e2"/>
                         <outlet property="resultmony" destination="oNr-cH-6FT" id="8Eb-sN-OCF"/>
                         <segue destination="Z1W-iY-s1d" kind="push" identifier="resultmoney" id="fBF-5G-2mn"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-771" y="-1324"/>
+            <point key="canvasLocation" x="-1233.5999999999999" y="-1191.0044977511245"/>
         </scene>
         <!--result-->
         <scene sceneID="Kcd-8S-AdK">
             <objects>
                 <viewController title="result" id="Z1W-iY-s1d" customClass="resultViewController" customModule="TodayMony" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="jIc-sj-CZG">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="JpX-7N-igA" customClass="SimpleButton" customModule="TodayMony" customModuleProvider="target">
-                                <rect key="frame" x="87.5" y="453" width="200" height="50"/>
+                                <rect key="frame" x="107" y="643" width="200" height="50"/>
                                 <color key="backgroundColor" red="0.50196081400000003" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="200" id="DBT-85-1t5"/>
@@ -515,7 +516,7 @@
                                 </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" alpha="0.90000000000000002" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gj2-rS-crQ">
-                                <rect key="frame" x="87.5" y="308" width="200" height="50"/>
+                                <rect key="frame" x="107" y="498" width="200" height="50"/>
                                 <color key="backgroundColor" red="0.19722986341396098" green="0.094349546791249489" blue="0.097413732096437666" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="50" id="JcP-ug-hhy"/>
@@ -526,7 +527,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="BD0-eD-yuT">
-                                <rect key="frame" x="87" y="543" width="200" height="50"/>
+                                <rect key="frame" x="107" y="733" width="200" height="50"/>
                                 <color key="backgroundColor" red="0.99942404029999998" green="0.98555368190000003" blue="0.0" alpha="0.78130278716216217" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="50" id="ugi-sy-heH"/>
@@ -546,7 +547,7 @@
                                 </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="残りの使える金額" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qbQ-bK-GYb">
-                                <rect key="frame" x="38" y="184" width="298" height="44"/>
+                                <rect key="frame" x="58" y="374" width="298" height="44"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="37"/>
                                 <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
@@ -577,7 +578,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Mtu-eS-Aei" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="45.5" y="-1165"/>
+            <point key="canvasLocation" x="72.799999999999997" y="-1047.9760119940031"/>
         </scene>
         <!--Custoumbar-->
         <scene sceneID="Fr6-Ol-fFg">
@@ -594,21 +595,99 @@
                         <segue destination="BYZ-38-t0r" kind="relationship" relationship="viewControllers" id="ozK-Yh-tbw"/>
                         <segue destination="Vvg-gj-v6r" kind="relationship" relationship="viewControllers" id="jAe-GD-7Dn"/>
                         <segue destination="Z1W-iY-s1d" kind="relationship" relationship="viewControllers" id="Ysh-rm-FaU"/>
+                        <segue destination="eZv-AU-5Lw" kind="relationship" relationship="viewControllers" id="NCz-h5-hUF"/>
                     </connections>
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="cn4-0I-OkZ" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-315" y="-182"/>
+            <point key="canvasLocation" x="-504" y="-163.71814092953525"/>
+        </scene>
+        <!--今日の履歴-->
+        <scene sceneID="5KD-qU-2hA">
+            <objects>
+                <viewController id="eZv-AU-5Lw" customClass="usedMoneyLogController" customModule="TodayMony" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="fWP-5f-cbp">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="dmN-yM-OQZ">
+                                <rect key="frame" x="70" y="182.66666666666663" width="274" height="350"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="274" id="j73-eb-gvq"/>
+                                    <constraint firstAttribute="height" constant="350" id="pgY-11-RMf"/>
+                                </constraints>
+                                <prototypes>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="cell" textLabel="pjY-th-A6Y" detailTextLabel="4lJ-RS-jUQ" style="IBUITableViewCellStyleValue1" id="bT4-3r-khJ">
+                                        <rect key="frame" x="0.0" y="28" width="274" height="44"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="bT4-3r-khJ" id="b4U-lk-kbL">
+                                            <rect key="frame" x="0.0" y="0.0" width="274" height="43.666666666666664"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="pjY-th-A6Y">
+                                                    <rect key="frame" x="16.000000000000004" y="11.999999999999998" width="33.333333333333336" height="20.333333333333332"/>
+                                                    <autoresizingMask key="autoresizingMask"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="Detail" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="4lJ-RS-jUQ">
+                                                    <rect key="frame" x="214" y="11.999999999999998" width="44" height="20.333333333333332"/>
+                                                    <autoresizingMask key="autoresizingMask"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
+                                </prototypes>
+                                <connections>
+                                    <outlet property="dataSource" destination="eZv-AU-5Lw" id="5IU-gb-TkD"/>
+                                    <outlet property="delegate" destination="eZv-AU-5Lw" id="43z-b6-4kB"/>
+                                </connections>
+                            </tableView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="今日使った金額" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mXg-6U-MC5">
+                                <rect key="frame" x="82" y="136.66666666666666" width="250" height="21"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="250" id="5s6-s9-Ieu"/>
+                                    <constraint firstAttribute="height" constant="21" id="MCV-GO-mDm"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="24"/>
+                                <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="dmN-yM-OQZ" firstAttribute="centerX" secondItem="fWP-5f-cbp" secondAttribute="centerX" id="01n-ml-5cR"/>
+                            <constraint firstItem="dmN-yM-OQZ" firstAttribute="centerY" secondItem="fWP-5f-cbp" secondAttribute="centerY" id="3nd-dO-nbh"/>
+                            <constraint firstItem="mXg-6U-MC5" firstAttribute="top" secondItem="wSN-Nn-lmg" secondAttribute="top" constant="92.5" id="Dfg-TN-0DI"/>
+                            <constraint firstItem="dmN-yM-OQZ" firstAttribute="top" secondItem="mXg-6U-MC5" secondAttribute="bottom" constant="25" id="QNK-CZ-dKa"/>
+                            <constraint firstItem="mXg-6U-MC5" firstAttribute="centerX" secondItem="fWP-5f-cbp" secondAttribute="centerX" id="b71-uY-Mdd"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="wSN-Nn-lmg"/>
+                    </view>
+                    <tabBarItem key="tabBarItem" title="今日の履歴" image="log" selectedImage="log" id="G2i-Pp-7ZM"/>
+                    <connections>
+                        <outlet property="table" destination="dmN-yM-OQZ" id="4az-IX-KfV"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="WeN-Be-4Fj" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="240.80000000000001" y="-144.3778110944528"/>
         </scene>
     </scenes>
     <resources>
         <image name="detailmoney" width="595" height="842"/>
+        <image name="log" width="595" height="842"/>
         <image name="poolmoney" width="595" height="842"/>
         <image name="yenIcon" width="595" height="842"/>
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="y3i-dL-bK4"/>
         <segue reference="fBF-5G-2mn"/>
-        <segue reference="6gN-BK-QLC"/>
+        <segue reference="ozK-Yh-tbw"/>
     </inferredMetricsTieBreakers>
 </document>

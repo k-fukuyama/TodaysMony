@@ -31,7 +31,7 @@ class detailmonyViewController: UIViewController, UITextFieldDelegate{
     
     if uiScreenSize < 750.0{
       numBottom.constant = 40
-    }else if uiScreenSize >= 1125{
+    }else if uiScreenSize >= 828.0{
       numBottom.constant = 160
     }
       
