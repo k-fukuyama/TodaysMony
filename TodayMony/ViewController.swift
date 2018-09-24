@@ -15,6 +15,7 @@ class ViewController: UIViewController, UITextFieldDelegate{
   
   @IBOutlet weak var onePushBottom: NSLayoutConstraint!
   @IBOutlet weak var tabBar: UITabBar!
+  @IBOutlet weak var resultViewTop: NSLayoutConstraint!
   
   let ud = UserDefaults.standard
   let udtwo = UserDefaults()
@@ -102,9 +103,10 @@ class ViewController: UIViewController, UITextFieldDelegate{
     if UIScreen.main.nativeBounds.size.width < 750.0{
       ResultMoneyButtom.constant = 1
       onePushBottom.constant = 35
-    }else if UIScreen.main.nativeBounds.size.width >= 1125{
-      onePushBottom.constant = 70
+    }else if UIScreen.main.nativeBounds.size.width >= 828.0{
+      onePushBottom.constant = 85
       TodayMony.font = UIFont.systemFont(ofSize: 50)
+      resultViewTop.constant = 30
     }
     
     
@@ -371,7 +373,7 @@ class ViewController: UIViewController, UITextFieldDelegate{
       if let keyboard = userinfo[UIKeyboardFrameEndUserInfoKey] as? NSValue{
         let keyhigh = keyboard.cgRectValue
         KeyboardHighResult = Int(keyhigh.size.height)
-        if KeyboardHighResult > 260 && suzi == 0 && keyboardNumber == 1{
+        if KeyboardHighResult > 260 && suzi == 0 && keyboardNumber == 1 && UIScreen.main.nativeBounds.size.width >= 1242.0{
           UITextField.animate(withDuration:0.10, delay:0.0, options: .curveLinear, animations:{
             self.UsedMony.center.y -= 20
             self.suzi = 1
