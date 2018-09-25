@@ -531,6 +531,11 @@ class ViewController: UIViewController, UITextFieldDelegate{
         print(hashBox)
       }
       
+      let dvc = detailmonyViewController()
+      
+      let remain = dvc.SaveOneMonthMoneyResult.integer(forKey: "SaveMoney") - Int(UsedMony.text!)!
+      dvc.SaveOneMonthMoneyResult.set(remain, forKey: "SaveMoney")
+      
       NotificationCenter.default.removeObserver(self)
       
       if ud.integer(forKey: "mony") != nil{
@@ -541,10 +546,6 @@ class ViewController: UIViewController, UITextFieldDelegate{
         Todayusedmony = Int(BeNum)!
         
         bbb = float_t(Todayusedmony) / float_t(ud4.integer(forKey: "mony2"))
-        
-        var total = Todayusedmony + TodaysTotalUsedMoney.integer(forKey: "TodaysTotalUd")
-        
-        TodaysTotalUsedMoney.set(total, forKey: "TodaysTotalUd")
         
         
         UIView.animate(withDuration: 1.3){
