@@ -517,7 +517,7 @@ class ViewController: UIViewController, UITextFieldDelegate{
       f.timeStyle = .medium
       f.dateStyle = .short
       f.locale = Locale(identifier: "ja_JP")
-      let beDate = addTime(str: f.string(from: now))
+      let beDate = jpTime(str: f.string(from: now))
       let backString = jptime(date: beDate)
       
       if var hashset = hashLog.dictionary(forKey: "hash"){
@@ -715,7 +715,7 @@ class ViewController: UIViewController, UITextFieldDelegate{
     }
   }
   
-  func addTime(str:String) -> Date{
+  func jpTime(str:String) -> Date{
     
     let now = Date()
     let dateFormater = DateFormatter()
@@ -724,7 +724,7 @@ class ViewController: UIViewController, UITextFieldDelegate{
     
     dateFormater.timeZone = TimeZone(identifier: "Asia/Tokyo")
     var tbox = dateFormater.date(from: str)
-    tbox?.addTimeInterval(60*60*24*1)
+//    tbox?.addTimeInterval(60*60*9*1)
  
     return tbox!
   }

@@ -18,7 +18,7 @@ class usedMoneyLogController: UIViewController, UITableViewDelegate, UITableView
   
   func ontap(){
     vcLogs = ViewController().hashLog.dictionary(forKey: "hash")
-    deleteLog()
+//    deleteLog()
     totalSum()
     table.reloadData()
     
@@ -45,7 +45,15 @@ class usedMoneyLogController: UIViewController, UITableViewDelegate, UITableView
     let cell:UITableViewCell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
 
     if let vclogs = vcLogs{
-      let log = vclogs.values.map{vc.CommaAdd(comma: $0 as! Int)}
+      let vclogsKeySort = Array(vclogs.keys).sorted(by: >)
+      
+      var valueBox:[Int] = []
+      
+      for key in vclogsKeySort{
+        valueBox.append(vclogs[key] as! Int)
+      }
+      
+      let log = valueBox.map{vc.CommaAdd(comma: $0 as! Int)}
       cell.textLabel!.text = String(log[indexPath.row])
       
       var timebox:[String] = []
@@ -54,10 +62,11 @@ class usedMoneyLogController: UIViewController, UITableViewDelegate, UITableView
         timebox.append(time)
       }
       
-      let shortTime = timebox.map{beShortTime(str: $0)}
+      let shortTime = vclogsKeySort.map{beShortTime(str: $0)}
       shortTime.map{String(describing: $0)}
       
       cell.detailTextLabel!.text = String(describing: shortTime[indexPath.row])
+      
     }else{
       return cell
     }
@@ -104,44 +113,44 @@ class usedMoneyLogController: UIViewController, UITableViewDelegate, UITableView
   }
   
   
-  func deleteLog(){
-    let cal = Calendar.current
-    let f = DateFormatter()
-    f.dateFormat = "yyyy/MM/dd HH:mm:ss"
-    let date = Date().toStringWithCurrentLocale()
-    
-    let now = f.date(from: date)?.addingTimeInterval((60*60*9*1)
-)
-    print("デイトの値\(now)")
-    
-    if let hashKey = vcLogs?.keys{
-      for logKey in hashKey{
-        let logkeys = ViewController().beTime(str:logKey)
-        
-        if logkeys < now!{
-          var timeBox:[Date] = []
-          timeBox.append(logkeys)
-          let result = timeBox.map{vc.jptime(date: $0)}
-          
-          for destroy in result{
-            print("結果\(result)")
-            vcLogs![destroy] = nil
-
-          }
-        
-          print("これ\(vcLogs)")
-        vc.hashLog.set(vcLogs, forKey: "hash")
-          
-        }else{
-          print(vcLogs)
-          print("何もありません")
-        }
-      }
-    }else{
-      print("何もありません")
-    }
-    
-  }
+//  func deleteLog(){
+//    let cal = Calendar.current
+//    let f = DateFormatter()
+//    f.dateFormat = "yyyy/MM/dd HH:mm:ss"
+//    let date = Date().toStringWithCurrentLocale()
+//
+//    let now = f.date(from: date)?.addingTimeInterval((60*60*9*1)
+//)
+//    print("デイトの値\(now)")
+//
+//    if let hashKey = vcLogs?.keys{
+//      for logKey in hashKey{
+//        let logkeys = ViewController().beTime(str:logKey)
+//
+//        if logkeys < now!{
+//          var timeBox:[Date] = []
+//          timeBox.append(logkeys)
+//          let result = timeBox.map{vc.jptime(date: $0)}
+//
+//          for destroy in result{
+//            print("結果\(result)")
+//            vcLogs![destroy] = nil
+//
+//          }
+//
+//          print("これ\(vcLogs)")
+//        vc.hashLog.set(vcLogs, forKey: "hash")
+//
+//        }else{
+//          print(vcLogs)
+//          print("何もありません")
+//        }
+//      }
+//    }else{
+//      print("何もありません")
+//    }
+//
+//  }
   
   func totalSum() -> Int{
     
