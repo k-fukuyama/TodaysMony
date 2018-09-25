@@ -46,7 +46,7 @@ class ViewController: UIViewController, UITextFieldDelegate{
       ResultMoneyButtom.constant = 1
       onePushBottom.constant = 35
     }else if UIScreen.main.nativeBounds.size.width >= 828.0{
-      onePushBottom.constant = 85
+      onePushBottom.constant = 80
       TodayMony.font = UIFont.systemFont(ofSize: 50)
       resultViewTop.constant = 30
     }
@@ -174,7 +174,7 @@ class ViewController: UIViewController, UITextFieldDelegate{
   @objc func buttonEvent(sender: Any) {
     if self.suzi == 1{
       UITextField.animate(withDuration:0.10, delay:0.0, options: .curveLinear, animations:{
-        self.UsedMony.center.y += 20
+        self.UsedMony.center.y += 10
       })
       suzi = 0
     }
@@ -269,7 +269,7 @@ class ViewController: UIViewController, UITextFieldDelegate{
     
     if suzi == 1{
       UITextField.animate(withDuration:0.10, delay:0.0, options: .curveLinear, animations:{
-        self.UsedMony.center.y += 20
+        self.UsedMony.center.y += 10
       })
       suzi = 0
     }
@@ -309,9 +309,9 @@ class ViewController: UIViewController, UITextFieldDelegate{
       if let keyboard = userinfo[UIKeyboardFrameEndUserInfoKey] as? NSValue{
         let keyhigh = keyboard.cgRectValue
         KeyboardHighResult = Int(keyhigh.size.height)
-        if KeyboardHighResult > 260 && suzi == 0 && keyboardNumber == 1 && UIScreen.main.nativeBounds.size.width >= 1242.0{
+        if KeyboardHighResult > 260 && suzi == 0 && keyboardNumber == 1 && UIScreen.main.nativeBounds.size.width >= 828.0{
           UITextField.animate(withDuration:0.10, delay:0.0, options: .curveLinear, animations:{
-            self.UsedMony.center.y -= 20
+            self.UsedMony.center.y -= 10
             self.suzi = 1
             print(self.suzi)
           })
@@ -337,7 +337,7 @@ class ViewController: UIViewController, UITextFieldDelegate{
           preferredStyle: .alert)
         if suzi == 1{
           UITextField.animate(withDuration:0.10, delay:0.0, options: .curveLinear, animations:{
-            self.UsedMony.center.y += 20
+            self.UsedMony.center.y += 10
           })
           suzi = 0
         }
@@ -359,7 +359,7 @@ class ViewController: UIViewController, UITextFieldDelegate{
         
         if suzi == 1{
           UITextField.animate(withDuration:0.10, delay:0.0, options: .curveLinear, animations:{
-            self.UsedMony.center.y += 20
+            self.UsedMony.center.y += 10
           })
           suzi = 0
           print("これがああああああ\(suzi)")
@@ -379,7 +379,7 @@ class ViewController: UIViewController, UITextFieldDelegate{
       
       if suzi == 1{
         UITextField.animate(withDuration:0.10, delay:0.0, options: .curveLinear, animations:{
-          self.UsedMony.center.y += 20
+          self.UsedMony.center.y += 10
         })
         MonyField.endEditing(true)
         MonyField.text = ""
@@ -576,7 +576,7 @@ class ViewController: UIViewController, UITextFieldDelegate{
         
         if suzi == 1{
           UITextField.animate(withDuration:0.10, delay:0.0, options: .curveLinear, animations:{
-            self.UsedMony.center.y += 20
+            self.UsedMony.center.y += 10
           })
           suzi = 0
         }
@@ -630,7 +630,7 @@ class ViewController: UIViewController, UITextFieldDelegate{
       UsedMony.endEditing(true)
       if suzi == 1{
         UITextField.animate(withDuration:0.10, delay:0.0, options: .curveLinear, animations:{
-          self.UsedMony.center.y += 20
+          self.UsedMony.center.y += 10
         })
         suzi = 0
       }
@@ -682,7 +682,7 @@ class ViewController: UIViewController, UITextFieldDelegate{
     EndTodaysMonyAlert.addAction(UIAlertAction(title: "キャンセル", style: .cancel, handler :{ action in
       if self.suzi == 1{
         UITextField.animate(withDuration:0.10, delay:0.0, options: .curveLinear, animations:{
-          self.UsedMony.center.y += 20
+          self.UsedMony.center.y += 10
         })
       }
     }))

@@ -98,7 +98,7 @@ class usedMoneyLogController: UIViewController, UITableViewDelegate, UITableView
     let date = inFormatter.date(from: str)
     
     let outFormatter = DateFormatter()
-    outFormatter.dateFormat = "HH:mm"
+    outFormatter.dateFormat = "yyyy/MM/dd HH:mm"
     
     return outFormatter.string(from: date!)
   }

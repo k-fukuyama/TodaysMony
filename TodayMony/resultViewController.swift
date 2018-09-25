@@ -26,7 +26,7 @@ class resultViewController: UIViewController, UITextFieldDelegate{
     
     if uiScreenSize < 750{
       remainMoneySetButtom.constant = 20
-    }else if uiScreenSize >= 1125{
+    }else if uiScreenSize >= 825.0{
       remainMoneySetButtom.constant = 115
     }
     

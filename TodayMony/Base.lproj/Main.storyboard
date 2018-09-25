@@ -295,7 +295,7 @@
                                 <rect key="frame" x="0.0" y="54" width="414" height="759"/>
                                 <subviews>
                                     <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="DWN-Aa-brQ" customClass="CustomTextField" customModule="TodayMony" customModuleProvider="target">
-                                        <rect key="frame" x="142" y="449" width="130" height="30"/>
+                                        <rect key="frame" x="142" y="444" width="130" height="30"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="30" id="95a-yo-2Bg"/>
                                             <constraint firstAttribute="width" constant="130" id="IGE-jO-ySF"/>
@@ -305,10 +305,10 @@
                                         <textInputTraits key="textInputTraits"/>
                                     </textField>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="oNr-cH-6FT" customClass="MBCircularProgressBarView">
-                                        <rect key="frame" x="0.0" y="5" width="414" height="424"/>
+                                        <rect key="frame" x="0.0" y="5" width="414" height="419"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Dn2-PJ-j9R">
-                                                <rect key="frame" x="107" y="186.66666666666666" width="200" height="51"/>
+                                                <rect key="frame" x="107" y="184" width="200" height="51"/>
                                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <constraints>
                                                     <constraint firstAttribute="width" constant="200" id="JIz-ku-rSc"/>
@@ -373,13 +373,13 @@
                                         </userDefinedRuntimeAttributes>
                                     </view>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="252" verticalCompressionResistancePriority="746" text="今日の金額" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Oqs-ce-a9i">
-                                        <rect key="frame" x="43.666666666666657" y="453.66666666666669" width="87" height="20"/>
+                                        <rect key="frame" x="43.666666666666657" y="448.66666666666669" width="87" height="20"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <textField opaque="NO" contentMode="scaleToFill" verticalCompressionResistancePriority="751" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="CcB-im-XIb" customClass="CustomTextField" customModule="TodayMony" customModuleProvider="target">
-                                        <rect key="frame" x="142" y="509" width="130" height="30"/>
+                                        <rect key="frame" x="142" y="504" width="130" height="30"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="130" id="PyP-ZE-z0g"/>
                                             <constraint firstAttribute="height" constant="30" id="aSW-U8-20e"/>
@@ -429,7 +429,7 @@
                                         </connections>
                                     </button>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="745" text="使った金額" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="UhH-3Y-dl3">
-                                        <rect key="frame" x="43.666666666666657" y="513.66666666666663" width="87" height="20.333333333333371"/>
+                                        <rect key="frame" x="43.666666666666657" y="508.66666666666657" width="87" height="20.333333333333314"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
@@ -443,9 +443,9 @@
                                     <constraint firstItem="UhH-3Y-dl3" firstAttribute="centerX" secondItem="vYx-bM-gSQ" secondAttribute="centerX" constant="-120" id="OGY-g3-TGM"/>
                                     <constraint firstItem="HjV-Y4-RPl" firstAttribute="top" secondItem="uIj-KF-bxk" secondAttribute="bottom" constant="35" id="Qxw-p1-Gk4"/>
                                     <constraint firstItem="oNr-cH-6FT" firstAttribute="top" secondItem="vYx-bM-gSQ" secondAttribute="top" constant="5" id="Rfo-qe-7r3"/>
-                                    <constraint firstItem="uIj-KF-bxk" firstAttribute="top" secondItem="UhH-3Y-dl3" secondAttribute="bottom" constant="40" id="UNR-Gy-FSx"/>
+                                    <constraint firstItem="uIj-KF-bxk" firstAttribute="top" secondItem="UhH-3Y-dl3" secondAttribute="bottom" constant="45" id="UNR-Gy-FSx"/>
                                     <constraint firstAttribute="trailing" secondItem="oNr-cH-6FT" secondAttribute="trailing" id="VyE-G1-UoA"/>
-                                    <constraint firstItem="uIj-KF-bxk" firstAttribute="top" secondItem="CcB-im-XIb" secondAttribute="bottom" constant="35" id="WGf-GU-1yd"/>
+                                    <constraint firstItem="uIj-KF-bxk" firstAttribute="top" secondItem="CcB-im-XIb" secondAttribute="bottom" constant="40" id="WGf-GU-1yd"/>
                                     <constraint firstItem="CcB-im-XIb" firstAttribute="top" secondItem="DWN-Aa-brQ" secondAttribute="bottom" constant="30" id="XTx-vn-YKx"/>
                                     <constraint firstItem="UhH-3Y-dl3" firstAttribute="top" secondItem="Oqs-ce-a9i" secondAttribute="bottom" constant="40" id="a1k-1V-wrn"/>
                                     <constraint firstItem="CcB-im-XIb" firstAttribute="centerX" secondItem="vYx-bM-gSQ" secondAttribute="centerX" id="bQd-gE-904"/>
@@ -602,7 +602,7 @@
             </objects>
             <point key="canvasLocation" x="-504" y="-163.71814092953525"/>
         </scene>
-        <!--今日の履歴-->
+        <!--使ったお金-->
         <scene sceneID="5KD-qU-2hA">
             <objects>
                 <viewController id="eZv-AU-5Lw" customClass="usedMoneyLogController" customModule="TodayMony" customModuleProvider="target" sceneMemberID="viewController">
@@ -611,18 +611,18 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="dmN-yM-OQZ">
-                                <rect key="frame" x="70" y="182.66666666666663" width="274" height="350"/>
+                                <rect key="frame" x="69.666666666666686" y="213" width="275" height="500"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" constant="274" id="j73-eb-gvq"/>
-                                    <constraint firstAttribute="height" constant="350" id="pgY-11-RMf"/>
+                                    <constraint firstAttribute="width" constant="275" id="fib-a4-AJl"/>
+                                    <constraint firstAttribute="height" constant="500" id="hpo-5C-ZlT"/>
                                 </constraints>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="cell" textLabel="pjY-th-A6Y" detailTextLabel="4lJ-RS-jUQ" style="IBUITableViewCellStyleValue1" id="bT4-3r-khJ">
-                                        <rect key="frame" x="0.0" y="28" width="274" height="44"/>
+                                        <rect key="frame" x="0.0" y="28" width="275" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="bT4-3r-khJ" id="b4U-lk-kbL">
-                                            <rect key="frame" x="0.0" y="0.0" width="274" height="43.666666666666664"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="275" height="43.666666666666664"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="pjY-th-A6Y">
@@ -633,7 +633,7 @@
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="Detail" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="4lJ-RS-jUQ">
-                                                    <rect key="frame" x="214" y="11.999999999999998" width="44" height="20.333333333333332"/>
+                                                    <rect key="frame" x="215" y="11.999999999999998" width="44" height="20.333333333333332"/>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <nil key="textColor"/>
@@ -648,11 +648,11 @@
                                     <outlet property="delegate" destination="eZv-AU-5Lw" id="43z-b6-4kB"/>
                                 </connections>
                             </tableView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="今日使った金額" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mXg-6U-MC5">
-                                <rect key="frame" x="82" y="136.66666666666666" width="250" height="21"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="使用金額履歴" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mXg-6U-MC5">
+                                <rect key="frame" x="82" y="155" width="250" height="30"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" constant="250" id="5s6-s9-Ieu"/>
-                                    <constraint firstAttribute="height" constant="21" id="MCV-GO-mDm"/>
+                                    <constraint firstAttribute="width" constant="250" id="T8n-HR-Oc8"/>
+                                    <constraint firstAttribute="height" constant="30" id="kOX-7J-oZG"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="24"/>
                                 <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
@@ -661,15 +661,15 @@
                         </subviews>
                         <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
-                            <constraint firstItem="dmN-yM-OQZ" firstAttribute="centerX" secondItem="fWP-5f-cbp" secondAttribute="centerX" id="01n-ml-5cR"/>
-                            <constraint firstItem="dmN-yM-OQZ" firstAttribute="centerY" secondItem="fWP-5f-cbp" secondAttribute="centerY" id="3nd-dO-nbh"/>
-                            <constraint firstItem="mXg-6U-MC5" firstAttribute="top" secondItem="wSN-Nn-lmg" secondAttribute="top" constant="92.5" id="Dfg-TN-0DI"/>
-                            <constraint firstItem="dmN-yM-OQZ" firstAttribute="top" secondItem="mXg-6U-MC5" secondAttribute="bottom" constant="25" id="QNK-CZ-dKa"/>
-                            <constraint firstItem="mXg-6U-MC5" firstAttribute="centerX" secondItem="fWP-5f-cbp" secondAttribute="centerX" id="b71-uY-Mdd"/>
+                            <constraint firstItem="mXg-6U-MC5" firstAttribute="top" secondItem="wSN-Nn-lmg" secondAttribute="top" constant="111" id="Sty-Nn-zQc"/>
+                            <constraint firstItem="mXg-6U-MC5" firstAttribute="centerX" secondItem="fWP-5f-cbp" secondAttribute="centerX" id="X6y-FE-kc3"/>
+                            <constraint firstItem="dmN-yM-OQZ" firstAttribute="top" secondItem="mXg-6U-MC5" secondAttribute="bottom" constant="28" id="czH-7X-VKR"/>
+                            <constraint firstItem="dmN-yM-OQZ" firstAttribute="centerX" secondItem="fWP-5f-cbp" secondAttribute="centerX" id="jOi-rq-MVz"/>
+                            <constraint firstItem="wSN-Nn-lmg" firstAttribute="bottom" secondItem="dmN-yM-OQZ" secondAttribute="bottom" constant="100" id="nYM-6J-2pm"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="wSN-Nn-lmg"/>
                     </view>
-                    <tabBarItem key="tabBarItem" title="今日の履歴" image="log" selectedImage="log" id="G2i-Pp-7ZM"/>
+                    <tabBarItem key="tabBarItem" title="使ったお金" image="log" selectedImage="log" id="G2i-Pp-7ZM"/>
                     <connections>
                         <outlet property="table" destination="dmN-yM-OQZ" id="4az-IX-KfV"/>
                     </connections>
