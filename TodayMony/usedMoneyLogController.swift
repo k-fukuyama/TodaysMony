@@ -11,10 +11,15 @@ import UIKit
 class usedMoneyLogController: UIViewController, UITableViewDelegate, UITableViewDataSource {
   @IBOutlet weak var table: UITableView!
   
+  var headerView: UIView!
+  var displayWidth: CGFloat!
+  var displayHeight: CGFloat!
+  var headerLabel = UILabel()
+  
   func ontap(){
     vcLogs = ViewController().hashLog.dictionary(forKey: "hash")
-    deleteLog()
-    print(totalSum())
+//    deleteLog()
+    totalSum()
     table.reloadData()
     
   }
@@ -40,7 +45,15 @@ class usedMoneyLogController: UIViewController, UITableViewDelegate, UITableView
     let cell:UITableViewCell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
 
     if let vclogs = vcLogs{
-      let log = vclogs.values.map{vc.CommaAdd(comma: $0 as! Int)}
+      let vclogsKeySort = Array(vclogs.keys).sorted(by: >)
+      
+      var valueBox:[Int] = []
+      
+      for key in vclogsKeySort{
+        valueBox.append(vclogs[key] as! Int)
+      }
+      
+      let log = valueBox.map{vc.CommaAdd(comma: $0 as! Int)}
       cell.textLabel!.text = String(log[indexPath.row])
       
       var timebox:[String] = []
@@ -49,10 +62,11 @@ class usedMoneyLogController: UIViewController, UITableViewDelegate, UITableView
         timebox.append(time)
       }
       
-      let shortTime = timebox.map{beShortTime(str: $0)}
+      let shortTime = vclogsKeySort.map{beShortTime(str: $0)}
       shortTime.map{String(describing: $0)}
       
       cell.detailTextLabel!.text = String(describing: shortTime[indexPath.row])
+      
     }else{
       return cell
     }
@@ -61,35 +75,23 @@ class usedMoneyLogController: UIViewController, UITableViewDelegate, UITableView
     
   }
   
-  func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-    return 70
-  }
-  
-  func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView?{
-    
-    
-    let view = UIView()
-    view.frame = CGRect(x: 0, y: 0, width: self.table.frame.size.width, height: 100)
-    
-    let screenWidth:CGFloat = view.frame.size.width
-    let screenHeight:CGFloat = view.frame.size.height
-    
-    let headerLabel = UILabel()
-    headerLabel.frame =  CGRect(x: 0, y: 0, width: self.view.frame.size.width, height: 50)
-    headerLabel.center = CGPoint(x: screenWidth/2, y: screenHeight/4)
-    headerLabel.text = String("合計金額：\(vc.CommaAdd(comma: totalSum()))")
-    headerLabel.textColor = UIColor.black
-    headerLabel.textAlignment = .center
-    view.addSubview(headerLabel)
-    
-    return view
-  }
-  
 
     override func viewDidLoad() {
         super.viewDidLoad()
      
         // Do any additional setup after loading the view.
+      
+      displayWidth = self.view.frame.width
+      displayHeight = self.view.frame.height
+      table.contentInset.top = 100
+      
+      headerView = UIView(frame: CGRect(x:0, y: 0, width: self.table.frame.size.width, height: 300))
+      table.addSubview(headerView)
+      headerLabel = UILabel(frame: CGRect(x: 0, y: 0, width: self.table.frame.size.width, height: -100))
+      headerLabel.text = String("合計金額：\(vc.CommaAdd(comma: totalSum()))")
+      headerLabel.font = UIFont.systemFont(ofSize: 25)
+      headerLabel.textAlignment = .center
+      table.addSubview(headerLabel)
     }
   
 
@@ -105,50 +107,50 @@ class usedMoneyLogController: UIViewController, UITableViewDelegate, UITableView
     let date = inFormatter.date(from: str)
     
     let outFormatter = DateFormatter()
-    outFormatter.dateFormat = "HH:mm"
+    outFormatter.dateFormat = "yyyy/MM/dd HH:mm"
     
     return outFormatter.string(from: date!)
   }
   
   
-  func deleteLog(){
-    let cal = Calendar.current
-    let f = DateFormatter()
-    f.dateFormat = "yyyy/MM/dd HH:mm:ss"
-    let date = Date().toStringWithCurrentLocale()
-    
-    let now = f.date(from: date)?.addingTimeInterval((60*60*9*1)
-)
-    print("デイトの値\(now)")
-    
-    if let hashKey = vcLogs?.keys{
-      for logKey in hashKey{
-        let logkeys = ViewController().beTime(str:logKey)
-        
-        if logkeys < now!{
-          var timeBox:[Date] = []
-          timeBox.append(logkeys)
-          let result = timeBox.map{vc.jptime(date: $0)}
-          
-          for destroy in result{
-            print("結果\(result)")
-            vcLogs![destroy] = nil
-
-          }
-        
-          print("これ\(vcLogs)")
-        vc.hashLog.set(vcLogs, forKey: "hash")
-          
-        }else{
-          print(vcLogs)
-          print("何もありません")
-        }
-      }
-    }else{
-      print("何もありません")
-    }
-    
-  }
+//  func deleteLog(){
+//    let cal = Calendar.current
+//    let f = DateFormatter()
+//    f.dateFormat = "yyyy/MM/dd HH:mm:ss"
+//    let date = Date().toStringWithCurrentLocale()
+//
+//    let now = f.date(from: date)?.addingTimeInterval((60*60*9*1)
+//)
+//    print("デイトの値\(now)")
+//
+//    if let hashKey = vcLogs?.keys{
+//      for logKey in hashKey{
+//        let logkeys = ViewController().beTime(str:logKey)
+//
+//        if logkeys < now!{
+//          var timeBox:[Date] = []
+//          timeBox.append(logkeys)
+//          let result = timeBox.map{vc.jptime(date: $0)}
+//
+//          for destroy in result{
+//            print("結果\(result)")
+//            vcLogs![destroy] = nil
+//
+//          }
+//
+//          print("これ\(vcLogs)")
+//        vc.hashLog.set(vcLogs, forKey: "hash")
+//
+//        }else{
+//          print(vcLogs)
+//          print("何もありません")
+//        }
+//      }
+//    }else{
+//      print("何もありません")
+//    }
+//
+//  }
   
   func totalSum() -> Int{
     
@@ -158,11 +160,19 @@ class usedMoneyLogController: UIViewController, UITableViewDelegate, UITableView
      let totalResult = values.map{$0 as! Int}
 
     result =  totalResult.reduce(0){$0 + $1}
+    headerLabel.text = String("合計金額：\(result)円")
     }else{
       result = 0
+      headerLabel.text = String("合計金額：\(result)円")
     }
     return result
     
+  }
+  
+  func scrollViewDidScroll(_ scrollView: UIScrollView) {
+    if scrollView.contentOffset.y < -100{
+      self.headerView.frame = CGRect(x: 0, y: scrollView.contentOffset.y, width: self.displayWidth, height: 100)
+    }
   }
 
     /*
