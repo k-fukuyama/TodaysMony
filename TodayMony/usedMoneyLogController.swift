@@ -75,6 +75,35 @@ class usedMoneyLogController: UIViewController, UITableViewDelegate, UITableView
     
   }
   
+  var valueBox:[Int] = []
+  var gotValue: Int = 0
+  
+  func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+    if let vclogs = vcLogs{
+      
+      let keyBox = Array(vclogs.keys).sorted(by: >)
+      
+      for key in keyBox{
+        valueBox.append(vclogs[key] as! Int)
+      }
+      
+      gotValue = valueBox[indexPath.row]
+      print(keyBox[indexPath.row])
+      print(gotValue)
+      
+      performSegue(withIdentifier: "logDetail",sender: nil)
+      valueBox.removeAll()
+
+    }
+  }
+  
+  override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+    if segue.identifier == "logDetail"{
+      let logVC = segue.destination as! logDetailViewController
+      logVC.valueBox.append(gotValue)
+    }
+  }
+  
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -92,6 +121,7 @@ class usedMoneyLogController: UIViewController, UITableViewDelegate, UITableView
       headerLabel.font = UIFont.systemFont(ofSize: 25)
       headerLabel.textAlignment = .center
       table.addSubview(headerLabel)
+      
     }
   
 
