@@ -24,6 +24,10 @@ class usedMoneyLogController: UIViewController, UITableViewDelegate, UITableView
     
   }
   
+  func update(){
+    vcLogs = ViewController().hashLog.dictionary(forKey: "hash")
+  }
+  
   
    var vcLogs = ViewController().hashLog.dictionary(forKey: "hash")
    let vc = ViewController()
@@ -127,6 +131,12 @@ class usedMoneyLogController: UIViewController, UITableViewDelegate, UITableView
       table.addSubview(headerLabel)
       
     }
+  
+  override func viewWillAppear(_ animated: Bool) {
+    super.viewWillAppear(animated)
+    ontap()
+    print("ハローハローハロー")
+  }
   
 
 

@@ -8,7 +8,7 @@
 
 import UIKit
 
-class logDetailViewController: UIViewController, UITabBarDelegate, UITableViewDataSource, changeLogDelgate {
+class logDetailViewController: UIViewController, UITabBarDelegate, UITableViewDataSource{
   
   
     override func viewDidLoad() {
@@ -16,6 +16,7 @@ class logDetailViewController: UIViewController, UITabBarDelegate, UITableViewDa
 
         // Do any additional setup after loading the view.
       print(keyBox)
+      print(valueBox)
     }
   
   var valueBox: [Int] = []
@@ -45,8 +46,10 @@ class logDetailViewController: UIViewController, UITabBarDelegate, UITableViewDa
   @IBOutlet weak var logTable: UITableView!
   
   @IBAction func backButton(_ sender: Any) {
+    
     self.dismiss(animated: true, completion: {
       usedMoneyLogController().valueBox.removeAll()
+      usedMoneyLogController().update()
     })
   }
   
@@ -58,10 +61,31 @@ class logDetailViewController: UIViewController, UITabBarDelegate, UITableViewDa
   }
   
   @IBAction func saveButton(_ sender: Any) {
-    print("保存される値\(editedLog)")
+    
+    let editedNum = Int(editedLog)!
+    var result = 0
+    let dvc = detailmonyViewController()
+    var dvcSetNum = 0
+    var todayRemainTextNum = 0
+    
     var vcHash = vc.hashLog.dictionary(forKey: "hash")
-    vcHash![keyBox[0]] = Int(editedLog)
+    vcHash![keyBox[0]] = editedNum
     vc.hashLog.set(vcHash, forKey: "hash")
+    
+    if editedNum > valueBox[0]{
+      result = editedNum - valueBox[0]
+      dvcSetNum = dvc.SaveOneMonthMoneyResult.integer(forKey: "SaveMoney") - result
+      dvc.SaveOneMonthMoneyResult.set(dvcSetNum, forKey: "SaveMoney")
+      
+      print("大きい方でした")
+    }else{
+      result = valueBox[0] - editedNum
+      dvcSetNum = dvc.SaveOneMonthMoneyResult.integer(forKey: "SaveMoney") + result
+      dvc.SaveOneMonthMoneyResult.set(dvcSetNum, forKey: "SaveMoney")
+      print("小さい方でした")
+    }
+    
+    
     
   }
   
