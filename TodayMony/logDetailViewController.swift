@@ -8,15 +8,39 @@
 
 import UIKit
 
-class logDetailViewController: UIViewController, UITabBarDelegate, UITableViewDataSource {
+class logDetailViewController: UIViewController, UITabBarDelegate, UITableViewDataSource, changeLogDelgate {
+  
   
     override func viewDidLoad() {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
       print(keyBox)
-     
     }
+  
+  var valueBox: [Int] = []
+  var keyBox: [String] = []
+  var vc = ViewController()
+  
+  func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    
+    
+    return valueBox.count
+    
+  }
+  
+  var saveString = ""
+  
+  func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+    let cell = logTable.dequeueReusableCell(withIdentifier: "logDetailCell") as! logDetailTableViewCell
+    cell.logTextfield.text! = String(valueBox[indexPath.row])
+    
+    
+    //    cell?.textLabel!.text! = String(valueBox[indexPath.row])
+    
+    return cell
+  }
+  
     
   @IBOutlet weak var logTable: UITableView!
   
@@ -26,27 +50,24 @@ class logDetailViewController: UIViewController, UITabBarDelegate, UITableViewDa
     })
   }
   
+  func textFieldDidEndEditing(cell: logDetailTableViewCell, value: String) {
+    
+    let index = logTable.indexPathForRow(at: cell.convert(cell.bounds.origin, to:logTable))
+    print("変更されたインデックス\(value)")
+    saveString = value
+  }
+  
   @IBAction func saveButton(_ sender: Any) {
-  }
-  var valueBox: [Int] = []
-  var keyBox: [String] = []
-  
-  
-  func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-    
-
-    return valueBox.count
+    print("保存される値\(editedLog)")
+    var vcHash = vc.hashLog.dictionary(forKey: "hash")
+    vcHash![keyBox[0]] = Int(editedLog)
+    vc.hashLog.set(vcHash, forKey: "hash")
     
   }
   
-  func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-    let cell = logTable.dequeueReusableCell(withIdentifier: "logDetailCell") as! logDetailTableViewCell
-    cell.logTextfield.text! = String(valueBox[indexPath.row])
-    
-//    cell?.textLabel!.text! = String(valueBox[indexPath.row])
-    
-    return cell
-  }
+  
+  
+ 
   
     /*
     // MARK: - Navigation

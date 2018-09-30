@@ -8,6 +8,10 @@
 
 import UIKit
 
+protocol changeLogDelgate {
+  func textFieldDidEndEditing(cell:logDetailTableViewCell, value:String)
+}
+
 class logDetailTableViewCell: UITableViewCell, UITextFieldDelegate {
 
     override func awakeFromNib() {
@@ -32,9 +36,21 @@ class logDetailTableViewCell: UITableViewCell, UITextFieldDelegate {
     }
 
   @IBOutlet weak var logTextfield: UITextField!
+  var saveString = ""
+  var delegate: changeLogDelgate! = nil
+  
   
   @objc func commit(){
     logTextfield.endEditing(true)
+    saveString = logTextfield.text!
+    print(saveString)
+    editedLog = saveString
+  }
+  
+  func textFieldDidEndEditing(_ textField: UITextField) {
+  
+    
+    print("終了した")
   }
   
 }

@@ -104,6 +104,7 @@ class usedMoneyLogController: UIViewController, UITableViewDelegate, UITableView
       let logVC = segue.destination as! logDetailViewController
       logVC.valueBox.append(gotValue)
       logVC.keyBox.append(gotKey)
+      
     }
   }
   
