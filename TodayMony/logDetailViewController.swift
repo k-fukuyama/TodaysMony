@@ -77,16 +77,33 @@ class logDetailViewController: UIViewController, UITabBarDelegate, UITableViewDa
       dvcSetNum = dvc.SaveOneMonthMoneyResult.integer(forKey: "SaveMoney") - result
       dvc.SaveOneMonthMoneyResult.set(dvcSetNum, forKey: "SaveMoney")
       
+      todayRemainTextNum = vc.ud.integer(forKey: "mony") - result
+      vc.ud.set(todayRemainTextNum, forKey: "mony")
+      
+      
       print("大きい方でした")
+      
     }else{
       result = valueBox[0] - editedNum
       dvcSetNum = dvc.SaveOneMonthMoneyResult.integer(forKey: "SaveMoney") + result
       dvc.SaveOneMonthMoneyResult.set(dvcSetNum, forKey: "SaveMoney")
+      
+      todayRemainTextNum = vc.ud.integer(forKey: "mony") + result
+      vc.ud.set(todayRemainTextNum, forKey: "mony")
       print("小さい方でした")
     }
     
     
     
+  }
+  
+  func adjustment(num: Int, editedValu: Int){
+    print(vc.ud.integer(forKey: "mony"))
+    var beforeNum = vc.ud.integer(forKey: "mony") + num
+    print("これがbefore\(beforeNum)")
+    var trueNum = float_t(editedValu) / float_t(beforeNum) * 100
+    
+    vc.ud3.set(CGFloat(trueNum), forKey: "resultmonyyy")
   }
   
   

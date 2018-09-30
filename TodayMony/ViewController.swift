@@ -40,6 +40,7 @@ class ViewController: UIViewController, UITextFieldDelegate{
     print(UsedMony.frame.origin.y)
     
     print( UIScreen.main.nativeBounds.size.width)
+    percentSet()
     
     
     if UIScreen.main.nativeBounds.size.width < 750.0{
@@ -707,12 +708,33 @@ class ViewController: UIViewController, UITextFieldDelegate{
   func ontap(){
     let onePushSetData = self.onepushud.integer(forKey: "onepushmony")
     
+    TodayMony.text = CommaAdd(comma: ud.integer(forKey: "mony"))
+    percentSet()
     
     if onePushSetData == 0{
       onePushTitle.setTitle("1psuh設定", for: .normal)
     }else{
       onePushTitle.setTitle(CommaAdd(comma: onePushSetData), for: .normal)
     }
+  }
+  
+  func percentSet(){
+    
+    if let logs = hashLog.dictionary(forKey: "hash"){
+      var valueBox: [Int] = []
+      
+      for key in (logs.keys){
+        valueBox.append(logs[key] as! Int)
+      }
+      
+      let logsTotal = valueBox.reduce(0){$0 + $1}
+      
+      let resultPercent = float_t(logsTotal) / float_t(ud4.integer(forKey: "mony2")) * 100
+      ud3.set(100 - resultPercent, forKey: "resultmonyyy")
+      print(resultPercent)
+      resultmony.value =  CGFloat(ud3.float(forKey: "resultmonyyy"))
+    }
+    
   }
   
   func jpTime(str:String) -> Date{
