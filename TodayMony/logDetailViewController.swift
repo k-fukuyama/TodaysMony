@@ -60,6 +60,12 @@ class logDetailViewController: UIViewController, UITabBarDelegate, UITableViewDa
     saveString = value
   }
   
+  var editedDoneAlert = UIAlertController(title: nil,
+                                         message: "編集が完了しました",
+                                         preferredStyle: .alert)
+  
+  
+  
   @IBAction func saveButton(_ sender: Any) {
     
     let editedNum = Int(editedLog)!
@@ -72,6 +78,14 @@ class logDetailViewController: UIViewController, UITabBarDelegate, UITableViewDa
     vcHash![keyBox[0]] = editedNum
     vc.hashLog.set(vcHash, forKey: "hash")
     
+    editedDoneAlert.addAction(UIAlertAction(title: "OK", style: .default){ action in
+      self.dismiss(animated: true, completion: {
+        usedMoneyLogController().valueBox.removeAll()
+        usedMoneyLogController().update()
+      })
+    })
+    
+    
     if editedNum > valueBox[0]{
       result = editedNum - valueBox[0]
       dvcSetNum = dvc.SaveOneMonthMoneyResult.integer(forKey: "SaveMoney") - result
@@ -80,7 +94,7 @@ class logDetailViewController: UIViewController, UITabBarDelegate, UITableViewDa
       todayRemainTextNum = vc.ud.integer(forKey: "mony") - result
       vc.ud.set(todayRemainTextNum, forKey: "mony")
       
-      
+      self.present(editedDoneAlert, animated: true, completion: nil)
       print("大きい方でした")
       
     }else{
@@ -90,6 +104,8 @@ class logDetailViewController: UIViewController, UITabBarDelegate, UITableViewDa
       
       todayRemainTextNum = vc.ud.integer(forKey: "mony") + result
       vc.ud.set(todayRemainTextNum, forKey: "mony")
+      
+      self.present(editedDoneAlert, animated: true, completion: nil)
       print("小さい方でした")
     }
     
