@@ -77,6 +77,7 @@ class usedMoneyLogController: UIViewController, UITableViewDelegate, UITableView
   
   var valueBox:[Int] = []
   var gotValue: Int = 0
+  var gotKey: String = ""
   
   func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
     if let vclogs = vcLogs{
@@ -88,6 +89,7 @@ class usedMoneyLogController: UIViewController, UITableViewDelegate, UITableView
       }
       
       gotValue = valueBox[indexPath.row]
+      gotKey = keyBox[indexPath.row]
       print(keyBox[indexPath.row])
       print(gotValue)
       
@@ -101,6 +103,7 @@ class usedMoneyLogController: UIViewController, UITableViewDelegate, UITableView
     if segue.identifier == "logDetail"{
       let logVC = segue.destination as! logDetailViewController
       logVC.valueBox.append(gotValue)
+      logVC.keyBox.append(gotKey)
     }
   }
   

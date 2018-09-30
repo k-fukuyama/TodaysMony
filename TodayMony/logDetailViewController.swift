@@ -14,6 +14,7 @@ class logDetailViewController: UIViewController, UITabBarDelegate, UITableViewDa
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
+      print(keyBox)
      
     }
     
@@ -25,7 +26,10 @@ class logDetailViewController: UIViewController, UITabBarDelegate, UITableViewDa
     })
   }
   
+  @IBAction func saveButton(_ sender: Any) {
+  }
   var valueBox: [Int] = []
+  var keyBox: [String] = []
   
   
   func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -36,10 +40,12 @@ class logDetailViewController: UIViewController, UITabBarDelegate, UITableViewDa
   }
   
   func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-    let cell = logTable.dequeueReusableCell(withIdentifier: "logDetailCell")
-    cell?.textLabel!.text! = String(valueBox[indexPath.row])
+    let cell = logTable.dequeueReusableCell(withIdentifier: "logDetailCell") as! logDetailTableViewCell
+    cell.logTextfield.text! = String(valueBox[indexPath.row])
     
-    return cell!
+//    cell?.textLabel!.text! = String(valueBox[indexPath.row])
+    
+    return cell
   }
   
     /*

@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		6D05B8EE214E9C0B003B1D56 /* usedMoneyLogController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D05B8ED214E9C0B003B1D56 /* usedMoneyLogController.swift */; };
 		6D3B05B32056AF3400A9671F /* resultViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D3B05B22056AF3400A9671F /* resultViewController.swift */; };
+		6D488FBC216057ED005D0EE2 /* logDetailTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D488FBB216057ED005D0EE2 /* logDetailTableViewCell.swift */; };
 		6D4F7800207E3F2C005C35D2 /* SimpleButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D4F77FF207E3F2C005C35D2 /* SimpleButton.swift */; };
 		6D4F7802207E64CA005C35D2 /* Used.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D4F7801207E64CA005C35D2 /* Used.swift */; };
 		6DCE8CFB2077A286006E324E /* detailmonyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DCE8CFA2077A286006E324E /* detailmonyViewController.swift */; };
@@ -28,6 +29,7 @@
 		3ADE97311C1760DF6220C436 /* Pods_TodayMony.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_TodayMony.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		6D05B8ED214E9C0B003B1D56 /* usedMoneyLogController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = usedMoneyLogController.swift; sourceTree = "<group>"; };
 		6D3B05B22056AF3400A9671F /* resultViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = resultViewController.swift; sourceTree = "<group>"; };
+		6D488FBB216057ED005D0EE2 /* logDetailTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = logDetailTableViewCell.swift; sourceTree = "<group>"; };
 		6D4F77FF207E3F2C005C35D2 /* SimpleButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SimpleButton.swift; sourceTree = "<group>"; };
 		6D4F7801207E64CA005C35D2 /* Used.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Used.swift; sourceTree = "<group>"; };
 		6DCE8CFA2077A286006E324E /* detailmonyViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = detailmonyViewController.swift; sourceTree = "<group>"; };
@@ -97,6 +99,7 @@
 				6DCE8CFA2077A286006E324E /* detailmonyViewController.swift */,
 				6DD901AA2121E86800581989 /* custoumbar.swift */,
 				6DED1144215F5F5000A4310D /* logDetailViewController.swift */,
+				6D488FBB216057ED005D0EE2 /* logDetailTableViewCell.swift */,
 				6D3B05B22056AF3400A9671F /* resultViewController.swift */,
 				6DF5AB7D2054D9BC00015475 /* Main.storyboard */,
 				6DF5AB802054D9BC00015475 /* Assets.xcassets */,
@@ -251,6 +254,7 @@
 				6DED1145215F5F5000A4310D /* logDetailViewController.swift in Sources */,
 				6DF5AB7C2054D9BC00015475 /* ViewController.swift in Sources */,
 				6DCE8CFB2077A286006E324E /* detailmonyViewController.swift in Sources */,
+				6D488FBC216057ED005D0EE2 /* logDetailTableViewCell.swift in Sources */,
 				6DF5AB7A2054D9BC00015475 /* AppDelegate.swift in Sources */,
 				6D4F7800207E3F2C005C35D2 /* SimpleButton.swift in Sources */,
 				6D05B8EE214E9C0B003B1D56 /* usedMoneyLogController.swift in Sources */,
