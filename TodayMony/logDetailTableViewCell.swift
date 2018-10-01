@@ -36,10 +36,15 @@ class logDetailTableViewCell: UITableViewCell, UITextFieldDelegate {
   
   
   @objc func commit(){
-    logTextfield.endEditing(true)
-    saveString = logTextfield.text!
-    print(saveString)
-    editedLog = saveString
+    if logTextfield.text! != ""{
+      logTextfield.endEditing(true)
+      saveString = logTextfield.text!
+      print(saveString)
+      editedLog = saveString
+    }else{
+      logTextfield.endEditing(true)
+    }
+    
   }
   
 }

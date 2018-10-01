@@ -47,4 +47,4 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
 }
 
-var editedLog = "グローバル"
+var editedLog = ""

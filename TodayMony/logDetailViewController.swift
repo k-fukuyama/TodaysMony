@@ -52,31 +52,11 @@ class logDetailViewController: UIViewController, UITabBarDelegate, UITableViewDa
       usedMoneyLogController().update()
     })
   }
-  
-  func textFieldDidEndEditing(cell: logDetailTableViewCell, value: String) {
-    
-    let index = logTable.indexPathForRow(at: cell.convert(cell.bounds.origin, to:logTable))
-    print("変更されたインデックス\(value)")
-    saveString = value
-  }
-  
-  var editedDoneAlert = UIAlertController(title: nil,
-                                         message: "編集が完了しました",
-                                         preferredStyle: .alert)
-  
-  
-  
-  @IBAction func saveButton(_ sender: Any) {
-    
-    let editedNum = Int(editedLog)!
-    var result = 0
-    let dvc = detailmonyViewController()
-    var dvcSetNum = 0
-    var todayRemainTextNum = 0
-    
-    var vcHash = vc.hashLog.dictionary(forKey: "hash")
-    vcHash![keyBox[0]] = editedNum
-    vc.hashLog.set(vcHash, forKey: "hash")
+
+  func editedAlert(){
+    var editedDoneAlert = UIAlertController(title: nil,
+                                            message: "編集が完了しました",
+                                            preferredStyle: .alert)
     
     editedDoneAlert.addAction(UIAlertAction(title: "OK", style: .default){ action in
       self.dismiss(animated: true, completion: {
@@ -85,32 +65,84 @@ class logDetailViewController: UIViewController, UITabBarDelegate, UITableViewDa
       })
     })
     
+    self.present(editedDoneAlert, animated: true, completion: nil)
     
-    if editedNum > valueBox[0]{
-      result = editedNum - valueBox[0]
-      dvcSetNum = dvc.SaveOneMonthMoneyResult.integer(forKey: "SaveMoney") - result
-      dvc.SaveOneMonthMoneyResult.set(dvcSetNum, forKey: "SaveMoney")
-      
-      todayRemainTextNum = vc.ud.integer(forKey: "mony") - result
-      vc.ud.set(todayRemainTextNum, forKey: "mony")
-      
-      self.present(editedDoneAlert, animated: true, completion: nil)
-      print("大きい方でした")
+  }
+  
+  func emptyAlert(){
+    var emptyAlert = UIAlertController(title: nil,
+                                            message: "金額を入力、変更してください",
+                                            preferredStyle: .alert)
+    
+    emptyAlert.addAction(UIAlertAction(title: "OK", style: .default))
+    
+    self.present(emptyAlert, animated: true, completion: nil)
+    
+  }
+  
+  func zeroAlert(){
+    var zeroAlert = UIAlertController(title: nil,
+                                       message: "0円は入力できません",
+                                       preferredStyle: .alert)
+    
+    zeroAlert.addAction(UIAlertAction(title: "OK", style: .default))
+    
+    self.present(zeroAlert, animated: true, completion: nil)
+  }
+  
+  
+  
+  
+  
+  @IBAction func saveButton(_ sender: Any) {
+    
+    if editedLog != ""{
+      print(editedLog)
+      let editedNum = Int(editedLog)!
+      if editedNum != 0{
+        
+        var result = 0
+        let dvc = detailmonyViewController()
+        var dvcSetNum = 0
+        var todayRemainTextNum = 0
+        
+        var vcHash = vc.hashLog.dictionary(forKey: "hash")
+        vcHash![keyBox[0]] = editedNum
+        vc.hashLog.set(vcHash, forKey: "hash")
+        
+        
+        if editedNum > valueBox[0]{
+          result = editedNum - valueBox[0]
+          dvcSetNum = dvc.SaveOneMonthMoneyResult.integer(forKey: "SaveMoney") - result
+          dvc.SaveOneMonthMoneyResult.set(dvcSetNum, forKey: "SaveMoney")
+          
+          todayRemainTextNum = vc.ud.integer(forKey: "mony") - result
+          vc.ud.set(todayRemainTextNum, forKey: "mony")
+          
+          editedAlert()
+          print("大きい方でした")
+          
+        }else{
+          result = valueBox[0] - editedNum
+          dvcSetNum = dvc.SaveOneMonthMoneyResult.integer(forKey: "SaveMoney") + result
+          dvc.SaveOneMonthMoneyResult.set(dvcSetNum, forKey: "SaveMoney")
+          
+          todayRemainTextNum = vc.ud.integer(forKey: "mony") + result
+          vc.ud.set(todayRemainTextNum, forKey: "mony")
+          
+          editedAlert()
+          print("小さい方でした")
+        }
+      }else{
+        zeroAlert()
+      }
       
     }else{
-      result = valueBox[0] - editedNum
-      dvcSetNum = dvc.SaveOneMonthMoneyResult.integer(forKey: "SaveMoney") + result
-      dvc.SaveOneMonthMoneyResult.set(dvcSetNum, forKey: "SaveMoney")
-      
-      todayRemainTextNum = vc.ud.integer(forKey: "mony") + result
-      vc.ud.set(todayRemainTextNum, forKey: "mony")
-      
-      self.present(editedDoneAlert, animated: true, completion: nil)
-      print("小さい方でした")
+      emptyAlert()
     }
+
     
-    
-    
+ 
   }
   
   func adjustment(num: Int, editedValu: Int){
