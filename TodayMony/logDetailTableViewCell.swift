@@ -23,6 +23,8 @@ class logDetailTableViewCell: UITableViewCell, UITextFieldDelegate {
       let commitbutton = UIBarButtonItem(title: "決定", style: UIBarButtonItemStyle.done, target: self, action: #selector(self.commit))
       toolbar.items = [spacer, commitbutton]
       logTextfield.inputAccessoryView = toolbar
+      editedLog = ""
+      
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {
@@ -32,15 +34,12 @@ class logDetailTableViewCell: UITableViewCell, UITextFieldDelegate {
     }
 
   @IBOutlet weak var logTextfield: UITextField!
-  var saveString = ""
-  
-  
+ 
   @objc func commit(){
     if logTextfield.text! != ""{
       logTextfield.endEditing(true)
-      saveString = logTextfield.text!
-      print(saveString)
-      editedLog = saveString
+      editedLog = logTextfield.text!
+     
     }else{
       logTextfield.endEditing(true)
     }

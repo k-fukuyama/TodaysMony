@@ -92,7 +92,7 @@ class logDetailViewController: UIViewController, UITabBarDelegate, UITableViewDa
   
   
   
-  
+  @IBOutlet weak var save: UIBarButtonItem!
   
   @IBAction func saveButton(_ sender: Any) {
     
@@ -109,7 +109,6 @@ class logDetailViewController: UIViewController, UITabBarDelegate, UITableViewDa
         var vcHash = vc.hashLog.dictionary(forKey: "hash")
         vcHash![keyBox[0]] = editedNum
         vc.hashLog.set(vcHash, forKey: "hash")
-        
         
         if editedNum > valueBox[0]{
           result = editedNum - valueBox[0]

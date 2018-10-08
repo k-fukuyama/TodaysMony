@@ -700,8 +700,8 @@
                                             <rect key="frame" x="0.0" y="0.0" width="414" height="43.666666666666664"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <textField opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="fhB-Bd-kKX">
-                                                    <rect key="frame" x="20" y="7" width="97" height="30"/>
+                                                <textField opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="fhB-Bd-kKX">
+                                                    <rect key="frame" x="20" y="7.0000000000000284" width="97" height="30"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     <nil key="textColor"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
@@ -744,6 +744,7 @@
                     </view>
                     <connections>
                         <outlet property="logTable" destination="YrG-j4-Fxf" id="LAO-tk-d84"/>
+                        <outlet property="save" destination="wWs-zx-FfZ" id="Fe9-xX-pjP"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="uP0-hU-oUa" userLabel="First Responder" sceneMemberID="firstResponder"/>
