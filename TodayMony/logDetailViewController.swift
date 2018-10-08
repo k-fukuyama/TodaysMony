@@ -8,7 +8,7 @@
 
 import UIKit
 
-class logDetailViewController: UIViewController, UITabBarDelegate, UITableViewDataSource{
+class logDetailViewController: UIViewController{
   
   
     override func viewDidLoad() {
@@ -17,30 +17,25 @@ class logDetailViewController: UIViewController, UITabBarDelegate, UITableViewDa
         // Do any additional setup after loading the view.
       print(keyBox)
       print(valueBox)
+      editTextField.text! = String(valueBox[0])
+      
+      let toolbar = UIToolbar()
+      toolbar.barStyle = UIBarStyle.default
+      toolbar.sizeToFit()
+      let spacer = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.flexibleSpace, target: self, action: nil)
+      let commitbutton = UIBarButtonItem(title: "決定", style: UIBarButtonItemStyle.done, target: self, action: #selector(self.commit))
+      toolbar.items = [spacer, commitbutton]
+      editTextField.inputAccessoryView = toolbar
+      editTextField.keyboardType = UIKeyboardType.numberPad
     }
   
   var valueBox: [Int] = []
   var keyBox: [String] = []
   var vc = ViewController()
   
-  func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-    
-    
-    return valueBox.count
-    
-  }
+  @IBOutlet weak var editTextField: UITextField!
   
   var saveString = ""
-  
-  func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-    let cell = logTable.dequeueReusableCell(withIdentifier: "logDetailCell") as! logDetailTableViewCell
-    cell.logTextfield.text! = String(valueBox[indexPath.row])
-    
-    
-    //    cell?.textLabel!.text! = String(valueBox[indexPath.row])
-    
-    return cell
-  }
   
     
   @IBOutlet weak var logTable: UITableView!
@@ -54,7 +49,7 @@ class logDetailViewController: UIViewController, UITabBarDelegate, UITableViewDa
   }
 
   func editedAlert(){
-    var editedDoneAlert = UIAlertController(title: nil,
+    let editedDoneAlert = UIAlertController(title: nil,
                                             message: "編集が完了しました",
                                             preferredStyle: .alert)
     
@@ -70,7 +65,7 @@ class logDetailViewController: UIViewController, UITabBarDelegate, UITableViewDa
   }
   
   func emptyAlert(){
-    var emptyAlert = UIAlertController(title: nil,
+    let emptyAlert = UIAlertController(title: nil,
                                             message: "金額を入力、変更してください",
                                             preferredStyle: .alert)
     
@@ -81,7 +76,7 @@ class logDetailViewController: UIViewController, UITabBarDelegate, UITableViewDa
   }
   
   func zeroAlert(){
-    var zeroAlert = UIAlertController(title: nil,
+    let zeroAlert = UIAlertController(title: nil,
                                        message: "0円は入力できません",
                                        preferredStyle: .alert)
     
@@ -96,10 +91,10 @@ class logDetailViewController: UIViewController, UITabBarDelegate, UITableViewDa
   
   @IBAction func saveButton(_ sender: Any) {
     
-    if editedLog != ""{
+    let text = editTextField.text!
+    
+    if text != "" && text != "0"{
       print(editedLog)
-      let editedNum = Int(editedLog)!
-      if editedNum != 0{
         
         var result = 0
         let dvc = detailmonyViewController()
@@ -107,11 +102,11 @@ class logDetailViewController: UIViewController, UITabBarDelegate, UITableViewDa
         var todayRemainTextNum = 0
         
         var vcHash = vc.hashLog.dictionary(forKey: "hash")
-        vcHash![keyBox[0]] = editedNum
+        vcHash![keyBox[0]] = Int(text)!
         vc.hashLog.set(vcHash, forKey: "hash")
         
-        if editedNum > valueBox[0]{
-          result = editedNum - valueBox[0]
+      if Int(text)! > valueBox[0]{
+          result = Int(editTextField.text!)! - valueBox[0]
           dvcSetNum = dvc.SaveOneMonthMoneyResult.integer(forKey: "SaveMoney") - result
           dvc.SaveOneMonthMoneyResult.set(dvcSetNum, forKey: "SaveMoney")
           
@@ -122,7 +117,7 @@ class logDetailViewController: UIViewController, UITabBarDelegate, UITableViewDa
           print("大きい方でした")
           
         }else{
-          result = valueBox[0] - editedNum
+          result = valueBox[0] - Int(text)!
           dvcSetNum = dvc.SaveOneMonthMoneyResult.integer(forKey: "SaveMoney") + result
           dvc.SaveOneMonthMoneyResult.set(dvcSetNum, forKey: "SaveMoney")
           
@@ -132,10 +127,9 @@ class logDetailViewController: UIViewController, UITabBarDelegate, UITableViewDa
           editedAlert()
           print("小さい方でした")
         }
-      }else{
-        zeroAlert()
-      }
       
+    }else if text == "0" {
+      zeroAlert()
     }else{
       emptyAlert()
     }
@@ -146,11 +140,16 @@ class logDetailViewController: UIViewController, UITabBarDelegate, UITableViewDa
   
   func adjustment(num: Int, editedValu: Int){
     print(vc.ud.integer(forKey: "mony"))
-    var beforeNum = vc.ud.integer(forKey: "mony") + num
+    let beforeNum = vc.ud.integer(forKey: "mony") + num
     print("これがbefore\(beforeNum)")
-    var trueNum = float_t(editedValu) / float_t(beforeNum) * 100
+    let trueNum = float_t(editedValu) / float_t(beforeNum) * 100
     
     vc.ud3.set(CGFloat(trueNum), forKey: "resultmonyyy")
+  }
+  
+  @objc func commit(){
+    editTextField.endEditing(true)
+    
   }
   
   
