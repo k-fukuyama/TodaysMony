@@ -24,6 +24,10 @@ class usedMoneyLogController: UIViewController, UITableViewDelegate, UITableView
     
   }
   
+  func update(){
+    vcLogs = ViewController().hashLog.dictionary(forKey: "hash")
+  }
+  
   
    var vcLogs = ViewController().hashLog.dictionary(forKey: "hash")
    let vc = ViewController()
@@ -75,6 +79,39 @@ class usedMoneyLogController: UIViewController, UITableViewDelegate, UITableView
     
   }
   
+  var valueBox:[Int] = []
+  var gotValue: Int = 0
+  var gotKey: String = ""
+  
+  func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+    if let vclogs = vcLogs{
+      
+      let keyBox = Array(vclogs.keys).sorted(by: >)
+      
+      for key in keyBox{
+        valueBox.append(vclogs[key] as! Int)
+      }
+      
+      gotValue = valueBox[indexPath.row]
+      gotKey = keyBox[indexPath.row]
+      print(keyBox[indexPath.row])
+      print(gotValue)
+      
+      performSegue(withIdentifier: "logDetail",sender: nil)
+      valueBox.removeAll()
+
+    }
+  }
+  
+  override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+    if segue.identifier == "logDetail"{
+      let logVC = segue.destination as! logDetailViewController
+      logVC.valueBox.append(gotValue)
+      logVC.keyBox.append(gotKey)
+      
+    }
+  }
+  
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -92,7 +129,14 @@ class usedMoneyLogController: UIViewController, UITableViewDelegate, UITableView
       headerLabel.font = UIFont.systemFont(ofSize: 25)
       headerLabel.textAlignment = .center
       table.addSubview(headerLabel)
+      
     }
+  
+  override func viewWillAppear(_ animated: Bool) {
+    super.viewWillAppear(animated)
+    ontap()
+    print("ハローハローハロー")
+  }
   
 
 
