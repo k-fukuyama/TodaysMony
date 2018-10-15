@@ -363,7 +363,7 @@ class ViewController: UIViewController, UITextFieldDelegate{
             self.UsedMony.center.y += 10
           })
           suzi = 0
-          print("これがああああああ\(suzi)")
+          print("これがああ\(suzi)")
         }
         TodaysTotalUsedMoney.removeObject(forKey: "TodaysTotalUd")
         ud3.set(resultmony.value, forKey: "resultmonyyy")
