@@ -135,7 +135,6 @@ class usedMoneyLogController: UIViewController, UITableViewDelegate, UITableView
   override func viewWillAppear(_ animated: Bool) {
     super.viewWillAppear(animated)
     ontap()
-    print("ハローハローハロー")
   }
   
 

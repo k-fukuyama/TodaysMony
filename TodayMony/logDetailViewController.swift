@@ -114,7 +114,6 @@ class logDetailViewController: UIViewController{
           vc.ud.set(todayRemainTextNum, forKey: "mony")
           
           editedAlert()
-          print("大きい方でした")
           
         }else{
           result = valueBox[0] - Int(text)!
@@ -125,7 +124,7 @@ class logDetailViewController: UIViewController{
           vc.ud.set(todayRemainTextNum, forKey: "mony")
           
           editedAlert()
-          print("小さい方でした")
+        
         }
       
     }else if text == "0" {
