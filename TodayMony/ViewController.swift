@@ -746,7 +746,6 @@ class ViewController: UIViewController, UITextFieldDelegate{
     
     dateFormater.timeZone = TimeZone(identifier: "Asia/Tokyo")
     var tbox = dateFormater.date(from: str)
-    //    tbox?.addTimeInterval(60*60*9*1)
     //    tbox?.addTimeInterval(60*60 * -13*1) テスト用時間変更メソッド
     
     return tbox!
