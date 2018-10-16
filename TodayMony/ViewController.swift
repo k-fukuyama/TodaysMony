@@ -518,8 +518,8 @@ class ViewController: UIViewController, UITextFieldDelegate{
       f.timeStyle = .medium
       f.dateStyle = .short
       f.locale = Locale(identifier: "ja_JP")
-      let beDate = jpTime(str: f.string(from: now))
-      let backString = jptime(date: beDate)
+      let beDate = jpTime_to_Date(str: f.string(from: now))
+      let backString = jptime_to_String(date: beDate)
       
       if var hashset = hashLog.dictionary(forKey: "hash"){
         hashset[backString] = Int(UsedMony.text!)!
@@ -737,7 +737,7 @@ class ViewController: UIViewController, UITextFieldDelegate{
     
   }
   
-  func jpTime(str:String) -> Date{
+  func jpTime_to_Date(str:String) -> Date{
     
     let now = Date()
     let dateFormater = DateFormatter()
@@ -746,8 +746,8 @@ class ViewController: UIViewController, UITextFieldDelegate{
     
     dateFormater.timeZone = TimeZone(identifier: "Asia/Tokyo")
     var tbox = dateFormater.date(from: str)
-//    tbox?.addTimeInterval(60*60*9*1)
- 
+    //    tbox?.addTimeInterval(60*60 * -13*1) テスト用時間変更メソッド
+    
     return tbox!
   }
   
@@ -763,7 +763,7 @@ class ViewController: UIViewController, UITextFieldDelegate{
      return tbox!
   }
   
-  func jptime(date:Date) -> String{
+  func jptime_to_String(date:Date) -> String{
     let now = Date().toStringWithCurrentLocale()
     let dateFormater = DateFormatter()
     dateFormater.dateFormat = "yyyy/MM/dd H:mm:ss"

@@ -49,11 +49,11 @@ class usedMoneyLogController: UIViewController, UITableViewDelegate, UITableView
     let cell:UITableViewCell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
 
     if let vclogs = vcLogs{
-      let vclogsKeySort = Array(vclogs.keys).sorted(by: >)
+      let vclogsKeySort = Array(vclogs.keys).map{vc.jpTime_to_Date(str: $0)}.sorted(by:>)
+      print(type(of: vclogsKeySort))
+      let vclogskeySorted = vclogsKeySort.map{vc.jptime_to_String(date: $0)}
       
-      var valueBox:[Int] = []
-      
-      for key in vclogsKeySort{
+      for key in vclogskeySorted{
         valueBox.append(vclogs[key] as! Int)
       }
       
@@ -66,7 +66,7 @@ class usedMoneyLogController: UIViewController, UITableViewDelegate, UITableView
         timebox.append(time)
       }
       
-      let shortTime = vclogsKeySort.map{beShortTime(str: $0)}
+      let shortTime = vclogskeySorted.map{beShortTime(str: $0)}
       shortTime.map{String(describing: $0)}
       
       cell.detailTextLabel!.text = String(describing: shortTime[indexPath.row])
