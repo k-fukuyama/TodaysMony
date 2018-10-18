@@ -8,7 +8,7 @@
 
 import UIKit
 
-class logDetailViewController: UIViewController{
+class logDetailViewController: UIViewController, UITextFieldDelegate{
   
   
     override func viewDidLoad() {
@@ -27,6 +27,7 @@ class logDetailViewController: UIViewController{
       toolbar.items = [spacer, commitbutton]
       editTextField.inputAccessoryView = toolbar
       editTextField.keyboardType = UIKeyboardType.numberPad
+      editTextField.delegate = self
     }
   
   var valueBox: [Int] = []
@@ -148,6 +149,18 @@ class logDetailViewController: UIViewController{
   
   @objc func commit(){
     editTextField.endEditing(true)
+    
+  }
+  
+  func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
+    let maxLength = 7
+    var str = textField.text! + string
+    
+    if str.characters.count < maxLength{
+      return true
+    }
+    
+    return false
     
   }
   
