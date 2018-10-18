@@ -53,6 +53,8 @@ class usedMoneyLogController: UIViewController, UITableViewDelegate, UITableView
       print(type(of: vclogsKeySort))
       let vclogskeySorted = vclogsKeySort.map{vc.jptime_to_String(date: $0)}
       
+      var valueBox:[Int] = []
+      
       for key in vclogskeySorted{
         valueBox.append(vclogs[key] as! Int)
       }
