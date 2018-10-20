@@ -21,7 +21,6 @@ class usedMoneyLogController: UIViewController, UITableViewDelegate, UITableView
 //    deleteLog()
     totalSum()
     table.reloadData()
-    
   }
   
   func update(){
@@ -126,7 +125,7 @@ class usedMoneyLogController: UIViewController, UITableViewDelegate, UITableView
       displayHeight = self.view.frame.height
       table.contentInset.top = 100
       
-      headerView = UIView(frame: CGRect(x:0, y: 0, width: self.table.frame.size.width, height: 300))
+      headerView = UIView(frame: CGRect(x:0, y: 0, width: self.table.frame.size.width, height: 10))
       table.addSubview(headerView)
       headerLabel = UILabel(frame: CGRect(x: 0, y: 0, width: self.table.frame.size.width, height: -100))
       headerLabel.text = String("合計金額：\(vc.CommaAdd(comma: totalSum()))")

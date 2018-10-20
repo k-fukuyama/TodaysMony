@@ -451,7 +451,7 @@ class ViewController: UIViewController, UITextFieldDelegate{
       
       let OnepushDoneAlert = UIAlertController(
         title: "既に金額を設定しています",
-        message: "もう一度設定しますか？",
+        message: "もう一度設定しますか？\n履歴がリセットされます",
         preferredStyle: .alert)
       
       OnepushDoneAlert.addAction(UIAlertAction(title: "キャンセル", style: .default))
@@ -473,6 +473,8 @@ class ViewController: UIViewController, UITextFieldDelegate{
         self.ud.set(onepush, forKey: "mony")
         self.ud4.set(onepush, forKey: "mony2")
         self.TodaysTotalUsedMoney.removeObject(forKey: "TodaysTotalUd")
+        self.hashBox.removeAll()
+        self.hashLog.removeObject(forKey: "hash")
         
       }))
       present(OnepushDoneAlert, animated: true, completion: nil)
@@ -652,7 +654,7 @@ class ViewController: UIViewController, UITextFieldDelegate{
   
   @IBAction func EndTodaysMony(_ sender: Any) {
     let EndTodaysMonyAlert = UIAlertController(title: "¥\(ud.integer(forKey: "mony"))",
-                                               message: "が今日の残額でよろしいですか?",
+                                               message: "が今日の残額でよろしいですか?\nOKを押すと履歴がリセットされます",
                                                preferredStyle: .alert)
  
     
@@ -733,6 +735,15 @@ class ViewController: UIViewController, UITextFieldDelegate{
       ud3.set(100 - resultPercent, forKey: "resultmonyyy")
       print(resultPercent)
       resultmony.value =  CGFloat(ud3.float(forKey: "resultmonyyy"))
+      if logsTotal > ud4.integer(forKey: "mony2") / 2{
+        self.resultmony.progressColor = UIColor.red
+        self.resultmony.progressStrokeColor = UIColor.red
+        print("赤の方")
+      }else{
+        self.resultmony.progressColor = UIColor.yellow
+        self.resultmony.progressStrokeColor = UIColor.yellow
+        print("黄色の方")
+      }
     }
     
   }
