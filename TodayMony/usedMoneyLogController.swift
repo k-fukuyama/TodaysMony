@@ -45,13 +45,17 @@ class usedMoneyLogController: UIViewController, UITableViewDelegate, UITableView
     
   }
   
+  var vclogskeySorted:[String] = []
+  
   func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
     let cell:UITableViewCell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
 
     if let vclogs = vcLogs{
       let vclogsKeySort = Array(vclogs.keys).map{vc.jpTime_to_Date(str: $0)}.sorted(by:>)
       print(type(of: vclogsKeySort))
-      let vclogskeySorted = vclogsKeySort.map{vc.jptime_to_String(date: $0)}
+      vclogskeySorted = vclogsKeySort.map{vc.jptime_to_String(date: $0)}
+      
+      var valueBox:[Int] = []
       
       for key in vclogskeySorted{
         valueBox.append(vclogs[key] as! Int)
@@ -86,7 +90,7 @@ class usedMoneyLogController: UIViewController, UITableViewDelegate, UITableView
   func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
     if let vclogs = vcLogs{
       
-      let keyBox = Array(vclogs.keys).sorted(by: >)
+      let keyBox = vclogskeySorted
       
       for key in keyBox{
         valueBox.append(vclogs[key] as! Int)
