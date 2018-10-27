@@ -30,6 +30,7 @@ class usedMoneyLogController: UIViewController, UITableViewDelegate, UITableView
   
    var vcLogs = ViewController().hashLog.dictionary(forKey: "hash")
    let vc = ViewController()
+   let method = MethodStruct()
    var total = 0
   
   func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -60,7 +61,7 @@ class usedMoneyLogController: UIViewController, UITableViewDelegate, UITableView
         valueBox.append(vclogs[key] as! Int)
       }
       
-      let log = valueBox.map{vc.CommaAdd(comma: $0 as! Int)}
+      let log = valueBox.map{method.CommaAdd(comma: $0 as! Int)}
       cell.textLabel!.text = String(log[indexPath.row])
       
       var timebox:[String] = []
@@ -128,7 +129,7 @@ class usedMoneyLogController: UIViewController, UITableViewDelegate, UITableView
       headerView = UIView(frame: CGRect(x:0, y: 0, width: self.table.frame.size.width, height: 10))
       table.addSubview(headerView)
       headerLabel = UILabel(frame: CGRect(x: 0, y: 0, width: self.table.frame.size.width, height: -100))
-      headerLabel.text = String("合計金額：\(vc.CommaAdd(comma: totalSum()))")
+      headerLabel.text = String("合計金額：\(method.CommaAdd(comma: totalSum()))")
       headerLabel.font = UIFont.systemFont(ofSize: 25)
       headerLabel.textAlignment = .center
       table.addSubview(headerLabel)
