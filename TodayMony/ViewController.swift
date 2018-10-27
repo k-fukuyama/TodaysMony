@@ -30,7 +30,6 @@ class ViewController: UIViewController, UITextFieldDelegate{
   var poolmony = 0
   var returnnum = 0
   var poolmonytwo = 0
-  var SentOneDayMoney = 0
   let method = MethodStruct()
 
   @IBOutlet weak var resultmony: MBCircularProgressBarView!
@@ -150,10 +149,6 @@ class ViewController: UIViewController, UITextFieldDelegate{
       self.resultmony.progressStrokeColor = UIColor.yellow;#colorLiteral(red: 0.9994240403, green: 0.9855536819, blue: 0, alpha: 1)
     }
     
-    if SentOneDayMoney != 0{
-      onepushud.set(SentOneDayMoney, forKey: "onepushmony")
-      onepushud.synchronize()
-    }
     
     let onePushData = onepushud.integer(forKey: "onepushmony")
     

@@ -367,13 +367,6 @@ class detailmonyViewController: UIViewController, UITextFieldDelegate{
     textField.text = addComma(str: textField.text!)
   }
   
-  override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-    if (segue.identifier == "SendOnedayMoney"){
-      let vc:ViewController = segue.destination as! ViewController
-      vc.SentOneDayMoney = SendOneDayMoney
-    }
-  }
-  
   override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
     self.view.endEditing(true)
   }
