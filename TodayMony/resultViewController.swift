@@ -11,6 +11,7 @@ import UIKit
 class resultViewController: UIViewController, UITextFieldDelegate{
   
   let ud = UserDefaults.standard
+  let method = MethodStruct()
 
   
   @IBOutlet weak var oneMonthMoneyRemain: UILabel!
@@ -89,7 +90,7 @@ class resultViewController: UIViewController, UITextFieldDelegate{
   
   
   func ontap(){
-    oneMonthMoneyRemain.text! = vc.CommaAdd(comma: dvc.SaveOneMonthMoneyResult.integer(forKey: "SaveMoney"))
+    oneMonthMoneyRemain.text! = method.CommaAdd(comma: dvc.SaveOneMonthMoneyResult.integer(forKey: "SaveMoney"))
     
   }
   
@@ -122,7 +123,7 @@ class resultViewController: UIViewController, UITextFieldDelegate{
       remainMoneySetAlert.addAction(UIAlertAction(title: "決定", style: .default, handler:{ action in
         if textField.text != ""{
          self.dvc.SaveOneMonthMoneyResult.set(Int(textField.text!), forKey: "SaveMoney")
-          let viewRemain = self.vc.CommaAdd(comma: self.dvc.SaveOneMonthMoneyResult.integer(forKey: "SaveMoney"))
+          let viewRemain = self.method.CommaAdd(comma: self.dvc.SaveOneMonthMoneyResult.integer(forKey: "SaveMoney"))
           self.oneMonthMoneyRemain.text =  viewRemain
         }
       } ))

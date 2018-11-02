@@ -30,18 +30,13 @@ class ViewController: UIViewController, UITextFieldDelegate{
   var poolmony = 0
   var returnnum = 0
   var poolmonytwo = 0
-  var SentOneDayMoney = 0
+  let method = MethodStruct()
 
   @IBOutlet weak var resultmony: MBCircularProgressBarView!
   
   override func viewDidLoad() {
     super.viewDidLoad()
-    
-    print(UsedMony.frame.origin.y)
-    
-    print( UIScreen.main.nativeBounds.size.width)
     percentSet()
-    
     
     if UIScreen.main.nativeBounds.size.width < 750.0{
       ResultMoneyButtom.constant = 1
@@ -57,9 +52,8 @@ class ViewController: UIViewController, UITextFieldDelegate{
     
     notificationcenter.addObserver(self, selector: #selector(showkeyboard(notification:)), name: .UIKeyboardWillShow, object: nil)
     
-   UsedMony.tag = 1
-   MonyField.tag = 2
-    
+    UsedMony.tag = 1
+    MonyField.tag = 2
     
     UpsideToolBar.setBackgroundImage(UIImage(), forToolbarPosition: .any, barMetrics: .default)
     UpsideToolBar.shadowImage(forToolbarPosition: .any)
@@ -106,10 +100,10 @@ class ViewController: UIViewController, UITextFieldDelegate{
     
     if ud.integer(forKey: "mony") != nil{
       TodayMonyNum = ud.integer(forKey: "mony")
-      TodayMony.text = CommaAdd(comma: ud.integer(forKey: "mony"))
+      TodayMony.text = method.CommaAdd(comma: ud.integer(forKey: "mony"))
     }else{
       TodayMonyNum = ud.integer(forKey: "mony")
-      TodayMony.text = CommaAdd(comma: ud.integer(forKey: "mony"))
+      TodayMony.text = method.CommaAdd(comma: ud.integer(forKey: "mony"))
     }
     
     
@@ -132,8 +126,6 @@ class ViewController: UIViewController, UITextFieldDelegate{
       resultmony.value = 100
     }
     
-    
-    
     print("\(udtwo.integer(forKey: "poolmonytwo"))です")
     print(ud.integer(forKey: "mony"))
   
@@ -148,21 +140,14 @@ class ViewController: UIViewController, UITextFieldDelegate{
       self.resultmony.progressStrokeColor = UIColor.yellow;#colorLiteral(red: 0.9994240403, green: 0.9855536819, blue: 0, alpha: 1)
     }
     
-    if SentOneDayMoney != 0{
-      onepushud.set(SentOneDayMoney, forKey: "onepushmony")
-      onepushud.synchronize()
-    }
     
     let onePushData = onepushud.integer(forKey: "onepushmony")
     
     if onePushData != 0{
-      onePushTitle.setTitle(CommaAdd(comma: onePushData), for: .normal)
+      onePushTitle.setTitle(method.CommaAdd(comma: onePushData), for: .normal)
     }else{
       onePushTitle.setTitle("1push", for: .normal)
     }
-    
-    
-    
   }
 
   override func didReceiveMemoryWarning() {
@@ -213,7 +198,6 @@ class ViewController: UIViewController, UITextFieldDelegate{
               preferredStyle: .alert)
             
             
-            
             OndDayMonyAlert.addAction(UIAlertAction(title: "OK", style: .cancel))
             self.present(OndDayMonyAlert, animated:true, completion:nil)
             
@@ -243,7 +227,7 @@ class ViewController: UIViewController, UITextFieldDelegate{
             self.onepushud.set(benum, forKey: "onepushmony")
             self.onepushud.synchronize()
             let onePushedCost = self.onepushud.integer(forKey: "onepushmony")
-            self.onePushTitle.setTitle(self.CommaAdd(comma: onePushedCost), for: .normal)
+            self.onePushTitle.setTitle(self.method.CommaAdd(comma: onePushedCost), for: .normal)
             
             let onepushalert = UIAlertController(title: "設定完了",
                                                  message: "金額を設定できました",
@@ -327,6 +311,14 @@ class ViewController: UIViewController, UITextFieldDelegate{
   
   var TodayMonyNum = 0
   
+  func circleBarAnimatiton(){
+    UIView.animate(withDuration: 1.3) {
+      self.resultmony.value = 100
+      self.resultmony.progressColor = UIColor.yellow
+      self.resultmony.progressStrokeColor = UIColor.yellow
+    }
+  }
+  
   @objc func commit(){
     if MonyField.text != ""{
       TodayMonyNum = Int(MonyField.text!)!
@@ -351,31 +343,34 @@ class ViewController: UIViewController, UITextFieldDelegate{
         self.present(zeroalert, animated: true, completion: nil)
     
       default:
-        UIView.animate(withDuration: 1.3) {
-          self.resultmony.value = 100
-          self.resultmony.progressColor = UIColor.yellow
-          self.resultmony.progressStrokeColor = UIColor.yellow
+        
+        if JudgeOnepush.integer(forKey: "judgenum") == 0{
+          circleBarAnimatiton()
+          if suzi == 1{
+            UITextField.animate(withDuration:0.10, delay:0.0, options: .curveLinear, animations:{
+              self.UsedMony.center.y += 10
+            })
+            suzi = 0
+            print("これがああああああ\(suzi)")
+          }
+          TodaysTotalUsedMoney.removeObject(forKey: "TodaysTotalUd")
+          ud3.set(resultmony.value, forKey: "resultmonyyy")
+          
+          TodayMony.text = method.CommaAdd(comma: Int(MonyField.text!)!)
+          TodayMonyNum = Int(MonyField.text!)!
+          ud.set(TodayMonyNum, forKey: "mony")
+          ud4.set(TodayMonyNum, forKey: "mony2")
+          MonyField.endEditing(true)
+          MonyField.text = ""
+          JudgeOnepush.set(1, forKey: "judgenum")
+          
+        }else{
+          onePushedNotice(which: 1)
         }
         
-        
-        if suzi == 1{
-          UITextField.animate(withDuration:0.10, delay:0.0, options: .curveLinear, animations:{
-            self.UsedMony.center.y += 10
-          })
-          suzi = 0
-          print("これがああああああ\(suzi)")
-        }
-        TodaysTotalUsedMoney.removeObject(forKey: "TodaysTotalUd")
-        ud3.set(resultmony.value, forKey: "resultmonyyy")
-        
-        TodayMony.text = CommaAdd(comma: Int(MonyField.text!)!)
-        TodayMonyNum = Int(MonyField.text!)!
-        ud.set(TodayMonyNum, forKey: "mony")
-        ud4.set(TodayMonyNum, forKey: "mony2")
-        MonyField.endEditing(true)
-        MonyField.text = ""
       }
-      JudgeOnepush.set(1, forKey: "judgenum")
+        
+        
     }else{
       
       if suzi == 1{
@@ -394,17 +389,53 @@ class ViewController: UIViewController, UITextFieldDelegate{
     }
   }
   
-  func CommaAdd(comma:Int) -> String{
-    let formatter = NumberFormatter()
-    formatter.numberStyle = NumberFormatter.Style.decimal
-    formatter.groupingSeparator = ","
-    formatter.groupingSize = 3
-
-    let becomma = "¥\(formatter.string(from: Int(comma) as! NSNumber)!)"
-
-    return becomma
-
+  func onePushedNotice(which: Int){
+    
+    let OnepushDoneAlert = UIAlertController(
+      title: "既に金額を設定しています",
+      message: "もう一度設定しますか？\n履歴がリセットされます",
+      preferredStyle: .alert)
+    
+    OnepushDoneAlert.addAction(UIAlertAction(title: "キャンセル", style: .default))
+    
+    OnepushDoneAlert.addAction(UIAlertAction(title: "OK", style: .destructive, handler: { action in
+      
+      self.circleBarAnimatiton()
+      
+      if which == 0{
+        var onepush = self.onepushud.integer(forKey: "onepushmony")
+        self.ud3.set(self.resultmony.value, forKey: "resultmonyyy")
+        
+        self.TodayMony.text = self.method.CommaAdd(comma: onepush)
+        
+        self.ud.set(onepush, forKey: "mony")
+        self.ud4.set(onepush, forKey: "mony2")
+        self.TodaysTotalUsedMoney.removeObject(forKey: "TodaysTotalUd")
+        self.hashBox.removeAll()
+        self.hashLog.removeObject(forKey: "hash")
+        
+      }else{
+        
+        let todaysMoneyCost = Int(self.MonyField.text!)!
+        self.ud3.set(self.resultmony.value, forKey: "resultmonyyy")
+        
+        self.TodayMony.text = self.method.CommaAdd(comma:todaysMoneyCost)
+        
+        self.ud.set(todaysMoneyCost, forKey: "mony")
+        self.ud4.set(todaysMoneyCost, forKey: "mony2")
+        self.TodaysTotalUsedMoney.removeObject(forKey: "TodaysTotalUd")
+        self.hashBox.removeAll()
+        self.hashLog.removeObject(forKey: "hash")
+        self.MonyField.text! = ""
+      }
+      
+      
+    }))
+    present(OnepushDoneAlert, animated: true, completion: nil)
+    
   }
+  
+  
   
   
   
@@ -428,7 +459,7 @@ class ViewController: UIViewController, UITextFieldDelegate{
               self.onepushud.set(benum, forKey: "onepushmony")
               self.onepushud.synchronize()
               let onePushedCost = self.onepushud.integer(forKey: "onepushmony")
-              self.onePushTitle.setTitle(self.CommaAdd(comma: onePushedCost), for: .normal)
+              self.onePushTitle.setTitle(self.method.CommaAdd(comma: onePushedCost), for: .normal)
               
               
               let onepushalert = UIAlertController(title: "設定完了",
@@ -447,45 +478,11 @@ class ViewController: UIViewController, UITextFieldDelegate{
     }
     
     
-    func onePushedNotice(){
-      
-      let OnepushDoneAlert = UIAlertController(
-        title: "既に金額を設定しています",
-        message: "もう一度設定しますか？\n履歴がリセットされます",
-        preferredStyle: .alert)
-      
-      OnepushDoneAlert.addAction(UIAlertAction(title: "キャンセル", style: .default))
-      
-      OnepushDoneAlert.addAction(UIAlertAction(title: "OK", style: .destructive, handler: { action in
-        
-        UIView.animate(withDuration: 1.3) {
-          self.resultmony.value = 100
-          self.resultmony.progressColor = UIColor.yellow
-          self.resultmony.progressStrokeColor = UIColor.yellow
-          
-        }
-        
-        var onepush = self.onepushud.integer(forKey: "onepushmony")
-        self.ud3.set(self.resultmony.value, forKey: "resultmonyyy")
-        
-        self.TodayMony.text = self.CommaAdd(comma: onepush)
-        
-        self.ud.set(onepush, forKey: "mony")
-        self.ud4.set(onepush, forKey: "mony2")
-        self.TodaysTotalUsedMoney.removeObject(forKey: "TodaysTotalUd")
-        self.hashBox.removeAll()
-        self.hashLog.removeObject(forKey: "hash")
-        
-      }))
-      present(OnepushDoneAlert, animated: true, completion: nil)
-      
-    }
-    
     if JudgeOnepush.integer(forKey: "judgenum") == 0 && onepushud.integer(forKey: "onepushmony") != 0{
       
       ud3.set(resultmony.value, forKey: "resultmonyyy")
       
-      TodayMony.text = CommaAdd(comma: onepush)
+      TodayMony.text = method.CommaAdd(comma: onepush)
       
       ud.set(onepush, forKey: "mony")
       ud4.set(onepush, forKey: "mony2")
@@ -502,7 +499,7 @@ class ViewController: UIViewController, UITextFieldDelegate{
       
     }else{
       
-      onePushedNotice()
+      onePushedNotice(which: 0)
      
     }
     JudgeOnepush.set(1, forKey: "judgenum")
@@ -565,7 +562,7 @@ class ViewController: UIViewController, UITextFieldDelegate{
         
         
         zyunresult = ud.integer(forKey: "mony") - Todayusedmony
-        TodayMony.text = CommaAdd(comma: zyunresult)
+        TodayMony.text = method.CommaAdd(comma: zyunresult)
 
         ud.set(zyunresult, forKey: "mony")
         ud.synchronize()
@@ -710,13 +707,13 @@ class ViewController: UIViewController, UITextFieldDelegate{
   func ontap(){
     let onePushSetData = self.onepushud.integer(forKey: "onepushmony")
     
-    TodayMony.text = CommaAdd(comma: ud.integer(forKey: "mony"))
+    TodayMony.text = method.CommaAdd(comma: ud.integer(forKey: "mony"))
     percentSet()
     
     if onePushSetData == 0{
       onePushTitle.setTitle("1psuh設定", for: .normal)
     }else{
-      onePushTitle.setTitle(CommaAdd(comma: onePushSetData), for: .normal)
+      onePushTitle.setTitle(method.CommaAdd(comma: onePushSetData), for: .normal)
     }
   }
   

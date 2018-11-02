@@ -275,13 +275,11 @@
                         <outlet property="salary" destination="Lah-Zr-1s0" id="COI-X4-PK1"/>
                         <outlet property="salaryText" destination="pUJ-FG-k4m" id="YSf-ei-6Fm"/>
                         <outlet property="transportmony" destination="QIH-0e-YNs" id="60g-zl-fpD"/>
-                        <segue destination="wCp-iv-rNX" kind="modal" identifier="back" id="y3i-dL-bK4"/>
-                        <segue destination="BYZ-38-t0r" kind="modal" identifier="SendOnedayMoney" id="6gN-BK-QLC"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="bXN-Q1-C8E" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1400.8" y="-1020.9895052473764"/>
+            <point key="canvasLocation" x="1445" y="-1048"/>
         </scene>
         <!--今日の金額-->
         <scene sceneID="tne-QT-ifu">
@@ -481,12 +479,11 @@
                         <outlet property="onePushTitle" destination="HjV-Y4-RPl" id="enb-9y-b9g"/>
                         <outlet property="resultViewTop" destination="Rfo-qe-7r3" id="CeF-LL-0e2"/>
                         <outlet property="resultmony" destination="oNr-cH-6FT" id="8Eb-sN-OCF"/>
-                        <segue destination="Z1W-iY-s1d" kind="push" identifier="resultmoney" id="fBF-5G-2mn"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-1233.5999999999999" y="-1191.0044977511245"/>
+            <point key="canvasLocation" x="-1181" y="-942"/>
         </scene>
         <!--result-->
         <scene sceneID="Kcd-8S-AdK">
@@ -497,7 +494,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="JpX-7N-igA" customClass="SimpleButton" customModule="TodayMony" customModuleProvider="target">
-                                <rect key="frame" x="107" y="643" width="200" height="50"/>
+                                <rect key="frame" x="107" y="599" width="200" height="50"/>
                                 <color key="backgroundColor" red="0.50196081400000003" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="200" id="DBT-85-1t5"/>
@@ -516,7 +513,7 @@
                                 </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" alpha="0.90000000000000002" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gj2-rS-crQ">
-                                <rect key="frame" x="107" y="498" width="200" height="50"/>
+                                <rect key="frame" x="107" y="454" width="200" height="50"/>
                                 <color key="backgroundColor" red="0.19722986341396098" green="0.094349546791249489" blue="0.097413732096437666" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="50" id="JcP-ug-hhy"/>
@@ -527,7 +524,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="BD0-eD-yuT">
-                                <rect key="frame" x="107" y="733" width="200" height="50"/>
+                                <rect key="frame" x="107" y="689" width="200" height="50"/>
                                 <color key="backgroundColor" red="0.99942404029999998" green="0.98555368190000003" blue="0.0" alpha="0.78130278716216217" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="50" id="ugi-sy-heH"/>
@@ -547,7 +544,7 @@
                                 </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="残りの使える金額" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qbQ-bK-GYb">
-                                <rect key="frame" x="58" y="374" width="298" height="44"/>
+                                <rect key="frame" x="58" y="330" width="298" height="44"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="37"/>
                                 <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
@@ -573,7 +570,6 @@
                     <connections>
                         <outlet property="oneMonthMoneyRemain" destination="gj2-rS-crQ" id="TRD-R3-v7o"/>
                         <outlet property="remainMoneySetButtom" destination="IMy-ed-wAz" id="nfI-l7-4rk"/>
-                        <segue destination="wCp-iv-rNX" kind="modal" identifier="todaysmony" id="KW3-Pr-7Kd"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Mtu-eS-Aei" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -600,7 +596,7 @@
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="cn4-0I-OkZ" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-504" y="-163.71814092953525"/>
+            <point key="canvasLocation" x="-848" y="-145"/>
         </scene>
         <!--使ったお金-->
         <scene sceneID="5KD-qU-2hA">
@@ -754,9 +750,4 @@
         <image name="poolmoney" width="595" height="842"/>
         <image name="yenIcon" width="595" height="842"/>
     </resources>
-    <inferredMetricsTieBreakers>
-        <segue reference="KW3-Pr-7Kd"/>
-        <segue reference="fBF-5G-2mn"/>
-        <segue reference="ozK-Yh-tbw"/>
-    </inferredMetricsTieBreakers>
 </document>

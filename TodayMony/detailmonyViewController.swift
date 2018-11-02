@@ -23,8 +23,6 @@ class detailmonyViewController: UIViewController, UITextFieldDelegate{
   
   override func viewDidLoad() {
         super.viewDidLoad()
-      print(SaveOneMonthMoneyResult.integer(forKey: "SaveMoney"))
-    print(fixedCostUd.array(forKey: "fixedCost"))
     
     let fixedCostSet = fixedCostUd.dictionary(forKey: "fixedCost")
     
@@ -84,31 +82,11 @@ class detailmonyViewController: UIViewController, UITextFieldDelegate{
       self.othermony.keyboardType = UIKeyboardType.numberPad
       netmony.keyboardType = UIKeyboardType.numberPad
     
-    
-//z      if let fixedCost = fix as Optional{
-//        let beComma = fix.map{addComma(str: $0 as! String)}
-//
-//        commaArray.append(contentsOf: beComma)
-//      }else{
-//        commaArray.append(String(111))
-//      }
-//
-////      for i in beComma{
-////        commaArray.append(i)
-////      }
-//
-//    }
-    
-//    hoge(fix: (fixedCostSet as? Array<String?>))
-    print("できたかな\(fixedCostSet)")
-    
     func beString(int: Int) -> String{
       return String(int)
     }
    
     if let fixedCostSet = fixedCostSet{
-//      let fixedCost = fixedCostNet.map{String(describing: $0)}
-//      let addCommaFixedCost = fixedCost.map{(addComma(str: $0))}
       housemony.text = fixedCostSet["housemoney"] as! String
       transportmony.text = fixedCostSet["transportmoney"] as! String
       netmony.text = fixedCostSet["netmoney"] as! String
@@ -262,7 +240,6 @@ class detailmonyViewController: UIViewController, UITextFieldDelegate{
       var fixedCost = ["housemoney": housemony.text!, "transportmoney": transportmony.text!, "netmoney": netmony.text!,"salary": salary.text!]
       
       let removeCommaFixedCost = fixedCost.values.map{removeComa(str: $0)}
-      print("これがああああ\(removeCommaFixedCost)")
       fixedCostUd.set(fixedCost, forKey: "fixedCost")
       
       let total = deletecomma.map{Int($0)!}
@@ -303,14 +280,6 @@ class detailmonyViewController: UIViewController, UITextFieldDelegate{
         
         let vc = ViewController()
         vc.onepushud.set(self.SendOneDayMoney, forKey: "onepushmony")
-        
-//        SendOneDayMoneySegue.addAction(UIAlertAction(title: "OK", style: .default){ action in
-//                  self.performSegue(withIdentifier: "SendOnedayMoney", sender: nil)
-//        })
-//
-//        self.present(SendOneDayMoneySegue, animated: true, completion: nil)
-
-        
       })
       
 
@@ -384,7 +353,6 @@ class detailmonyViewController: UIViewController, UITextFieldDelegate{
   func addComma(str:String) -> String{
     if (str != ""){
       return formatter.string(from: Int(str) as! NSNumber)!
-//      formatter.string(from: Int(MonyField.text!) as! NSNumber)!
     }else{
       return ""
     }
@@ -396,28 +364,12 @@ class detailmonyViewController: UIViewController, UITextFieldDelegate{
   }
   
   func textFieldDidEndEditing(_ textField: UITextField) {
-//    textField.text = addComma(str: removeComa(str: textField.text!))
     textField.text = addComma(str: textField.text!)
-    
-   
-  }
-  
-  override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-    if (segue.identifier == "SendOnedayMoney"){
-      let vc:ViewController = segue.destination as! ViewController
-      vc.SentOneDayMoney = SendOneDayMoney
-    }
   }
   
   override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
     self.view.endEditing(true)
   }
-  
-//  func textFieldDidBeginEditing(_ textField: UITextField) {
-//    textField.text = removeComa(str: removeComa(str: textField.text!))
-//    print(textField.tag)
-//  }
-  
   
   /*
     // MARK: - Navigation
