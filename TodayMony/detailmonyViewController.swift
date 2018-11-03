@@ -19,6 +19,7 @@ class detailmonyViewController: UIViewController, UITextFieldDelegate{
   @IBOutlet weak var numBottom: NSLayoutConstraint!
   @IBOutlet weak var salaryText: UILabel!
   
+  @IBOutlet weak var eatCostText: UILabel!
   let uiScreenSize = UIScreen.main.nativeBounds.size.width
   
   override func viewDidLoad() {
@@ -44,6 +45,7 @@ class detailmonyViewController: UIViewController, UITextFieldDelegate{
       
       UITextField().delegate = self
       salary.delegate = self
+      eatCost.delegate = self
       housemony.delegate = self
       lifelinemony.delegate = self
       phonemony.delegate = self
@@ -63,6 +65,7 @@ class detailmonyViewController: UIViewController, UITextFieldDelegate{
       toolbar.items = [cancelButton,spacer, commitbutton]
       
       salary.inputAccessoryView = toolbar
+      eatCost.inputAccessoryView = toolbar
       housemony.inputAccessoryView = toolbar
       lifelinemony.inputAccessoryView = toolbar
       phonemony.inputAccessoryView = toolbar
@@ -73,6 +76,7 @@ class detailmonyViewController: UIViewController, UITextFieldDelegate{
       netmony.inputAccessoryView = toolbar
       
       self.salary.keyboardType = UIKeyboardType.numberPad
+      self.eatCost.keyboardType = UIKeyboardType.numberPad
       self.housemony.keyboardType = UIKeyboardType.numberPad
       self.lifelinemony.keyboardType = UIKeyboardType.numberPad
       self.phonemony.keyboardType = UIKeyboardType.numberPad
@@ -96,14 +100,15 @@ class detailmonyViewController: UIViewController, UITextFieldDelegate{
     }
     
       salary.tag = 1
-      housemony.tag = 2
-      lifelinemony.tag = 3
-      phonemony.tag = 4
-      cardmony.tag = 5
-      transportmony.tag = 6
-      entertainmentmony.tag = 7
-      netmony.tag = 8
-      othermony.tag = 9
+      eatCost.tag = 2
+      housemony.tag = 3
+      lifelinemony.tag = 4
+      phonemony.tag = 5
+      cardmony.tag = 6
+      transportmony.tag = 7
+      entertainmentmony.tag = 8
+      netmony.tag = 9
+      othermony.tag = 10
       
       let notificationCenter = NotificationCenter.default
       notificationCenter.addObserver(self, selector: #selector(self.handleKeyboardWillShowNotification(_:)) , name: .UIKeyboardWillShow, object: nil)
@@ -157,7 +162,7 @@ class detailmonyViewController: UIViewController, UITextFieldDelegate{
       nextTextField.becomeFirstResponder()
     }
     
-    if nextTag == 10{
+    if nextTag == 11{
       othermony.endEditing(true)
     }
   }
@@ -167,20 +172,22 @@ class detailmonyViewController: UIViewController, UITextFieldDelegate{
     case 1:
       salary.endEditing(true)
     case 2:
-      housemony.endEditing(true)
+      eatCost.endEditing(true)
     case 3:
-      lifelinemony.endEditing(true)
+      housemony.endEditing(true)
     case 4:
-      phonemony.endEditing(true)
+      lifelinemony.endEditing(true)
     case 5:
-      cardmony.endEditing(true)
+      phonemony.endEditing(true)
     case 6:
-      transportmony.endEditing(true)
+      cardmony.endEditing(true)
     case 7:
-      entertainmentmony.endEditing(true)
+      transportmony.endEditing(true)
     case 8:
-      netmony.endEditing(true)
+      entertainmentmony.endEditing(true)
     case 9:
+      netmony.endEditing(true)
+    case 10:
       othermony.endEditing(true)
     
     default:
@@ -198,8 +205,10 @@ class detailmonyViewController: UIViewController, UITextFieldDelegate{
   @IBOutlet weak var entertainmentmony: UITextField!
   @IBOutlet weak var othermony: UITextField!
   @IBOutlet weak var netmony: UITextField!
+  @IBOutlet weak var eatCost: UITextField!
   
   var salaryint = 0
+  var eatInt = 0
   var houseint = 0
   var lifelineint = 0
   var phoneint = 0
@@ -215,7 +224,7 @@ class detailmonyViewController: UIViewController, UITextFieldDelegate{
   @IBAction func total(_ sender: Any) {
     
     
-    textarray = [lifelinemony.text!, phonemony.text!, cardmony.text!, entertainmentmony.text!, othermony.text!]
+    textarray = [lifelinemony.text!, phonemony.text!, cardmony.text!, entertainmentmony.text!, othermony.text!, eatCost.text!]
     
     
     if salary.text == ""{
@@ -227,7 +236,7 @@ class detailmonyViewController: UIViewController, UITextFieldDelegate{
       self.present(emptyalert, animated: true, completion: nil)
     }else{
       let benumsarary = Int(removeComa(str: salary.text!) )
-      costarray = [housemony.text!, transportmony.text!, lifelinemony.text!, phonemony.text!, cardmony.text!, entertainmentmony.text!, othermony.text!, netmony.text!]
+      costarray = [housemony.text!, transportmony.text!, lifelinemony.text!, phonemony.text!, cardmony.text!, entertainmentmony.text!, othermony.text!, netmony.text!, eatCost.text!]
       
       for var (index, text) in  costarray.enumerated(){
         if text == ""{
@@ -316,6 +325,7 @@ class detailmonyViewController: UIViewController, UITextFieldDelegate{
           self.view.frame = CGRect(x: 0, y: self.view.frame.origin.y - (edithingTextField - (keyBoardY - 30)), width: self.view.bounds.width, height: self.view.bounds.height)
         }, completion: nil)
         salaryText.textColor = UIColor.black
+        eatCostText.textColor = UIColor.black
       }
     
 
@@ -328,6 +338,7 @@ class detailmonyViewController: UIViewController, UITextFieldDelegate{
       self.view.frame = CGRect(x: 0, y: 0, width: self.view.bounds.width, height: self.view.bounds.height)
     }, completion: nil)
     salaryText.textColor = UIColor.white
+    eatCostText.textColor = UIColor.white
 
   }
 
