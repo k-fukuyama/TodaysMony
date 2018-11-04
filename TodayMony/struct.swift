@@ -20,4 +20,9 @@ struct MethodStruct {
     
     return becomma
   }
+  
+  func removeComa(str:String) -> String{
+    let tmp = str.replacingOccurrences(of: ",", with: "")
+    return tmp
+  }
 }

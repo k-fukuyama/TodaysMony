@@ -19,7 +19,7 @@ class ViewController: UIViewController, UITextFieldDelegate{
   
   let ud = UserDefaults.standard
   let udtwo = UserDefaults()
-  let ud3 = UserDefaults.standard
+  let todaysMoneyRemainPercent = UserDefaults.standard
   let ud4 = UserDefaults()
   let onepushud = UserDefaults()
   var JudgeOnepush = UserDefaults()
@@ -27,6 +27,8 @@ class ViewController: UIViewController, UITextFieldDelegate{
   let todaysUsedLog = UserDefaults()
   let todaysUsedTime = UserDefaults()
   let hashLog = UserDefaults()
+  let remainResult = UserDefaults()
+  let firstEnd = UserDefaults()
   var poolmony = 0
   var returnnum = 0
   var poolmonytwo = 0
@@ -37,6 +39,8 @@ class ViewController: UIViewController, UITextFieldDelegate{
   override func viewDidLoad() {
     super.viewDidLoad()
     percentSet()
+    
+    print("これがudの正体\(ud.integer(forKey: "mony"))")
     
     if UIScreen.main.nativeBounds.size.width < 750.0{
       ResultMoneyButtom.constant = 1
@@ -119,8 +123,8 @@ class ViewController: UIViewController, UITextFieldDelegate{
       udtwo.synchronize()
     }
     
-    if ud3.float(forKey: "resultmonyyy") != nil{
-      resultmony.value = CGFloat(ud3.float(forKey: "resultmonyyy"))
+    if todaysMoneyRemainPercent.float(forKey: "resultmonyyy") != nil{
+      resultmony.value = CGFloat(todaysMoneyRemainPercent.float(forKey: "resultmonyyy"))
       
     }else{
       resultmony.value = 100
@@ -310,6 +314,7 @@ class ViewController: UIViewController, UITextFieldDelegate{
   
   
   var TodayMonyNum = 0
+  let setedJudgeNum = UserDefaults()
   
   func circleBarAnimatiton(){
     UIView.animate(withDuration: 1.3) {
@@ -354,7 +359,7 @@ class ViewController: UIViewController, UITextFieldDelegate{
             print("これがああああああ\(suzi)")
           }
           TodaysTotalUsedMoney.removeObject(forKey: "TodaysTotalUd")
-          ud3.set(resultmony.value, forKey: "resultmonyyy")
+          todaysMoneyRemainPercent.set(resultmony.value, forKey: "resultmonyyy")
           
           TodayMony.text = method.CommaAdd(comma: Int(MonyField.text!)!)
           TodayMonyNum = Int(MonyField.text!)!
@@ -363,6 +368,7 @@ class ViewController: UIViewController, UITextFieldDelegate{
           MonyField.endEditing(true)
           MonyField.text = ""
           JudgeOnepush.set(1, forKey: "judgenum")
+          setedJudgeNum.set(1, forKey: "setedJudge")
           
         }else{
           onePushedNotice(which: 1)
@@ -404,7 +410,7 @@ class ViewController: UIViewController, UITextFieldDelegate{
       
       if which == 0{
         var onepush = self.onepushud.integer(forKey: "onepushmony")
-        self.ud3.set(self.resultmony.value, forKey: "resultmonyyy")
+        self.todaysMoneyRemainPercent.set(self.resultmony.value, forKey: "resultmonyyy")
         
         self.TodayMony.text = self.method.CommaAdd(comma: onepush)
         
@@ -417,7 +423,7 @@ class ViewController: UIViewController, UITextFieldDelegate{
       }else{
         
         let todaysMoneyCost = Int(self.MonyField.text!)!
-        self.ud3.set(self.resultmony.value, forKey: "resultmonyyy")
+        self.todaysMoneyRemainPercent.set(self.resultmony.value, forKey: "resultmonyyy")
         
         self.TodayMony.text = self.method.CommaAdd(comma:todaysMoneyCost)
         
@@ -480,7 +486,7 @@ class ViewController: UIViewController, UITextFieldDelegate{
     
     if JudgeOnepush.integer(forKey: "judgenum") == 0 && onepushud.integer(forKey: "onepushmony") != 0{
       
-      ud3.set(resultmony.value, forKey: "resultmonyyy")
+      todaysMoneyRemainPercent.set(resultmony.value, forKey: "resultmonyyy")
       
       TodayMony.text = method.CommaAdd(comma: onepush)
       
@@ -493,7 +499,7 @@ class ViewController: UIViewController, UITextFieldDelegate{
         self.resultmony.progressStrokeColor = UIColor.yellow
         
       }
-      self.ud3.set(self.resultmony.value, forKey: "resultmonyyy")
+      self.todaysMoneyRemainPercent.set(self.resultmony.value, forKey: "resultmonyyy")
       self.ud.set(onepush, forKey: "mony")
       self.ud4.set(onepush, forKey: "mony2")
       
@@ -503,7 +509,7 @@ class ViewController: UIViewController, UITextFieldDelegate{
      
     }
     JudgeOnepush.set(1, forKey: "judgenum")
-   
+   setedJudgeNum.set(1, forKey: "setedJudge")
   }
   
   var hashBox:[String:Int] = [:]
@@ -593,8 +599,7 @@ class ViewController: UIViewController, UITextFieldDelegate{
         bbb = float_t(float_t(Todayusedmony) / float_t(ud4.integer(forKey: "mony2")) * 100)
         resultmony.value = CGFloat(bbb)
         
-        ud3.set(resultmony.value, forKey: "resultmonyyy")
-        ud3.synchronize()
+        todaysMoneyRemainPercent.set(resultmony.value, forKey: "resultmonyyy")
         
         
         zyunresult = TodayMonyNum - Todayusedmony
@@ -609,17 +614,17 @@ class ViewController: UIViewController, UITextFieldDelegate{
         
       }
       
-      if ud3.float(forKey: "resulymonyyy") != nil{
+      if todaysMoneyRemainPercent.float(forKey: "resulymonyyy") != nil{
         
-        resultmony.value = CGFloat(ud3.float(forKey: "resultmonyyy") - bbb * 100)
+        resultmony.value = CGFloat(todaysMoneyRemainPercent.float(forKey: "resultmonyyy") - bbb * 100)
         
-        ud3.set(resultmony.value, forKey: "resultmonyyy")
-        ud3.synchronize()
+        todaysMoneyRemainPercent.set(resultmony.value, forKey: "resultmonyyy")
+        todaysMoneyRemainPercent.synchronize()
       }else{
         resultmony.value = CGFloat(float_t(100) - bbb * 100)
         
-        ud3.set(resultmony.value, forKey: "resultmonyyy")
-        ud3.synchronize()
+        todaysMoneyRemainPercent.set(resultmony.value, forKey: "resultmonyyy")
+        todaysMoneyRemainPercent.synchronize()
         UsedMony.endEditing(true)
         suzi = 0
       }
@@ -656,8 +661,24 @@ class ViewController: UIViewController, UITextFieldDelegate{
  
     
     EndTodaysMonyAlert.addAction(UIAlertAction(title: "OK", style: .destructive, handler: { action in
-      
+      var calcResult = Int((self.method.removeComa(str: self.TodayMony.text!)).replacingOccurrences(of: "¥", with: ""))
+      print(calcResult)
       self.JudgeOnepush.set(0, forKey: "judgenum")
+      
+      if self.setedJudgeNum.integer(forKey:"setedJudge") != 0{
+        if self.firstEnd.integer(forKey: "endCount") == 0{
+          self.remainResult.set(calcResult!, forKey: "remain")
+          self.firstEnd.set(1, forKey: "endCount")
+          print("初めての決算でした")
+        }else{
+          
+          let newResult = self.remainResult.integer(forKey: "remain") + calcResult!
+          self.remainResult.set(newResult, forKey: "remain")
+          print("ほええええ\(self.remainResult.integer(forKey: "remain"))")
+          
+        }
+      }
+      self.setedJudgeNum.set(0, forKey: "setedJudge")
 
       let rvc = resultViewController()
       let dvc = detailmonyViewController()
@@ -729,9 +750,9 @@ class ViewController: UIViewController, UITextFieldDelegate{
       let logsTotal = valueBox.reduce(0){$0 + $1}
       
       let resultPercent = float_t(logsTotal) / float_t(ud4.integer(forKey: "mony2")) * 100
-      ud3.set(100 - resultPercent, forKey: "resultmonyyy")
+      todaysMoneyRemainPercent.set(100 - resultPercent, forKey: "resultmonyyy")
       print(resultPercent)
-      resultmony.value =  CGFloat(ud3.float(forKey: "resultmonyyy"))
+      resultmony.value =  CGFloat(todaysMoneyRemainPercent.float(forKey: "resultmonyyy"))
       if logsTotal > ud4.integer(forKey: "mony2") / 2{
         self.resultmony.progressColor = UIColor.red
         self.resultmony.progressStrokeColor = UIColor.red

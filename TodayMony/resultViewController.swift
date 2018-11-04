@@ -12,6 +12,7 @@ class resultViewController: UIViewController, UITextFieldDelegate{
   
   let ud = UserDefaults.standard
   let method = MethodStruct()
+  let dvc = detailmonyViewController()
 
   
   @IBOutlet weak var oneMonthMoneyRemain: UILabel!
@@ -31,10 +32,7 @@ class resultViewController: UIViewController, UITextFieldDelegate{
       remainMoneySetButtom.constant = 115
     }
     
-   let dvc = detailmonyViewController()
-    
-    
-    let aaa = dvc.SaveOneMonthMoneyResult.integer(forKey: "SaveMoney")
+   
     
       let formatter = NumberFormatter()
       formatter.numberStyle = NumberFormatter.Style.decimal
@@ -65,8 +63,6 @@ class resultViewController: UIViewController, UITextFieldDelegate{
 
   @IBOutlet weak var monylabel: UILabel!
   
-  
-  let dvc = detailmonyViewController()
   let vc = ViewController()
   
   @IBAction func reset(_ sender: Any) {
@@ -77,8 +73,16 @@ class resultViewController: UIViewController, UITextFieldDelegate{
     
     
     alert.addAction(UIAlertAction(title:"リセットする", style:.destructive, handler:{ action in
-      self.dvc.SaveOneMonthMoneyResult.removeObject(forKey: "SaveMoney")
-      self.oneMonthMoneyRemain.text! = String(self.ud.integer(forKey: "aaa"))
+      
+      if self.segnum == 0{
+        self.dvc.SaveOneMonthMoneyResult.removeObject(forKey: "SaveMoney")
+        self.oneMonthMoneyRemain.text! = String(self.ud.integer(forKey: "aaa"))
+      }else{
+        self.vc.remainResult.removeObject(forKey: "remain")
+        self.vc.firstEnd.removeObject(forKey: "endCount")
+        self.oneMonthMoneyRemain.text! = self.method.CommaAdd(comma: self.vc.remainResult.integer(forKey: "remain"))
+      }
+      
     }))
     
     alert.addAction(UIAlertAction(title:"リセットしない", style: .cancel))
@@ -90,7 +94,12 @@ class resultViewController: UIViewController, UITextFieldDelegate{
   
   
   func ontap(){
-    oneMonthMoneyRemain.text! = method.CommaAdd(comma: dvc.SaveOneMonthMoneyResult.integer(forKey: "SaveMoney"))
+    if segnum == 0{
+      oneMonthMoneyRemain.text! = method.CommaAdd(comma: dvc.SaveOneMonthMoneyResult.integer(forKey: "SaveMoney"))
+    }else{
+      oneMonthMoneyRemain.text! = method.CommaAdd(comma: ViewController().remainResult.integer(forKey: "remain"))
+    }
+    
     
   }
   
@@ -109,7 +118,16 @@ class resultViewController: UIViewController, UITextFieldDelegate{
   
   
   @IBAction func remainMoneySetButton(_ sender: Any) {
-    let remainMoneySetAlert = UIAlertController(title: "残りの金額を設定します",
+    let remainSetTitle = "残りの金額を設定します"
+    let poolMoneySetTitle = "貯められた金額を修正します"
+    var title = ""
+    
+    if segnum == 0{
+      title = remainSetTitle
+    }else{
+      title = poolMoneySetTitle
+    }
+    let remainMoneySetAlert = UIAlertController(title: title,
                                                 message: "金額を入力してください",
                                                 preferredStyle: .alert)
     
@@ -122,15 +140,50 @@ class resultViewController: UIViewController, UITextFieldDelegate{
       
       remainMoneySetAlert.addAction(UIAlertAction(title: "決定", style: .default, handler:{ action in
         if textField.text != ""{
-         self.dvc.SaveOneMonthMoneyResult.set(Int(textField.text!), forKey: "SaveMoney")
-          let viewRemain = self.method.CommaAdd(comma: self.dvc.SaveOneMonthMoneyResult.integer(forKey: "SaveMoney"))
-          self.oneMonthMoneyRemain.text =  viewRemain
+          if self.segnum == 0{
+            self.dvc.SaveOneMonthMoneyResult.set(Int(textField.text!), forKey: "SaveMoney")
+            let viewRemain = self.method.CommaAdd(comma: self.dvc.SaveOneMonthMoneyResult.integer(forKey: "SaveMoney"))
+            self.oneMonthMoneyRemain.text =  viewRemain
+          }else{
+            self.vc.remainResult.set(Int(textField.text!), forKey: "remain")
+            self.oneMonthMoneyRemain.text = self.method.CommaAdd(comma: ViewController().remainResult.integer(forKey: "remain"))
+          }
+         
         }
       } ))
     } )
     self.present(remainMoneySetAlert, animated: true, completion: nil)
   }
   
+  @IBOutlet weak var itemTitle: UILabel!
+  
+  
+  func remainMoneyViewSet(){
+    itemTitle.text! = "残りの使える金額"
+    oneMonthMoneyRemain.text! = method.CommaAdd(comma: dvc.SaveOneMonthMoneyResult.integer(forKey: "SaveMoney"))
+    segnum = 0
+  }
+  
+  func poolMoneyViewSet(){
+    itemTitle.text! = "貯められた金額"
+    oneMonthMoneyRemain.text! = method.CommaAdd(comma: ViewController().remainResult.integer(forKey: "remain"))
+    segnum = 1
+  }
+  
+  var segnum = 0
+  
+  @IBAction func changeSegment(_ sender: UISegmentedControl) {
+    switch  sender.selectedSegmentIndex {
+    case 0:
+      remainMoneyViewSet()
+      
+    case 1:
+      poolMoneyViewSet()
+    
+    default:
+      print("error")
+    }
+  }
   
   /*
     // MARK: - Navigation

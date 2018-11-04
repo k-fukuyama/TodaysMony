@@ -144,7 +144,7 @@ class logDetailViewController: UIViewController, UITextFieldDelegate{
     print("これがbefore\(beforeNum)")
     let trueNum = float_t(editedValu) / float_t(beforeNum) * 100
     
-    vc.ud3.set(CGFloat(trueNum), forKey: "resultmonyyy")
+    vc.todaysMoneyRemainPercent.set(CGFloat(trueNum), forKey: "resultmonyyy")
   }
   
   @objc func commit(){
