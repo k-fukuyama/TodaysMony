@@ -514,8 +514,23 @@ class ViewController: UIViewController, UITextFieldDelegate{
   
   var hashBox:[String:Int] = [:]
   
+  func pleaseSetMoneyAlert(){
+      let setAlert = UIAlertController(title: "金額を再設定してください",
+        message: "決算ボタンを押した後は、金額を再設定してください",
+        preferredStyle: .alert)
+      
+      setAlert.addAction(UIAlertAction(title: "OK", style: .default))
+    present(setAlert, animated: true, completion: nil)
+  }
+  
   @objc func UsedMonyButton(){
     if UsedMony.text != ""{
+      
+      guard setedJudgeNum.integer(forKey:"setedJudge") == 1 else {
+        pleaseSetMoneyAlert()
+        return
+      }
+      print("処理を抜けました")
       
       let f = DateFormatter()
       let now = Date()
