@@ -520,6 +520,7 @@ class ViewController: UIViewController, UITextFieldDelegate{
         preferredStyle: .alert)
       
       setAlert.addAction(UIAlertAction(title: "OK", style: .default))
+    UsedMony.endEditing(true)
     present(setAlert, animated: true, completion: nil)
   }
   
@@ -530,8 +531,7 @@ class ViewController: UIViewController, UITextFieldDelegate{
         pleaseSetMoneyAlert()
         return
       }
-      print("処理を抜けました")
-      
+     
       let f = DateFormatter()
       let now = Date()
       var timeBox: [String] = []

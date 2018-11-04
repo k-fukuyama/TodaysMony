@@ -161,16 +161,20 @@ class resultViewController: UIViewController, UITextFieldDelegate{
   func remainMoneyViewSet(){
     itemTitle.text! = "残りの使える金額"
     oneMonthMoneyRemain.text! = method.CommaAdd(comma: dvc.SaveOneMonthMoneyResult.integer(forKey: "SaveMoney"))
+    setButtonTitle.setTitle("残りの金額を設定", for: .normal)
     segnum = 0
   }
   
   func poolMoneyViewSet(){
     itemTitle.text! = "貯められた金額"
     oneMonthMoneyRemain.text! = method.CommaAdd(comma: ViewController().remainResult.integer(forKey: "remain"))
+    setButtonTitle.setTitle("貯められた金額を設定", for: .normal)
     segnum = 1
   }
   
   var segnum = 0
+  
+  @IBOutlet weak var setButtonTitle: UIButton!
   
   @IBAction func changeSegment(_ sender: UISegmentedControl) {
     switch  sender.selectedSegmentIndex {

@@ -617,6 +617,7 @@
                         <outlet property="itemTitle" destination="qbQ-bK-GYb" id="5qM-N1-gkv"/>
                         <outlet property="oneMonthMoneyRemain" destination="gj2-rS-crQ" id="TRD-R3-v7o"/>
                         <outlet property="remainMoneySetButtom" destination="IMy-ed-wAz" id="nfI-l7-4rk"/>
+                        <outlet property="setButtonTitle" destination="BD0-eD-yuT" id="ZUY-8P-ULK"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Mtu-eS-Aei" userLabel="First Responder" sceneMemberID="firstResponder"/>
