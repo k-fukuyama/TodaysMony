@@ -25,4 +25,12 @@ struct MethodStruct {
     let tmp = str.replacingOccurrences(of: ",", with: "")
     return tmp
   }
+  
+  func getThisMonthDays() -> Int{
+    let cal = Calendar.current
+    let date = Date()
+    let thisMonthDays = cal.range(of: .day, in: .month, for: date as Date)?.count
+    
+    return thisMonthDays!
+  }
 }

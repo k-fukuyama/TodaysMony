@@ -66,8 +66,15 @@ class resultViewController: UIViewController, UITextFieldDelegate{
   let vc = ViewController()
   
   @IBAction func reset(_ sender: Any) {
-    var alert = UIAlertController(title:"残りの金額をリセット",
-                                  message:"残りの金額をリセットします",
+    var AlertTitle = ""
+    
+    if segnum == 0{
+      AlertTitle = "残りの金額をリセット"
+    }else{
+      AlertTitle = "貯められた金額をリセット"
+    }
+    var alert = UIAlertController(title: AlertTitle,
+                                  message:"\(AlertTitle)します",
                                   preferredStyle: .alert)
     
     
@@ -118,14 +125,13 @@ class resultViewController: UIViewController, UITextFieldDelegate{
   
   
   @IBAction func remainMoneySetButton(_ sender: Any) {
-    let remainSetTitle = "残りの金額を設定します"
-    let poolMoneySetTitle = "貯められた金額を修正します"
+
     var title = ""
     
     if segnum == 0{
-      title = remainSetTitle
+      title = "残りの金額を設定します"
     }else{
-      title = poolMoneySetTitle
+      title = "貯められた金額を修正します"
     }
     let remainMoneySetAlert = UIAlertController(title: title,
                                                 message: "金額を入力してください",
