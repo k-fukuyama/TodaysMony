@@ -577,9 +577,27 @@
                                 <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="tS8-ni-3W0">
+                                <rect key="frame" x="99.666666666666686" y="284" width="215" height="29"/>
+                                <color key="backgroundColor" cocoaTouchSystemColor="viewFlipsideBackgroundColor"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="28" id="hJb-DV-wze"/>
+                                    <constraint firstAttribute="width" constant="215" id="lQx-gQ-3Oz"/>
+                                </constraints>
+                                <segments>
+                                    <segment title="残りの金額"/>
+                                    <segment title="貯められた金額"/>
+                                </segments>
+                                <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <connections>
+                                    <action selector="changeSegment:" destination="Z1W-iY-s1d" eventType="valueChanged" id="9BZ-ca-tIF"/>
+                                </connections>
+                            </segmentedControl>
                         </subviews>
                         <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
+                            <constraint firstItem="tS8-ni-3W0" firstAttribute="centerX" secondItem="jIc-sj-CZG" secondAttribute="centerX" id="0w0-On-9hf"/>
+                            <constraint firstItem="qbQ-bK-GYb" firstAttribute="top" secondItem="tS8-ni-3W0" secondAttribute="bottom" constant="18" id="29L-c5-odE"/>
                             <constraint firstItem="BD0-eD-yuT" firstAttribute="centerX" secondItem="jIc-sj-CZG" secondAttribute="centerX" id="37Y-SI-FXe"/>
                             <constraint firstItem="BD0-eD-yuT" firstAttribute="top" secondItem="JpX-7N-igA" secondAttribute="bottom" constant="40" id="Cfq-bf-kDS"/>
                             <constraint firstItem="mLf-M8-grq" firstAttribute="bottom" secondItem="BD0-eD-yuT" secondAttribute="bottom" constant="30" id="IMy-ed-wAz"/>
@@ -596,13 +614,15 @@
                     <navigationItem key="navigationItem" id="rgD-WZ-MH6"/>
                     <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
+                        <outlet property="itemTitle" destination="qbQ-bK-GYb" id="5qM-N1-gkv"/>
                         <outlet property="oneMonthMoneyRemain" destination="gj2-rS-crQ" id="TRD-R3-v7o"/>
                         <outlet property="remainMoneySetButtom" destination="IMy-ed-wAz" id="nfI-l7-4rk"/>
+                        <outlet property="setButtonTitle" destination="BD0-eD-yuT" id="ZUY-8P-ULK"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Mtu-eS-Aei" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="72.799999999999997" y="-1047.9760119940031"/>
+            <point key="canvasLocation" x="72.463768115942031" y="-1047.9910714285713"/>
         </scene>
         <!--Custoumbar-->
         <scene sceneID="Fr6-Ol-fFg">

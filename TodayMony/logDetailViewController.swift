@@ -94,7 +94,7 @@ class logDetailViewController: UIViewController, UITextFieldDelegate{
     
     let text = editTextField.text!
     
-    if text != "" && text != "0"{
+    if text != "" && Int(text) != 0{
       print(editedLog)
         
         var result = 0
@@ -128,7 +128,7 @@ class logDetailViewController: UIViewController, UITextFieldDelegate{
         
         }
       
-    }else if text == "0" {
+    }else if Int(text) == 0 {
       zeroAlert()
     }else{
       emptyAlert()
@@ -144,7 +144,7 @@ class logDetailViewController: UIViewController, UITextFieldDelegate{
     print("これがbefore\(beforeNum)")
     let trueNum = float_t(editedValu) / float_t(beforeNum) * 100
     
-    vc.ud3.set(CGFloat(trueNum), forKey: "resultmonyyy")
+    vc.todaysMoneyRemainPercent.set(CGFloat(trueNum), forKey: "resultmonyyy")
   }
   
   @objc func commit(){
