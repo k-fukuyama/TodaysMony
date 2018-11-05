@@ -111,8 +111,8 @@ class logDetailViewController: UIViewController, UITextFieldDelegate{
           dvcSetNum = dvc.SaveOneMonthMoneyResult.integer(forKey: "SaveMoney") - result
           dvc.SaveOneMonthMoneyResult.set(dvcSetNum, forKey: "SaveMoney")
           
-          todayRemainTextNum = vc.ud.integer(forKey: "mony") - result
-          vc.ud.set(todayRemainTextNum, forKey: "mony")
+          todayRemainTextNum = vc.todaysMoneyPrice.integer(forKey: "mony") - result
+          vc.todaysMoneyPrice.set(todayRemainTextNum, forKey: "mony")
           
           editedAlert()
           
@@ -121,8 +121,8 @@ class logDetailViewController: UIViewController, UITextFieldDelegate{
           dvcSetNum = dvc.SaveOneMonthMoneyResult.integer(forKey: "SaveMoney") + result
           dvc.SaveOneMonthMoneyResult.set(dvcSetNum, forKey: "SaveMoney")
           
-          todayRemainTextNum = vc.ud.integer(forKey: "mony") + result
-          vc.ud.set(todayRemainTextNum, forKey: "mony")
+          todayRemainTextNum = vc.todaysMoneyPrice.integer(forKey: "mony") + result
+          vc.todaysMoneyPrice.set(todayRemainTextNum, forKey: "mony")
           
           editedAlert()
         
@@ -139,9 +139,8 @@ class logDetailViewController: UIViewController, UITextFieldDelegate{
   }
   
   func adjustment(num: Int, editedValu: Int){
-    print(vc.ud.integer(forKey: "mony"))
-    let beforeNum = vc.ud.integer(forKey: "mony") + num
-    print("これがbefore\(beforeNum)")
+    print(vc.todaysMoneyPrice.integer(forKey: "mony"))
+    let beforeNum = vc.todaysMoneyPrice.integer(forKey: "mony") + num
     let trueNum = float_t(editedValu) / float_t(beforeNum) * 100
     
     vc.todaysMoneyRemainPercent.set(CGFloat(trueNum), forKey: "resultmonyyy")

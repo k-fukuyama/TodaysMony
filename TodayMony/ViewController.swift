@@ -17,7 +17,7 @@ class ViewController: UIViewController, UITextFieldDelegate{
   @IBOutlet weak var tabBar: UITabBar!
   @IBOutlet weak var resultViewTop: NSLayoutConstraint!
   
-  let ud = UserDefaults.standard
+  let todaysMoneyPrice = UserDefaults.standard
   let udtwo = UserDefaults()
   let todaysMoneyRemainPercent = UserDefaults.standard
   let ud4 = UserDefaults()
@@ -33,14 +33,13 @@ class ViewController: UIViewController, UITextFieldDelegate{
   var returnnum = 0
   var poolmonytwo = 0
   let method = MethodStruct()
+  let dvc = detailmonyViewController()
 
   @IBOutlet weak var resultmony: MBCircularProgressBarView!
   
   override func viewDidLoad() {
     super.viewDidLoad()
     percentSet()
-    
-    print("これがudの正体\(ud.integer(forKey: "mony"))")
     
     if UIScreen.main.nativeBounds.size.width < 750.0{
       ResultMoneyButtom.constant = 1
@@ -102,12 +101,12 @@ class ViewController: UIViewController, UITextFieldDelegate{
     UsedMony.inputAccessoryView = UsedCostToolbar
     
     
-    if ud.integer(forKey: "mony") != nil{
-      TodayMonyNum = ud.integer(forKey: "mony")
-      TodayMony.text = method.CommaAdd(comma: ud.integer(forKey: "mony"))
+    if todaysMoneyPrice.integer(forKey: "mony") != nil{
+      TodayMonyNum = todaysMoneyPrice.integer(forKey: "mony")
+      TodayMony.text = method.CommaAdd(comma: todaysMoneyPrice.integer(forKey: "mony"))
     }else{
-      TodayMonyNum = ud.integer(forKey: "mony")
-      TodayMony.text = method.CommaAdd(comma: ud.integer(forKey: "mony"))
+      TodayMonyNum = todaysMoneyPrice.integer(forKey: "mony")
+      TodayMony.text = method.CommaAdd(comma: todaysMoneyPrice.integer(forKey: "mony"))
     }
     
     
@@ -119,7 +118,7 @@ class ViewController: UIViewController, UITextFieldDelegate{
       
     }else{
       udtwo.set(poolmonytwo, forKey: "poolmonytwo")
-      poolmonytwo = ud.integer(forKey: "poolmonytwo")
+      poolmonytwo = todaysMoneyPrice.integer(forKey: "poolmonytwo")
       udtwo.synchronize()
     }
     
@@ -131,10 +130,10 @@ class ViewController: UIViewController, UITextFieldDelegate{
     }
     
     print("\(udtwo.integer(forKey: "poolmonytwo"))です")
-    print(ud.integer(forKey: "mony"))
+    print(todaysMoneyPrice.integer(forKey: "mony"))
   
     if zyunresult == 0{
-      zyunresult = ud.integer(forKey: "mony")
+      zyunresult = todaysMoneyPrice.integer(forKey: "mony")
     }
     if zyunresult < ud4.integer(forKey: "mony2") / 2{
       self.resultmony.progressColor = UIColor.red
@@ -179,7 +178,7 @@ class ViewController: UIViewController, UITextFieldDelegate{
     
     SubButtonAlert.addAction(UIAlertAction(title: "1日あたりに使える金額計算", style: .default, handler: { action in
       let OneMonthMony = UIAlertController(title: "今月自由に使える金額を入力してください",
-                                           message: "[入力した金額]÷31日で1日あたりに使える金額を計算します",
+                                           message: "[入力した金額]÷今月の日数で1日あたりに使える金額を計算します",
                                            preferredStyle: .alert
                                            )
       
@@ -196,11 +195,10 @@ class ViewController: UIViewController, UITextFieldDelegate{
           if textField.text != "" {
             
             
-            let OndDayMony = Int(textField.text!)! / 31
+            let OndDayMony = Int(textField.text!)! / self.method.getThisMonthDays()
             let OndDayMonyAlert = UIAlertController(title: "¥\(OndDayMony)",
               message: "が1日あたりの使用可能金額です",
               preferredStyle: .alert)
-            
             
             OndDayMonyAlert.addAction(UIAlertAction(title: "OK", style: .cancel))
             self.present(OndDayMonyAlert, animated:true, completion:nil)
@@ -363,7 +361,7 @@ class ViewController: UIViewController, UITextFieldDelegate{
           
           TodayMony.text = method.CommaAdd(comma: Int(MonyField.text!)!)
           TodayMonyNum = Int(MonyField.text!)!
-          ud.set(TodayMonyNum, forKey: "mony")
+          todaysMoneyPrice.set(TodayMonyNum, forKey: "mony")
           ud4.set(TodayMonyNum, forKey: "mony2")
           MonyField.endEditing(true)
           MonyField.text = ""
@@ -414,7 +412,7 @@ class ViewController: UIViewController, UITextFieldDelegate{
         
         self.TodayMony.text = self.method.CommaAdd(comma: onepush)
         
-        self.ud.set(onepush, forKey: "mony")
+        self.todaysMoneyPrice.set(onepush, forKey: "mony")
         self.ud4.set(onepush, forKey: "mony2")
         self.TodaysTotalUsedMoney.removeObject(forKey: "TodaysTotalUd")
         self.hashBox.removeAll()
@@ -427,7 +425,7 @@ class ViewController: UIViewController, UITextFieldDelegate{
         
         self.TodayMony.text = self.method.CommaAdd(comma:todaysMoneyCost)
         
-        self.ud.set(todaysMoneyCost, forKey: "mony")
+        self.todaysMoneyPrice.set(todaysMoneyCost, forKey: "mony")
         self.ud4.set(todaysMoneyCost, forKey: "mony2")
         self.TodaysTotalUsedMoney.removeObject(forKey: "TodaysTotalUd")
         self.hashBox.removeAll()
@@ -490,7 +488,7 @@ class ViewController: UIViewController, UITextFieldDelegate{
       
       TodayMony.text = method.CommaAdd(comma: onepush)
       
-      ud.set(onepush, forKey: "mony")
+      todaysMoneyPrice.set(onepush, forKey: "mony")
       ud4.set(onepush, forKey: "mony2")
       TodaysTotalUsedMoney.removeObject(forKey: "TodaysTotalUd")
       UIView.animate(withDuration: 1.3) {
@@ -500,7 +498,7 @@ class ViewController: UIViewController, UITextFieldDelegate{
         
       }
       self.todaysMoneyRemainPercent.set(self.resultmony.value, forKey: "resultmonyyy")
-      self.ud.set(onepush, forKey: "mony")
+      self.todaysMoneyPrice.set(onepush, forKey: "mony")
       self.ud4.set(onepush, forKey: "mony2")
       
     }else{
@@ -552,16 +550,16 @@ class ViewController: UIViewController, UITextFieldDelegate{
         print(hashBox)
       }
       
-      let dvc = detailmonyViewController()
+      
       
       let remain = dvc.SaveOneMonthMoneyResult.integer(forKey: "SaveMoney") - Int(UsedMony.text!)!
       dvc.SaveOneMonthMoneyResult.set(remain, forKey: "SaveMoney")
       
       NotificationCenter.default.removeObserver(self)
       
-      if ud.integer(forKey: "mony") != nil{
+      if todaysMoneyPrice.integer(forKey: "mony") != nil{
         
-        print(ud.integer(forKey: "mony"))
+        print(todaysMoneyPrice.integer(forKey: "mony"))
         
         BeNum = UsedMony.text!
         Todayusedmony = Int(BeNum)!
@@ -582,11 +580,11 @@ class ViewController: UIViewController, UITextFieldDelegate{
         
         
         
-        zyunresult = ud.integer(forKey: "mony") - Todayusedmony
+        zyunresult = todaysMoneyPrice.integer(forKey: "mony") - Todayusedmony
         TodayMony.text = method.CommaAdd(comma: zyunresult)
 
-        ud.set(zyunresult, forKey: "mony")
-        ud.synchronize()
+        todaysMoneyPrice.set(zyunresult, forKey: "mony")
+        todaysMoneyPrice.synchronize()
         UsedMony.endEditing(true)
         
         
@@ -620,8 +618,7 @@ class ViewController: UIViewController, UITextFieldDelegate{
         zyunresult = TodayMonyNum - Todayusedmony
         TodayMony.text = String(zyunresult)
         
-        ud.set(zyunresult, forKey: "mony")
-        ud.synchronize()
+        todaysMoneyPrice.set(zyunresult, forKey: "mony")
         UsedMony.endEditing(true)
         
         suzi = 0
@@ -670,24 +667,24 @@ class ViewController: UIViewController, UITextFieldDelegate{
   var todaysOneMonethMoneyRemain = 0
   
   @IBAction func EndTodaysMony(_ sender: Any) {
-    let EndTodaysMonyAlert = UIAlertController(title: "¥\(ud.integer(forKey: "mony"))",
+    let EndTodaysMonyAlert = UIAlertController(title: "¥\(todaysMoneyPrice.integer(forKey: "mony"))",
                                                message: "が今日の残額でよろしいですか?\nOKを押すと履歴がリセットされます",
                                                preferredStyle: .alert)
  
     
     EndTodaysMonyAlert.addAction(UIAlertAction(title: "OK", style: .destructive, handler: { action in
-      var calcResult = Int((self.method.removeComa(str: self.TodayMony.text!)).replacingOccurrences(of: "¥", with: ""))
+      let calcResult = Int((self.method.removeComa(str: self.TodayMony.text!)).replacingOccurrences(of: "¥", with: ""))!
       print(calcResult)
       self.JudgeOnepush.set(0, forKey: "judgenum")
       
       if self.setedJudgeNum.integer(forKey:"setedJudge") != 0{
         if self.firstEnd.integer(forKey: "endCount") == 0{
-          self.remainResult.set(calcResult!, forKey: "remain")
+          self.remainResult.set(calcResult, forKey: "remain")
           self.firstEnd.set(1, forKey: "endCount")
           print("初めての決算でした")
         }else{
           
-          let newResult = self.remainResult.integer(forKey: "remain") + calcResult!
+          let newResult = self.remainResult.integer(forKey: "remain") + calcResult
           self.remainResult.set(newResult, forKey: "remain")
           print("ほええええ\(self.remainResult.integer(forKey: "remain"))")
           
@@ -696,9 +693,9 @@ class ViewController: UIViewController, UITextFieldDelegate{
       self.setedJudgeNum.set(0, forKey: "setedJudge")
 
       let rvc = resultViewController()
-      let dvc = detailmonyViewController()
-      self.todaysOneMonethMoneyRemain = dvc.SaveOneMonthMoneyResult.integer(forKey: "SaveMoney") - self.TodaysTotalUsedMoney.integer(forKey: "TodaysTotalUd")
-      dvc.SaveOneMonthMoneyResult.set(self.todaysOneMonethMoneyRemain, forKey: "SaveMoney")
+      
+      self.todaysOneMonethMoneyRemain = self.dvc.SaveOneMonthMoneyResult.integer(forKey: "SaveMoney") - self.TodaysTotalUsedMoney.integer(forKey: "TodaysTotalUd")
+      self.dvc.SaveOneMonthMoneyResult.set(self.todaysOneMonethMoneyRemain, forKey: "SaveMoney")
       
       let todaysResult = UIAlertController(title: "\(self.todaysOneMonethMoneyRemain)円",
         message: "が残りの使える金額です",
@@ -743,7 +740,7 @@ class ViewController: UIViewController, UITextFieldDelegate{
   func ontap(){
     let onePushSetData = self.onepushud.integer(forKey: "onepushmony")
     
-    TodayMony.text = method.CommaAdd(comma: ud.integer(forKey: "mony"))
+    TodayMony.text = method.CommaAdd(comma: todaysMoneyPrice.integer(forKey: "mony"))
     percentSet()
     
     if onePushSetData == 0{

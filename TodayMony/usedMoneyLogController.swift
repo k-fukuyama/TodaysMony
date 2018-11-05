@@ -18,7 +18,6 @@ class usedMoneyLogController: UIViewController, UITableViewDelegate, UITableView
   
   func ontap(){
     vcLogs = ViewController().hashLog.dictionary(forKey: "hash")
-//    deleteLog()
     totalSum()
     table.reloadData()
   }
