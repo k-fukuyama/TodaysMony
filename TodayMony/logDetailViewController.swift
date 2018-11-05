@@ -94,7 +94,7 @@ class logDetailViewController: UIViewController, UITextFieldDelegate{
     
     let text = editTextField.text!
     
-    if text != "" && text != "0"{
+    if text != "" && Int(text) != 0{
       print(editedLog)
         
         var result = 0
@@ -128,7 +128,7 @@ class logDetailViewController: UIViewController, UITextFieldDelegate{
         
         }
       
-    }else if text == "0" {
+    }else if Int(text) == 0 {
       zeroAlert()
     }else{
       emptyAlert()
