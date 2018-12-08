@@ -25,9 +25,6 @@ class detailmonyViewController: UIViewController, UITextFieldDelegate{
   override func viewDidLoad() {
         super.viewDidLoad()
     
-    let fixedCostSet = fixedCostUd.dictionary(forKey: "fixedCost")
-    
-    
     if uiScreenSize < 750.0{
       numBottom.constant = 40
     }else if uiScreenSize >= 828.0{
@@ -41,54 +38,31 @@ class detailmonyViewController: UIViewController, UITextFieldDelegate{
       formatter.numberStyle = NumberFormatter.Style.decimal
       formatter.groupingSeparator = ","
       formatter.groupingSize = 3
+      let methodStruct = MethodStruct()
       
+      let toolbar = methodStruct.toolbarMaker()
       
-      UITextField().delegate = self
-      salary.delegate = self
-      eatCost.delegate = self
-      housemony.delegate = self
-      lifelinemony.delegate = self
-      phonemony.delegate = self
-      cardmony.delegate = self
-      transportmony.delegate = self
-      entertainmentmony.delegate = self
-      othermony.delegate = self
-      netmony.delegate = self
-      
-      let toolbar = UIToolbar()
-      toolbar.barStyle = UIBarStyle.default
-      toolbar.sizeToFit()
-      
-      let spacer = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.flexibleSpace, target: self, action: nil)
+      let spacer = methodStruct.spacer(className: self)
       let commitbutton = UIBarButtonItem(title: "決定", style: UIBarButtonItemStyle.done, target: self, action: #selector(self.commit))
       let cancelButton = UIBarButtonItem(title: "閉じる", style: UIBarButtonItemStyle.done, target: self, action: #selector(self.cancelButton))
       toolbar.items = [cancelButton,spacer, commitbutton]
       
-      salary.inputAccessoryView = toolbar
-      eatCost.inputAccessoryView = toolbar
-      housemony.inputAccessoryView = toolbar
-      lifelinemony.inputAccessoryView = toolbar
-      phonemony.inputAccessoryView = toolbar
-      cardmony.inputAccessoryView = toolbar
-      transportmony.inputAccessoryView = toolbar
-      entertainmentmony.inputAccessoryView = toolbar
-      othermony.inputAccessoryView = toolbar
-      netmony.inputAccessoryView = toolbar
-      
-      self.salary.keyboardType = UIKeyboardType.numberPad
-      self.eatCost.keyboardType = UIKeyboardType.numberPad
-      self.housemony.keyboardType = UIKeyboardType.numberPad
-      self.lifelinemony.keyboardType = UIKeyboardType.numberPad
-      self.phonemony.keyboardType = UIKeyboardType.numberPad
-      self.cardmony.keyboardType = UIKeyboardType.numberPad
-      self.transportmony.keyboardType = UIKeyboardType.numberPad
-      self.entertainmentmony.keyboardType = UIKeyboardType.numberPad
-      self.othermony.keyboardType = UIKeyboardType.numberPad
-      netmony.keyboardType = UIKeyboardType.numberPad
+    let keyboards = [salary, eatCost, housemony, lifelinemony, phonemony, cardmony, transportmony, entertainmentmony, netmony, othermony]
+    
+    var tagAssignNum = 0
+    for keyboard in keyboards{
+      keyboard?.keyboardType = UIKeyboardType.numberPad
+      keyboard?.inputAccessoryView = toolbar
+      keyboard?.delegate = self
+      tagAssignNum += 1
+      keyboard?.tag = tagAssignNum
+    }
     
     func beString(int: Int) -> String{
       return String(int)
     }
+    
+    let fixedCostSet = fixedCostUd.dictionary(forKey: "fixedCost")
    
     if let fixedCostSet = fixedCostSet{
       housemony.text = fixedCostSet["housemoney"] as! String
@@ -99,17 +73,6 @@ class detailmonyViewController: UIViewController, UITextFieldDelegate{
       print("There are Optionals")
     }
     
-      salary.tag = 1
-      eatCost.tag = 2
-      housemony.tag = 3
-      lifelinemony.tag = 4
-      phonemony.tag = 5
-      cardmony.tag = 6
-      transportmony.tag = 7
-      entertainmentmony.tag = 8
-      netmony.tag = 9
-      othermony.tag = 10
-      
       let notificationCenter = NotificationCenter.default
       notificationCenter.addObserver(self, selector: #selector(self.handleKeyboardWillShowNotification(_:)) , name: .UIKeyboardWillShow, object: nil)
       notificationCenter.addObserver(self, selector: #selector(self.handleKeyboardWillHideNotification(_:)), name: .UIKeyboardWillHide, object: nil)
@@ -135,8 +98,6 @@ class detailmonyViewController: UIViewController, UITextFieldDelegate{
         self.introalertjudge.set(judgenum, forKey: "introalertnum")
         self.introalertjudge.synchronize()
       }))
-      
-      
       
       self.present(introAlert, animated: true, completion:  nil)
     }
@@ -282,7 +243,7 @@ class detailmonyViewController: UIViewController, UITextFieldDelegate{
       
       
       OneDayMoneyAlert.addAction(UIAlertAction(title: "OK", style: .default))
-      OneDayMoneyAlert.addAction(UIAlertAction(title: "1pushに設定", style: .default){ action in
+      OneDayMoneyAlert.addAction(UIAlertAction(title: "1pushに設定する", style: .default){ action in
         let SendOneDayMoneySegue = UIAlertController(title: "設定が完了しました",
                                                      message: "",
                                                      preferredStyle: .alert)

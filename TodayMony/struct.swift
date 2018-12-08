@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import UIKit
 
 struct MethodStruct {
   
@@ -24,5 +25,16 @@ struct MethodStruct {
   func removeComa(str:String) -> String{
     let tmp = str.replacingOccurrences(of: ",", with: "")
     return tmp
+  }
+  
+  func toolbarMaker()-> UIToolbar{
+    let toolbar = UIToolbar()
+    toolbar.barStyle = UIBarStyle.default
+    toolbar.sizeToFit()
+    return toolbar
+  }
+  
+  func spacer(className: UIViewController) -> UIBarButtonItem{
+    return UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.flexibleSpace, target: className, action: nil)
   }
 }

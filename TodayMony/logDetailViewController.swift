@@ -19,7 +19,7 @@ class logDetailViewController: UIViewController, UITextFieldDelegate{
       print(valueBox)
       editTextField.text! = String(valueBox[0])
       
-      let toolbar = UIToolbar()
+      let toolbar = MethodStruct().toolbarMaker()
       toolbar.barStyle = UIBarStyle.default
       toolbar.sizeToFit()
       let spacer = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.flexibleSpace, target: self, action: nil)
