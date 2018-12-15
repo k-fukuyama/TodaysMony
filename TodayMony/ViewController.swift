@@ -200,7 +200,6 @@ class ViewController: UIViewController, UITextFieldDelegate{
               message: "が1日あたりの使用可能金額です",
               preferredStyle: .alert)
             
-            
             OndDayMonyAlert.addAction(UIAlertAction(title: "OK", style: .cancel))
             self.present(OndDayMonyAlert, animated:true, completion:nil)
             
