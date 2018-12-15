@@ -204,7 +204,6 @@ class ViewController: UIViewController, UITextFieldDelegate{
             self.present(OndDayMonyAlert, animated:true, completion:nil)
           }
         }))
-        
         self.present(OneMonthMony, animated: true, completion: nil)
         } as! (UITextField) -> Void) )
       
