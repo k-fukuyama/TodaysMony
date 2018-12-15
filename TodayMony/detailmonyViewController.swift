@@ -224,23 +224,14 @@ class detailmonyViewController: UIViewController, UITextFieldDelegate{
       let OneDayMoneyResult = OneMonthMonyResult / thisMonthDays!
       SendOneDayMoney = OneMonthMonyResult / thisMonthDays!
      
-      
-      
-      
-      
       let OneMonthMonyAlert = UIAlertController(title: String("\(OneMonthMonyResult)円"),
         message: "が1ヶ月あたりに使用できる金額です",
         preferredStyle: .alert)
-      
-      
-      
-     
       
       let OneDayMoneyAlert = UIAlertController(title: String("\(OneDayMoneyResult)円"),
                                                message: "が1日あたりに使用できる金額です",
                                                preferredStyle: .alert)
      
-      
       
       OneDayMoneyAlert.addAction(UIAlertAction(title: "OK", style: .default))
       OneDayMoneyAlert.addAction(UIAlertAction(title: "1pushに設定する", style: .default){ action in
