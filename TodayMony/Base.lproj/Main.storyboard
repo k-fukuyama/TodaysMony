@@ -593,18 +593,32 @@
                                     <action selector="changeSegment:" destination="Z1W-iY-s1d" eventType="valueChanged" id="9BZ-ca-tIF"/>
                                 </connections>
                             </segmentedControl>
+                            <view alpha="0.80000000000000004" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="wc6-ea-3bj">
+                                <rect key="frame" x="0.0" y="44" width="414" height="808"/>
+                                <color key="backgroundColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            </view>
+                            <pickerView contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="xjt-yX-ynv">
+                                <rect key="frame" x="0.0" y="340" width="414" height="216"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            </pickerView>
                         </subviews>
                         <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
                             <constraint firstItem="tS8-ni-3W0" firstAttribute="centerX" secondItem="jIc-sj-CZG" secondAttribute="centerX" id="0w0-On-9hf"/>
                             <constraint firstItem="qbQ-bK-GYb" firstAttribute="top" secondItem="tS8-ni-3W0" secondAttribute="bottom" constant="18" id="29L-c5-odE"/>
                             <constraint firstItem="BD0-eD-yuT" firstAttribute="centerX" secondItem="jIc-sj-CZG" secondAttribute="centerX" id="37Y-SI-FXe"/>
+                            <constraint firstItem="wc6-ea-3bj" firstAttribute="centerX" secondItem="jIc-sj-CZG" secondAttribute="centerX" id="3ic-vv-FUZ"/>
+                            <constraint firstItem="mLf-M8-grq" firstAttribute="trailing" secondItem="wc6-ea-3bj" secondAttribute="trailing" id="3nZ-cw-YCu"/>
+                            <constraint firstItem="wc6-ea-3bj" firstAttribute="top" secondItem="mLf-M8-grq" secondAttribute="top" id="Ai6-QQ-dgL"/>
                             <constraint firstItem="BD0-eD-yuT" firstAttribute="top" secondItem="JpX-7N-igA" secondAttribute="bottom" constant="40" id="Cfq-bf-kDS"/>
+                            <constraint firstItem="wc6-ea-3bj" firstAttribute="centerY" secondItem="jIc-sj-CZG" secondAttribute="centerY" id="Gvc-yG-aYm"/>
                             <constraint firstItem="mLf-M8-grq" firstAttribute="bottom" secondItem="BD0-eD-yuT" secondAttribute="bottom" constant="30" id="IMy-ed-wAz"/>
                             <constraint firstItem="gj2-rS-crQ" firstAttribute="top" secondItem="qbQ-bK-GYb" secondAttribute="bottom" constant="80" id="feZ-jC-p2z"/>
                             <constraint firstItem="qbQ-bK-GYb" firstAttribute="centerX" secondItem="jIc-sj-CZG" secondAttribute="centerX" id="jBL-eH-j4I"/>
                             <constraint firstItem="JpX-7N-igA" firstAttribute="centerX" secondItem="jIc-sj-CZG" secondAttribute="centerX" id="pZt-jh-seO"/>
                             <constraint firstItem="gj2-rS-crQ" firstAttribute="centerX" secondItem="jIc-sj-CZG" secondAttribute="centerX" id="qTe-Ea-lXO"/>
+                            <constraint firstItem="wc6-ea-3bj" firstAttribute="leading" secondItem="mLf-M8-grq" secondAttribute="leading" id="uNh-BH-kaj"/>
                             <constraint firstItem="JpX-7N-igA" firstAttribute="top" secondItem="gj2-rS-crQ" secondAttribute="bottom" constant="95" id="vML-SG-WJW"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="mLf-M8-grq"/>
@@ -614,7 +628,10 @@
                     <navigationItem key="navigationItem" id="rgD-WZ-MH6"/>
                     <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
+                        <outlet property="buttonTitle" destination="JpX-7N-igA" id="5gR-PD-Bbo"/>
+                        <outlet property="coverView" destination="wc6-ea-3bj" id="Qrd-YD-sxC"/>
                         <outlet property="itemTitle" destination="qbQ-bK-GYb" id="5qM-N1-gkv"/>
+                        <outlet property="nextSalaryPicker" destination="xjt-yX-ynv" id="Flm-IP-zcK"/>
                         <outlet property="oneMonthMoneyRemain" destination="gj2-rS-crQ" id="TRD-R3-v7o"/>
                         <outlet property="remainMoneySetButtom" destination="IMy-ed-wAz" id="nfI-l7-4rk"/>
                         <outlet property="setButtonTitle" destination="BD0-eD-yuT" id="ZUY-8P-ULK"/>

@@ -8,11 +8,14 @@
 
 import UIKit
 
-class resultViewController: UIViewController, UITextFieldDelegate{
+class resultViewController: UIViewController, UITextFieldDelegate, UIPickerViewDelegate, UIPickerViewDataSource{
+  
   
   let ud = UserDefaults.standard
   let method = MethodStruct()
   let dvc = detailmonyViewController()
+  let vi = UIView()
+  var buttonText = ""
 
   
   @IBOutlet weak var oneMonthMoneyRemain: UILabel!
@@ -24,16 +27,32 @@ class resultViewController: UIViewController, UITextFieldDelegate{
   override func viewDidLoad() {
         super.viewDidLoad()
     
+    
+    nextSalaryPicker.delegate = self
+    nextSalaryPicker.dataSource = self
+    
+    vi.isHidden = true
+    vi.center.y = 0
+    
     let uiScreenSize = UIScreen.main.nativeBounds.size.width
+//    vi.frame = nextSalaryPicker.bounds
+     nextSalaryPicker.frame = CGRect(x:0, y:UIScreen.main.nativeBounds.size.height / 2, width: view.frame.size.width, height: nextSalaryPicker.bounds.size.height)
+    
+//    vi.addSubview(nextSalaryPicker)
+//
+//    view.addSubview(vi)
+//    self.vi.bringSubview(toFront: vi)
+//    self.vi.frame.origin.y += UIScreen.main.nativeBounds.size.height / 2
+//
+    
+    coverView.isHidden = true
     
     if uiScreenSize < 750{
       remainMoneySetButtom.constant = 20
     }else if uiScreenSize >= 825.0{
       remainMoneySetButtom.constant = 115
     }
-    
-   
-    
+  
       let formatter = NumberFormatter()
       formatter.numberStyle = NumberFormatter.Style.decimal
       formatter.groupingSeparator = ","
@@ -65,38 +84,56 @@ class resultViewController: UIViewController, UITextFieldDelegate{
   
   let vc = ViewController()
   
-  @IBAction func reset(_ sender: Any) {
-    var alert = UIAlertController(title:"残りの金額をリセット",
-                                  message:"残りの金額をリセットします",
-                                  preferredStyle: .alert)
-    
-    
-    
-    alert.addAction(UIAlertAction(title:"リセットする", style:.destructive, handler:{ action in
+  let salaryDay = UserDefaults()
+  
+  func setSalaryDay(){
+    if salaryDay.integer(forKey: "salaryDay") == 0{
+      let alert = UIAlertController(title:"給料日の設定",
+                                    message:"次の給料日まで1日あたりに使える金額を設定します",
+                                    preferredStyle: .alert)
+      alert.addAction(UIAlertAction(title:"OK", style: .cancel))
+      self.present(alert, animated: true, completion: nil)
       
-      if self.segnum == 0{
-        self.dvc.SaveOneMonthMoneyResult.removeObject(forKey: "SaveMoney")
-        self.oneMonthMoneyRemain.text! = String(self.ud.integer(forKey: "aaa"))
-      }else{
+      coverView.isHidden = false
+      vi.isHidden = false
+      
+      UIPickerView.animate(withDuration: 0.3){
+        self.nextSalaryPicker.frame.origin.y -= UIScreen.main.nativeBounds.size.height / 6
+      }
+      
+      
+    }
+  }
+  
+  
+  @IBAction func reset(_ sender: Any) {
+    
+    if self.segnum == 0{
+      setSalaryDay()
+    }else{
+      var alert = UIAlertController(title:"残りの金額をリセット",
+                                    message:"残りの金額をリセットします",
+                                    preferredStyle: .alert)
+      alert.addAction(UIAlertAction(title:"リセットする", style:.destructive, handler:{ action in
         self.vc.remainResult.removeObject(forKey: "remain")
         self.vc.firstEnd.removeObject(forKey: "endCount")
         self.oneMonthMoneyRemain.text! = self.method.CommaAdd(comma: self.vc.remainResult.integer(forKey: "remain"))
-      }
+        
+      }))
+      alert.addAction(UIAlertAction(title:"リセットしない", style: .cancel))
       
-    }))
-    
-    alert.addAction(UIAlertAction(title:"リセットしない", style: .cancel))
-    
-    self.present(alert, animated: true, completion: nil)
+      self.present(alert, animated: true, completion: nil)
+    }
   }
-  
   
   
   
   func ontap(){
     if segnum == 0{
+      buttonTitleSet(title: "次の給料日まで")
       oneMonthMoneyRemain.text! = method.CommaAdd(comma: dvc.SaveOneMonthMoneyResult.integer(forKey: "SaveMoney"))
     }else{
+      buttonText = "リセット"
       oneMonthMoneyRemain.text! = method.CommaAdd(comma: ViewController().remainResult.integer(forKey: "remain"))
     }
     
@@ -162,6 +199,7 @@ class resultViewController: UIViewController, UITextFieldDelegate{
     itemTitle.text! = "残りの使える金額"
     oneMonthMoneyRemain.text! = method.CommaAdd(comma: dvc.SaveOneMonthMoneyResult.integer(forKey: "SaveMoney"))
     setButtonTitle.setTitle("残りの金額を設定", for: .normal)
+    buttonTitleSet(title: "次の給料日まで")
     segnum = 0
   }
   
@@ -169,6 +207,7 @@ class resultViewController: UIViewController, UITextFieldDelegate{
     itemTitle.text! = "貯められた金額"
     oneMonthMoneyRemain.text! = method.CommaAdd(comma: ViewController().remainResult.integer(forKey: "remain"))
     setButtonTitle.setTitle("貯められた金額を設定", for: .normal)
+    buttonTitleSet(title: "リセット")
     segnum = 1
   }
   
@@ -188,6 +227,36 @@ class resultViewController: UIViewController, UITextFieldDelegate{
       print("error")
     }
   }
+  
+  @IBOutlet weak var nextSalaryPicker: UIPickerView!
+  
+  @IBOutlet weak var buttonTitle: SimpleButton!
+  
+  func buttonTitleSet(title:String){
+    buttonTitle.setTitle(title, for: .normal)
+  }
+  
+  @IBOutlet weak var coverView: UIView!
+
+  let days = [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30]
+  func numberOfComponents(in pickerView: UIPickerView) -> Int {
+    return 1
+  }
+  
+  func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
+    return days.count
+  }
+  
+  func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
+    return String(days[row])
+  }
+  
+  func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
+    
+    print(days[row])
+  }
+ 
+ 
   
   /*
     // MARK: - Navigation
