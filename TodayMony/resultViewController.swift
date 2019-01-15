@@ -14,7 +14,10 @@ class resultViewController: UIViewController, UITextFieldDelegate, UIPickerViewD
   let ud = UserDefaults.standard
   let method = MethodStruct()
   let dvc = detailmonyViewController()
-  let vi = UIView()
+  let salaryPickerView = UIPickerView()
+  let toolbar = UIToolbar()
+
+
   var buttonText = ""
 
   
@@ -24,26 +27,22 @@ class resultViewController: UIViewController, UITextFieldDelegate, UIPickerViewD
   
   @IBOutlet weak var remainMoneySetButtom: NSLayoutConstraint!
   
+  
+  
   override func viewDidLoad() {
         super.viewDidLoad()
     
+    toolbar.barStyle = UIBarStyle.default
+    toolbar.sizeToFit()
     
-    nextSalaryPicker.delegate = self
-    nextSalaryPicker.dataSource = self
+    let spacer = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.flexibleSpace, target: self, action: nil)
+    let commitButton = UIBarButtonItem(title: "決定", style: UIBarButtonItemStyle.done, target: self, action: #selector(self.commit))
+    let cancelButton = UIBarButtonItem(title: "閉じる", style: UIBarButtonItemStyle.done, target: self, action: #selector(self.cancelButton))
+    toolbar.items = [cancelButton,spacer, commitButton]
     
-    vi.isHidden = true
-    vi.center.y = 0
-    
+    salaryPickerView.delegate = self
+    salaryPickerView.dataSource = self
     let uiScreenSize = UIScreen.main.nativeBounds.size.width
-//    vi.frame = nextSalaryPicker.bounds
-     nextSalaryPicker.frame = CGRect(x:0, y:UIScreen.main.nativeBounds.size.height / 2, width: view.frame.size.width, height: nextSalaryPicker.bounds.size.height)
-    
-//    vi.addSubview(nextSalaryPicker)
-//
-//    view.addSubview(vi)
-//    self.vi.bringSubview(toFront: vi)
-//    self.vi.frame.origin.y += UIScreen.main.nativeBounds.size.height / 2
-//
     
     coverView.isHidden = true
     
@@ -84,27 +83,6 @@ class resultViewController: UIViewController, UITextFieldDelegate, UIPickerViewD
   
   let vc = ViewController()
   
-  let salaryDay = UserDefaults()
-  
-  func setSalaryDay(){
-    if salaryDay.integer(forKey: "salaryDay") == 0{
-      let alert = UIAlertController(title:"給料日の設定",
-                                    message:"次の給料日まで1日あたりに使える金額を設定します",
-                                    preferredStyle: .alert)
-      alert.addAction(UIAlertAction(title:"OK", style: .cancel))
-      self.present(alert, animated: true, completion: nil)
-      
-      coverView.isHidden = false
-      vi.isHidden = false
-      
-      UIPickerView.animate(withDuration: 0.3){
-        self.nextSalaryPicker.frame.origin.y -= UIScreen.main.nativeBounds.size.height / 6
-      }
-      
-      
-    }
-  }
-  
   
   @IBAction func reset(_ sender: Any) {
     
@@ -114,6 +92,7 @@ class resultViewController: UIViewController, UITextFieldDelegate, UIPickerViewD
       var alert = UIAlertController(title:"残りの金額をリセット",
                                     message:"残りの金額をリセットします",
                                     preferredStyle: .alert)
+      
       alert.addAction(UIAlertAction(title:"リセットする", style:.destructive, handler:{ action in
         self.vc.remainResult.removeObject(forKey: "remain")
         self.vc.firstEnd.removeObject(forKey: "endCount")
@@ -228,7 +207,6 @@ class resultViewController: UIViewController, UITextFieldDelegate, UIPickerViewD
     }
   }
   
-  @IBOutlet weak var nextSalaryPicker: UIPickerView!
   
   @IBOutlet weak var buttonTitle: SimpleButton!
   
@@ -238,7 +216,8 @@ class resultViewController: UIViewController, UITextFieldDelegate, UIPickerViewD
   
   @IBOutlet weak var coverView: UIView!
 
-  let days = [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30]
+  let days = ["1日", "2日", "3日", "4日", "5日", "6日", "7日", "8日", "9日", "10日", "11日", "12日", "13日", "14日", "15日", "16日", "17日", "18日", "19日", "20日", "21日", "22日", "23日", "24日", "25日", "26日", "27日", "28日", "29日", "30日", "月末"]
+  
   func numberOfComponents(in pickerView: UIPickerView) -> Int {
     return 1
   }
@@ -248,12 +227,97 @@ class resultViewController: UIViewController, UITextFieldDelegate, UIPickerViewD
   }
   
   func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
-    return String(days[row])
+    return days[row]
   }
   
   func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
+    getsalaryDayText = days[row]
+    getSalaryAlertTextField.text = days[row]
+    print(getsalaryDayText)
+  }
+  
+  let salaryDay = UserDefaults()
+  
+  var getSalaryAlert = UIAlertController()
+  var getsalaryDayText = ""
+  
+  
+  func setSalaryDay(){
+    if salaryDay.integer(forKey: "salaryDay") == 0{
+      salaryPickerView.selectRow(0, inComponent: 0, animated: true)
+      let salaryAlert = UIAlertController(title:"給料日の設定",
+                                          message:"あなたの給料日を設定してください",
+                                          preferredStyle: .alert)
+      getSalaryAlert = salaryAlert
+      salaryAlert.addTextField(configurationHandler:{(textField: UITextField) -> Void in
+        textField.delegate = self
+        textField.inputView = self.salaryPickerView
+        textField.inputAccessoryView = self.toolbar
+        textField.text = self.days[0]
+        self.getsalaryDayText = textField.text!
+        self.getSalaryAlertTextField = textField
+      } )
+      
+      self.present(salaryAlert, animated: true, completion: nil)
+      
+    }else{
+//      let resultDate = salaryDay.integer(forKey: "salaryDay") - getDate()
+//      let result = ViewController().remainResult.integer(forKey: "remain") / resultDate
+//      print(resultDate)
+//      print(ViewController().remainResult.integer(forKey: "remain"))
+    }
+  }
+  
+  func canUseMoneyNextSalaryDay(){
+    if salaryDay.integer(forKey: "salaryDay") > nowDate(){
+      
+    }
+  }
+  
+  var getSalaryAlertTextField = UITextField()
+  @objc func commit(){
+    getSalaryAlert.dismiss(animated: true, completion: nil)
+    let result = getsalaryDayText.components(separatedBy: "日")
+    salaryDay.set(Int(result[0])!, forKey: "salaryDay")
+    let sucsessAlert = UIAlertController(title:"設定が完了しました",
+                                         message:nil,
+                                         preferredStyle: .alert)
+  sucsessAlert.addAction(UIAlertAction(title: "OK", style: .default))
+  self.present(sucsessAlert, animated: true, completion: nil)
+  }
+  
+  @objc func cancelButton(){
+    getSalaryAlert.dismiss(animated: true, completion: nil)
     
-    print(days[row])
+  }
+  
+//  func futureDate() -> Date{
+//    let today : Date = Date()
+//    let dfm = DateFormatter()
+//    dfm.dateFormat = "yyyy/MM/dd"
+//    dfm.locale = Locale(identifier: "ja_JP")
+//
+//
+//    var calendar = Calendar.current
+//    calendar.timeZone = TimeZone(identifier: "Asia/Tokyo")!
+//    calendar.locale = Locale(identifier: "ja_JP")
+//    let year = calendar.component(.year, from: today)
+//    let day = calendar.component(.day, from: today)
+//    let month = calendar.component(.month, from: today)
+//    let time = calendar.component(.hour, from: today)
+//
+//    let res = dfm.date(from: "\(year)/\(month)/\(day)")
+//
+//
+//    return res!
+//  }
+  
+  func nowDate() -> Int{
+    let now = Date()
+    let dateFormater = DateFormatter()
+    dateFormater.dateFormat = "dd"
+    dateFormater.locale = Locale(identifier: "ja_JP")
+    return Int(dateFormater.string(from: now))!
   }
  
  
