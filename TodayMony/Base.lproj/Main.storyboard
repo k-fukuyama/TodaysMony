@@ -578,15 +578,16 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="tS8-ni-3W0">
-                                <rect key="frame" x="99.666666666666686" y="284" width="215" height="29"/>
+                                <rect key="frame" x="57" y="284" width="300" height="29"/>
                                 <color key="backgroundColor" cocoaTouchSystemColor="viewFlipsideBackgroundColor"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="28" id="hJb-DV-wze"/>
-                                    <constraint firstAttribute="width" constant="215" id="lQx-gQ-3Oz"/>
+                                    <constraint firstAttribute="width" constant="300" id="lQx-gQ-3Oz"/>
                                 </constraints>
                                 <segments>
                                     <segment title="残りの金額"/>
                                     <segment title="貯められた金額"/>
+                                    <segment title="欲しいもの"/>
                                 </segments>
                                 <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <connections>
