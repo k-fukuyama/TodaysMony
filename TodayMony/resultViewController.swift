@@ -13,6 +13,7 @@ class resultViewController: UIViewController, UITextFieldDelegate{
   let ud = UserDefaults.standard
   let method = MethodStruct()
   let dvc = detailmonyViewController()
+  let want_goods_cost = UserDefaults()
 
   
   @IBOutlet weak var oneMonthMoneyRemain: UILabel!
@@ -77,10 +78,13 @@ class resultViewController: UIViewController, UITextFieldDelegate{
       if self.segnum == 0{
         self.dvc.SaveOneMonthMoneyResult.removeObject(forKey: "SaveMoney")
         self.oneMonthMoneyRemain.text! = String(self.ud.integer(forKey: "aaa"))
-      }else{
+      }else if self.segnum == 1{
         self.vc.remainResult.removeObject(forKey: "remain")
         self.vc.firstEnd.removeObject(forKey: "endCount")
         self.oneMonthMoneyRemain.text! = self.method.CommaAdd(comma: self.vc.remainResult.integer(forKey: "remain"))
+      }else{
+        self.want_goods_cost.removeObject(forKey: "wants")
+        self.oneMonthMoneyRemain.text! = self.method.CommaAdd(comma: self.want_goods_cost.integer(forKey: "wants"))
       }
       
     }))
@@ -96,8 +100,10 @@ class resultViewController: UIViewController, UITextFieldDelegate{
   func ontap(){
     if segnum == 0{
       oneMonthMoneyRemain.text! = method.CommaAdd(comma: dvc.SaveOneMonthMoneyResult.integer(forKey: "SaveMoney"))
-    }else{
+    }else if segnum == 1{
       oneMonthMoneyRemain.text! = method.CommaAdd(comma: ViewController().remainResult.integer(forKey: "remain"))
+    }else{
+      oneMonthMoneyRemain.text! = method.CommaAdd(comma: self.want_goods_cost.integer(forKey: "wants"))
     }
     
     
@@ -124,8 +130,10 @@ class resultViewController: UIViewController, UITextFieldDelegate{
     
     if segnum == 0{
       title = remainSetTitle
-    }else{
+    }else if segnum == 1{
       title = poolMoneySetTitle
+    }else{
+      title = "欲しいものの金額を入力します"
     }
     let remainMoneySetAlert = UIAlertController(title: title,
                                                 message: "金額を入力してください",
@@ -144,9 +152,12 @@ class resultViewController: UIViewController, UITextFieldDelegate{
             self.dvc.SaveOneMonthMoneyResult.set(Int(textField.text!), forKey: "SaveMoney")
             let viewRemain = self.method.CommaAdd(comma: self.dvc.SaveOneMonthMoneyResult.integer(forKey: "SaveMoney"))
             self.oneMonthMoneyRemain.text =  viewRemain
-          }else{
+          }else if self.segnum == 1{
             self.vc.remainResult.set(Int(textField.text!), forKey: "remain")
             self.oneMonthMoneyRemain.text = self.method.CommaAdd(comma: ViewController().remainResult.integer(forKey: "remain"))
+          }else{
+            self.want_goods_cost.set(Int(textField.text!), forKey: "wants")
+            self.oneMonthMoneyRemain.text = self.method.CommaAdd(comma: self.want_goods_cost.integer(forKey: "wants"))
           }
          
         }
@@ -172,6 +183,19 @@ class resultViewController: UIViewController, UITextFieldDelegate{
     segnum = 1
   }
   
+  func wantsSet(){
+    itemTitle.text! = "欲しいものの金額"
+    oneMonthMoneyRemain.text! = method.CommaAdd(comma: self.want_goods_cost.integer(forKey: "wants"))
+    setButtonTitle.setTitle("欲しいものの金額", for: .normal)
+    segnum = 2
+  }
+  
+  func want_goods(){
+    itemTitle.text! = "欲しいものが買えるまで"
+    setButtonTitle.setTitle("欲しいものの金額", for: .normal)
+    segnum = 2
+  }
+  
   var segnum = 0
   
   @IBOutlet weak var setButtonTitle: UIButton!
@@ -183,6 +207,9 @@ class resultViewController: UIViewController, UITextFieldDelegate{
       
     case 1:
       poolMoneyViewSet()
+      
+    case 2:
+      wantsSet()
     
     default:
       print("error")

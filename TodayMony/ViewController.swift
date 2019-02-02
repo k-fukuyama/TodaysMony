@@ -674,9 +674,10 @@ class ViewController: UIViewController, UITextFieldDelegate{
                                                message: "が今日の残額でよろしいですか?\nOKを押すと履歴がリセットされます",
                                                preferredStyle: .alert)
  
+     var calcResult = Int((self.method.removeComa(str: self.TodayMony.text!)).replacingOccurrences(of: "¥", with: ""))
     
     EndTodaysMonyAlert.addAction(UIAlertAction(title: "OK", style: .destructive, handler: { action in
-      var calcResult = Int((self.method.removeComa(str: self.TodayMony.text!)).replacingOccurrences(of: "¥", with: ""))
+     
       print(calcResult)
       self.JudgeOnepush.set(0, forKey: "judgenum")
       
@@ -693,9 +694,16 @@ class ViewController: UIViewController, UITextFieldDelegate{
           
         }
       }
+      
+      
+      let rvc = resultViewController()
+      let rvc_want_goods = rvc.want_goods_cost.integer(forKey: "wants")
+      rvc.want_goods_cost.set(rvc_want_goods - calcResult!, forKey: "wants")
+    
+      
       self.setedJudgeNum.set(0, forKey: "setedJudge")
 
-      let rvc = resultViewController()
+      
       let dvc = detailmonyViewController()
       self.todaysOneMonethMoneyRemain = dvc.SaveOneMonthMoneyResult.integer(forKey: "SaveMoney") - self.TodaysTotalUsedMoney.integer(forKey: "TodaysTotalUd")
       dvc.SaveOneMonthMoneyResult.set(self.todaysOneMonethMoneyRemain, forKey: "SaveMoney")
