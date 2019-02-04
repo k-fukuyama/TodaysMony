@@ -1,10 +1,3 @@
-//
-//  logDetailViewController.swift
-//  TodayMony
-//
-//  Created by Keita Fukuyama on 2018/09/29.
-//  Copyright © 2018年 Keita Fukuyama. All rights reserved.
-//
 
 import UIKit
 
