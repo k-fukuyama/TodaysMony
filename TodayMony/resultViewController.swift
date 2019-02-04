@@ -65,33 +65,58 @@ class resultViewController: UIViewController, UITextFieldDelegate{
   @IBOutlet weak var monylabel: UILabel!
   
   let vc = ViewController()
+  var textNum = 0
   
   @IBAction func reset(_ sender: Any) {
-    var alert = UIAlertController(title:"残りの金額をリセット",
+    var remain_alert = UIAlertController(title:"残りの金額をリセット",
                                   message:"残りの金額をリセットします",
                                   preferredStyle: .alert)
     
+    let next_salary_alert = UIAlertController(title:"次の給料日まで",
+                                             message:"次の給料日までの日数をに入力してください",
+                                             preferredStyle: .alert)
     
     
-    alert.addAction(UIAlertAction(title:"リセットする", style:.destructive, handler:{ action in
+    if segnum == 0{
       
-      if self.segnum == 0{
-        self.dvc.SaveOneMonthMoneyResult.removeObject(forKey: "SaveMoney")
-        self.oneMonthMoneyRemain.text! = String(self.ud.integer(forKey: "aaa"))
-      }else if self.segnum == 1{
-        self.vc.remainResult.removeObject(forKey: "remain")
-        self.vc.firstEnd.removeObject(forKey: "endCount")
-        self.oneMonthMoneyRemain.text! = self.method.CommaAdd(comma: self.vc.remainResult.integer(forKey: "remain"))
-      }else{
-        self.want_goods_cost.removeObject(forKey: "wants")
-        self.oneMonthMoneyRemain.text! = self.method.CommaAdd(comma: self.want_goods_cost.integer(forKey: "wants"))
-      }
-      
-    }))
+      next_salary_alert.addTextField(configurationHandler: {(textField: UITextField) -> Void in
+        
+        textField.delegate = self
+        textField.keyboardType = UIKeyboardType.numberPad
+        textField.tag = 1
+        self.textNum = textField.tag
+        
+
+          next_salary_alert.addAction(UIAlertAction(title: "決定", style: .default, handler:{ action in
+            if textField.text != "" && Int(textField.text!) != 0{
+                        let while_next_salary_one_day_cost = UIAlertController(title: "\(self.dvc.SaveOneMonthMoneyResult.integer(forKey: "SaveMoney") / Int(textField.text!)!)円",
+                          message: "が残りの使える金額です",
+                          preferredStyle: .alert)
+              while_next_salary_one_day_cost.addAction(UIAlertAction(title:"Ok", style: .default))
+              self.present(while_next_salary_one_day_cost, animated: true, completion: nil)
+            }
+          }))
+          
+        
+        self.present(next_salary_alert, animated: true, completion: nil)
+      })
+    }else{
+      remain_alert.addAction(UIAlertAction(title:"リセットする", style:.destructive, handler:{ action in
+        if self.segnum == 1{
+          self.vc.remainResult.removeObject(forKey: "remain")
+          self.vc.firstEnd.removeObject(forKey: "endCount")
+          self.oneMonthMoneyRemain.text! = self.method.CommaAdd(comma: self.vc.remainResult.integer(forKey: "remain"))
+        }else{
+          self.want_goods_cost.removeObject(forKey: "wants")
+          self.oneMonthMoneyRemain.text! = self.method.CommaAdd(comma: self.want_goods_cost.integer(forKey: "wants"))
+        }
+        
+      }))
+    }
     
-    alert.addAction(UIAlertAction(title:"リセットしない", style: .cancel))
+    remain_alert.addAction(UIAlertAction(title:"リセットしない", style: .cancel))
     
-    self.present(alert, animated: true, completion: nil)
+    
   }
   
   
@@ -110,14 +135,27 @@ class resultViewController: UIViewController, UITextFieldDelegate{
   }
   
   func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
-    let maxLength = 7
-    var str = textField.text! + string
     
-    if str.characters.count < maxLength{
-      return true
+    if textNum == 1{
+      let maxLength = 3
+      var str = textField.text! + string
+      
+      if str.characters.count < maxLength{
+        return true
+      }
+      
+      return false
+    }else{
+      let maxLength = 7
+      var str = textField.text! + string
+      
+      if str.characters.count < maxLength{
+        return true
+      }
+      
+      return false
     }
     
-    return false
     
   }
   
@@ -142,6 +180,8 @@ class resultViewController: UIViewController, UITextFieldDelegate{
     remainMoneySetAlert.addAction(UIAlertAction(title: "キャンセル", style: .cancel))
     
     remainMoneySetAlert.addTextField(configurationHandler:{(textField: UITextField) -> Void in
+      textField.tag = 2
+      self.textNum = textField.tag
       textField.placeholder = "金額を入力してください"
       textField.delegate = self
       textField.keyboardType = UIKeyboardType.numberPad
