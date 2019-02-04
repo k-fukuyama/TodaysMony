@@ -32,6 +32,7 @@ class resultViewController: UIViewController, UITextFieldDelegate, UIPickerViewD
   override func viewDidLoad() {
         super.viewDidLoad()
     
+    print("こんにちは")
     toolbar.barStyle = UIBarStyle.default
     toolbar.sizeToFit()
     
